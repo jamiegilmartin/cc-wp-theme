@@ -31,14 +31,11 @@
 				</nav>
 				<section class="about">
 					<?php
-					//$page = get_page_by_path('about');
-					//echo apply_filters('the_content', $page->content);
-					//include "wp-load.php";
-					$page = get_page_by_title('About');
-					$page_id = $page->ID;
-					$page_data = get_page( $page_id );
+						$page = get_page_by_title('About');
+						$page_id = $page->ID;
+						$page_data = get_page( $page_id );
 				
-					echo apply_filters('the_content', $page_data->post_content);
+						echo apply_filters('the_content', $page_data->post_content);
 					?>
 				</section>
 			</section>
