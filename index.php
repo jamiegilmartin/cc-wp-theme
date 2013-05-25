@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-	<div id="content" class="home">
+	<div id="content" class="cc-home">
 		<!-- <?php while ( have_posts() ) : the_post() ?>
 				<?php get_template_part( 'entry' ); ?>
 				<?php endwhile; ?> -->
@@ -12,4 +12,5 @@
 			echo apply_filters('the_content', $page_data->post_content);
 		?>
 	</div>
+	<div id="fader"><div>
 <?php get_footer(); ?>
