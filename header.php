@@ -11,7 +11,7 @@
 <script src="<?php echo bloginfo( 'template_url' ); ?>/js/main.js"></script>
 
 <link type="text/css" rel="stylesheet" href="http://fast.fonts.com/cssapi/a4d8896a-8bbe-4120-94f7-f4ac84fd9314.css"/>
-
+<link href="//cloud.webtype.com/css/a32f59da-8972-4ea4-af8c-8b3f9047dda9.css" rel="stylesheet" type="text/css" />
 
 <?php wp_head(); ?>
 </head>
