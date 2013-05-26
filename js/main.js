@@ -9,7 +9,7 @@ UBCC = {
 		console.log('cat club');
 		
 		this.headerAnimation();
-		this.homeSlideShow();
+		//this.homeSlideShow();
 	},
 	headerAnimation : function(){
 		var header = document.getElementById('cc-header');

@@ -3,6 +3,9 @@ body {
 	font-family:arial;
 	background-color:rgba(255,134,107,1);
 	margin:0;
+	
+	
+	font-family:'DrescherGroteskBTW01-Se';
 }
 
 #wrapper {
@@ -169,12 +172,34 @@ header section.about p {
 .cc-news {
 	background-color:rgba(255,134,107,1);
 }
-
-
-
-
-
-
+.cc-news ul.contentList {
+	
+}
+.cc-news ul.contentList li {
+	
+}
+.cc-news article.entry {
+	width:60em;
+}
+.cc-news article.entry h2.title{
+	
+}
+.cc-news article.entry h2.title a,
+.cc-news article.entry .meta {
+	font-size:2em;
+	line-height:1em;
+	color:#fff;
+	text-decoration:none;
+}
+.cc-news article.entry section.content {
+	width:100%;
+}
+.cc-news article.entry section.content p {
+	font-size:2em;
+	line-height:1em;
+	color:#fff;
+	text-decoration:none;
+}
 
 
 
