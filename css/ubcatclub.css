@@ -8,6 +8,16 @@ body {
 	font-family:'DrescherGroteskBTW01-Se';
 }
 
+/**
+ * fonts
+ */
+.garamonditalic {
+	font-family: Garamond;
+	font-style: italic;
+	font-weight: normal;
+}
+
+
 #wrapper {
 	background-color:#fff;
 
@@ -26,7 +36,8 @@ header#cc-header {
 	overflow:hidden;
 	position:absolute;
 	background-color:rgba(255,134,107,1);
-	box-shadow: 0.1em 0.5em 0.5em rgba(227,227,227,1);
+	/*box-shadow: 0.1em 0.5em 0.5em rgba(227,227,227,1);*/
+	box-shadow: 0.1em 0.2em 0.5em rgba(0,0,0,0.3);
 	margin-bottom:0.5em;
 	height:40em;
 	width:100%;
@@ -137,9 +148,9 @@ header#cc-header section.about p {
 .cc-home p {
 	text-align:center;
 }
-.cc-home a {
+.cc-home {
 }
-.cc-home a img{
+.cc-home img{
 	/*display:none;
 		height:0;*/
 	top:0;
@@ -167,25 +178,50 @@ header#cc-header section.about p {
 }
 
 
+
+/**
+ * ul.contentList
+ */
+ul.contentList {
+
+}
+ul.contentList li {
+	padding:0 0 8em 0em;
+}
+ul.contentList li:nth-child(2n+1) {
+	padding-left:20em;
+}
+
+
+
 /**
  *News
  */
 .cc-news {
 	background-color:rgba(255,134,107,1);
 	padding:4em 10em;
-	
 }
 .cc-news .content {
 	width:80em;
 }
-.cc-news ul.contentList {
-	
+
+/*twitter -- TODO:*/
+.cc-news .twitter-module {
+	padding-bottom:8em;
 }
-.cc-news ul.contentList li {
-	padding:0 0 8em 0em;
+.cc-news .twitter-module p.title {
+	font-size:2em;
+	line-height:1em;
+	color:#fff;
+	padding-bottom:1em;
 }
-.cc-news ul.contentList li:nth-child(2n+1) {
-	padding-left:20em;
+.cc-news .twitter-module .tweet {
+	font-size:5em;
+	line-height:1em;
+	color:#fff;
+}
+.cc-news .twitter-module .tweet a {
+	color:#fff;
 }
 .cc-news article.entry {
 	width:60em;
@@ -220,6 +256,145 @@ header#cc-header section.about p {
 	padding-bottom:3em;
 }
 
+
+
+/**
+ * store
+ */
+.cc-store {
+	/*background-color:rgba(255,134,107,1);*/
+	padding:4em 10em;
+}
+.cc-store .content {
+	width:80em;
+}
+.cc-store article.entry {
+	position:relative;
+	width:60em;
+}
+.cc-store article.entry header {
+	overflow:hidden;
+	position:absolute;
+	padding-bottom:2em;
+	background:rgba(0,0,255,1);
+	width:33em;
+	top:25em;
+	left:13.5em;
+	-moz-border-radius:10px;
+	border-radius:10px;
+}
+.cc-store article.entry header .content {
+	padding:2em;
+	width:auto;
+}
+.cc-store article.entry header .meta {
+	
+}
+.cc-store article.entry header .meta ul {
+	
+}
+.cc-store article.entry header .meta ul li:nth-child(1) {
+	padding:0;
+	font-family:'Courier New';
+	font-size:1.2em;
+	line-height:110%;
+	color:#fff;
+}
+.cc-store article.entry header .meta ul li:nth-child(2) {
+	padding:0;
+	font-size:2em;
+	line-height:1em;
+	color:#fff;
+	text-decoration:none;
+}
+.cc-store article.entry h2.title,
+.cc-store article.entry .date {
+	
+}
+.cc-store article.entry h2.title a,
+.cc-store article.entry .date a {
+	font-size:2em;
+	line-height:1em;
+	color:#fff;
+	text-decoration:none;
+	text-transform:uppercase;
+}
+.cc-store article.entry section.content a {
+	display:block;
+	border:1px dotted red;
+}
+.cc-store article.entry section.content a:hover {
+	
+}
+.cc-store article.entry section.content a:hover img {
+	visibility:hidden;
+}
+.cc-store article.entry section.content img {
+	padding-bottom:0;
+}
+
+
+
+/**
+ * models
+ */
+.cc-models {
+	background-color:rgba(255,134,107,1);
+	padding:4em 10em;
+}
+.cc-models .content {
+/*	width:80em;*/
+}
+
+
+
+/**
+ * ul.contentList
+ */
+ul.modelList {
+	overflow:hidden;
+}
+ul.modelList li {
+	float:left;
+	padding:0 2em 4em 0;
+}
+
+ul.modelList li article.entry {
+	width:auto;
+}
+ul.modelList li article.entry header {
+	overflow:hidden;
+	padding-bottom:2em;
+	display:none;
+}
+ul.modelList li article.entry h2.title,
+ul.modelList li article.entry .date {
+	float:left;
+}
+ul.modelList li article.entry h2.title a,
+ul.modelList li article.entry .date a {
+	font-size:2em;
+	line-height:1em;
+	color:#fff;
+	text-decoration:none;
+	text-transform:uppercase;
+}
+ul.modelList li article.entry section.content {
+	width:100%;
+}
+ul.modelList li article.entry section.content p {
+	font-size:1em;
+	line-height:1em;
+	color:#fff;
+	text-decoration:none;
+	padding-bottom:0;
+}
+ul.modelList li article.entry section.content img:hover {
+	background:rgba(0,0,255,1);
+}
+ul.modelList li article.entry section.content img {
+	padding-bottom:0;
+}
 
 
 

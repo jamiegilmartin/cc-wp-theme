@@ -9,6 +9,11 @@ UBCC = {
 		console.log('cat club');
 		
 		this.headerAnimation();
+		
+		
+		//get page
+		var content = document.getElementById('content');
+		
 		//this.homeSlideShow();
 	},
 	headerAnimation : function(){
@@ -30,7 +35,7 @@ UBCC = {
 		//set slide show height
 		var slideShowHeight = slideShow.style.height = imgLinks[0].offsetHeight + 'px';
 		
-		console.log(imgLinks[0].offsetHeight )
+		//console.log( imgLinks[0].offsetHeight )
 		
 		for(var i=0;i<imgLinks.length;i++){
 			var imgLink = imgLinks[i];
@@ -48,10 +53,6 @@ UBCC = {
 				//fader.classList.add('transition');
 			}, false);
 		}
-		
-		
-		
-		
 		
 	}
 };

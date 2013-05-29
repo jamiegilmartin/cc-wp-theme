@@ -1,0 +1,27 @@
+<?php
+$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+	$args= array(
+		'posts_per_page' => 10,
+		'orderby' => $orderBy ,
+		'order' => $order,
+		'paged' => $paged
+	);
+
+	$wp_query = new WP_Query( $args );
+
+?>
+<?php
+/*set max number of pages @see http://wpengineer.com/1263/correct-pagination-with-get_posts/*/
+$ppp = get_option('posts_per_page');
+//echo $ppp.'<br /><br />';
+$published_posts = wp_count_posts()->publish;
+
+?>
+
+<?php global $wp_query; $total_pages = $wp_query->max_num_pages; if ( $total_pages > 1 ) { ?>
+<div id="nav-above" class="navigation" style="display:none;">
+<p class="nav-previous"><?php next_posts_link(__( '<span class="meta-nav">&laquo;</span> older articles', 'blankslate' )) ?></p>
+<p class="nav-next"><?php previous_posts_link(__( 'newer articles <span class="meta-nav">&raquo;</span>', 'blankslate' )) ?></p>
+</div>
+<?php } ?>
+<?php } ?>
