@@ -282,10 +282,26 @@ ul.contentList li:nth-child(2n+1) {
 	left:13.5em;
 	-moz-border-radius:10px;
 	border-radius:10px;
+	opacity:0;
+	-webkit-transition:all 0.2s ease-in-out;
+	-moz-transition:all 0.2s ease-in-out;
+	-o-transition:all 0.2s ease-in-out;
+	transition:all 0.2s ease-in-out;
+}
+.cc-store article.entry:hover header {
+	opacity:1;
 }
 .cc-store article.entry header .content {
 	padding:2em;
 	width:auto;
+}
+.cc-store article.entry header h2.title{
+	padding-bottom:1em;
+	font-size:2em;
+	line-height:1em;
+	color:#fff;
+	text-decoration:none;
+	text-transform:uppercase;
 }
 .cc-store article.entry header .meta {
 	
@@ -293,44 +309,35 @@ ul.contentList li:nth-child(2n+1) {
 .cc-store article.entry header .meta ul {
 	
 }
+.cc-store article.entry header .meta ul li {
+	padding:0 0 1em 0;
+}
+.cc-store article.entry header .meta ul li span.post-meta-key {
+	display:none;
+}
 .cc-store article.entry header .meta ul li:nth-child(1) {
-	padding:0;
 	font-family:'Courier New';
 	font-size:1.2em;
-	line-height:110%;
+	line-height:1.6em;
 	color:#fff;
 }
 .cc-store article.entry header .meta ul li:nth-child(2) {
-	padding:0;
 	font-size:2em;
 	line-height:1em;
 	color:#fff;
 	text-decoration:none;
 }
-.cc-store article.entry h2.title,
-.cc-store article.entry .date {
-	
-}
-.cc-store article.entry h2.title a,
-.cc-store article.entry .date a {
+.cc-store article.entry header a.buyNowBtn {
 	font-size:2em;
 	line-height:1em;
 	color:#fff;
 	text-decoration:none;
-	text-transform:uppercase;
 }
-.cc-store article.entry section.content a {
-	display:block;
-	border:1px dotted red;
-}
-.cc-store article.entry section.content a:hover {
+.cc-store article.entry header a.buyNowBtn:hover  {
 	
-}
-.cc-store article.entry section.content a:hover img {
-	visibility:hidden;
 }
 .cc-store article.entry section.content img {
-	padding-bottom:0;
+	cursor:pointer;
 }
 
 
@@ -365,7 +372,7 @@ ul.modelList li article.entry {
 ul.modelList li article.entry header {
 	overflow:hidden;
 	padding-bottom:2em;
-	display:none;
+	/*display:none;*/
 }
 ul.modelList li article.entry h2.title,
 ul.modelList li article.entry .date {

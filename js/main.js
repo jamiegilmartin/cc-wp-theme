@@ -11,10 +11,18 @@ UBCC = {
 		this.headerAnimation();
 		
 		
-		//get page
-		var content = document.getElementById('content');
 		
-		//this.homeSlideShow();
+		this.content = document.getElementById('content');
+		this.contentList = this.content.getElementsByClassName('contentList')[0];
+		this.contentListItems = this.contentList.getElementsByClassName('item');
+		
+		//pages
+		if(this.content.classList.contains('cc-home')){
+			this.homeSlideShow();
+		}
+		if(this.content.classList.contains('cc-store')){
+			this.store();
+		}
 	},
 	headerAnimation : function(){
 		var header = document.getElementById('cc-header');
@@ -53,6 +61,15 @@ UBCC = {
 				//fader.classList.add('transition');
 			}, false);
 		}
+		
+	},
+	store : function(){
+		for(var i=0;i<this.contentListItems.length;i++){
+			var item = this.contentListItems[i];
+			console.log(item)
+		}
+	},
+	models : function(){
 		
 	}
 };

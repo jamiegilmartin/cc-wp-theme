@@ -22,7 +22,7 @@ get_header(); ?>
 		?>
 		<ul class="contentList">
 		<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
-			<li>
+			<li class="item">
 				<?php get_template_part( 'cc', 'newsItem'); ?>
 			</li>
 		<?php endwhile; ?>
