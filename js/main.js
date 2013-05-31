@@ -20,6 +20,9 @@ UBCC = {
 		if(this.content.classList.contains('cc-home')){
 			this.homeSlideShow();
 		}
+		if(this.content.classList.contains('cc-news')){
+			this.news();
+		}
 		if(this.content.classList.contains('cc-store')){
 			this.store();
 		}
@@ -62,6 +65,22 @@ UBCC = {
 			}, false);
 		}
 		
+	},
+	news : function(){
+		for(var i=0;i<this.contentListItems.length;i++){
+			var item = this.contentListItems[i],
+				entry = item.getElementsByClassName('entry')[0],
+				entryContent = entry.getElementsByClassName('content')[0],
+				images = entryContent.getElementsByTagName('img');
+			if(images.length>0){
+				for(var j=0;j<images.length;j++){
+					console.log(i,j,images[j]);
+				}
+			}else{
+				console.log('no images')
+			}
+			
+		}
 	},
 	store : function(){
 		for(var i=0;i<this.contentListItems.length;i++){
