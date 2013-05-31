@@ -1,4 +1,5 @@
 <?php get_header(); ?>
+
 	<div id="content">
 		<?php the_post(); ?>
 		<?php if ( is_day() ) : ?>
@@ -17,4 +18,5 @@
 		<?php endwhile; ?>
 			<?php get_template_part( 'nav', 'below' ); ?>
 	</div>
+	ARCHIVEA
 <?php get_footer(); ?>
