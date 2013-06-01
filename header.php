@@ -8,6 +8,7 @@
 <script src="<?php echo bloginfo( 'template_url' ); ?>/js/utils.js"></script>
 <script src="<?php echo bloginfo( 'template_url' ); ?>/js/animator.js"></script>
 <script src="<?php echo bloginfo( 'template_url' ); ?>/js/slideShow.js"></script>
+<script src="<?php echo bloginfo( 'template_url' ); ?>/js/verticalSlideShow.js"></script>
 <script src="<?php echo bloginfo( 'template_url' ); ?>/js/main.js"></script>
 
 <link type="text/css" rel="stylesheet" href="http://fast.fonts.com/cssapi/a4d8896a-8bbe-4120-94f7-f4ac84fd9314.css"/>

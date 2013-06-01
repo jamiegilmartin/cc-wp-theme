@@ -12,5 +12,4 @@
 			echo apply_filters('the_content', $page_data->post_content);
 		?>
 	</div>
-	<div id="fader"><div>
 <?php get_footer(); ?>
