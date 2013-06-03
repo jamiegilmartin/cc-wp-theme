@@ -118,7 +118,7 @@ UBCC = {
 			nextBtn.classList.add('nextBtn');
 			prevBtn.classList.add('prevBtn');
 			
-			if(imgs.length>0){
+			if(imgs.length>1){
 				
 				for(var j=0;j<imgs.length;j++){
 					//set slide show height based on tallest slide
@@ -127,7 +127,7 @@ UBCC = {
 					}
 					
 					imgArr.push( imgs[j] );
-					console.log(slideShowHeight)
+					
 				}
 				
 				//set ss height
@@ -138,12 +138,37 @@ UBCC = {
 				//wrap images in list item
 				for(var k=0;k<imgArr.length;k++){
 					var img = imgArr[k],
-						li = document.createElement('li');
+						li = document.createElement('li'),
+						over = false;
 
 					li.appendChild( img );
-					//li.style.top = -slideShowHeight+'px';
 					list.appendChild( li );
 					liArr.push(li);
+					
+					
+					// slide side rollover function
+					li.addEventListener('mouseover', function(e){
+						over = true;
+						mouseOverTimer();
+					}, false);
+					li.addEventListener('mouseout', function(e){
+						over = false;
+					}, false);
+					
+					var up = 0;
+					function mouseOverTimer(){
+						
+						console.log(up++)
+						
+						//request new frame
+						requestAnimFrame(function(){
+							if(self.playing){
+								mouseOverTimer();
+							}else{
+								over = false;
+							}
+						});
+					}
 				}
 				view.appendChild(nextBtn);
 				view.appendChild(list);
@@ -161,8 +186,11 @@ UBCC = {
 				var newsItemSlideShow = new SlideShow( view, list, liArr, nextBtn, prevBtn );
 				
 				
+				
+				
+				
 			}else{
-				//console.log('no images')
+				//no images, slide show
 			}
 			
 			
