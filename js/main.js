@@ -40,33 +40,40 @@ UBCC = {
 		}, false);
 	},
 	homeSlideShow : function(){
-		var imgs = this.content.getElementsByTagName('img');
+		var imgs = this.content.getElementsByTagName('img'),
+			imgArr = [],
+			liArr = [];
 		
 		//set slide show height
 		var slideShowHeight = this.content.style.height = imgs[0].offsetHeight + 'px';
 		
-/*
+		console.log(slideShowHeight)
 		//wrap images in list
 		var list = document.createElement('ul');
-		this.content.appendChild(list);
+		
+		//add images to array
 		for(var i=0;i<imgs.length;i++){
-			var img = imgs[i],
+			imgArr.push( imgs[i] );
+		}
+		//empty content
+		this.content.innerHTML = '';
+		
+		//wrap images in list item
+		for(var j=0;j<imgArr.length;j++){
+			var img = imgArr[j],
 				li = document.createElement('li');
 			
 			li.appendChild( img );
+			li.style.top = -slideShowHeight+'px';
 			list.appendChild( li );
-			console.log(i,li)
-	
+			liArr.push(li);
 		}
+		this.content.appendChild(list);
 		
-		for(var j=0;j<list.childNodes.length;j++){
-			list.childNodes[j].appendChild(imgs[j]);
-			console.log(j)
-		}*/
 		/**
 		 * create slide show
 		 */
-		var homeSlideShow = new VerticalSlideShow( this.content, imgs, this.content );
+		var homeSlideShow = new VerticalSlideShow( this.content, list, liArr, this.content );
 		
 		
 		
@@ -96,15 +103,68 @@ UBCC = {
 			var item = this.contentListItems[i],
 				entry = item.getElementsByClassName('entry')[0],
 				entryContent = entry.getElementsByClassName('content')[0],
-				images = entryContent.getElementsByTagName('img');
-			if(images.length>0){
-				for(var j=0;j<images.length;j++){
-					console.log(i,j,images[j]);
-					console.log(maxMin(images[j].offsetHeight) )
+				imgs = entryContent.getElementsByTagName('img'),
+				imgArr = [],
+				liArr = [],
+				slideShowHeight = 0;
+			
+			//wrap images in list
+			var view = document.createElement('div'),
+				list = document.createElement('ul'),
+				nextBtn = document.createElement('a'),
+				prevBtn = document.createElement('a');
+			
+			view.classList.add('slideShow');
+			nextBtn.classList.add('nextBtn');
+			prevBtn.classList.add('prevBtn');
+			
+			if(imgs.length>0){
+				
+				for(var j=0;j<imgs.length;j++){
+					//set slide show height based on tallest slide
+					if(imgs[j].offsetHeight > slideShowHeight){
+						slideShowHeight = imgs[j].offsetHeight
+					}
+					
+					imgArr.push( imgs[j] );
+					console.log(slideShowHeight)
 				}
+				
+				//set ss height
+				list.style.height = slideShowHeight + 'px';
+				
+				
+				
+				//wrap images in list item
+				for(var k=0;k<imgArr.length;k++){
+					var img = imgArr[k],
+						li = document.createElement('li');
+
+					li.appendChild( img );
+					//li.style.top = -slideShowHeight+'px';
+					list.appendChild( li );
+					liArr.push(li);
+				}
+				view.appendChild(nextBtn);
+				view.appendChild(list);
+				view.appendChild(prevBtn);
+				
+				//set btn tops
+				nextBtn.style.top = slideShowHeight / 2 - nextBtn.offsetHeight / 2 + 'px';
+				prevBtn.style.top = slideShowHeight / 2 - prevBtn.offsetHeight / 2 + 'px';
+				
+				entryContent.insertBefore(view, entryContent.firstChild);
+
+				/**
+				 * create slide show
+				 */
+				var newsItemSlideShow = new SlideShow( view, list, liArr, nextBtn, prevBtn );
+				
+				
 			}else{
 				//console.log('no images')
 			}
+			
 			
 		}
 	},

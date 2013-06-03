@@ -37,13 +37,20 @@ get_header(); ?>
 			$ppp = get_option('posts_per_page');
 			//echo $ppp.'<br /><br />';
 			$published_posts = wp_count_posts()->publish;
-			global $wp_query; $total_pages = $wp_query->max_num_pages; 
-			echo $total_pages ;
+			//global $wp_query; 
+			$total_pages = $wp_query->max_num_pages; 
+			echo $published_posts ;
 			//if ( $total_pages > 1 ) { ?>
-			
+			<!--
 			<div id="nav-below" class="navigation">
 				<p class="nav-previous">Older News<?php next_posts_link(__( '<span class="meta-nav">&laquo;</span> older articles' )) ?></p>
 				<p class="nav-next">Newer News<?php previous_posts_link(__( 'newer articles <span class="meta-nav">&raquo;</span>')) ?></p>
+			</div>-->
+		
+			<div class="navigation">
+				<p class="backToTop">Back to Top</p>
+				<p class="nav-next">Newer News<?php previous_posts_link(__( 'newer articles <span class="meta-nav">&raquo;</span>')) ?></p>
+				<p class="nav-previous">Older News<?php next_posts_link(__( '<span class="meta-nav">&laquo;</span> older articles' )) ?></p>
 			</div>
 		
 		<?php // } ?>

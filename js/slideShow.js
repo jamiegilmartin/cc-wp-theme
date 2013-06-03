@@ -20,15 +20,12 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	
 	this.viewWidth = this.view.offsetWidth;
 	this.viewHeight = this.view.offsetHeight;
+	
+	
+	console.log(this.viewWidth ,this.viewHeight )
+	
 	this.active_index = 0;
 		
-	
-	this.slideArray = [];
-	
-	for(var i=0;i<this.slides.length;i++){
-		//create new slide instance for header animations
-		this.slideArray.push( new Slide( this, this.slides[i] ) );
-	}
 	
 	this.updateSlides();
 	
@@ -177,8 +174,6 @@ SlideShow.prototype.updateSlides = function( dir ){
 			this.transitioning = true; //prevents user from going through slides too fast
 			this.currentSlide.style.zIndex = 2;
 			this.currentSlide.style.left = 0;
-			//start header animations
-			this.slideArray[i].start();
 			
 			
 			this.currentSlide.addEventListener('webkitTransitionEnd', function( e ) {
@@ -190,7 +185,7 @@ SlideShow.prototype.updateSlides = function( dir ){
 			//slide is less than active, move stage left
 			this.slides[i].style.zIndex = 0;
 			this.slides[i].style.left = -this.viewWidth+'px';
-			this.slideArray[i].stop();
+			
 		}else{
 			//slide is greater than active, move stage right
 			if(this.slides[i] !== this.previousSlide){
@@ -198,7 +193,6 @@ SlideShow.prototype.updateSlides = function( dir ){
 				this.slides[i].style.zIndex = 0;
 				this.slides[i].style.left = this.viewWidth+'px';
 			}
-			this.slideArray[i].stop();
 		}
 	}
 	
