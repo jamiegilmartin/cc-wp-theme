@@ -1,0 +1,33 @@
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+	section.content {
+		width:100%;
+		margin:0 auto;
+	}
+	header#cc-header {
+		font-size:2em;
+		height:150em;
+	}
+	header#cc-header nav ul li {
+		float:none;
+		padding-right:0;
+	}
+	header#cc-header nav ul li a {
+		font-size:4em;
+	}
+	
+	/*about*/
+	header#cc-header section.about {
+	
+	}
+	header#cc-header section.about p {
+		float:none;
+		width:95%;
+		font-size:3.5em;
+	}
+	header#cc-header section.about p:nth-child(2){
+		padding-top:1em;
+	}
+}

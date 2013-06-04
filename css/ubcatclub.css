@@ -169,13 +169,13 @@ header#cc-header section.about p {
 	-o-transition:all 1s ease-in-out;
 	transition:all 1s ease-in-out;
 }
-.cc-home .fader {
+.cc-home ul li .fader {
 	background-color:rgba(255,134,107,1);
 	position:absolute;
 	top:0;
 	width:100%;
 	z-index:3;
-	opacity:0;
+	opacity:0.5;
 	-webkit-transition:all 1s ease-in-out;
 	-moz-transition:all 1s ease-in-out;
 	-o-transition:all 1s ease-in-out;
@@ -273,7 +273,7 @@ ul.contentList li.item:nth-child(2n+1) {
 	position:absolute;
 	width: 1.2em;
 	height: 2.4em;
-	opacity:0;
+	/*opacity:0;*/
 	-webkit-transition:all 0.5s ease-in-out;
 	-moz-transition:all 0.5s ease-in-out;
 	-o-transition:all 0.5s ease-in-out;
@@ -423,7 +423,7 @@ ul.contentList li.item:nth-child(2n+1) {
 
 
 /**
- * ul.contentList
+ * ul.contentList.modelList
  */
 ul.modelList {
 	overflow:hidden;
@@ -439,11 +439,15 @@ ul.modelList li article.entry {
 ul.modelList li article.entry header {
 	overflow:hidden;
 	padding-bottom:2em;
+	background:rgba(0,0,255,1);
 	/*display:none;*/
 }
 ul.modelList li article.entry h2.title,
 ul.modelList li article.entry .date {
 	float:left;
+}
+ul.modelList li article.entry .date {
+	display:none;
 }
 ul.modelList li article.entry h2.title a,
 ul.modelList li article.entry .date a {

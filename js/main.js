@@ -6,16 +6,15 @@ var UBCC = window.UBCC || {};
  */
 UBCC = {
 	init : function(){
-		console.log('cat club');
-		
-		this.headerAnimation();
-		
-		
 		
 		this.content = document.getElementById('content');
 		this.contentList = this.content.getElementsByClassName('contentList')[0];
 		if(this.contentList)
 		this.contentListItems = this.contentList.getElementsByClassName('item');
+		
+		
+		//header
+		this.header();
 		
 		//pages
 		if(this.content.classList.contains('cc-home')){
@@ -28,16 +27,25 @@ UBCC = {
 			this.store();
 		}
 	},
-	headerAnimation : function(){
+	header : function(){
 		var header = document.getElementById('cc-header');
 		
-		header.addEventListener('click', function(){
+		function openCloseHeader(){
 			if(header.classList.contains('closed')){
-				header.classList.remove('closed');
+				openHeader();
 			}else{
-				header.classList.add('closed');
+				closeHeader();
 			}
-		}, false);
+		}
+		function openHeader(){
+			header.classList.remove('closed');
+		}
+		function closeHeader(){
+			header.classList.add('closed');
+		}
+		
+		header.addEventListener('click', openCloseHeader, false);
+		this.content.addEventListener('click',closeHeader,false);
 	},
 	homeSlideShow : function(){
 		var imgs = this.content.getElementsByTagName('img'),
@@ -61,10 +69,15 @@ UBCC = {
 		//wrap images in list item
 		for(var j=0;j<imgArr.length;j++){
 			var img = imgArr[j],
-				li = document.createElement('li');
+				li = document.createElement('li'),
+				fader = document.createElement('div');
+			fader.classList.add('fader');
+			fader.style.height = slideShowHeight + 'px';
+			//fader.style.top = -this.viewHeight + 'px';
 			
+			li.appendChild( fader );
 			li.appendChild( img );
-			li.style.top = -slideShowHeight+'px';
+			//li.style.top = -slideShowHeight+'px';
 			list.appendChild( li );
 			liArr.push(li);
 		}
@@ -74,29 +87,23 @@ UBCC = {
 		 * create slide show
 		 */
 		var homeSlideShow = new VerticalSlideShow( this.content, list, liArr, this.content );
-		
-		
-		
 		/*
-	var imgLink = imgs[i];
-	imgLink.addEventListener('click', function(e){
-		e.preventDefault();
-
-
-		fader.style.height = slideShowHeight;
-		fader.style.opacity = 1;
-
-		function setFaderTop(){
-			fader.classList.add('transition');
-			fader.style.top = slideShowHeight;
-
-		}
-		setTimeout(setFaderTop,1000);
-		//fader.classList.add('transition');
-
-	}, false);
-		*/
-					
+		var controller = $.superscrollorama();
+		// parallax example
+			controller.addTween(
+			  '#content ul li',
+			  (new TimelineLite())
+				.append([
+					TweenMax.fromTo($('#content ul li'), 1, 
+						{css:{height: 0}, immediateRender:true}, 
+						{css:{height: slideShowHeight}}),
+					TweenMax.fromTo($('#content ul li .fader'), 1, 
+						{css:{opacity: 0}, immediateRender:true}, 
+						{css:{opacity: 1}})
+				]),
+			1000 // scroll duration of tween
+			);
+			*/
 	},
 	news : function(){
 		for(var i=0;i<this.contentListItems.length;i++){

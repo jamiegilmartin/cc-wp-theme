@@ -22,16 +22,7 @@ VerticalSlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	this.active_index = 0;
 	
 	console.log(this.viewHeight)
-	//set slides & make fader
-	for(var i=0;i<this.slides.length;i++){
-		var fader = document.createElement('div')
-		fader.classList.add('fader');
-		fader.style.height = this.viewHeight + 'px';
-		//fader.style.top = -this.viewHeight + 'px';
-		this.slides[i].appendChild(fader);
-		this.slides[i].classList.add('transitioning');
-	}
-	
+
 	this.updateSlides();
 	
 	this.events();
