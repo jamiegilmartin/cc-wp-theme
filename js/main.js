@@ -6,6 +6,9 @@ var UBCC = window.UBCC || {};
  */
 UBCC = {
 	init : function(){
+		this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
+		this.isAndroid = /Android/i.test(navigator.userAgent);
+		
 		
 		this.content = document.getElementById('content');
 		this.contentList = this.content.getElementsByClassName('contentList')[0];
@@ -130,7 +133,8 @@ UBCC = {
 				for(var j=0;j<imgs.length;j++){
 					//set slide show height based on tallest slide
 					if(imgs[j].offsetHeight > slideShowHeight){
-						slideShowHeight = imgs[j].offsetHeight
+						slideShowHeight = imgs[j].offsetHeight;
+						console.log(imgs[j].offsetHeight, slideShowHeight )
 					}
 					
 					imgArr.push( imgs[j] );
@@ -139,7 +143,6 @@ UBCC = {
 				
 				//set ss height
 				list.style.height = slideShowHeight + 'px';
-				
 				
 				
 				//wrap images in list item

@@ -22,7 +22,7 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	this.viewHeight = this.view.offsetHeight;
 	
 	
-	console.log(this.viewWidth ,this.viewHeight )
+	//console.log(this.viewWidth ,this.viewHeight )
 	
 	this.active_index = 0;
 		
@@ -51,7 +51,7 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 		called = 0;
 		deltaXAvg = [];
 		deltaYAvg = [];
-		if(MSH.isAndroid){
+		if(UBCC.isAndroid){
 			touchStartX = e.changedTouches[0].pageX;
 			touchStartY = e.changedTouches[0].pageY;
 		}else{
@@ -65,7 +65,7 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	this.view.addEventListener('touchmove',function(e){
 		var deltaX,
 			deltaY;
-		if(MSH.isAndroid){
+		if(UBCC.isAndroid){
 			deltaX = e.changedTouches[0].pageX  - touchStartX;
 			deltaY = e.changedTouches[0].pageY  - touchStartY;
 		}else{
@@ -75,7 +75,6 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 		
 		deltaXAvg.push(deltaX);
 		deltaYAvg.push(deltaY);
-		console.log(deltaY)
 		
 		if(deltaXAvg.length > 2){
 			//if scrolling Y return
