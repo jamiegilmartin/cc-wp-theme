@@ -134,7 +134,7 @@ UBCC = {
 					//set slide show height based on tallest slide
 					if(imgs[j].offsetHeight > slideShowHeight){
 						slideShowHeight = imgs[j].offsetHeight;
-						console.log(imgs[j].offsetHeight, slideShowHeight )
+						//console.log(imgs[j].offsetHeight, slideShowHeight )
 					}
 					
 					imgArr.push( imgs[j] );
@@ -156,29 +156,6 @@ UBCC = {
 					liArr.push(li);
 					
 					
-					// slide side rollover function
-					li.addEventListener('mouseover', function(e){
-						over = true;
-						mouseOverTimer();
-					}, false);
-					li.addEventListener('mouseout', function(e){
-						over = false;
-					}, false);
-					
-					var up = 0;
-					function mouseOverTimer(){
-						
-						console.log(up++)
-						
-						//request new frame
-						requestAnimFrame(function(){
-							if(self.playing){
-								mouseOverTimer();
-							}else{
-								over = false;
-							}
-						});
-					}
 				}
 				view.appendChild(nextBtn);
 				view.appendChild(list);
@@ -189,16 +166,16 @@ UBCC = {
 				prevBtn.style.top = slideShowHeight / 2 - prevBtn.offsetHeight / 2 + 'px';
 				
 				entryContent.insertBefore(view, entryContent.firstChild);
-
+				
+				
+				
+				
+				
 				/**
 				 * create slide show
 				 */
 				var newsItemSlideShow = new SlideShow( view, list, liArr, nextBtn, prevBtn );
-				
-				
-				
-				
-				
+			
 			}else{
 				//no images, slide show
 			}

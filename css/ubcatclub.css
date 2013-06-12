@@ -158,10 +158,11 @@ header#cc-header section.about p {
 	overflow:hidden;
 	height:0;
 	border:1px solid red;
-/*	-webkit-transition:all 1s ease-in-out;
+/**/
+	-webkit-transition:all 1s ease-in-out;
 	-moz-transition:all 1s ease-in-out;
 	-o-transition:all 1s ease-in-out;
-	transition:all 1s ease-in-out;*/
+	transition:all 1s ease-in-out;
 }
 .cc-home .transitioning {
 	-webkit-transition:all 1s ease-in-out;
@@ -278,11 +279,11 @@ ul.contentList li.item:nth-child(2n+1) {
 	position:absolute;
 	width: 1.2em;
 	height: 2.4em;
-	/*opacity:0;*/
 	-webkit-transition:all 0.5s ease-in-out;
 	-moz-transition:all 0.5s ease-in-out;
 	-o-transition:all 0.5s ease-in-out;
 	transition:all 0.5s ease-in-out;
+	cursor:pointer;
 }
 .cc-news article.entry section.content .slideShow a.nextBtn {
 	background: url('../images/cc-btn-next.png') no-repeat scroll top left;

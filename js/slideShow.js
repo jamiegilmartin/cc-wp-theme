@@ -21,11 +21,15 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	this.viewWidth = this.view.offsetWidth;
 	this.viewHeight = this.view.offsetHeight;
 	
-	
+	this.over = false;
+	this.overLeftSide = false;
 	//console.log(this.viewWidth ,this.viewHeight )
 	
 	this.active_index = 0;
-		
+	
+	//hide next and prev
+	this.nextBtn.style.opacity = 0
+	this.prevBtn.style.opacity = 0;
 	
 	this.updateSlides();
 	
@@ -106,6 +110,48 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	}
 	
 	
+	//hide show next and prev
+	this.slideShow.addEventListener('mouseover', function(e){
+		self.over = true;
+		self.showButtons();
+	}, false);
+	this.slideShow.addEventListener('mousemove', function(e){
+		if(self.over === true){
+			if(e.offsetX > this.offsetWidth/2){
+				self.overLeftSide = false;
+			}else{
+				self.overLeftSide = true;
+			}
+			self.showButtons();
+		}
+	}, false);
+	this.slideShow.addEventListener('mouseout', function(e){
+		self.over = false;
+		self.hideButtons();
+	}, false);
+	
+	//next and prev over and out
+	this.nextBtn.addEventListener('mouseover', function(){
+		self.over = true;
+		self.overLeftSide = false;
+		self.showButtons();
+	}, false);
+	this.prevBtn.addEventListener('mouseover', function(){
+		self.over = true;
+		self.overLeftSide = true;
+		self.showButtons();
+	}, false);
+	this.nextBtn.addEventListener('mouseout', function(){
+		self.over = false;
+		self.hideButtons()
+	}, false);
+	this.prevBtn.addEventListener('mouseout', function(){
+		self.over = false;
+		self.hideButtons()
+	}, false);
+	
+	
+	//next and prev click
 	this.nextBtn.addEventListener('click', function(){
 		if(self.transitioning === false)
 		self.next();
@@ -116,6 +162,28 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	}, false);
 	
 };
+SlideShow.prototype.showButtons = function(){
+	if(this.overLeftSide===true){
+		this.prevBtn.style.opacity = 1;
+		this.nextBtn.style.opacity = 0;
+	}else{
+		this.nextBtn.style.opacity = 1;
+		this.prevBtn.style.opacity = 0;
+	}
+	
+};
+SlideShow.prototype.hideButtons = function(){
+	var self = this;
+	
+	function hide(){
+		if(self.over === false){
+			self.nextBtn.style.opacity = 0;
+			self.prevBtn.style.opacity = 0;
+		}
+	}
+	setTimeout(hide,1000);
+};
+
 
 SlideShow.prototype.next = function(){
 	if(this.active_index < this.slides.length-1){
