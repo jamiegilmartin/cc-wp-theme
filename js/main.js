@@ -29,6 +29,9 @@ UBCC = {
 		if(this.content.classList.contains('cc-store')){
 			this.store();
 		}
+		if(this.content.classList.contains('cc-models')){
+			this.models();
+		}
 	},
 	header : function(){
 		var header = document.getElementById('cc-header');
@@ -190,7 +193,25 @@ UBCC = {
 		}
 	},
 	models : function(){
-		
+		this.modelList = this.content.getElementsByClassName('modelList')[0];
+		this.modelListItems = this.modelList.getElementsByClassName('item');
+		for(var i=0;i<this.modelListItems.length;i++){
+			var item = this.modelListItems[i],
+				entry = item.getElementsByClassName('entry')[0],
+				entryContent = entry.getElementsByClassName('content')[0],
+				img = entryContent.getElementsByTagName('img')[0];
+			
+			
+			img.addEventListener('mouseover', function(){
+				
+			}, false);
+			img.addEventListener('mouseout', function(){
+			
+			}, false);
+			img.addEventListener('click', function(){
+				console.log(img)
+			}, false);
+		}
 	}
 };
 window.onload = function(){
