@@ -2,7 +2,7 @@
 <html <?php language_attributes(); ?>>
 <head>
 <meta http-equiv="content-type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
-<title><?php wp_title(' | ', true, 'right'); ?></title>
+<title><?php wp_title(' | ', true, 'right'); ?> UB Cat Club</title>
 <link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_uri(); ?>" />
 
 <script type="text/javascript" src="<?php echo bloginfo( 'template_url' ); ?>/js/greensock/TweenMax.min.js"></script>
@@ -11,7 +11,6 @@
 <script src="<?php echo bloginfo( 'template_url' ); ?>/js/jquery.superscrollorama.js"></script>
 
 <script src="<?php echo bloginfo( 'template_url' ); ?>/js/utils.js"></script>
-<script src="<?php echo bloginfo( 'template_url' ); ?>/js/animator.js"></script>
 <script src="<?php echo bloginfo( 'template_url' ); ?>/js/slideShow.js"></script>
 <script src="<?php echo bloginfo( 'template_url' ); ?>/js/verticalSlideShow.js"></script>
 <script src="<?php echo bloginfo( 'template_url' ); ?>/js/main.js"></script>

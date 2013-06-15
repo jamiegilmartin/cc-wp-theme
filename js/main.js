@@ -170,10 +170,6 @@ UBCC = {
 				
 				entryContent.insertBefore(view, entryContent.firstChild);
 				
-				
-				
-				
-				
 				/**
 				 * create slide show
 				 */
@@ -189,29 +185,42 @@ UBCC = {
 	store : function(){
 		for(var i=0;i<this.contentListItems.length;i++){
 			var item = this.contentListItems[i];
-			console.log(item)
+			//console.log(item)
 		}
 	},
 	models : function(){
+		var self = this;
 		this.modelList = this.content.getElementsByClassName('modelList')[0];
 		this.modelListItems = this.modelList.getElementsByClassName('item');
 		for(var i=0;i<this.modelListItems.length;i++){
 			var item = this.modelListItems[i],
+				header = item.getElementsByTagName('header')[0],
 				entry = item.getElementsByClassName('entry')[0],
 				entryContent = entry.getElementsByClassName('content')[0],
 				img = entryContent.getElementsByTagName('img')[0];
 			
-			
-			img.addEventListener('mouseover', function(){
-				
+			new model(item,header,entry,entryContent,img);
+		}
+		
+		/**
+		 *@Class model
+		 */
+		function model(item,header,entry,entryContent,img){
+			console.log('model')
+			item.addEventListener('mouseover', function(){
+				header.style.opacity =  1;
+				console.log(header)
 			}, false);
-			img.addEventListener('mouseout', function(){
-			
+			item.addEventListener('mouseout', function(){
+				//header.style.opacity = 0;
 			}, false);
-			img.addEventListener('click', function(){
+			item.addEventListener('click', function(){
 				console.log(img)
+				self.modelList.classList.add('slideShow')
 			}, false);
 		}
+		
+		
 	}
 };
 window.onload = function(){
