@@ -6,7 +6,10 @@
 		</header>
 		<div class="imgHolder"></div>
 		<section class="content">
-			<div class="meta"><?php the_meta(); ?></div>
+			<div class="meta">
+				<p class="name">Name: <?php the_title(); ?></p>
+				<?php the_meta(); ?>
+			</div>
 			<?php the_content(); ?>
 		</section>
 		

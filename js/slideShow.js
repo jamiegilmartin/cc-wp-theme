@@ -28,8 +28,8 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	this.active_index = 0;
 	
 	//hide next and prev
-	//this.nextBtn.style.opacity = 0
-	//this.prevBtn.style.opacity = 0;
+	this.nextBtn.style.opacity = 0
+	this.prevBtn.style.opacity = 0;
 	
 	this.updateSlides();
 	
@@ -207,7 +207,6 @@ SlideShow.prototype.gotoSlide = function(num){
 	this.updateSlides();
 };
 SlideShow.prototype.updateSlides = function( dir ){
-	console.log('on',this.active_index)
 	var self = this;
 	for(var i=0;i<this.slides.length;i++){
 		
@@ -244,10 +243,15 @@ SlideShow.prototype.updateSlides = function( dir ){
 			this.currentSlide.style.left = 0;
 			
 			
-			this.currentSlide.addEventListener('webkitTransitionEnd', function( e ) {
+			var transitionEnd = whichTransitionEvent();
+			if(transitionEnd){
+				this.currentSlide.addEventListener(transitionEnd, function( e ) {
+					self.transitioning = false;
+					//TODO: self.currentSlide.removeEventListener('webkitTransitionEnd', this , false);
+				}, false );
+			}else{
 				self.transitioning = false;
-				//TODO: self.currentSlide.removeEventListener('webkitTransitionEnd', this , false);
-			}, false );
+			}
 			
 		}else if(i < this.active_index ){
 			//slide is less than active, move stage left

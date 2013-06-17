@@ -11,7 +11,7 @@ get_header(); ?>
 			$zargs = array(
 			    'type' => 'yearly'
 			);
-			wp_get_archives($zargs);
+			//wp_get_archives($zargs);
 		?>
 		
 		<?php

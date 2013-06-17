@@ -59,9 +59,8 @@ UBCC = {
 			liArr = [];
 		
 		//set slide show height
-		var slideShowHeight = this.content.style.height = imgs[0].offsetHeight + 'px';
+		//var slideShowHeight = this.content.style.height = imgs[0].offsetHeight + 'px';
 		
-		console.log(slideShowHeight)
 		//wrap images in list
 		var list = document.createElement('ul');
 		
@@ -78,7 +77,7 @@ UBCC = {
 				li = document.createElement('li'),
 				fader = document.createElement('div');
 			fader.classList.add('fader');
-			fader.style.height = slideShowHeight + 'px';
+			//fader.style.height = slideShowHeight + 'px';
 			//fader.style.top = -this.viewHeight + 'px';
 			
 			li.appendChild( fader );
@@ -88,28 +87,45 @@ UBCC = {
 			liArr.push(li);
 		}
 		this.content.appendChild(list);
+		/*
+		//scrolling
+		if(window.addEventListener){
+		    window.addEventListener('DOMMouseScroll',wheel,false);
+		}
+		function wheel(e){
+			e.preventDefault();
+			e.returnValue=false;
+			console.log(window.pageXOffset + " " + window.pageYOffset + ' '+ document.body.scrollTop + ' ' +(self.viewHeight-window.innerHeight) );
+		}
+		window.onmousewheel=document.onmousewheel=wheel;
 		
-		/**
+		//onscroll
+		window.onscroll = function(e){
+			//console.log(window.pageXOffset + " " + window.pageYOffset + ' '+ document.body.scrollTop + ' ' +(self.viewHeight-window.innerHeight) );
+
+			if( window.pageYOffset > window.innerHeight){
+				console.log('scroll end')
+			}
+		}
+		
+		
+		
+		
+		*
 		 * create slide show
 		 */
-		var homeSlideShow = new VerticalSlideShow( this.content, list, liArr, this.content );
-		/*
-		var controller = $.superscrollorama();
-		// parallax example
-			controller.addTween(
-			  '#content ul li',
-			  (new TimelineLite())
-				.append([
-					TweenMax.fromTo($('#content ul li'), 1, 
-						{css:{height: 0}, immediateRender:true}, 
-						{css:{height: slideShowHeight}}),
-					TweenMax.fromTo($('#content ul li .fader'), 1, 
-						{css:{opacity: 0}, immediateRender:true}, 
-						{css:{opacity: 1}})
-				]),
-			1000 // scroll duration of tween
-			);
-			*/
+		//var homeSlideShow = new VerticalSlideShow( this.content, list, liArr, this.content );
+		
+		/* SCROLLORAMA */
+		var scrollorama = $.superscrollorama({ blocks:'.scrollblock' });
+		scrollorama.addTween(
+			'#content ul li',
+			TweenMax.from($('#content ul li .fader'),.5,{
+			    css:{opacity:0}, 
+			    onComplete: function(){alert('test')}
+			  }));
+	
+			
 	},
 	news : function(){
 		for(var i=0;i<this.contentListItems.length;i++){
@@ -202,13 +218,13 @@ UBCC = {
 			
 			imgHolder.appendChild(img);
 			
-			new model(item,header,entry,entryContent,img);
+			new model(item,header,entry,entryContent,img,i);
 		}
 		
 		/**
 		 *@Class model
 		 */
-		function model(item,header,entry,entryContent,img){
+		function model(item,header,entry,entryContent,img,i){
 			
 			item.addEventListener('mouseover', function(){
 				header.style.opacity =  1;
@@ -218,16 +234,17 @@ UBCC = {
 			}, false);
 			item.addEventListener('click', function(){
 				
-				modelSlideShow();
+				modelSlideShow(i+1);
 				
 			}, false);
 		}
 		
-		function modelSlideShow(){
+		function modelSlideShow(clicked_slide_index){
 			//wrap images in list
 			var view = self.modelList.parentNode,
 				nextBtn = document.createElement('a'),
-				prevBtn = document.createElement('a');
+				prevBtn = document.createElement('a'),
+				xBtn = document.createElement('a');
 			
 			view.classList.add('slideShow');
 			
@@ -236,28 +253,35 @@ UBCC = {
 			
 			nextBtn.classList.add('nextBtn');
 			prevBtn.classList.add('prevBtn');
+			xBtn.classList.add('xBtn');
 			
-			//set nextBtn position
-			//nextBtn.style.left = self.modelListItems[0].offsetWidth + 50 + 'px';
+			//set btn positions
 			nextBtn.style.top = self.modelListItems[0].offsetHeight / 2+ 'px';
-			
 			prevBtn.style.top = self.modelListItems[0].offsetHeight / 2+ 'px';
 			
 			view.appendChild(nextBtn);
 			view.appendChild(prevBtn);
+			view.appendChild(xBtn);
 			
-			var maxHeight = 0;
+			//x btn click
+			xBtn.addEventListener('click', function(){
+				view.classList.remove('slideShow');
+			}, false);
 			
 			//set heights
+			var maxHeight = 0;
 			for(var i=0;i<self.modelListItems.length;i++){
 				if(self.modelListItems[i].offsetHeight > maxHeight){
 					maxHeight = self.modelListItems[i].offsetHeight;
 				}
-				console.log(self.modelListItems[i].offsetHeight)
+			}
+			for(var j=0;j<self.modelListItems.length;j++){
+				self.modelListItems[j].style.height = maxHeight + 'px'; //?working correctly??
 			}
 			self.modelList.style.height = maxHeight + 'px';
 			
 			var newsItemSlideShow = new SlideShow( view, self.modelList, self.modelListItems, nextBtn, prevBtn );
+			newsItemSlideShow.gotoSlide(clicked_slide_index);
 		}
 		
 		

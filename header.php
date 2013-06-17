@@ -6,8 +6,12 @@
 <link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_uri(); ?>" />
 
 <script type="text/javascript" src="<?php echo bloginfo( 'template_url' ); ?>/js/greensock/TweenMax.min.js"></script>
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="<?php echo bloginfo( 'template_url' ); ?>/js/jquery-1.9.1.min.js"><\/script>')</script>
+
+<script src="<?php echo bloginfo( 'template_url' ); ?>/js/libraries/jquery.mousewheel.js"></script>
+
 <script src="<?php echo bloginfo( 'template_url' ); ?>/js/jquery.superscrollorama.js"></script>
 
 <script src="<?php echo bloginfo( 'template_url' ); ?>/js/utils.js"></script>
