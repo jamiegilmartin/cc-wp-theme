@@ -28,8 +28,8 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	this.active_index = 0;
 	
 	//hide next and prev
-	this.nextBtn.style.opacity = 0
-	this.prevBtn.style.opacity = 0;
+	//this.nextBtn.style.opacity = 0
+	//this.prevBtn.style.opacity = 0;
 	
 	this.updateSlides();
 	
@@ -207,6 +207,7 @@ SlideShow.prototype.gotoSlide = function(num){
 	this.updateSlides();
 };
 SlideShow.prototype.updateSlides = function( dir ){
+	console.log('on',this.active_index)
 	var self = this;
 	for(var i=0;i<this.slides.length;i++){
 		

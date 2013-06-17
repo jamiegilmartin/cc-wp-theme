@@ -196,8 +196,11 @@ UBCC = {
 			var item = this.modelListItems[i],
 				header = item.getElementsByTagName('header')[0],
 				entry = item.getElementsByClassName('entry')[0],
+				imgHolder = entry.getElementsByClassName('imgHolder')[0],
 				entryContent = entry.getElementsByClassName('content')[0],
 				img = entryContent.getElementsByTagName('img')[0];
+			
+			imgHolder.appendChild(img);
 			
 			new model(item,header,entry,entryContent,img);
 		}
@@ -206,18 +209,55 @@ UBCC = {
 		 *@Class model
 		 */
 		function model(item,header,entry,entryContent,img){
-			console.log('model')
+			
 			item.addEventListener('mouseover', function(){
 				header.style.opacity =  1;
-				console.log(header)
 			}, false);
 			item.addEventListener('mouseout', function(){
-				//header.style.opacity = 0;
+				header.style.opacity = 0;
 			}, false);
 			item.addEventListener('click', function(){
-				console.log(img)
-				self.modelList.classList.add('slideShow')
+				
+				modelSlideShow();
+				
 			}, false);
+		}
+		
+		function modelSlideShow(){
+			//wrap images in list
+			var view = self.modelList.parentNode,
+				nextBtn = document.createElement('a'),
+				prevBtn = document.createElement('a');
+			
+			view.classList.add('slideShow');
+			
+			view.style.position = 'relative';
+			self.modelList.style.height = self.modelListItems[0].offsetHeight + 'px';
+			
+			nextBtn.classList.add('nextBtn');
+			prevBtn.classList.add('prevBtn');
+			
+			//set nextBtn position
+			//nextBtn.style.left = self.modelListItems[0].offsetWidth + 50 + 'px';
+			nextBtn.style.top = self.modelListItems[0].offsetHeight / 2+ 'px';
+			
+			prevBtn.style.top = self.modelListItems[0].offsetHeight / 2+ 'px';
+			
+			view.appendChild(nextBtn);
+			view.appendChild(prevBtn);
+			
+			var maxHeight = 0;
+			
+			//set heights
+			for(var i=0;i<self.modelListItems.length;i++){
+				if(self.modelListItems[i].offsetHeight > maxHeight){
+					maxHeight = self.modelListItems[i].offsetHeight;
+				}
+				console.log(self.modelListItems[i].offsetHeight)
+			}
+			self.modelList.style.height = maxHeight + 'px';
+			
+			var newsItemSlideShow = new SlideShow( view, self.modelList, self.modelListItems, nextBtn, prevBtn );
 		}
 		
 		

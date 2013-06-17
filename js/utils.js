@@ -15,6 +15,7 @@ Array.prototype.sum = function() {
 };
 
 //not working yet
+/*
 function maxMin( test ){
 	var t = test,
 		max,
@@ -33,3 +34,4 @@ function maxMin( test ){
 	obj.min = min;
 	return obj;
 }
+*/
