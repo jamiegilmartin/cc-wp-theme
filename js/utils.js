@@ -31,7 +31,8 @@ function whichTransitionEvent(){
 			return transitions[t];
 		}
 	}
-}
+};
+
 
 //not working yet
 /*

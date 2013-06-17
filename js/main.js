@@ -59,7 +59,7 @@ UBCC = {
 			liArr = [];
 		
 		//set slide show height
-		//var slideShowHeight = this.content.style.height = imgs[0].offsetHeight + 'px';
+		var slideShowHeight = this.content.style.height = imgs[0].offsetHeight + 'px';
 		
 		//wrap images in list
 		var list = document.createElement('ul');
@@ -87,45 +87,12 @@ UBCC = {
 			liArr.push(li);
 		}
 		this.content.appendChild(list);
-		/*
-		//scrolling
-		if(window.addEventListener){
-		    window.addEventListener('DOMMouseScroll',wheel,false);
-		}
-		function wheel(e){
-			e.preventDefault();
-			e.returnValue=false;
-			console.log(window.pageXOffset + " " + window.pageYOffset + ' '+ document.body.scrollTop + ' ' +(self.viewHeight-window.innerHeight) );
-		}
-		window.onmousewheel=document.onmousewheel=wheel;
 		
-		//onscroll
-		window.onscroll = function(e){
-			//console.log(window.pageXOffset + " " + window.pageYOffset + ' '+ document.body.scrollTop + ' ' +(self.viewHeight-window.innerHeight) );
-
-			if( window.pageYOffset > window.innerHeight){
-				console.log('scroll end')
-			}
-		}
-		
-		
-		
-		
-		*
+		/**
 		 * create slide show
 		 */
-		//var homeSlideShow = new VerticalSlideShow( this.content, list, liArr, this.content );
-		
-		/* SCROLLORAMA */
-		var scrollorama = $.superscrollorama({ blocks:'.scrollblock' });
-		scrollorama.addTween(
-			'#content ul li',
-			TweenMax.from($('#content ul li .fader'),.5,{
-			    css:{opacity:0}, 
-			    onComplete: function(){alert('test')}
-			  }));
-	
-			
+		var homeSlideShow = new HomeSlideShow( this.content, list, liArr, this.content );
+
 	},
 	news : function(){
 		for(var i=0;i<this.contentListItems.length;i++){

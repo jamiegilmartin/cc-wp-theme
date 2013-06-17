@@ -151,7 +151,7 @@ header#cc-header section.about p {
 	width:100%;
 }
 .cc-home ul li {
-	position:relative;
+	position:absolute;
 	top:0;
 	width:100%;
 	text-align:center;
@@ -170,9 +170,9 @@ header#cc-header section.about p {
 	position:absolute;
 	top:0;
 	width:100%;
-	/*height:100%;*/
+
 	z-index:3;
-	opacity:1;
+	opacity:0;
 	-webkit-transition:all 1s ease-in-out;
 	-moz-transition:all 1s ease-in-out;
 	-o-transition:all 1s ease-in-out;
