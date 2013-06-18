@@ -33,6 +33,7 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	
 	this.updateSlides();
 	
+	this.events();
 	/*
 	var output = document.createElement('div');
 	output.style.border = '1px solid red';
@@ -43,8 +44,13 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	output.style.zIndex = 100;
 	this.view.appendChild(output);
 	*/
+
+	
+};
+SlideShow.prototype.events = function(){
 	//Events
-	var called = 0,
+	var self = this,
+		called = 0,
 		touchStartX,
 		touchStartY,
 		deltaXAvg = [],
@@ -160,7 +166,6 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 		if(self.transitioning === false)
 		self.prev();
 	}, false);
-	
 };
 SlideShow.prototype.showButtons = function(){
 	if(this.overLeftSide===true){

@@ -23,13 +23,15 @@ get_header(); ?>
 			);
 			$loop = new WP_Query( $args );
 		?>
-		<ul class="modelList">
-		<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
-			<li class="item">
-				<?php get_template_part( 'cc', 'modelItem'); ?>
-			</li>
-		<?php endwhile; ?>
-		</ul>
+		<div class="view">
+			<ul class="modelList">
+			<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
+				<li class="item">
+					<?php get_template_part( 'cc', 'modelItem'); ?>
+				</li>
+			<?php endwhile; ?>
+			</ul>
+		</div>
 	</section>
 </div>
 <?php get_footer(); ?>
