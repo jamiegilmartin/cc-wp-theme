@@ -214,10 +214,10 @@ UBCC = {
 				prevBtn = document.createElement('a'),
 				xBtn = document.createElement('a');
 			
-			console.log(content.offsetLeft)
+			console.log(content.offsetLeft,content.offsetWidth)
 			view.classList.add('slideShow');
 			
-			content.style.width = window.innerWidth -content.offsetLeft + 'px';
+			content.style.width = window.innerWidth - ((window.innerWidth - content.offsetWidth) /2)-10 + 'px';
 			view.style.width = content.offsetWidth - 100+ 'px';
 			
 			nextBtn.classList.add('nextBtn');
