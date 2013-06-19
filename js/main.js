@@ -175,7 +175,10 @@ UBCC = {
 		}
 	},
 	models : function(){
-		var self = this;
+		var self = this,
+			contentSection = this.content.getElementsByClassName('content')[0],
+			contentWidth = contentSection.offsetWidth;
+		
 		this.modelList = this.content.getElementsByClassName('modelList')[0];
 		this.modelListItems = this.modelList.getElementsByClassName('item');
 		for(var i=0;i<this.modelListItems.length;i++){
@@ -204,6 +207,7 @@ UBCC = {
 			}, false);
 			item.addEventListener('click', function(){
 				
+				if(!self.modelList.parentNode.classList.contains('slideShow'))
 				modelSlideShow(i+1);
 				
 			}, false);
@@ -258,6 +262,7 @@ UBCC = {
 			
 			//x btn click
 			xBtn.addEventListener('click', function(){
+				content.style.width = contentWidth + 'px';
 				view.classList.remove('slideShow');
 				view.removeChild(nextBtn);
 				view.removeChild(prevBtn);
@@ -270,7 +275,10 @@ UBCC = {
 		}
 	},
 	archive : function(){
-		var self = this;
+		var self = this,
+			contentSection = this.content.getElementsByClassName('content')[0],
+			contentWidth = contentSection.offsetWidth;
+			
 		this.archiveList = this.content.getElementsByClassName('archiveList')[0];
 		this.archiveListStories = this.archiveList.getElementsByClassName('story');
 		for(var i=0;i<this.archiveListStories.length;i++){
@@ -293,7 +301,7 @@ UBCC = {
 					item.style.display = 'block';
 					storyWidth = img.width;
 					
-					new archiveItem(item,header,entry,entryContent,img,i);
+					new archiveItem(item,header,entry,entryContent,img,i,storyWidth);
 				}
 				
 			}
@@ -303,7 +311,7 @@ UBCC = {
 		/**
 		 *@Class archiveItem
 		 */
-		function archiveItem(item,header,entry,entryContent,img,i){
+		function archiveItem(item,header,entry,entryContent,img,i,storyWidth){
 
 			item.addEventListener('mouseover', function(){
 				header.style.opacity =  1;
@@ -312,15 +320,15 @@ UBCC = {
 				header.style.opacity = 0;
 			}, false);
 			item.addEventListener('click', function(){
-
-				archiveSlideShow(i);
+				if(!self.archiveListStories[i].classList.contains('slideShow'))
+				archiveSlideShow(i,storyWidth);
 
 			}, false);
 		}
 		/**
 		 *@Class archiveSlideShow
 		 */
-		function archiveSlideShow(clicked_story_index){
+		function archiveSlideShow(clicked_story_index,storyWidth){
 			
 			//get clicked story
 			for(var i=0;i<self.archiveListStories.length;i++){
@@ -341,7 +349,8 @@ UBCC = {
 					nextBtn = document.createElement('a'),
 					prevBtn = document.createElement('a'),
 					xBtn = document.createElement('a');
-					
+				
+				console.log(storyWidth)
 				//console.log(content,content.offsetLeft,content.offsetWidth)
 				view.classList.add('slideShow');
 				
@@ -371,7 +380,7 @@ UBCC = {
 					}
 				}
 				for(var j=0;j<listItems.length;j++){
-					listItems[j].style.height = maxHeight + 'px'; //?working correctly??
+					//listItems[j].style.height = maxHeight + 'px'; //?working correctly??
 				}
 				list.style.height = maxHeight + 'px';
 
@@ -381,45 +390,24 @@ UBCC = {
 
 				//x btn click
 				xBtn.addEventListener('click', function(){
+					content.style.width = contentWidth + 'px';
 					view.classList.remove('slideShow');
 					view.removeChild(nextBtn);
 					view.removeChild(prevBtn);
 					view.removeChild(xBtn);
+					view.style.width = storyWidth + 'px';
 					list.style.height = 'auto';
 					for(var j=0;j<listItems.length;j++){
 						listItems[j].style.height = 'auto';
+						listItems[j].style.display = 'none';
+						if(j===listItems.length-1){
+							listItems[j].style.display = 'block';
+						}
 					}
 					for(var i=0;i<self.archiveListStories.length;i++){
 						
 						self.archiveListStories[i].style.display = 'block';
-						//self.archive();//???
-						//todo : re loop and hide stuff
-						location.reload();
-						/*
-						for(var i=0;i<self.archiveListStories.length;i++){
-							var story = self.archiveListStories[i],
-								archiveStoryList = story.getElementsByClassName('archiveStoryList')[0],
-								archiveStoryListItems = archiveStoryList.getElementsByClassName('item'),
-								storyWidth = 0;
-
-							for(var j=0;j<archiveStoryListItems.length;j++){
-								var item = archiveStoryListItems[j],
-									header = item.getElementsByTagName('header')[0],
-									entry = item.getElementsByClassName('entry')[0],
-									imgHolder = entry.getElementsByClassName('imgHolder')[0],
-									entryContent = entry.getElementsByClassName('content')[0],
-									img = entryContent.getElementsByTagName('img')[0];
-									
-								if(j===archiveStoryListItems.length-1){
-									item.style.display = 'block';
-									storyWidth = img.width;
-								}
-
-							}
-							//set story width
-							story.style.width = storyWidth + 'px';
-						}
-						*/
+						
 					}
 				}, false);
 			}

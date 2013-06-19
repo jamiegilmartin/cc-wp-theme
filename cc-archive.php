@@ -24,7 +24,7 @@ get_header(); ?>
 				        //echo '<li><a href="'.get_permalink($post->ID).'">'.get_the_title().'</a></li>';   
 						echo '<li class="item"><article class="entry"><header><h2 class="title"><a href="javascript:void(0);">';
 						echo $category->name;
-						echo '</a></h2></header><div class="imgHolder"></div><section class="content"><p class="name">Name: ';
+						echo '</a></h2></header><div class="imgHolder"></div><section class="content"><p class="name">';
 						echo $category->name;
 						echo '</p>';
 						the_content();
