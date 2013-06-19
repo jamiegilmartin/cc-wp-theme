@@ -497,10 +497,10 @@ ul.modelList li article.entry .imgHolder img {
 	float:none;
 	width:100%;
 	background-color:rgba(255,134,107,1);
-	-webkit-transition:all 1.5s ease-in-out;
-	-moz-transition:all 1.5s ease-in-out;
-	-o-transition:all 1.5s ease-in-out;
-	transition:all 1.5s ease-in-out;
+	-webkit-transition:all 0.5s ease-in-out;
+	-moz-transition:all 0.5s ease-in-out;
+	-o-transition:all 0.5s ease-in-out;
+	transition:all 0.5s ease-in-out;
 	
 }
 
@@ -513,15 +513,10 @@ ul.modelList li article.entry .imgHolder img {
 	background:rgba(0,0,255,1);
 	display:none;
 }
-.cc-models .slideShow ul.modelList li article.entry h2.title,
-.cc-models .slideShow ul.modelList li article.entry .date {
+.cc-models .slideShow ul.modelList li article.entry h2.title{
 	float:left;
 }
-.cc-models .slideShow ul.modelList li article.entry .date {
-	display:none;
-}
-.cc-models .slideShow ul.modelList li article.entry h2.title a,
-.cc-models .slideShow ul.modelList li article.entry .date a {
+.cc-models .slideShow ul.modelList li article.entry h2.title a{
 	font-size:2em;
 	line-height:1em;
 	color:#fff;
@@ -622,29 +617,29 @@ ul.modelList li article.entry .imgHolder img {
 	padding:4em 10em;
 }
 .cc-archive .content {
-	width:80em;
+	width:83em;
+	overflow:hidden;
 }
 /**
  * ul.contentList.archiveList
  */
 ul.archiveList {
-/*	overflow:hidden;
-*/}
+	overflow:hidden;
+}
 
-ul.archiveList li.view {
+ul.archiveList li.story {
 	padding:0 2em 4em 0;
+	float:left;
 }
 /**
  * archiveStoryList
  */
 ul.archiveStoryList {
-/*	overflow:hidden;*/
+	overflow:hidden;
+	float:left;
 }
 ul.archiveStoryList li.item {
 	display:none;
-}
-ul.archiveStoryList li.item:nth-child(1){
-	display:block;
 }
 ul.archiveStoryList li.item article.entry {
 	position:relative;
@@ -668,11 +663,7 @@ ul.archiveStoryList li.item article.entry header h2.title{
 	position:relative;
 	top:45%;
 }
-ul.archiveStoryList li.item article.entry .date {
-	display:none;
-}
-ul.archiveStoryList li.item article.entry h2.title a,
-ul.archiveStoryList li.item article.entry .date a {
+ul.archiveStoryList li.item article.entry h2.title a {
 	font-size:2em;
 	line-height:1em;
 	color:#fff;
@@ -680,6 +671,7 @@ ul.archiveStoryList li.item article.entry .date a {
 	text-transform:uppercase;
 }
 ul.archiveStoryList li.item article.entry section.content {
+	display:none;
 }
 ul.archiveStoryList li.item article.entry .imgHolder img:hover {
 	background:rgba(0,0,255,1);
@@ -689,3 +681,114 @@ ul.archiveStoryList li.item article.entry .imgHolder img {
 }
 
 
+/*archive slide show*/
+.cc-archive .slideShow {
+	position:relative;
+/*	margin:0;
+	width:60em;*/
+}
+.cc-archive .slideShow ul.archiveStoryList  {
+	position:relative;
+	background-color:rgba(255,134,107,1);
+	width:100%;
+}
+.cc-archive .slideShow ul.archiveStoryList li.item {
+	position:absolute;
+	padding:0;
+	float:none;
+	width:100%;
+	background-color:rgba(255,134,107,1);
+	-webkit-transition:all 0.5s ease-in-out;
+	-moz-transition:all 0.5s ease-in-out;
+	-o-transition:all 0.5s ease-in-out;
+	transition:all 0.5s ease-in-out;
+	
+}
+.cc-archive .slideShow ul.archiveStoryList li article.entry {
+
+}
+.cc-archive .slideShow ul.archiveStoryList li article.entry header {
+	overflow:hidden;
+	padding-bottom:2em;
+	background:rgba(0,0,255,1);
+	display:none;
+}
+.cc-archive .slideShow ul.archiveStoryList li article.entry h2.title{
+	float:left;
+}
+.cc-archive .slideShow ul.archiveStoryList li article.entry h2.title a{
+	font-size:2em;
+	line-height:1em;
+	color:#fff;
+	text-decoration:none;
+	text-transform:uppercase;
+}
+.cc-archive .slideShow a.nextBtn,
+.cc-archive .slideShow  a.prevBtn {
+	position:absolute;
+	width: 1.2em;
+	height: 2.4em;
+	z-index:10;
+	-webkit-transition:all 0.5s ease-in-out;
+	-moz-transition:all 0.5s ease-in-out;
+	-o-transition:all 0.5s ease-in-out;
+	transition:all 0.5s ease-in-out;
+	cursor:pointer;
+}
+.cc-archive .slideShow a.nextBtn {
+	background: url('../images/cc-btn-next.png') no-repeat scroll top left;
+	top:35em;
+	left:65em;
+}
+.cc-archive .slideShow a.prevBtn {
+	background: url('../images/cc-btn-prev.png') no-repeat scroll top left;
+	top:35em;
+	left:-5em;
+}
+.cc-archive .slideShow a.xBtn {
+	position:absolute;
+	width:4.2em;
+	height:4.2em;
+	top:0;
+	left:65em;
+	z-index:10;
+	cursor:pointer;
+	background: url('../images/cc-btn-x.png') no-repeat scroll top left;
+}
+
+.cc-archive .slideShow ul.archiveStoryList li article.entry section.content {
+	width:60em;
+	margin:0;
+	display:block;
+	opacity:0;
+	-webkit-transition:all 0.5s ease-in-out;
+	-moz-transition:all 0.5s ease-in-out;
+	-o-transition:all 0.5s ease-in-out;
+	transition:all 0.5s ease-in-out;
+}
+.cc-archive .slideShow ul.archiveStoryList li.currentSlide article.entry section.content {
+	opacity:1;
+}
+.cc-archive .slideShow ul.archiveStoryList li article.entry section.content p {
+	font-family: Garamond;
+	font-style: italic;
+	font-weight: normal;
+	font-size:2em;
+	line-height:1em;
+	color:#fff;
+	text-decoration:none;
+	padding-bottom:0;
+}
+.cc-archive .slideShow ul.archiveStoryList li article.entry section.content p.name {
+	font-family:'DrescherGroteskBTW01-Se';
+	font-style: normal;
+	font-size:2em;
+	line-height:1em;
+	color:#fff;
+	text-decoration:none;
+}
+.cc-archive .slideShow ul.archiveStoryList li article.entry .imgHolder img {
+	padding:0;
+	width:60em;
+	height:auto;
+}

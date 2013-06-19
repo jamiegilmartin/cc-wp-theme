@@ -209,6 +209,9 @@ UBCC = {
 			}, false);
 		}
 		
+		/**
+		 *@Class modelSlideShow
+		 */
 		function modelSlideShow(clicked_slide_index){
 			//wrap images in list
 			var view = self.modelList.parentNode,
@@ -249,8 +252,8 @@ UBCC = {
 			}
 			self.modelList.style.height = maxHeight + 'px';
 			
-			var newsItemSlideShow = new SlideShow( view, self.modelList, self.modelListItems, nextBtn, prevBtn );
-			newsItemSlideShow.gotoSlide(clicked_slide_index);
+			var modelItemSlideShow = new SlideShow( view, self.modelList, self.modelListItems, nextBtn, prevBtn );
+			modelItemSlideShow.gotoSlide(clicked_slide_index);
 			
 			
 			//x btn click
@@ -267,7 +270,161 @@ UBCC = {
 		}
 	},
 	archive : function(){
-		
+		var self = this;
+		this.archiveList = this.content.getElementsByClassName('archiveList')[0];
+		this.archiveListStories = this.archiveList.getElementsByClassName('story');
+		for(var i=0;i<this.archiveListStories.length;i++){
+			var story = this.archiveListStories[i],
+				archiveStoryList = story.getElementsByClassName('archiveStoryList')[0],
+				archiveStoryListItems = archiveStoryList.getElementsByClassName('item'),
+				storyWidth = 0;
+				
+			for(var j=0;j<archiveStoryListItems.length;j++){
+				var item = archiveStoryListItems[j],
+					header = item.getElementsByTagName('header')[0],
+					entry = item.getElementsByClassName('entry')[0],
+					imgHolder = entry.getElementsByClassName('imgHolder')[0],
+					entryContent = entry.getElementsByClassName('content')[0],
+					img = entryContent.getElementsByTagName('img')[0];
+				
+				imgHolder.appendChild(img);
+				
+				if(j===archiveStoryListItems.length-1){
+					item.style.display = 'block';
+					storyWidth = img.width;
+					
+					new archiveItem(item,header,entry,entryContent,img,i);
+				}
+				
+			}
+			//set story width
+			story.style.width = storyWidth + 'px';
+		}
+		/**
+		 *@Class archiveItem
+		 */
+		function archiveItem(item,header,entry,entryContent,img,i){
+
+			item.addEventListener('mouseover', function(){
+				header.style.opacity =  1;
+			}, false);
+			item.addEventListener('mouseout', function(){
+				header.style.opacity = 0;
+			}, false);
+			item.addEventListener('click', function(){
+
+				archiveSlideShow(i);
+
+			}, false);
+		}
+		/**
+		 *@Class archiveSlideShow
+		 */
+		function archiveSlideShow(clicked_story_index){
+			
+			//get clicked story
+			for(var i=0;i<self.archiveListStories.length;i++){
+				if(i === clicked_story_index){
+					buildSlideShow( self.archiveListStories[i] );
+				}else{
+					self.archiveListStories[i].style.display = 'none';
+				}
+			}
+			
+			
+			function buildSlideShow( story ){
+				//wrap images in list
+				var view = story,
+					content = story.parentNode.parentNode,
+					list = story.getElementsByClassName('archiveStoryList')[0],
+					listItems = list.getElementsByClassName('item'),
+					nextBtn = document.createElement('a'),
+					prevBtn = document.createElement('a'),
+					xBtn = document.createElement('a');
+					
+				//console.log(content,content.offsetLeft,content.offsetWidth)
+				view.classList.add('slideShow');
+				
+				content.style.width = window.innerWidth - ((window.innerWidth - content.offsetWidth) /2)-10 + 'px';
+				
+				view.style.width = content.offsetWidth - 100+ 'px';
+
+				nextBtn.classList.add('nextBtn');
+				prevBtn.classList.add('prevBtn');
+				xBtn.classList.add('xBtn');
+
+				//set btn positions
+				//nextBtn.style.top = self.modelListItems[0].offsetHeight / 2+ 'px';
+				//prevBtn.style.top = self.modelListItems[0].offsetHeight / 2+ 'px';
+
+				view.appendChild(nextBtn);
+				view.appendChild(prevBtn);
+				view.appendChild(xBtn);
+
+				//set heights
+				var maxHeight = 0;
+				for(var i=0;i<listItems.length;i++){
+					//show all
+					listItems[i].style.display = 'block';
+					if(listItems[i].offsetHeight > maxHeight){
+						maxHeight = listItems[i].offsetHeight;
+					}
+				}
+				for(var j=0;j<listItems.length;j++){
+					listItems[j].style.height = maxHeight + 'px'; //?working correctly??
+				}
+				list.style.height = maxHeight + 'px';
+
+				var archiveStoryItemSlideShow = new SlideShow( view, list, listItems, nextBtn, prevBtn );
+				archiveStoryItemSlideShow.gotoSlide(listItems.length);
+				
+
+				//x btn click
+				xBtn.addEventListener('click', function(){
+					view.classList.remove('slideShow');
+					view.removeChild(nextBtn);
+					view.removeChild(prevBtn);
+					view.removeChild(xBtn);
+					list.style.height = 'auto';
+					for(var j=0;j<listItems.length;j++){
+						listItems[j].style.height = 'auto';
+					}
+					for(var i=0;i<self.archiveListStories.length;i++){
+						
+						self.archiveListStories[i].style.display = 'block';
+						//self.archive();//???
+						//todo : re loop and hide stuff
+						location.reload();
+						/*
+						for(var i=0;i<self.archiveListStories.length;i++){
+							var story = self.archiveListStories[i],
+								archiveStoryList = story.getElementsByClassName('archiveStoryList')[0],
+								archiveStoryListItems = archiveStoryList.getElementsByClassName('item'),
+								storyWidth = 0;
+
+							for(var j=0;j<archiveStoryListItems.length;j++){
+								var item = archiveStoryListItems[j],
+									header = item.getElementsByTagName('header')[0],
+									entry = item.getElementsByClassName('entry')[0],
+									imgHolder = entry.getElementsByClassName('imgHolder')[0],
+									entryContent = entry.getElementsByClassName('content')[0],
+									img = entryContent.getElementsByTagName('img')[0];
+									
+								if(j===archiveStoryListItems.length-1){
+									item.style.display = 'block';
+									storyWidth = img.width;
+								}
+
+							}
+							//set story width
+							story.style.width = storyWidth + 'px';
+						}
+						*/
+					}
+				}, false);
+			}
+			
+		}
 	}
 };
 window.onload = function(){
