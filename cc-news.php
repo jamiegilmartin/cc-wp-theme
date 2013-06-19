@@ -6,7 +6,11 @@ Template Name: News
 get_header(); ?>
 <div id="content" class="cc-news">
 	<section class="content">
-		<!--TODO-->
+		<!--<div class="twitter-module">
+			<a class="twitter-timeline" href="https://twitter.com/jamiegilmartin" data-widget-id="347109372226334720" data-chrome="nofooter noheader transparent noborders" data-tweet-limit="1">Tweets by @jamiegilmartin</a>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+		</div>
+		TODO-->
 		<div class="twitter-module ">
 			<p class="title">TWITTER @UBcatclub &mdash; 2 days ago</p>
 			<div class="tweet garamonditalic">Cat casting call, going on now, please visit us at our new website: <a href="#">http://t.co/XCOlseAa @UBcatclub</a></div>
@@ -35,7 +39,7 @@ get_header(); ?>
 			
 			/*set max number of pages @see http://wpengineer.com/1263/correct-pagination-with-get_posts/*/
 			$ppp = get_option('posts_per_page');
-			//echo $ppp.'<br /><br />';
+			echo $ppp.'<br /><br />';
 			$published_posts = wp_count_posts()->publish;
 			//global $wp_query; 
 			$total_pages = $wp_query->max_num_pages; 

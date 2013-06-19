@@ -228,6 +228,8 @@ ul.contentList li.item:nth-child(2n+1) {
 	color:#fff;
 }
 
+
+
 /*news article*/
 .cc-news article.entry {
 	width:60em;
@@ -435,7 +437,6 @@ ul.modelList li {
 	float:left;
 	padding:0 2em 4em 0;
 }
-
 ul.modelList li article.entry {
 	position:relative;
 	width:auto;
@@ -472,8 +473,6 @@ ul.modelList li article.entry .date a {
 ul.modelList li article.entry section.content {
 	display:none;
 }
-
-
 ul.modelList li article.entry .imgHolder img:hover {
 	background:rgba(0,0,255,1);
 }
@@ -543,10 +542,12 @@ ul.modelList li article.entry .imgHolder img {
 }
 .cc-models .slideShow a.nextBtn {
 	background: url('../images/cc-btn-next.png') no-repeat scroll top left;
+	top:35em;
 	left:65em;
 }
 .cc-models .slideShow a.prevBtn {
 	background: url('../images/cc-btn-prev.png') no-repeat scroll top left;
+	top:35em;
 	left:-5em;
 }
 .cc-models .slideShow a.xBtn {
@@ -613,6 +614,78 @@ ul.modelList li article.entry .imgHolder img {
 }
 
 
+/**
+ * archive
+ */
+.cc-archive {
+	background-color:rgba(255,134,107,1);
+	padding:4em 10em;
+}
+.cc-archive .content {
+	width:80em;
+}
+/**
+ * ul.contentList.archiveList
+ */
+ul.archiveList {
+/*	overflow:hidden;
+*/}
 
+ul.archiveList li.view {
+	padding:0 2em 4em 0;
+}
+/**
+ * archiveStoryList
+ */
+ul.archiveStoryList {
+/*	overflow:hidden;*/
+}
+ul.archiveStoryList li.item {
+	display:none;
+}
+ul.archiveStoryList li.item:nth-child(1){
+	display:block;
+}
+ul.archiveStoryList li.item article.entry {
+	position:relative;
+	width:auto;
+	cursor:pointer;
+}
+ul.archiveStoryList li.item article.entry header {
+	position:absolute;
+	background:rgba(0,0,255,1);
+	width:100%;
+	height:100%;
+	-webkit-transition:all 0.2s ease-in-out;
+	-moz-transition:all 0.2s ease-in-out;
+	-o-transition:all 0.2s ease-in-out;
+	transition:all 0.2s ease-in-out;
+	opacity:0;
+}
+
+ul.archiveStoryList li.item article.entry header h2.title{
+	text-align:center;
+	position:relative;
+	top:45%;
+}
+ul.archiveStoryList li.item article.entry .date {
+	display:none;
+}
+ul.archiveStoryList li.item article.entry h2.title a,
+ul.archiveStoryList li.item article.entry .date a {
+	font-size:2em;
+	line-height:1em;
+	color:#fff;
+	text-decoration:none;
+	text-transform:uppercase;
+}
+ul.archiveStoryList li.item article.entry section.content {
+}
+ul.archiveStoryList li.item article.entry .imgHolder img:hover {
+	background:rgba(0,0,255,1);
+}
+ul.archiveStoryList li.item article.entry .imgHolder img {
+	padding-bottom:0;
+}
 
 

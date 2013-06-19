@@ -32,6 +32,9 @@ UBCC = {
 		if(this.content.classList.contains('cc-models')){
 			this.models();
 		}
+		if(this.content.classList.contains('cc-archive')){
+			this.archive();
+		}
 	},
 	header : function(){
 		var header = document.getElementById('cc-header');
@@ -225,8 +228,8 @@ UBCC = {
 			xBtn.classList.add('xBtn');
 			
 			//set btn positions
-			nextBtn.style.top = self.modelListItems[0].offsetHeight / 2+ 'px';
-			prevBtn.style.top = self.modelListItems[0].offsetHeight / 2+ 'px';
+			//nextBtn.style.top = self.modelListItems[0].offsetHeight / 2+ 'px';
+			//prevBtn.style.top = self.modelListItems[0].offsetHeight / 2+ 'px';
 			
 			view.appendChild(nextBtn);
 			view.appendChild(prevBtn);
@@ -262,6 +265,9 @@ UBCC = {
 				}
 			}, false);
 		}
+	},
+	archive : function(){
+		
 	}
 };
 window.onload = function(){
