@@ -350,8 +350,7 @@ UBCC = {
 					prevBtn = document.createElement('a'),
 					xBtn = document.createElement('a');
 				
-				console.log(storyWidth)
-				//console.log(content,content.offsetLeft,content.offsetWidth)
+				//console.log(content,content.offsetLeft,content.offsetWidth)//TODO : on resize, models ...
 				view.classList.add('slideShow');
 				
 				content.style.width = window.innerWidth - ((window.innerWidth - content.offsetWidth) /2)-10 + 'px';

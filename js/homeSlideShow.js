@@ -30,12 +30,12 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	this.updateSlides();
 	this.events();
 	
-	this.scrollorama();
+	//this.scrollorama();
 
 };
 HomeSlideShow.prototype.resize = function(){
-	var self = this;
-	var arr = this.slides.concat(this.imgArr);
+	var self = this,
+		arr = this.slides.concat(this.imgArr);
 	arr.push(this.view);
 	
 	function resizeElements( elementsToResize ){
@@ -52,10 +52,13 @@ HomeSlideShow.prototype.resize = function(){
 			if(isImage(elementsToResize[i])){
 				oldH = elementsToResize[i].offsetHeight;
 				oldW = elementsToResize[i].offsetWidth;
-
-				elementsToResize[i].style.width = (oldW*this.windowHeight)/oldH + 'px';
+				//scale img
+				elementsToResize[i].style.width = this.windowWidth + 'px';
+				elementsToResize[i].style.height = (oldH*this.windowWidth)/oldW + 'px';
+			}else{
+				elementsToResize[i].style.height = this.windowHeight + 'px';
 			}
-			elementsToResize[i].style.height = this.windowHeight + 'px';
+			
 		}
 	};
 	resizeElements(arr);
