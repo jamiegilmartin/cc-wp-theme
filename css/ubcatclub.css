@@ -150,17 +150,17 @@ header#cc-header section.about p {
 	width:100%;
 }
 .cc-home ul li {
-	position:absolute;
+	position:relative;
 	top:0;
 	width:100%;
 	text-align:center;
 	overflow:hidden;
 	border:1px solid red;
-
+/*
 	-webkit-transition:all 1s ease-in-out;
 	-moz-transition:all 1s ease-in-out;
 	-o-transition:all 1s ease-in-out;
-	transition:all 1s ease-in-out;
+	transition:all 1s ease-in-out;*/
 
 }
 .cc-home ul li .fader {
@@ -169,7 +169,7 @@ header#cc-header section.about p {
 	position:absolute;
 	top:0;
 	width:100%;
-
+	height:100%;
 	z-index:3;
 	opacity:0;
 	-webkit-transition:all 1s ease-in-out;

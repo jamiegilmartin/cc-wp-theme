@@ -62,7 +62,8 @@ UBCC = {
 			liArr = [];
 		
 		//set slide show height
-		var slideShowHeight = this.content.style.height = imgs[0].offsetHeight + 'px';
+		//var slideShowHeight = this.content.style.height = imgs[0].offsetHeight + 'px';
+		
 		
 		//wrap images in list
 		var list = document.createElement('ul');

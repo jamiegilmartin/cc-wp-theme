@@ -15,14 +15,17 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	this.slideShow = ul;
 	this.slides = lis;
 	this.nextBtn = nextBtn;
-	
 	this.imgArr = [];
+	this.active_index = 0;
+	
+	this.viewWidth = this.view.offsetWidth;
+	this.viewHeight = this.view.offsetHeight;
+	
 	for(var i=0;i<this.slides.length;i++){
 		this.imgArr.push(this.slides[i].getElementsByTagName('img')[0]);
 	}
 	
 	
-	this.active_index = 0;
 	
 	
 
@@ -30,13 +33,13 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	this.updateSlides();
 	this.events();
 	
-	//this.scrollorama();
+	this.scrollorama();
 
 };
 HomeSlideShow.prototype.resize = function(){
 	var self = this,
-		arr = this.slides.concat(this.imgArr);
-	arr.push(this.view);
+		arr = this.imgArr;//this.slides.concat(this.imgArr);
+	//arr.push(this.view);
 	
 	function resizeElements( elementsToResize ){
 		this.windowHeight = window.innerHeight,
@@ -63,8 +66,14 @@ HomeSlideShow.prototype.resize = function(){
 	};
 	resizeElements(arr);
 	
-	this.viewWidth = this.view.offsetWidth;
-	this.viewHeight = this.view.offsetHeight;
+	for(var i=0;i<this.slides.length;i++){
+		console.log(this.slides[i].offsetHeight)
+		if(i !== this.active_index){
+			this.slides[i].style.top = -this.slides[i].offsetHeight*(i+1) +'px';
+		}
+		
+	}
+
 };
 HomeSlideShow.prototype.events = function(){
 	var self = this;
@@ -195,44 +204,69 @@ HomeSlideShow.prototype.events = function(){
 HomeSlideShow.prototype.scrollorama = function(){
 	//scrollorama
 	var self = this,
-		controller = $.superscrollorama();
-
-	/*
-	controller.addTween('.cc-home ul li', 
-	  TweenMax.from($(self.currentSlide),0,{
-	    css:{opacity:1}, 
-	    onComplete: function(){alert('test')}
-	  }));
-
+		controller = $.superscrollorama(),
+		update = 0;
+	/*function updateHandler(){
+		update++;
+		console.log(update)
+	}
+	function completeHandler(){
+		console.log('complete')
+	}
+	
 	controller.addTween(
-		  '.cc-home ul li',
-		  (new TimelineLite())
-		    .append([
-		      TweenMax.fromTo($(self.currentSlide).find('.fader'), 1, 
-		        {css:{opacity: 0},immediateRender:true }, 
-		        {css:{opacity: 1}}),
-		      // TweenMax.fromTo($(self.currentSlide).find('.fader'), 1, 
-		      // 		        {css:{top: 500}, 
-		      // 		        {css:{top: -1250}})
-		    ]),
-		  .5 // scroll duration of tween
-		);
-	*/
-	controller.pin($(self.view), 0,{
+		'.cc-home',
+		TweenMax.to($('.cc-home ul li').get(0),
+			0.5,
+			{opacity:0.5,
+				onUpdate:updateHandler, 
+				onComplete:completeHandler
+			}
+		),
+		$('.cc-home ul li').height()
+	);*/
+	console.log($(self.nextSlide).css('top'))
+	controller.pin($(self.currentSlide), 1000,
+		{anim : (new TimelineLite())
+		.append(
+			TweenMax.fromTo($(self.nextSlide), .5, 
+			{css:{top:$(self.nextSlide).css('top'), opacity: 0,height:0}, ease:Quad.easeOut}, 
+			{css:{top:-$(this.currentSlide).height(),opacity: 1,height:$(self.currentSlide).height()},
+			onComplete: function(){
+				console.log('end');
+				//controller.removePin($(self.view), true)
+				self.next();
+			}})
+		)},
+		-20 //offset
+	);
+	
+	/*
+	controller.addTween(
+		'.cc-home',
+		TweenMax.to($('.cc-home ul li').get(0),
+			0.5,
+			{opacity:0.5,
+				onUpdate:updateHandler, 
+				onComplete:completeHandler
+			}
+		),
+		$('.cc-home ul li').height()
+	);
+	controller.pin($(self.currentSlide), 0,{
 		anim : (new TimelineLite())
 		.append(
-			TweenMax.fromTo($(self.currentSlide), .5, 
-			{css:{opacity: 0, height: 0}, immediateRender:true,ease:Quad.easeOut}, 
+			TweenMax.fromTo($(self.nextSlide), 555, 
+			{css:{opacity: 0, height: 0}, ease:Quad.easeOut}, 
 			{css:{opacity: 1, height: $(self.currentSlide).height() },
 			onComplete: function(){
 				console.log('end');
 				//controller.removePin($(self.view), true)
 				self.next();
-			}}),
-			700
+			}})
 		)
 	});
-	
+		*/
 };
 
 HomeSlideShow.prototype.next = function(){
@@ -257,7 +291,7 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 				//on first slide
 				this.previousSlide = this.slides[this.slides.length-1];
 				//move previous slide stage left
-				this.previousSlide.style.zIndex = 0;
+				//this.previousSlide.style.zIndex = 0;
 				//this.previousSlide.style.top  =  this.viewHeight+'px';
 			}
 			//this.previousFader = this.previousSlide.getElementsByClassName('fader')[0];
@@ -278,7 +312,7 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 				//on last slide
 				this.nextSlide = this.slides[0];
 				//move next slide stage right
-				this.nextSlide.style.zIndex = 0;
+				//this.nextSlide.style.zIndex = 0;
 				//this.nextSlide.style.top  =  -this.viewHeight+'px';
 			}
 			//this.nextFader = this.nextSlide.getElementsByClassName('fader')[0];
@@ -286,7 +320,7 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 
 
 			this.transitioning = true; //prevents user from going through slides too fast
-			this.currentSlide.style.zIndex = 2;
+			//this.currentSlide.style.zIndex = 2;
 			//this.currentSlide.style.height = this.viewHeight+'px';
 			//this.currentFader.style.opacity = 0
 			
@@ -303,7 +337,7 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 
 		}else if(i < this.active_index ){
 			//slide is less than active, move stage left
-			this.slides[i].style.zIndex = 0;
+			//this.slides[i].style.zIndex = 0;
 			this.slides[i].classList.remove('c')
 			//this.slides[i].style.top  =  this.viewHeight+'px';
 			//var fader = this.slides[i].getElementsByClassName('fader')[0];
@@ -314,7 +348,7 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 			//slide is greater than active, move stage right
 			if(this.slides[i] !== this.previousSlide){
 
-				this.slides[i].style.zIndex = 0;
+				//this.slides[i].style.zIndex = 0;
 				//this.slides[i].style.top  =  -this.viewHeight+'px';
 				//var fader = this.slides[i].getElementsByClassName('fader')[0];
 				//fader.style.opacity = 1;
