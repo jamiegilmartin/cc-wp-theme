@@ -14,8 +14,9 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	this.view = view;
 	this.slideShow = ul;
 	this.slides = lis;
-	this.nextBtn = nextBtn;
+	this.slideHeights = [];
 	this.imgArr = [];
+	this.nextBtn = nextBtn;
 	this.active_index = 0;
 	
 	this.viewWidth = this.view.offsetWidth;
@@ -23,6 +24,7 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	
 	
 	for(var i=0;i<this.slides.length;i++){
+		this.slideHeights.push(this.slides[i].offsetHeight);
 		this.imgArr.push(this.slides[i].getElementsByTagName('img')[0]);
 	}
 
@@ -125,6 +127,25 @@ HomeSlideShow.prototype.scrollorama = function(){
 	var self = this,
 		controller = $.superscrollorama(),
 		update = 0;
+
+	console.log($(self.nextSlide).css('top'))
+	controller.pin($(self.currentSlide), $(self.currentSlide).height(),
+		{anim : (new TimelineLite())
+		.append(
+			TweenMax.fromTo($(self.nextSlide), .5, 
+			{css:{opacity: 0,height:0}, ease:Quad.easeOut}, 
+			{css:{opacity: 1,height:$(self.nextSlide).height()},
+			onComplete: function(){
+				console.log('end');
+				//controller.removePin($(self.view), true)
+				self.next();
+				self.scrollorama();
+			}})
+		)},
+		-20 //offset
+	);
+	
+	
 	/*function updateHandler(){
 		update++;
 		console.log(update)
@@ -144,22 +165,6 @@ HomeSlideShow.prototype.scrollorama = function(){
 		),
 		$('.cc-home ul li').height()
 	);*/
-	console.log($(self.nextSlide).css('top'))
-	controller.pin($(self.currentSlide), 1000,
-		{anim : (new TimelineLite())
-		.append(
-			TweenMax.fromTo($(self.nextSlide), .5, 
-			{css:{top:$(self.nextSlide).css('top'), opacity: 0,height:0}, ease:Quad.easeOut}, 
-			{css:{top:-$(this.currentSlide).height(),opacity: 1,height:$(self.currentSlide).height()},
-			onComplete: function(){
-				console.log('end');
-				//controller.removePin($(self.view), true)
-				self.next();
-			}})
-		)},
-		-20 //offset
-	);
-	
 	/*
 	controller.addTween(
 		'.cc-home',
@@ -210,7 +215,7 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 				//on first slide
 				this.previousSlide = this.slides[this.slides.length-1];
 				//move previous slide stage left
-				this.previousSlide.style.zIndex = 0;
+				//this.previousSlide.style.zIndex = 0;
 				//this.previousSlide.style.top  =  this.viewHeight+'px';
 			}
 			//this.previousFader = this.previousSlide.getElementsByClassName('fader')[0];
@@ -219,6 +224,7 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 			
 			//set current
 			this.currentSlide = this.slides[i];
+			this.currentSlide.style.height = this.slideHeights[i] + 'px';
 			this.currentSlide.classList.add('c')
 			//this.currentFader = this.currentSlide.getElementsByClassName('fader')[0];
 			
@@ -231,7 +237,7 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 				//on last slide
 				this.nextSlide = this.slides[0];
 				//move next slide stage right
-				this.nextSlide.style.zIndex = 0;
+				//this.nextSlide.style.zIndex = 0;
 				//this.nextSlide.style.top  =  -this.viewHeight+'px';
 			}
 			//this.nextFader = this.nextSlide.getElementsByClassName('fader')[0];
@@ -239,7 +245,7 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 
 
 			this.transitioning = true; //prevents user from going through slides too fast
-			this.currentSlide.style.zIndex = 2;
+			//this.currentSlide.style.zIndex = 2;
 			//this.currentSlide.style.height = this.viewHeight+'px';
 			//this.currentFader.style.opacity = 0
 			
@@ -255,19 +261,22 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 			}
 
 		}else if(i < this.active_index ){
-			//slide is less than active, move stage left
-			this.slides[i].style.zIndex = 0;
-			this.slides[i].classList.remove('c')
+			//slide is less than active
+			this.slides[i].style.height = 0;
+			//this.slides[i].style.zIndex = 0;
+			this.slides[i].classList.remove('c');
+			
 			//this.slides[i].style.top  =  this.viewHeight+'px';
 			//var fader = this.slides[i].getElementsByClassName('fader')[0];
 			//fader.style.opacity = 1;
 			
 		}else{
+			this.slides[i].style.height = 0;
 			this.slides[i].classList.remove('c')
 			//slide is greater than active, move stage right
 			if(this.slides[i] !== this.previousSlide){
-
-				this.slides[i].style.zIndex = 0;
+				
+				//this.slides[i].style.zIndex = 0;
 				//this.slides[i].style.top  =  -this.viewHeight+'px';
 				//var fader = this.slides[i].getElementsByClassName('fader')[0];
 				//fader.style.opacity = 1;

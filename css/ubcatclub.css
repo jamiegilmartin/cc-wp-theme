@@ -151,7 +151,6 @@ header#cc-header section.about p {
 }
 .cc-home ul li {
 	position:relative;
-
 	width:100%;
 	text-align:center;
 	overflow:hidden;
@@ -181,6 +180,7 @@ header#cc-header section.about p {
 }
 .cc-home ul.slideList li {
 	position:absolute;
+	top:0;
 }
 .cc-home ul.shadowList li {
 	
