@@ -33,7 +33,7 @@ UBCC = {
 			this.models();
 		}
 		if(this.content.classList.contains('cc-casting')){
-			this.archive();
+			this.casting();
 		}
 		if(this.content.classList.contains('cc-archive')){
 			this.archive();
@@ -63,14 +63,19 @@ UBCC = {
 	homeSlideShow : function(){
 		var imgs = this.content.getElementsByTagName('img'),
 			imgArr = [],
-			liArr = [];
+			liArr = [],
+			shadowLiArr = [];
 		
 		//set slide show height
 		//var slideShowHeight = this.content.style.height = imgs[0].offsetHeight + 'px';
 		
 		
-		//wrap images in list
-		var list = document.createElement('ul');
+		//wrap images in list and shadow list for scrollarama
+		var slideList = document.createElement('ul'),
+			shadowList = document.createElement('ul');
+		
+		slideList.classList.add('slideList');
+		shadowList.classList.add('shadowList');
 		
 		//add images to array
 		for(var i=0;i<imgs.length;i++){
@@ -83,7 +88,9 @@ UBCC = {
 		for(var j=0;j<imgArr.length;j++){
 			var img = imgArr[j],
 				li = document.createElement('li'),
+				cloneLi = li.cloneNode(true),
 				fader = document.createElement('div');
+				
 			fader.classList.add('fader');
 			//fader.style.height = slideShowHeight + 'px';
 			//fader.style.top = -this.viewHeight + 'px';
@@ -91,15 +98,58 @@ UBCC = {
 			li.appendChild( fader );
 			li.appendChild( img );
 			//li.style.top = -slideShowHeight+'px';
-			list.appendChild( li );
+			slideList.appendChild( li );
+			shadowList.appendChild( cloneLi );
 			liArr.push(li);
+			shadowLiArr.push(cloneLi);
 		}
-		this.content.appendChild(list);
+		this.content.appendChild(slideList);
+		this.content.appendChild(shadowList);
+		
+
+		//set top slideList
+		slideList.style.position = 'absolute';
+		
+		
+		//resize images
+		function resize(elementsToResize){
+			this.windowHeight = window.innerHeight;
+			this.windowWidth = window.innerWidth;
+
+			function isImage(i) {
+				return i instanceof HTMLImageElement;
+			}
+			//resize elements
+			for(var i=0;i<elementsToResize.length;i++){
+				var oldW,
+					oldH;
+				if(isImage(elementsToResize[i])){
+					oldH = elementsToResize[i].offsetHeight;
+					oldW = elementsToResize[i].offsetWidth;
+					//scale img
+					elementsToResize[i].style.width = this.windowWidth + 'px';
+					elementsToResize[i].style.height = (oldH*this.windowWidth)/oldW + 'px';
+				}else{
+					elementsToResize[i].style.height = this.windowHeight + 'px';
+				}
+
+			}
+
+			//set shadows same height
+			for(var k=0;k<liArr.length;k++){
+				shadowLiArr[k].style.height = liArr[k].offsetHeight + 'px';
+				console.log(liArr[k].offsetHeight)
+			}
+		}
+		resize( imgArr );
+		window.onresize = function(e){
+			resize( imgArr );
+		};
 		
 		/**
 		 * create slide show
 		 */
-		var homeSlideShow = new HomeSlideShow( this.content, list, liArr, this.content );
+		var homeSlideShow = new HomeSlideShow( this.content, slideList, liArr, this.content );
 
 	},
 	news : function(){
@@ -278,6 +328,14 @@ UBCC = {
 				}
 			}, false);
 		}
+	},
+	casting : function(){
+		var self = this;
+		this.content.style.height =  window.innerHeight + 'px';
+		
+		window.onresize = function(e){
+			self.content.style.height =  window.innerHeight + 'px';
+		};
 	},
 	archive : function(){
 		var self = this,

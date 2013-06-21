@@ -151,7 +151,7 @@ header#cc-header section.about p {
 }
 .cc-home ul li {
 	position:relative;
-	top:0;
+
 	width:100%;
 	text-align:center;
 	overflow:hidden;
@@ -179,7 +179,12 @@ header#cc-header section.about p {
 	
 	border:1px solid blue;
 }
-
+.cc-home ul.slideList li {
+	position:absolute;
+}
+.cc-home ul.shadowList li {
+	
+}
 
 
 
@@ -608,6 +613,21 @@ ul.modelList li article.entry .imgHolder img {
 	height:auto;
 }
 
+
+/**
+ * casting
+ */
+.cc-casting {
+	background-color:rgba(255,134,107,1);
+	padding:0;
+	height:100%;
+}
+.cc-casting .content {
+	margin:0;
+}
+.cc-casting iframe {
+	position:absolute;
+}
 
 /**
  * archive
