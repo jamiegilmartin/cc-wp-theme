@@ -32,9 +32,13 @@ UBCC = {
 		if(this.content.classList.contains('cc-models')){
 			this.models();
 		}
+		if(this.content.classList.contains('cc-casting')){
+			this.archive();
+		}
 		if(this.content.classList.contains('cc-archive')){
 			this.archive();
 		}
+		
 	},
 	header : function(){
 		var header = document.getElementById('cc-header');
