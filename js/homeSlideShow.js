@@ -129,12 +129,31 @@ HomeSlideShow.prototype.scrollorama = function(){
 		update = 0;
 
 	console.log($(self.nextSlide).css('top'))
-	controller.pin($(self.currentSlide), $(self.currentSlide).height(),
+	controller.pin($(self.slides), $(self.currentSlide).height(),
 		{anim : (new TimelineLite())
 		.append(
 			TweenMax.fromTo($(self.nextSlide), .5, 
 			{css:{opacity: 0,height:0}, ease:Quad.easeOut}, 
-			{css:{opacity: 1,height:$(self.nextSlide).height()},
+			{css:{opacity: 1,height:$(self.currentSlide).height()},
+			onUpdate: function(){
+				//update++;
+				//console.log(update)
+			},
+			onComplete: function(){
+				console.log('end');
+				//controller.removePin($(self.view), true)
+				self.next();
+				self.scrollorama();
+			}})
+		)
+		.append(
+			TweenMax.fromTo($(self.currentSlide).find('fader'), .5, 
+			{css:{opacity: 0}, ease:Quad.easeOut}, 
+			{css:{opacity: 1},
+			onUpdate: function(){
+				update++;
+				console.log(update)
+			},
 			onComplete: function(){
 				console.log('end');
 				//controller.removePin($(self.view), true)
@@ -226,7 +245,7 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 			this.currentSlide = this.slides[i];
 			this.currentSlide.style.height = this.slideHeights[i] + 'px';
 			this.currentSlide.classList.add('c')
-			//this.currentFader = this.currentSlide.getElementsByClassName('fader')[0];
+			this.currentFader = this.currentSlide.getElementsByClassName('fader')[0];
 			
 			
 			
@@ -247,7 +266,7 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 			this.transitioning = true; //prevents user from going through slides too fast
 			//this.currentSlide.style.zIndex = 2;
 			//this.currentSlide.style.height = this.viewHeight+'px';
-			//this.currentFader.style.opacity = 0
+			this.currentFader.style.opacity = 0
 			
 			
 			var transitionEnd = whichTransitionEvent();
@@ -262,7 +281,7 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 
 		}else if(i < this.active_index ){
 			//slide is less than active
-			this.slides[i].style.height = 0;
+			//this.slides[i].style.height = 0;
 			//this.slides[i].style.zIndex = 0;
 			this.slides[i].classList.remove('c');
 			
