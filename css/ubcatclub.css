@@ -149,13 +149,14 @@ header#cc-header section.about p {
 }
 .cc-home ul {
 	width:100%;
+	position:relative;
 }
 .cc-home ul li {
 	position:relative;
 	width:100%;
 	text-align:center;
 	overflow:hidden;
-	border:1px solid red;
+
 /*
 	-webkit-transition:all 1s ease-in-out;
 	-moz-transition:all 1s ease-in-out;
@@ -179,15 +180,31 @@ header#cc-header section.about p {
 	
 	border:1px solid blue;*/
 }
+.cc-home ul.slideList {
+	z-index:1;
+}
 .cc-home ul.slideList li {
 	position:absolute;
 	top:0;
+		border:1px solid red;
+}
+
+.cc-home ul.shadowList {
+	z-index:0;
 }
 .cc-home ul.shadowList li {
-	
+		border:1px solid blue;
+		
 }
-
-
+.cc-home ul.shadowList li:nth-child(1){
+	background:blue;
+}
+.cc-home ul.shadowList li:nth-child(2){
+	background:red;
+}
+.cc-home ul.shadowList li:nth-child(3){
+	background:green;
+}
 
 /**
  * ul.contentList

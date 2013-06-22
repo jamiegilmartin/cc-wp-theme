@@ -108,7 +108,7 @@ UBCC = {
 		
 
 		//set top slideList
-		slideList.style.position = 'absolute';
+		//slideList.style.position = 'absolute';
 		
 		
 		//resize images
