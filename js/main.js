@@ -21,6 +21,7 @@ UBCC = {
 		
 		//pages
 		if(this.content.classList.contains('cc-home')){
+			$(this).scrollTop(0);
 			this.homeSlideShow();
 		}
 		if(this.content.classList.contains('cc-news')){

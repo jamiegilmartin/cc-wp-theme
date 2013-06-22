@@ -127,6 +127,7 @@ HomeSlideShow.prototype.scrollorama = function(){
 	var self = this,
 		controller = $.superscrollorama(),
 		update = 0,
+		last = false,
 		animation = (new TimelineLite())
 			.append([
 				TweenMax.fromTo($(self.nextSlide), 0.5, 
@@ -169,13 +170,17 @@ HomeSlideShow.prototype.scrollorama = function(){
 	);*/
 	controller.pin(
 		$('.slideList'),//ele
-		3000,//duration
+		1000,//duration
 		{anim : animation,
 			onPin: function() {
 				console.log('on pin')
+				if(self.active_index >= self.slides.length - 2){
+					last = true;
+				}
 			}, 
 			onUnpin: function() {
-				console.log('un pin')
+				console.log('un pin',self.currentSlide,self.active_index)
+				if(last) return;
 				self.next();
 				self.scrollorama();
 			}
