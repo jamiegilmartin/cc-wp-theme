@@ -127,89 +127,52 @@ HomeSlideShow.prototype.scrollorama = function(){
 	var self = this,
 		controller = $.superscrollorama(),
 		update = 0;
-
-	console.log($(self.nextSlide).css('top'))
-	controller.pin($(self.slides), $(self.currentSlide).height(),
-		{anim : (new TimelineLite())
-		.append(
-			TweenMax.fromTo($(self.nextSlide), .5, 
-			{css:{opacity: 0,height:0}, ease:Quad.easeOut}, 
-			{css:{opacity: 1,height:$(self.currentSlide).height()},
-			onUpdate: function(){
-				//update++;
-				//console.log(update)
-			},
-			onComplete: function(){
-				console.log('end');
-				//controller.removePin($(self.view), true)
+	
+	
+	
+	controller.pin($('.cc-home ul.slideList li'), $(self.currentSlide).height(),
+		{
+			anim : (new TimelineLite())
+			.append(
+				TweenMax.fromTo($(self.nextSlide), .5, 
+				{css:{height:0}, ease:Quad.easeOut}, 
+				{css:{height:$(self.currentSlide).height()},
+				onUpdate: function(){
+					//update++;
+					//console.log(update)
+				},
+				onComplete: function(){
+					console.log('end');
+					//controller.removePin($(self.view), true)
+					//self.next();
+					//self.scrollorama();
+				}})
+			)
+			.append(
+				TweenMax.fromTo($(self.nextSlide).find('.fader'), .5, 
+				{css:{opacity: 0.5}, ease:Quad.easeOut}, 
+				{css:{opacity: 0},
+				onUpdate: function(){
+					//update++;
+					//console.log(update)
+				},
+				onComplete: function(){
+					console.log('end');
+					//controller.removePin($(self.view), true)
+					//self.next();
+					//self.scrollorama();
+				}})
+			),
+			onPin: function() {
+				console.log('on pin')
+			}, 
+			onUnpin: function() {
+				console.log('un pin')
 				self.next();
 				self.scrollorama();
-			}})
-		)
-		.append(
-			TweenMax.fromTo($(self.currentSlide).find('fader'), .5, 
-			{css:{opacity: 0}, ease:Quad.easeOut}, 
-			{css:{opacity: 1},
-			onUpdate: function(){
-				update++;
-				console.log(update)
-			},
-			onComplete: function(){
-				console.log('end');
-				//controller.removePin($(self.view), true)
-				self.next();
-				self.scrollorama();
-			}})
-		)},
-		-20 //offset
-	);
-	
-	
-	/*function updateHandler(){
-		update++;
-		console.log(update)
-	}
-	function completeHandler(){
-		console.log('complete')
-	}
-	
-	controller.addTween(
-		'.cc-home',
-		TweenMax.to($('.cc-home ul li').get(0),
-			0.5,
-			{opacity:0.5,
-				onUpdate:updateHandler, 
-				onComplete:completeHandler
 			}
-		),
-		$('.cc-home ul li').height()
-	);*/
-	/*
-	controller.addTween(
-		'.cc-home',
-		TweenMax.to($('.cc-home ul li').get(0),
-			0.5,
-			{opacity:0.5,
-				onUpdate:updateHandler, 
-				onComplete:completeHandler
-			}
-		),
-		$('.cc-home ul li').height()
+		}
 	);
-	controller.pin($(self.currentSlide), 0,{
-		anim : (new TimelineLite())
-		.append(
-			TweenMax.fromTo($(self.nextSlide), 555, 
-			{css:{opacity: 0, height: 0}, ease:Quad.easeOut}, 
-			{css:{opacity: 1, height: $(self.currentSlide).height() },
-			onComplete: function(){
-				console.log('end');
-				//controller.removePin($(self.view), true)
-				self.next();
-			}})
-		)
-	});
-		*/
 };
 
 HomeSlideShow.prototype.next = function(){
