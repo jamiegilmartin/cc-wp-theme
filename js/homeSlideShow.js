@@ -129,8 +129,22 @@ HomeSlideShow.prototype.scrollorama = function(){
 		update = 0;
 	
 	
-	
-	controller.pin($('.cc-home ul.slideList li'), $(self.currentSlide).height(),
+	//$('.cc-home ul.slideList li')
+	controller.addTween(
+		  '.cc-home ul.slideList li',
+		  (new TimelineLite())
+		    .append([
+		      TweenMax.fromTo($(self.currentSlide), 1, 
+		        {css:{top: 200}, immediateRender:true}, 
+		        {css:{top: -600}}),
+		      TweenMax.fromTo($(self.nextSlide), 1, 
+		        {css:{top: 500}, immediateRender:true}, 
+		        {css:{top: -1250}})
+		    ]),
+		  1000 // scroll duration of tween
+		);
+	/*
+	controller.pin($(self.currentSlide), $(window).height(),
 		{
 			anim : (new TimelineLite())
 			.append(
@@ -172,7 +186,7 @@ HomeSlideShow.prototype.scrollorama = function(){
 				self.scrollorama();
 			}
 		}
-	);
+	);*/
 };
 
 HomeSlideShow.prototype.next = function(){
