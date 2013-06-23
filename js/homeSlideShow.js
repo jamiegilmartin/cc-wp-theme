@@ -170,12 +170,13 @@ HomeSlideShow.prototype.scrollorama = function(){
 	);*/
 	controller.pin(
 		$('.slideList'),//ele
-		1000,//duration
+		$(window).height() / (self.slides.length + 1),//duration
 		{anim : animation,
 			onPin: function() {
 				console.log('on pin')
 				if(self.active_index >= self.slides.length - 2){
 					last = true;
+					//self.view.style.height = self.currentSlide.offsetHeight + 'px';
 				}
 			}, 
 			onUnpin: function() {

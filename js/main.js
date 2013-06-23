@@ -25,7 +25,7 @@ UBCC = {
 			this.homeSlideShow();
 		}
 		if(this.content.classList.contains('cc-news')){
-			this.news();
+			//this.news();
 		}
 		if(this.content.classList.contains('cc-store')){
 			this.store();
@@ -62,7 +62,8 @@ UBCC = {
 		this.content.addEventListener('click',closeHeader,false);
 	},
 	homeSlideShow : function(){
-		var imgs = this.content.getElementsByTagName('img'),
+		var self = this,
+			imgs = this.content.getElementsByTagName('img'),
 			imgArr = [],
 			liArr = [],
 			shadowLiArr = [];
@@ -130,6 +131,7 @@ UBCC = {
 					//scale img
 					elementsToResize[i].style.width = this.windowWidth + 'px';
 					elementsToResize[i].style.height = (oldH*this.windowWidth)/oldW + 'px';
+					self.content.style.height = (oldH*this.windowWidth)/oldW + 'px';
 				}else{
 					elementsToResize[i].style.height = this.windowHeight + 'px';
 				}
@@ -139,9 +141,10 @@ UBCC = {
 			//set shadows same height
 			for(var k=0;k<liArr.length;k++){
 				shadowLiArr[k].style.height = liArr[k].offsetHeight + 'px';
-				console.log(liArr[k].offsetHeight)
+				//console.log(liArr[k].offsetHeight)
 			}
 		}
+		
 		resize( imgArr );
 		window.onresize = function(e){
 			resize( imgArr );

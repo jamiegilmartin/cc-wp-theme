@@ -186,16 +186,15 @@ header#cc-header section.about p {
 .cc-home ul.slideList li {
 	position:absolute;
 	top:0;
-		border:1px solid red;
 }
 
 .cc-home ul.shadowList {
 	z-index:0;
 }
 .cc-home ul.shadowList li {
-		border:1px solid blue;
-		
+
 }
+/*
 .cc-home ul.shadowList li:nth-child(1){
 	background:blue;
 }
@@ -205,6 +204,8 @@ header#cc-header section.about p {
 .cc-home ul.shadowList li:nth-child(3){
 	background:green;
 }
+*/
+
 
 /**
  * ul.contentList
