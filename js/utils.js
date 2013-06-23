@@ -27,6 +27,7 @@ function whichTransitionEvent(){
 		'WebkitTransition':'webkitTransitionEnd'
 	}
 	for(t in transitions){
+		console.log(transitions[t])
 		if( el.style[t] !== undefined ){
 			return transitions[t];
 		}

@@ -4,7 +4,7 @@ body {
 	background-color:rgba(255,134,107,1);
 	margin:0;
 	
-	
+	-webkit-font-smoothing: antialiased;
 	font-family:'DrescherGroteskBTW01-Se';
 	font-family:'DrescherGroteskBTW01-Se';
 }
@@ -15,7 +15,7 @@ body {
 .garamonditalic {
 	font-family: Garamond;
 	font-style: italic;
-	font-weight: normal;
+	font-weight: normal !important;
 }
 
 
