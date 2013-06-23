@@ -32,7 +32,10 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	this.updateSlides();
 	this.events();
 	
-	this.scrollorama();
+	this.scrollorama({
+		triggerAtCenter: false,
+		playoutAnimations: true
+	});
 
 };
 HomeSlideShow.prototype.events = function(){
@@ -130,9 +133,9 @@ HomeSlideShow.prototype.scrollorama = function(){
 		last = false,
 		animation = (new TimelineLite())
 			.append([
-				TweenMax.fromTo($(self.nextSlide), 0.5, 
-					{css:{height:0}, ease:Quad.easeOut}, 
-					{css:{height:$(self.currentSlide).height()},
+				TweenMax.fromTo($(self.nextSlide), 1.5, 
+					{css:{top:0,height:0}, ease:Quad.easeOut}, 
+					{css:{top:0,height:$(self.currentSlide).height()},
 					onUpdate: function(){
 						update++;
 						//console.log(update)
@@ -144,7 +147,7 @@ HomeSlideShow.prototype.scrollorama = function(){
 						//self.scrollorama();
 					}
 				}),
-				TweenMax.fromTo($(self.nextSlide).find('.fader'), 0.5, 
+				TweenMax.fromTo($(self.nextSlide).find('.fader'), 1.5, 
 					{css:{opacity:1}, ease:Quad.easeOut}, 
 					{css:{opacity:0},
 					onUpdate: function(){
@@ -170,21 +173,29 @@ HomeSlideShow.prototype.scrollorama = function(){
 	);*/
 	controller.pin(
 		$('.slideList'),//ele
-		$(window).height() / (self.slides.length + 1),//duration
+		500,//$(window).height() / (self.slides.length + 1),//duration
 		{anim : animation,
 			onPin: function() {
-				console.log('on pin')
+				
 				if(self.active_index >= self.slides.length - 2){
 					last = true;
+					console.log('on pin last')
 					//self.view.style.height = self.currentSlide.offsetHeight + 'px';
+					
 				}
 			}, 
 			onUnpin: function() {
 				console.log('un pin',self.currentSlide,self.active_index)
-				if(last) return;
-				self.next();
-				self.scrollorama();
-			}
+				if(last){
+					//stay pinned
+					//controller.removePin('.slideList', false);
+					console.log('endndndnd')
+				}else{
+					self.next();
+					self.scrollorama();
+				}
+			}//,
+			//pushFollowers: false
 		}
 	);
 	/*
