@@ -18,10 +18,12 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	this.imgArr = [];
 	this.nextBtn = nextBtn;
 	this.active_index = 0;
+	this.reverse = false;
 	
 	this.viewWidth = this.view.offsetWidth;
 	this.viewHeight = this.view.offsetHeight;
 	
+	console.log(this.viewHeight)
 	
 	for(var i=0;i<this.slides.length;i++){
 		this.slideHeights.push(this.slides[i].offsetHeight);
@@ -32,11 +34,7 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	this.updateSlides();
 	this.events();
 	
-	this.scrollorama({
-		triggerAtCenter: false,
-		playoutAnimations: true
-	});
-
+	this.customScrollAnimations();
 };
 HomeSlideShow.prototype.events = function(){
 	var self = this;
@@ -123,7 +121,37 @@ HomeSlideShow.prototype.events = function(){
 		self.next();
 	}, false);
 	
+	
 };
+HomeSlideShow.prototype.customScrollAnimations = function(){
+	var self = this;
+	/*jquery scroll stuff*/
+	//$(window).scrollTop(0);
+	var leftToScroll = self.slides.length;
+	$(window).scroll(function(e){
+		//console.log('scrolling ',e,$(window).height()-$(document).scrollTop(),$(document).scrollTop())
+		/*TweenLite.fromTo($(self.nextSlide), $(document).scrollTop(), 
+			{css:{top:0,height:0}, ease:Quad.easeOut},
+			{css:{top:0,height:$(self.currentSlide).height()}, ease:Quad.easeOut}
+		);*/
+		//console.log($(document).scrollTop(),$(window).height())
+		
+		for(var i=0;i<self.slides.length;i++){
+			if($(document).scrollTop() > $(window).height() / i+1){
+				//leftToScroll = leftToScroll-1;
+				//console.log('i+1',i,$(window).height() / i+1)
+				//console.log('this.slides.length' , self.slides.length,leftToScroll)
+			}
+		}
+	});
+	
+	
+	
+};
+HomeSlideShow.prototype.animate = function(){
+	
+};
+
 
 HomeSlideShow.prototype.scrollorama = function(){
 	//scrollorama
@@ -173,7 +201,7 @@ HomeSlideShow.prototype.scrollorama = function(){
 	);*/
 	controller.pin(
 		$('.slideList'),//ele
-		500,//$(window).height() / (self.slides.length + 1),//duration
+		$(window).height() / (self.slides.length + 1),//duration
 		{anim : animation,
 			onPin: function() {
 				
@@ -189,10 +217,16 @@ HomeSlideShow.prototype.scrollorama = function(){
 				if(last){
 					//stay pinned
 					//controller.removePin('.slideList', false);
-					console.log('endndndnd')
+					console.log('endndndnd');
+					self.reverse = true;
 				}else{
-					self.next();
-					self.scrollorama();
+					if(self.reverse){
+						self.prev();
+					}else{
+						self.next();
+					}
+					
+					//self.scrollorama();
 				}
 			}//,
 			//pushFollowers: false
@@ -248,13 +282,22 @@ HomeSlideShow.prototype.next = function(){
 	if(this.active_index < this.slides.length-1){
 		this.active_index++;
 	}else{
+		console.log('last slide')
 		this.active_index = 0;
 	}
 	this.updateSlides('next');
 };
-
+HomeSlideShow.prototype.prev = function(){
+	if(this.active_index > 0){
+		this.active_index--;
+	}else{
+		this.active_index = this.slides.length-1;
+	}
+	this.updateSlides('prev');
+};
 HomeSlideShow.prototype.updateSlides = function( dir ){
 	var self = this;
+
 	for(var i=0;i<this.slides.length;i++){
 		
 		if(i === this.active_index ){
@@ -276,9 +319,9 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 			//set current
 			this.currentSlide = this.slides[i];
 			this.currentSlide.style.height = this.slideHeights[i] + 'px';
-			this.currentSlide.classList.add('c')
+			this.currentSlide.classList.add('c');
 			this.currentFader = this.currentSlide.getElementsByClassName('fader')[0];
-			
+			this.currentFader.style.opacity = 0;
 			
 			
 			//set next slide
@@ -291,16 +334,26 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 				//this.nextSlide.style.zIndex = 0;
 				//this.nextSlide.style.top  =  -this.viewHeight+'px';
 			}
-			//this.nextFader = this.nextSlide.getElementsByClassName('fader')[0];
-			//this.nextFader.style.top = 0;
+			this.nextFader = this.nextSlide.getElementsByClassName('fader')[0];
+			//this.nextFader.style.opacity = 0;
 
 
-			this.transitioning = true; //prevents user from going through slides too fast
+			//this.transitioning = true; //prevents user from going through slides too fast
 			//this.currentSlide.style.zIndex = 2;
 			//this.currentSlide.style.height = this.viewHeight+'px';
-			this.currentFader.style.opacity = 0
 			
 			
+			
+			//init scrollorama
+			/*
+			this.scrollorama({
+				triggerAtCenter: false,
+				playoutAnimations: true
+			});
+			*/
+			
+			
+			/*
 			var transitionEnd = whichTransitionEvent();
 			if(transitionEnd){
 				this.currentSlide.addEventListener(transitionEnd, function( e ) {
@@ -310,20 +363,21 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 			}else{
 				self.transitioning = false;
 			}
-
+			*/
 		}else if(i < this.active_index ){
 			//slide is less than active
 			//this.slides[i].style.height = 0;
 			//this.slides[i].style.zIndex = 0;
 			this.slides[i].classList.remove('c');
-			
+			this.slides[i].classList.add('transitioning');
 			//this.slides[i].style.top  =  this.viewHeight+'px';
 			//var fader = this.slides[i].getElementsByClassName('fader')[0];
 			//fader.style.opacity = 1;
 			
 		}else{
 			this.slides[i].style.height = 0;
-			this.slides[i].classList.remove('c')
+			this.slides[i].classList.remove('c');
+			this.slides[i].classList.add('transitioning');
 			//slide is greater than active, move stage right
 			if(this.slides[i] !== this.previousSlide){
 				

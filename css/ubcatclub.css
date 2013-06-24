@@ -156,13 +156,14 @@ header#cc-header section.about p {
 	width:100%;
 	text-align:center;
 	overflow:hidden;
-
-/*
-	-webkit-transition:all 1s ease-in-out;
-	-moz-transition:all 1s ease-in-out;
-	-o-transition:all 1s ease-in-out;
-	transition:all 1s ease-in-out;*/
-
+}
+.cc-home ul li.transitioning {
+	-webkit-transition:all 2s ease-in-out;
+	-moz-transition:all 2s ease-in-out;
+	-o-transition:all 2s ease-in-out;
+	transition:all 2s ease-in-out;/**/
+	
+	border:1px solid red;
 }
 .cc-home ul li .fader {
 	background-color:rgba(255,134,107,1);
@@ -170,16 +171,20 @@ header#cc-header section.about p {
 	top:0;
 	width:100%;
 	height:100%;
-	z-index:3;
+/*	z-index:1;*/
 	opacity:1;
-	/*
-	-webkit-transition:all 1s ease-in-out;
-	-moz-transition:all 1s ease-in-out;
-	-o-transition:all 1s ease-in-out;
-	transition:all 1s ease-in-out;
+
+	-webkit-transition:all 4s ease-in-out;
+	-moz-transition:all 4s ease-in-out;
+	-o-transition:all 4s ease-in-out;
+	transition:all 4s ease-in-out;
 	
-	border:1px solid blue;*/
+	border:1px solid blue;
 }
+.cc-home ul li.transitioning .fader {
+	opacity:1;
+}
+
 .cc-home ul.slideList {
 	z-index:1;
 }
@@ -190,9 +195,9 @@ header#cc-header section.about p {
 
 .cc-home ul.shadowList {
 	z-index:0;
+	display:none;
 }
 .cc-home ul.shadowList li {
-
 }
 /*
 .cc-home ul.shadowList li:nth-child(1){

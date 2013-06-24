@@ -21,7 +21,6 @@ UBCC = {
 		
 		//pages
 		if(this.content.classList.contains('cc-home')){
-			$(this).scrollTop(0);
 			this.homeSlideShow();
 		}
 		if(this.content.classList.contains('cc-news')){
@@ -131,6 +130,8 @@ UBCC = {
 					//scale img
 					elementsToResize[i].style.width = this.windowWidth + 'px';
 					elementsToResize[i].style.height = (oldH*this.windowWidth)/oldW + 'px';
+					
+					//set view height
 					self.content.style.height = (oldH*this.windowWidth)/oldW + 'px';
 				}else{
 					elementsToResize[i].style.height = this.windowHeight + 'px';
@@ -140,7 +141,7 @@ UBCC = {
 
 			//set shadows same height
 			for(var k=0;k<liArr.length;k++){
-				shadowLiArr[k].style.height = liArr[k].offsetHeight + 'px';
+				shadowLiArr[k].style.height = liArr[k].offsetHeight  + 'px';
 				//console.log(liArr[k].offsetHeight)
 			}
 		}
