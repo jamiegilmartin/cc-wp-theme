@@ -19,6 +19,9 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	this.nextBtn = nextBtn;
 	this.active_index = 0;
 	this.reverse = false;
+	this.transitioning = false;
+	this.playing = false;
+	this.interval = 0;
 	
 	this.viewWidth = this.view.offsetWidth;
 	this.viewHeight = this.view.offsetHeight;
@@ -34,7 +37,15 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	this.updateSlides();
 	this.events();
 	
+	
+	this.scrollTopDif = ( $(document).height()- $(window).height() ) / this.slides.length;
+	this.scrollTopDif = Math.round(this.scrollTopDif);
+	this.currentScrollTop = 0;
+	
+	
 	this.customScrollAnimations();
+	
+	//this.scrollorama();
 };
 HomeSlideShow.prototype.events = function(){
 	var self = this;
@@ -121,14 +132,14 @@ HomeSlideShow.prototype.events = function(){
 		self.next();
 	}, false);
 	
-	
 };
 HomeSlideShow.prototype.customScrollAnimations = function(){
 	var self = this;
 	/*jquery scroll stuff*/
 	//$(window).scrollTop(0);
-	var leftToScroll = self.slides.length;
+	//var leftToScroll = self.slides.length;
 	$(window).scroll(function(e){
+		//$(window).scrollTop(0);
 		//console.log('scrolling ',e,$(window).height()-$(document).scrollTop(),$(document).scrollTop())
 		/*TweenLite.fromTo($(self.nextSlide), $(document).scrollTop(), 
 			{css:{top:0,height:0}, ease:Quad.easeOut},
@@ -148,9 +159,7 @@ HomeSlideShow.prototype.customScrollAnimations = function(){
 	
 	
 };
-HomeSlideShow.prototype.animate = function(){
-	
-};
+
 
 
 HomeSlideShow.prototype.scrollorama = function(){
@@ -159,7 +168,7 @@ HomeSlideShow.prototype.scrollorama = function(){
 		controller = $.superscrollorama(),
 		update = 0,
 		last = false,
-		animation = (new TimelineLite())
+		animations = (new TimelineLite())
 			.append([
 				TweenMax.fromTo($(self.nextSlide), 1.5, 
 					{css:{top:0,height:0}, ease:Quad.easeOut}, 
@@ -189,8 +198,24 @@ HomeSlideShow.prototype.scrollorama = function(){
 						//self.scrollorama();
 					}
 				})
+			]),
+		animation = (new TimelineLite())
+			.append([
+				TweenMax.fromTo($('body'), 1.5, 
+					{css:{top:0,opacity:1}, ease:Quad.easeOut}, 
+					{css:{top:0,opacity:0.5},
+					onUpdate: function(){
+						update++;
+						//console.log(update)
+					},
+					onComplete: function(){
+						console.log('end');
+						//controller.removePin($(self.view), true)
+						//self.next();
+						//self.scrollorama();
+					}
+				})
 			]);
-	
 	
 	//$('.cc-home ul.slideList li')
 	/*
@@ -200,7 +225,7 @@ HomeSlideShow.prototype.scrollorama = function(){
 		1000// scroll duration of tween
 	);*/
 	controller.pin(
-		$('.slideList'),//ele
+		$('body'),//ele
 		$(window).height() / (self.slides.length + 1),//duration
 		{anim : animation,
 			onPin: function() {
@@ -282,11 +307,16 @@ HomeSlideShow.prototype.next = function(){
 	if(this.reverse === false && this.active_index < this.slides.length-1){
 		this.active_index++;
 		
+		this.currentScrollTop += this.scrollTopDif;
+		$(window).scrollTop(this.currentScrollTop);
+		
+		
+		this.playing = true;
+		//this.animate();
 		this.updateSlides('next');
 	}else{
 		this.reverse = true;
-		console.log('go prev, last ')
-		//this.active_index = 0;
+		this.active_index = 0;
 		this.prev();
 	}
 };
@@ -294,7 +324,13 @@ HomeSlideShow.prototype.prev = function(){
 	if(this.active_index > 0){
 		this.active_index--;
 		
+		this.currentScrollTop -= this.scrollTopDif;
+		console.log(this.currentScrollTop)
+		$(window).scrollTop(this.currentScrollTop);
+		
 		this.updateSlides('prev');
+		//this.playing = true;
+		//this.animate();
 	}else{
 		this.reverse = false;
 		//this.active_index = this.slides.length-1;
@@ -327,7 +363,7 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 			this.currentSlide.style.height = this.slideHeights[i] + 'px';
 			this.currentSlide.classList.add('c');
 			this.currentFader = this.currentSlide.getElementsByClassName('fader')[0];
-			this.currentFader.style.opacity = 0;
+			//this.currentFader.style.opacity = 0;
 			
 			
 			//set next slide
@@ -344,7 +380,7 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 			//this.nextFader.style.opacity = 0;
 
 
-			this.transitioning = true; //prevents user from going through slides too fast
+			//this.transitioning = true; //prevents user from going through slides too fast
 			//this.currentSlide.style.zIndex = 2;
 			//this.currentSlide.style.height = this.viewHeight+'px';
 
@@ -354,7 +390,6 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 			if(transitionEnd){
 				this.currentSlide.addEventListener(transitionEnd, function( e ) {
 					self.transitioning = false;
-					console.log('t e')
 					//TODO: self.currentSlide.removeEventListener('webkitTransitionEnd', this , false);
 				}, false );
 			}else{
@@ -386,8 +421,43 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 			
 		}
 	}
-
 };
-
+HomeSlideShow.prototype.animate = function( lastTime ){
+	var self = this,
+		now = Date.now(), //new Date().getTime();
+		deltaTime = now - ( lastTime || now);
+	
+	this.interval++
+	if(this.interval >= this.scrollTopDif){
+		this.playing = false;
+		this.interval = 0;
+	}else{
+		console.log(this.viewHeight)
+		this.nextSlide.style.height = (this.interval * this.viewHeight) / this.scrollTopDif + 'px';
+		
+	}
+	
+	
+	
+	
+	/*TweenLite.fromTo(self.nextSlide, 2, 
+		{css:{top:0,height:0}, ease:Quad.easeOut},
+		{css:{top:0,height:$(self.currentSlide).height()}, ease:Quad.easeOut}
+	);
+	TweenLite.fromTo(self.nextFader, 3.5, 
+		{css:{opcity:1}, ease:Quad.easeOut},
+		{css:{opcity:0}, ease:Quad.easeOut}
+	);*/
+	
+	
+	//request new frame
+	requestAnimFrame(function(){
+		if(self.playing){ // && self.secondsRunning < (self.duration)
+			self.animate( now );
+		}else{
+			self.playing = false;
+		}
+	});
+};
 
 
