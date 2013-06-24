@@ -32,6 +32,7 @@ get_header(); ?>
 			<?php endwhile; ?>
 			</ul>
 		</div>
+		
 	</section>
 </div>
 <?php get_footer(); ?>
