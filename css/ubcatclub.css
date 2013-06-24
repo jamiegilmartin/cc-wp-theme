@@ -48,10 +48,6 @@ header#cc-header {
 	-o-transition:all 0.5s ease-in-out;
 	transition:all 0.5s ease-in-out;
 }
-.home header#cc-header {
-	position:fixed;
-}
-
 header#cc-header.closed {
 	height:2em;
 	cursor:pointer;
@@ -165,7 +161,7 @@ header#cc-header section.about p {
 	-webkit-transition:all 2s ease-in-out;
 	-moz-transition:all 2s ease-in-out;
 	-o-transition:all 2s ease-in-out;
-	transition:all 2s ease-in-out;
+	transition:all 2s ease-in-out;/**/
 
 }
 .cc-home ul li .fader {
@@ -175,18 +171,23 @@ header#cc-header section.about p {
 	width:100%;
 	height:100%;
 /*	z-index:1;*/
-	opacity:0;
+	opacity:1;
 	-webkit-transition:all 1.5s ease-in-out;
 	-moz-transition:all 1.5s ease-in-out;
 	-o-transition:all 1.5s ease-in-out;
 	transition:all 1.5s ease-in-out;
 	
 }
-
+.cc-home ul li.transitioning .fader {
+	opacity:1;
+	-webkit-transition:all 2.5s ease-in-out;
+	-moz-transition:all 2.5s ease-in-out;
+	-o-transition:all 2.5s ease-in-out;
+	transition:all 2.5s ease-in-out;
+}
 
 .cc-home ul.slideList {
 	z-index:1;
-	position:fixed;
 }
 .cc-home ul.slideList li {
 	position:absolute;
