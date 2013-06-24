@@ -1,7 +1,7 @@
 var UBCC = window.UBCC || {};
 /**
  * @namespace United Bamboo Cat Club  
- * @description 
+ * @description main js controller for all ubcc pages
  * 
  */
 UBCC = {
