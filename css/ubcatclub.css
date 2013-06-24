@@ -139,6 +139,9 @@ header#cc-header section.about p {
 
 
 /*home*/
+.home header#cc-header  {
+	position:fixed;
+}
 .cc-home {
 	background: -webkit-radial-gradient(circle, #fff, #f6f7f2);
 	background: -moz-radial-gradient(circle, #fff, #f6f7f2);
@@ -188,6 +191,7 @@ header#cc-header section.about p {
 
 .cc-home ul.slideList {
 	z-index:1;
+	position:fixed;
 }
 .cc-home ul.slideList li {
 	position:absolute;
