@@ -117,7 +117,7 @@ HomeSlideShow.prototype.events = function(){
 
 	
 	this.nextBtn.addEventListener('click', function(){
-		//if(self.transitioning === false)
+		if(self.transitioning === false)
 		self.next();
 	}, false);
 	
@@ -279,21 +279,27 @@ HomeSlideShow.prototype.scrollorama = function(){
 };
 
 HomeSlideShow.prototype.next = function(){
-	if(this.active_index < this.slides.length-1){
+	if(this.reverse === false && this.active_index < this.slides.length-1){
 		this.active_index++;
+		
+		this.updateSlides('next');
 	}else{
-		console.log('last slide')
-		this.active_index = 0;
+		this.reverse = true;
+		console.log('go prev, last ')
+		//this.active_index = 0;
+		this.prev();
 	}
-	this.updateSlides('next');
 };
 HomeSlideShow.prototype.prev = function(){
 	if(this.active_index > 0){
 		this.active_index--;
+		
+		this.updateSlides('prev');
 	}else{
-		this.active_index = this.slides.length-1;
+		this.reverse = false;
+		//this.active_index = this.slides.length-1;
+		this.next();
 	}
-	this.updateSlides('prev');
 };
 HomeSlideShow.prototype.updateSlides = function( dir ){
 	var self = this;
@@ -338,32 +344,23 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 			//this.nextFader.style.opacity = 0;
 
 
-			//this.transitioning = true; //prevents user from going through slides too fast
+			this.transitioning = true; //prevents user from going through slides too fast
 			//this.currentSlide.style.zIndex = 2;
 			//this.currentSlide.style.height = this.viewHeight+'px';
+
 			
 			
-			
-			//init scrollorama
-			/*
-			this.scrollorama({
-				triggerAtCenter: false,
-				playoutAnimations: true
-			});
-			*/
-			
-			
-			/*
 			var transitionEnd = whichTransitionEvent();
 			if(transitionEnd){
 				this.currentSlide.addEventListener(transitionEnd, function( e ) {
 					self.transitioning = false;
+					console.log('t e')
 					//TODO: self.currentSlide.removeEventListener('webkitTransitionEnd', this , false);
 				}, false );
 			}else{
 				self.transitioning = false;
 			}
-			*/
+			
 		}else if(i < this.active_index ){
 			//slide is less than active
 			//this.slides[i].style.height = 0;
@@ -383,8 +380,8 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 				
 				//this.slides[i].style.zIndex = 0;
 				//this.slides[i].style.top  =  -this.viewHeight+'px';
-				//var fader = this.slides[i].getElementsByClassName('fader')[0];
-				//fader.style.opacity = 1;
+				this.slides[i].getElementsByClassName('fader')[0].style.opacity = 1;
+				//fader
 			}
 			
 		}
