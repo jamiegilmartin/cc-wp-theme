@@ -34,7 +34,9 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	this.updateSlides();
 	this.events();
 	
-	this.customScrollAnimations();
+	//this.customScrollAnimations();
+	//window.scrollTo(0,100);
+	//console.log()
 };
 HomeSlideShow.prototype.events = function(){
 	var self = this;
@@ -148,136 +150,6 @@ HomeSlideShow.prototype.customScrollAnimations = function(){
 	
 	
 };
-HomeSlideShow.prototype.animate = function(){
-	
-};
-
-
-HomeSlideShow.prototype.scrollorama = function(){
-	//scrollorama
-	var self = this,
-		controller = $.superscrollorama(),
-		update = 0,
-		last = false,
-		animation = (new TimelineLite())
-			.append([
-				TweenMax.fromTo($(self.nextSlide), 1.5, 
-					{css:{top:0,height:0}, ease:Quad.easeOut}, 
-					{css:{top:0,height:$(self.currentSlide).height()},
-					onUpdate: function(){
-						update++;
-						//console.log(update)
-					},
-					onComplete: function(){
-						console.log('end');
-						//controller.removePin($(self.view), true)
-						//self.next();
-						//self.scrollorama();
-					}
-				}),
-				TweenMax.fromTo($(self.nextSlide).find('.fader'), 1.5, 
-					{css:{opacity:1}, ease:Quad.easeOut}, 
-					{css:{opacity:0},
-					onUpdate: function(){
-						//update++;
-						//console.log(update)
-					},
-					onComplete: function(){
-						//console.log('end');
-						//controller.removePin($(self.view), true)
-						//self.next();
-						//self.scrollorama();
-					}
-				})
-			]);
-	
-	
-	//$('.cc-home ul.slideList li')
-	/*
-	controller.addTween(
-		'.cc-home ul.slideList li',
-		animation,
-		1000// scroll duration of tween
-	);*/
-	controller.pin(
-		$('.slideList'),//ele
-		$(window).height() / (self.slides.length + 1),//duration
-		{anim : animation,
-			onPin: function() {
-				
-				if(self.active_index >= self.slides.length - 2){
-					last = true;
-					console.log('on pin last')
-					//self.view.style.height = self.currentSlide.offsetHeight + 'px';
-					
-				}
-			}, 
-			onUnpin: function() {
-				console.log('un pin',self.currentSlide,self.active_index)
-				if(last){
-					//stay pinned
-					//controller.removePin('.slideList', false);
-					console.log('endndndnd');
-					self.reverse = true;
-				}else{
-					if(self.reverse){
-						self.prev();
-					}else{
-						self.next();
-					}
-					
-					//self.scrollorama();
-				}
-			}//,
-			//pushFollowers: false
-		}
-	);
-	/*
-	controller.pin($(self.currentSlide), $(window).height(),
-		{
-			anim : (new TimelineLite())
-			.append(
-				TweenMax.fromTo($(self.nextSlide), .5, 
-				{css:{height:0}, ease:Quad.easeOut}, 
-				{css:{height:$(self.currentSlide).height()},
-				onUpdate: function(){
-					//update++;
-					//console.log(update)
-				},
-				onComplete: function(){
-					console.log('end');
-					//controller.removePin($(self.view), true)
-					//self.next();
-					//self.scrollorama();
-				}})
-			)
-			.append(
-				TweenMax.fromTo($(self.nextSlide).find('.fader'), .5, 
-				{css:{opacity: 0.5}, ease:Quad.easeOut}, 
-				{css:{opacity: 0},
-				onUpdate: function(){
-					//update++;
-					//console.log(update)
-				},
-				onComplete: function(){
-					console.log('end');
-					//controller.removePin($(self.view), true)
-					//self.next();
-					//self.scrollorama();
-				}})
-			),
-			onPin: function() {
-				console.log('on pin')
-			}, 
-			onUnpin: function() {
-				console.log('un pin')
-				self.next();
-				self.scrollorama();
-			}
-		}
-	);*/
-};
-
 HomeSlideShow.prototype.next = function(){
 	if(this.reverse === false && this.active_index < this.slides.length-1){
 		this.active_index++;
