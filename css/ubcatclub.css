@@ -29,11 +29,30 @@ section.content {
 	margin:0 auto;
 }
 
+/**
+ * screensaver
+ */
+.screensaver {
+	position:absolute;
+	top:0;
+	left:0;
+	height:100%;
+	width:100%;
+	z-index:11;
+	opacity:0;
+	background:#000;
+	-webkit-transition:all 0.5s ease-in-out;
+	-moz-transition:all 0.5s ease-in-out;
+	-o-transition:all 0.5s ease-in-out;
+	transition:all 0.5s ease-in-out;
+}
+.activateScreenSaver {
+	opacity:1;
+}
 
 /**
  * header#cc-header
  */
-
 header#cc-header {
 	overflow:hidden;
 	position:fixed;

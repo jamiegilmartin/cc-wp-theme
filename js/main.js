@@ -510,18 +510,11 @@ UBCC = {
 		}
 	},
 	screensaver : function(){
-		var self = this,
-			delay = 100,
-			timer = setTimeout(startScreenSaver,delay);
 		
-		function startScreenSaver(){
-			
-			clearTimeout(timer);
-		}
-		function stopScreenSaver(){
-			timer = setTimeout(startScreenSaver,delay)
-		}
 		
+		var s = new ScreenSaver(1500);
+		
+
 		
 	}
 };

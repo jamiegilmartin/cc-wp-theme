@@ -13,6 +13,7 @@
 <script src="<?php echo bloginfo( 'template_url' ); ?>/js/libraries/widgets.js"></script>
 
 <script src="<?php echo bloginfo( 'template_url' ); ?>/js/utils.js"></script>
+<script src="<?php echo bloginfo( 'template_url' ); ?>/js/screensaver.js"></script>
 <script src="<?php echo bloginfo( 'template_url' ); ?>/js/slideShow.js"></script>
 <script src="<?php echo bloginfo( 'template_url' ); ?>/js/homeSlideShow.js"></script>
 <script src="<?php echo bloginfo( 'template_url' ); ?>/js/main.js"></script>

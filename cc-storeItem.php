@@ -4,7 +4,7 @@
 			<div class="content">
 				<h2 class="title"><?php the_title(); ?></h2>
 				<div class="meta"><?php the_meta(); ?></div>
-				<a href="#" class="buyNowBtn">Buy Now</a>
+				<a href="#" target="_blank" class="buyNowBtn">Buy Now</a>
 			</div>
 		</header>
 		
