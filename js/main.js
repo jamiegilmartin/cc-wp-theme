@@ -39,6 +39,8 @@ UBCC = {
 			this.archive();
 		}
 		
+		this.screensaver();
+		
 	},
 	header : function(){
 		var header = document.getElementById('cc-header');
@@ -506,6 +508,21 @@ UBCC = {
 			}
 			
 		}
+	},
+	screensaver : function(){
+		var self = this,
+			delay = 100,
+			timer = setTimeout(startScreenSaver,delay);
+		
+		function startScreenSaver(){
+			
+			clearTimeout(timer);
+		}
+		function stopScreenSaver(){
+			timer = setTimeout(startScreenSaver,delay)
+		}
+		
+		
 	}
 };
 window.onload = function(){
