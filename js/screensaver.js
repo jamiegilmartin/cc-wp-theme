@@ -44,7 +44,7 @@ ScreenSaver.prototype.events = function(){
 	}
 	this.doc.addEventListener('click',function(e){
 	//self.moved = true;
-		self.start();
+		self.stop();
 	});
 };
 ScreenSaver.prototype.resize = function(){
@@ -62,16 +62,14 @@ ScreenSaver.prototype.start = function(){
 	this.playing = false;
 	this.resize();
 	this.doc.style.overflow = 'hidden';
-	this.view.classList.add('activateScreenSaver');
+	this.view.display = 'block';
 			
 };
 ScreenSaver.prototype.stop = function(){
-
+	console.log('stop screen saver');
 	this.doc.style.overflow = 'auto';
-	this.view.classList.remove('activateScreenSaver');
 	this.doc.style.height = 'auto';
-	this.view.style.width = 0;			
-	this.view.style.height = 0;
+	this.view.display = 'none';
 	
 	this.animate();
 };
