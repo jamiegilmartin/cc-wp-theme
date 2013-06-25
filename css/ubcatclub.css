@@ -314,6 +314,8 @@ ul.contentList li.item:nth-child(2n+1) {
 	height:100%;
 	width:100%;
 	position:absolute;
+}
+.cc-news article.entry section.content .slideShow ul li.transitioning {
 	-webkit-transition:all 0.5s ease-in-out;
 	-moz-transition:all 0.5s ease-in-out;
 	-o-transition:all 0.5s ease-in-out;
@@ -540,13 +542,14 @@ ul.modelList li article.entry .imgHolder img {
 	float:none;
 	width:100%;
 	background-color:rgba(255,134,107,1);
+
+}
+.cc-models .slideShow ul.modelList li.transitioning {
 	-webkit-transition:all 0.5s ease-in-out;
 	-moz-transition:all 0.5s ease-in-out;
 	-o-transition:all 0.5s ease-in-out;
 	transition:all 0.5s ease-in-out;
-	
 }
-
 .cc-models .slideShow ul.modelList li article.entry {
 
 }
@@ -756,11 +759,13 @@ ul.archiveStoryList li.item article.entry .imgHolder img {
 	float:none;
 	width:100%;
 	background-color:rgba(255,134,107,1);
+	
+}
+.cc-archive .slideShow ul.archiveStoryList li.transitioning {
 	-webkit-transition:all 0.5s ease-in-out;
 	-moz-transition:all 0.5s ease-in-out;
 	-o-transition:all 0.5s ease-in-out;
 	transition:all 0.5s ease-in-out;
-	
 }
 .cc-archive .slideShow ul.archiveStoryList li article.entry {
 

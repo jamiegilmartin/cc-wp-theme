@@ -221,16 +221,25 @@ SlideShow.prototype.gotoSlide = function(num){
 SlideShow.prototype.updateSlides = function( dir ){
 	var self = this;
 	for(var i=0;i<this.slides.length;i++){
+		//add transitioning class
+		//this.slides[i].classList.remove('transitioning');
 		
 		if(i === this.active_index ){
 			
 			//set prev slide
 			if(this.active_index-1 >= 0){
 				this.previousSlide = this.slides[this.active_index-1];
+				this.previousSlide.classList.add('transitioning');
+				console.log('pp',this.previousSlide)
 			}else{
 				//on first slide
 				this.previousSlide = this.slides[this.slides.length-1];
 				//move previous slide stage left
+				if(dir === 'next'){
+					this.previousSlide.classList.add('transitioning');
+				}else{
+					this.previousSlide.classList.remove('transitioning');
+				}
 				this.previousSlide.style.zIndex = 0;
 				this.previousSlide.style.left  =  -this.viewWidth+'px';
 				
@@ -239,6 +248,7 @@ SlideShow.prototype.updateSlides = function( dir ){
 			//set current
 			this.currentSlide = this.slides[i];
 			this.currentSlide.classList.add('currentSlide');
+			this.currentSlide.classList.add('transitioning');
 			
 			//set next slide
 			if(this.active_index+1 <= this.slides.length-1){
@@ -247,6 +257,10 @@ SlideShow.prototype.updateSlides = function( dir ){
 				//on last slide
 				this.nextSlide = this.slides[0];
 				//move next slide stage right
+				
+				console.log('ll',this.nextSlide)
+				
+				this.nextSlide.classList.add('transitioning');
 				this.nextSlide.style.zIndex = 0;
 				this.nextSlide.style.left  =  this.viewWidth+'px';
 			}
