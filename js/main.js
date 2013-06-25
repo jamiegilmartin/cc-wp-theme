@@ -229,9 +229,28 @@ UBCC = {
 		}
 	},
 	store : function(){
+		var self = this;
+		
 		for(var i=0;i<this.contentListItems.length;i++){
-			var item = this.contentListItems[i];
-			//console.log(item)
+			var item = this.contentListItems[i],
+				entry = item.getElementsByClassName('entry')[0],
+				entryContent = entry.getElementsByClassName('content')[0],
+				meta = entryContent.getElementsByClassName('meta')[0],
+				metaListItems = meta.getElementsByTagName('li'),
+				buyNowBtn = entryContent.getElementsByClassName('buyNowBtn')[0];
+
+			for(var j=0;j<metaListItems.length;j++){
+				var metaListItem = metaListItems[j],
+					span = metaListItem.getElementsByTagName('span')[0];
+					
+					//buyNow set link
+					
+					if(span.innerHTML === 'buy now:'){
+						var string = metaListItems[j].innerHTML.split('</span> ')[1];
+						buyNowBtn.setAttribute('href',string);
+					}
+			}
+			
 		}
 	},
 	models : function(){
