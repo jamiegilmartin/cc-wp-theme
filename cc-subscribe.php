@@ -7,7 +7,23 @@ Template Name: Subscribe
 get_header(); ?>
 <div id="content" class="cc-subscribe">
 	<section class="content">
-		
+		<form action="<?php bloginfo('url'); ?>/subscribe" method="POST">
+			<fieldset>
+				<label><span>Name</span> : </label>
+				<input name="n" id="name" maxlength="256" />
+			</fieldset>
+			<fieldset>
+				<label><span>Email</span> : </label>
+				<input name="e" id="email" type="email" maxlength="256" />
+			</fieldset>
+			<fieldset>
+				<label><span>City</span> : </label>
+				<input name="c" placeholder="e.g. Rome, Italy" id="city" maxlength="256" />
+			</fieldset>
+			<fieldset>
+				<input type="submit" id="submit" class="submitBtn" value="submit" />
+			</fieldset>
+		</form>
 		<?php
 			/*
 			http://codex.wordpress.org/Creating_Tables_with_Plugins
@@ -15,8 +31,6 @@ get_header(); ?>
 			*/
 			global $wpdb;
 			$table_name = $wpdb->prefix . "sufs";
-			//mysql_connect('ivillage.cc', 'jamiegilmartin', 'e~3832&iS-77<2y') or die( "Unable to select database");
-			//mysql_select_db('jamiegilmartin') or die("I couldn't find the database table make sure it's spelt right!"); 
 			mysql_connect('localhost', 'root', 'root') or die( "Unable to select database");
 			mysql_select_db('ubcatclub') or die("I couldn't find the database table make sure it's spelt right!"); 
 
@@ -83,7 +97,7 @@ get_header(); ?>
 					<?php
 				}else{
 					
-					//TODO: go home an pop signup again
+					
 					?>
 						
 						<!-- auxiliary -->

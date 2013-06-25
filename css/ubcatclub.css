@@ -100,6 +100,10 @@ header#cc-header nav ul li {
 	float:left;
 	padding-right:2em;
 }
+header#cc-header nav ul li:last-child{
+	position:absolute;
+	left:51.5%;
+}
 header#cc-header nav ul li a {
 	font-size:2em;
 	line-height:1em;

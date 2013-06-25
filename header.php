@@ -37,9 +37,7 @@
 					</div>
 				</div>
 				<nav>
-					
 					<?php wp_nav_menu(); ?>
-					<!-- <?php get_template_part( 'nav' ); ?> -->
 				</nav>
 				<section class="about">
 					<?php
@@ -52,4 +50,4 @@
 				</section>
 			</section>
 		</header>
-		<div id="container">	
+		<div id="container">
