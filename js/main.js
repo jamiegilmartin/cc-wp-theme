@@ -512,7 +512,7 @@ UBCC = {
 	screensaver : function(){
 		
 		
-		var s = new ScreenSaver(1500);
+		var s = new ScreenSaver(3500);
 		
 	}
 };

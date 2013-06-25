@@ -42,9 +42,10 @@ ScreenSaver.prototype.events = function(){
 	window.onresize = function(e){
 		self.resize();
 	}
-	window.onClick = function(){
-		//sssself.moved = true;
-	}
+	this.doc.addEventListener('click',function(e){
+	//self.moved = true;
+		self.start();
+	});
 };
 ScreenSaver.prototype.resize = function(){
 	this.windowHeight = window.innerHeight;
@@ -68,6 +69,10 @@ ScreenSaver.prototype.stop = function(){
 
 	this.doc.style.overflow = 'hidden';
 	this.view.classList.remove('activateScreenSaver');
+	this.doc.style.height = 'auto';
+	this.view.style.width = 0;			
+	this.view.style.height = 0;
+	
 	this.animate();
 };
 ScreenSaver.prototype.animate = function(lastTime){
@@ -80,7 +85,7 @@ ScreenSaver.prototype.animate = function(lastTime){
 	//time in seconds
 	this.milliSecondsRunning = (now - this.startTime);
 	this.interval++;
-	console.log(this.moved,this.milliSecondsRunning);
+	//console.log(this.moved,this.milliSecondsRunning);
 	if(this.moved === true){
 		console.log('mooove');
 		this.startTime = now;
