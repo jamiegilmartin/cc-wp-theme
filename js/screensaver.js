@@ -6,26 +6,27 @@ var ScreenSaver = window.ScreenSaver || {};
  * @param ScreenSaver - a ScreenSaver
  */
 ScreenSaver =  function(delay){
-	var self = this,
-		doc = document.documentElement || document.body;
-		view = document.createElement('div'),
-		moved = false,
-		interval = 0;
+	var self = this;
 		
-	view.classList.add('screensaver');
-	doc.appendChild(view);
+	this.doc = document.documentElement || document.body;
+	this.view = document.createElement('div');
+	this.moved = false
+	this.interval = 0;
+		
+	this.view.classList.add('screensaver');
+	this.doc.appendChild(this.view);
 	
 	this.delay = delay;
-	this.start();
+	this.set();
 };
-ScreenSaver.prototype.start = function(){
+ScreenSaver.prototype.set = function(){
 	var self = this,
 		now = Date.now();
 		
 	this.startTime = now;
 	this.then = now;
 
-	this.secondsRunning = 0;
+	this.milliSecondsRunning = 0;
 	this.duration = 1;
 
 
@@ -33,9 +34,41 @@ ScreenSaver.prototype.start = function(){
 	this.playing = true;
 	this.interval = 0;
 	this.animate();
+	this.events();
+
+};
+ScreenSaver.prototype.events = function(){
+	var self = this;
+	window.onresize = function(e){
+		self.resize();
+	}
+	window.onClick = function(){
+		//sssself.moved = true;
+	}
+};
+ScreenSaver.prototype.resize = function(){
+	this.windowHeight = window.innerHeight;
+	this.windowWidth = window.innerWidth;
+			
+	this.doc.style.height = this.windowHeight +'px';
+	this.doc.style.width = this.windowWidth + 'px';
+	this.view.style.width = this.windowWidth + 'px';			
+	this.view.style.height = this.windowHeight + 'px';
+			
+};
+ScreenSaver.prototype.start = function(){
+	console.log('start screen saver');
+	this.playing = false;
+	this.resize();
+	this.doc.style.overflow = 'hidden';
+	this.view.classList.add('activateScreenSaver');
+			
 };
 ScreenSaver.prototype.stop = function(){
-	this.playing = false;
+
+	this.doc.style.overflow = 'hidden';
+	this.view.classList.remove('activateScreenSaver');
+	this.animate();
 };
 ScreenSaver.prototype.animate = function(lastTime){
 	var self = this,
@@ -47,9 +80,15 @@ ScreenSaver.prototype.animate = function(lastTime){
 	//time in seconds
 	this.milliSecondsRunning = (now - this.startTime);
 	this.interval++;
-
+	console.log(this.moved,this.milliSecondsRunning);
+	if(this.moved === true){
+		console.log('mooove');
+		this.startTime = now;
+		//this.stop();
+	}
 	if(this.milliSecondsRunning > this.delay){
 		console.log('sss',this.milliSecondsRunning)
+		this.start();
 		this.startTime = now;
 	}
 
