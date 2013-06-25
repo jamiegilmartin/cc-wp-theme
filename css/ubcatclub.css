@@ -195,7 +195,7 @@ header#cc-header section.about p {
 
 .cc-home ul.slideList {
 	z-index:1;
-	position:fixed;
+	/*position:fixed;*/
 }
 .cc-home ul.slideList li {
 	position:absolute;

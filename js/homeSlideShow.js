@@ -23,8 +23,11 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	this.viewWidth = this.view.offsetWidth;
 	this.viewHeight = this.view.offsetHeight;
 	
-	console.log(this.viewHeight)
+	this.scrollTopDif = (document.documentElement.offsetHeight || document.body.offsetHeight - window.innerHeight ) / this.slides.length;
+	this.scrollTopDif = Math.round(this.scrollTopDif);
+	this.currentScrollTop = 0;
 	
+		
 	for(var i=0;i<this.slides.length;i++){
 		this.slideHeights.push(this.slides[i].offsetHeight);
 		this.imgArr.push(this.slides[i].getElementsByTagName('img')[0]);
@@ -34,7 +37,7 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	this.updateSlides();
 	this.events();
 	
-	//this.customScrollAnimations();
+	this.scrollAnimation();
 	//window.scrollTo(0,100);
 	//console.log()
 };
@@ -125,7 +128,7 @@ HomeSlideShow.prototype.events = function(){
 	
 	
 };
-HomeSlideShow.prototype.customScrollAnimations = function(){
+HomeSlideShow.prototype.XXscrollAnimation = function(){
 	var self = this;
 	/*jquery scroll stuff*/
 	//$(window).scrollTop(0);
@@ -150,6 +153,33 @@ HomeSlideShow.prototype.customScrollAnimations = function(){
 	
 	
 };
+HomeSlideShow.prototype.scrollAnimation = function(){
+	var self = this,
+		lastScroll;
+	window.onscroll = function (oEvent) {
+		var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+		//window.scrollTo(0,100);
+		
+		if(self.reverse === false && scrollTop > self.currentScrollTop ){
+			self.next();
+			self.currentScrollTop += self.scrollTopDif;
+		
+			if(self.currentScrollTop === self.scrollTopDif*self.slides.length){
+				self.reverse = true;
+			}
+		}else if(self.reverse === true && scrollTop < self.currentScrollTop-self.scrollTopDif ){
+			self.prev();
+			self.currentScrollTop -= self.scrollTopDif;
+			console.log('p ',self.currentScrollTop)
+			
+			if(self.currentScrollTop === 0){
+				self.reverse = false;
+			}
+		}
+		
+		lastScroll = scrollTop;
+	}
+};
 HomeSlideShow.prototype.next = function(){
 	if(this.reverse === false && this.active_index < this.slides.length-1){
 		this.active_index++;
@@ -157,8 +187,6 @@ HomeSlideShow.prototype.next = function(){
 		this.updateSlides('next');
 	}else{
 		this.reverse = true;
-		console.log('go prev, last ')
-		//this.active_index = 0;
 		this.prev();
 	}
 };
@@ -169,7 +197,6 @@ HomeSlideShow.prototype.prev = function(){
 		this.updateSlides('prev');
 	}else{
 		this.reverse = false;
-		//this.active_index = this.slides.length-1;
 		this.next();
 	}
 };
