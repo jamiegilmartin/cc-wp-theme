@@ -67,7 +67,7 @@ ScreenSaver.prototype.start = function(){
 };
 ScreenSaver.prototype.stop = function(){
 
-	this.doc.style.overflow = 'hidden';
+	this.doc.style.overflow = 'auto';
 	this.view.classList.remove('activateScreenSaver');
 	this.doc.style.height = 'auto';
 	this.view.style.width = 0;			
