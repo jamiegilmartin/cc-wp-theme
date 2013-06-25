@@ -514,7 +514,34 @@ UBCC = {
 		
 		var s = new ScreenSaver(1500);
 		
-
+		function startScreenSaver(){
+			console.log('start screen saver');
+			
+			resize( view );
+			doc.style.overflow = 'hidden';
+			view.classList.add('activateScreenSaver');
+			
+		}
+		function stopScreenSaver(){
+			doc.style.overflow = 'auto';
+			view.classList.remove('activateScreenSaver');
+		}
+		
+		function resize(){
+			this.windowHeight = window.innerHeight;
+			this.windowWidth = window.innerWidth;
+			
+			doc.style.height = view.windowHeight +'px';
+			doc.style.width = this.windowWidth + 'px';
+			view.style.width = this.windowWidth + 'px';
+			view.style.height = this.windowHeight + 'px';
+		}
+		window.onresize = function(e){
+			moved = true;
+		};
+		window.onclick = function(e){
+			stopScreenSaver();
+		};
 		
 	}
 };

@@ -45,10 +45,13 @@ ScreenSaver.prototype.animate = function(lastTime){
 	this.delta = now - this.then;
 
 	//time in seconds
-	this.secondsRunning = (now - this.startTime) / 1000;
+	this.milliSecondsRunning = (now - this.startTime);
 	this.interval++;
 
-	console.log(this.secondsRunning)
+	if(this.milliSecondsRunning > this.delay){
+		console.log('sss',this.milliSecondsRunning)
+		this.startTime = now;
+	}
 
 	//request new frame
 	requestAnimFrame(function(){
