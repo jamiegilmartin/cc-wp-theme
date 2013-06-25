@@ -353,12 +353,14 @@ ul.contentList li.item:nth-child(2n+1) {
 	overflow:hidden;
 }
 .cc-news .navigation p {
+	float:right;
+	padding-left:2em;
+}
+.cc-news .navigation p a {
 	font-size:2em;
 	line-height:1em;
 	color:#fff;
 	text-decoration:none;
-	float:right;
-	padding-left:2em;
 }
 .cc-news .navigation p.backToTop {
 	float:left;

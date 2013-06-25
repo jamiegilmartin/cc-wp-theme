@@ -165,7 +165,7 @@ SlideShow.prototype.events = function(){
 	
 	//next and prev click
 	this.nextBtn.addEventListener('click', function(){
-		console.log(self.transitioning)
+		//console.log(self.transitioning)
 		if(self.transitioning === false)
 		self.next();
 	}, false);
