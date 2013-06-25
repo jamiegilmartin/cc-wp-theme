@@ -237,14 +237,21 @@ UBCC = {
 				entryContent = entry.getElementsByClassName('content')[0],
 				meta = entryContent.getElementsByClassName('meta')[0],
 				metaListItems = meta.getElementsByTagName('li'),
-				buyNowBtn = entryContent.getElementsByClassName('buyNowBtn')[0];
+				buyNowBtn = entryContent.getElementsByClassName('buyNowBtn')[0],
+				orderedList = [];
 
 			for(var j=0;j<metaListItems.length;j++){
 				var metaListItem = metaListItems[j],
 					span = metaListItem.getElementsByTagName('span')[0];
 					
+					//console.log(span.innerHTML)
 					//buyNow set link
-					
+					if(span.innerHTML === 'description:'){
+						orderedList[0] = metaListItems[j];
+					}
+					if(span.innerHTML === 'price:'){
+						orderedList[1] = metaListItems[j];
+					}
 					if(span.innerHTML === 'buy now:'){
 						var string = metaListItems[j].innerHTML.split('</span> ')[1];
 						buyNowBtn.setAttribute('href',string);
