@@ -38,7 +38,9 @@ UBCC = {
 		if(this.content.classList.contains('cc-archive')){
 			this.archive();
 		}
-		
+		if(this.content.classList.contains('cc-subscribe')){
+			this.subscribe();
+		}
 		this.screensaver();
 		
 	},
@@ -509,10 +511,15 @@ UBCC = {
 			
 		}
 	},
+	subscribe : function(){
+		var self = this;
+			
+		this.content.style.height = window.innerHeight + 'px';
+	},
 	screensaver : function(){
 		
 		
-		var s = new ScreenSaver(3500);
+		//var s = new ScreenSaver(3500);
 		
 	}
 };

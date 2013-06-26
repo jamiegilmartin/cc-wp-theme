@@ -96,8 +96,8 @@ header#cc-header #branding {
 	overflow:hidden;
 }
 header#cc-header #branding #site-title {
-	width: 5.5em;
-	height: 4.1em;
+	width: 6.5em;/*5.5em;*/
+	height: 4.7em; /*4.1em;*/
 }
 header#cc-header #branding #site-title a {
 	display:block;
@@ -872,4 +872,17 @@ ul.archiveStoryList li.item article.entry .imgHolder img {
 	padding:0;
 	width:60em;
 	height:auto;
+}
+
+/**
+ * cc-subscribe
+ */
+.cc-subscribe {
+	background:#fff;
+	height:600px;
+	padding:4em 10em;
+}
+.cc-subscribe .content {
+	width:83em;
+	overflow:hidden;
 }
