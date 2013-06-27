@@ -162,6 +162,18 @@ UBCC = {
 
 	},
 	news : function(){
+		//twitter
+		$.ajax({
+			url:'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=jamiegilmartin&count=1',
+		error: function(msg){
+			console.log(msg);
+		},
+		success: function(msg){
+			console.log(msg);
+		}	 
+		});
+		
+		//list
 		for(var i=0;i<this.contentListItems.length;i++){
 			var item = this.contentListItems[i],
 				entry = item.getElementsByClassName('entry')[0],

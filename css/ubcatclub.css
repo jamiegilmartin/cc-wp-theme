@@ -69,14 +69,14 @@ header#cc-header {
 	transition:all 0.5s ease-in-out;
 }
 header#cc-header.closed {
-	height:2em;
+	height:3em;
 	cursor:pointer;
 }
 header#cc-header .dot {
 	position:absolute;
 	width:1em;
 	height:1em;
-	top:0.55em;
+	top:1em;
 	left:1.2em;
 	border-radius: 0.6em;
 	background:#fff;
@@ -92,7 +92,7 @@ header#cc-header:hover .dot {
 
 header#cc-header #branding {
 	float:right;
-	padding:2.7em 0 0 3em;
+	padding:3em 0 0 3em;
 	overflow:hidden;
 }
 header#cc-header #branding #site-title {
@@ -274,6 +274,13 @@ ul.contentList li.item:nth-child(2n+1) {
 	color:#fff;
 	padding-bottom:1em;
 }
+.cc-news .twitter-module p.title a {
+	text-decoration:none;
+	color:#fff;
+}
+.cc-news .twitter-module p.title a:hover {
+	color:rgba(0,0,255,1);
+}
 .cc-news .twitter-module .tweet {
 	font-size:5em;
 	line-height:1em;
@@ -282,7 +289,9 @@ ul.contentList li.item:nth-child(2n+1) {
 .cc-news .twitter-module .tweet a {
 	color:#fff;
 }
-
+.cc-news .twitter-module .tweet a:hover {
+	color:rgba(0,0,255,1);
+}
 
 
 /*news article*/
@@ -380,6 +389,9 @@ ul.contentList li.item:nth-child(2n+1) {
 	line-height:1em;
 	color:#fff;
 	text-decoration:none;
+}
+.cc-news .navigation p a:hover {
+	color:rgba(0,0,255,1);
 }
 .cc-news .navigation p.backToTop {
 	float:left;
@@ -584,7 +596,6 @@ ul.modelList li article.entry .imgHolder img {
 	line-height:1em;
 	color:#fff;
 	text-decoration:none;
-	text-transform:uppercase;
 }
 .cc-models .slideShow a.nextBtn,
 .cc-models .slideShow  a.prevBtn {
