@@ -18,7 +18,7 @@ get_header(); ?>
 			$args= array(
 				'posts_per_page' =>  100,
 				'orderby' => 'date',
-				'order' => 'ASC',
+				'order' => 'DSC',
 				'category_name' => 'Models'
 			);
 			$loop = new WP_Query( $args );
