@@ -1,13 +1,20 @@
 <?php get_header(); ?>
-<article id="content">
-<?php get_template_part( 'nav', 'above-single' ); ?>
-<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-<?php get_template_part( 'entry' ); ?>
-<?php comments_template('', true); ?>
-<?php endwhile; endif; ?>
-<?php get_template_part( 'nav', 'below-single' ); ?>
-
-SINGKE
-</article>
-<?php get_sidebar(); ?>
+<div id="content" class="cc-news">
+	<section class="content">
+		<ul class="contentList">
+		<?php if (have_posts()) :while ( have_posts() ) : the_post(); ?>
+			<li class="item">
+				<?php get_template_part( 'cc', 'newsItem'); ?>
+			</li>
+		<?php endwhile; endif; ?>
+		</ul>
+		
+		<div class="navigation">
+			<p class="backToTop"><a href="javascript:void(0);" onclick="window.scrollTo(0,0);">Back to Top</a></p>
+			<p class="nav-next"><a href="javascript:void(0);">Newer News</a></p>
+			<p class="nav-previous"><a href="javascript:void(0);">Older News</a></p>
+		</div>
+			
+	</section>
+</div>
 <?php get_footer(); ?>
