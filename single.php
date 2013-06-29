@@ -10,9 +10,11 @@
 		</ul>
 		
 		<div class="navigation">
-			<p class="backToTop"><a href="javascript:void(0);" onclick="window.scrollTo(0,0);">Back to Top</a></p>
-			<p class="nav-next"><a href="javascript:void(0);">Newer News</a></p>
-			<p class="nav-previous"><a href="javascript:void(0);">Older News</a></p>
+			<p class="backToTop"><a href="javascript:void(0);" onclick="window.scrollTo(0,0);">Back to List</a></p>
+			<p class="nav-next"><?php next_post_link( '%link', 'Next Post' ) ?></p>
+			<p class="nav-previous"><?php previous_post_link( '%link', 'Previous Entry' ) ?></p>
+			
+			
 		</div>
 			
 	</section>
