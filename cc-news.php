@@ -33,10 +33,11 @@ get_header(); ?>
 			<p class="title"><a href="#">Twitter</a> @<a href="#">UBcatclub</a> &mdash; 2 days ago</p>
 			<div class="tweet garamonditalic">Cat casting call, going on now, please visit us at our new website: <a href="#">http://t.co/XCOlseAa</a> @<a href="#">UBcatclub</a></div>
 		</div>
+		
 		<?php
 			$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 			$args= array(
-				'posts_per_page' => 15,
+				'posts_per_page' => 5,
 				'orderby' => 'date',
 				'order' => 'DSC',
 				'category_name' => 'News',
@@ -56,6 +57,7 @@ get_header(); ?>
 			//not working!!!! TODO
 			
 			/*set max number of pages @see http://wpengineer.com/1263/correct-pagination-with-get_posts/*/
+			/*
 			$ppp = get_option('posts_per_page');
 			//echo $ppp.'<br /><br />';
 			$published_posts = wp_count_posts()->publish;
@@ -66,18 +68,27 @@ get_header(); ?>
 			$count = count($posts);
 
 			//echo '<br /><br />'.$count;
-			//if ( $total_pages > 1 ) { ?>
-				
+			//if ( $total_pages > 1 ) { 
+			*/
+			?>
+			
 			<!--
 			<div id="nav-below" class="navigation">
 				<p class="nav-previous">Older News<?php next_posts_link(__( '<span class="meta-nav">&laquo;</span> older articles' )) ?></p>
 				<p class="nav-next">Newer News<?php previous_posts_link(__( 'newer articles <span class="meta-nav">&raquo;</span>')) ?></p>
 			</div>-->
-		
+			
+			
+			
 			<div class="navigation">
+				
 				<p class="backToTop"><a href="javascript:void(0);" onclick="window.scrollTo(0,0);">Back to Top</a></p>
 				<p class="nav-next"><a href="javascript:void(0);">Newer News</a></p>
 				<p class="nav-previous"><a href="javascript:void(0);">Older News</a></p>
+				<?php previous_posts_link(__( 'newer articles')) ?>
+				<?php next_posts_link(__( 'older articles' )) ?>
+				<?php echo paginate_links(); ?>
+				hhh
 			</div>
 		
 		<?php // } ?>
