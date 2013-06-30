@@ -1,6 +1,5 @@
 
 <article class="entry">
-<!--"<?php ubcc_posted_on(); ?>-->
 		<header>
 			<h2 class="title"><a href="javascript:void(0);"><?php the_title(); ?></a></h2>
 		</header>

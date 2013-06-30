@@ -22,22 +22,10 @@ function ubcc_posted_on() {
 }
 endif;
 
+if ( ! function_exists( 'ubcc_year' ) ) :
 
-// posts per page based on CPT
-function iti_custom_posts_per_page($query)
-{
-    switch ( $query->query_vars['category_name'] )
-    {
-        case 'News':  // Post Type named 'iti_cpt_1'
-            $query->query_vars['posts_per_page'] = 5;
-            break;
-        default:
-            break;
-    }
-    return $query;
+function ubcc_year() {
+	return get_the_date( 'Y' );
 }
+endif;
 
-if( !is_admin() )
-{
-    //add_filter( 'pre_get_posts', 'iti_custom_posts_per_page' );
-}
