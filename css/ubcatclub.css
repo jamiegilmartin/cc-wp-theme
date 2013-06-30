@@ -569,6 +569,9 @@ ul.modelList li article.entry .imgHolder img {
 /*	margin:0;
 	width:60em;*/
 }
+.cc-models .slideShow h2.date{
+	display:none;
+}
 .cc-models .slideShow ul.modelList  {
 	position:relative;
 	background-color:rgba(255,134,114,1);

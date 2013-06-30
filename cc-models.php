@@ -43,8 +43,8 @@ get_header(); ?>
 
 			$my_query = new WP_Query($args);
 			if( $my_query->have_posts() ) {
-				echo '<h2 class="date">' . $counter . '</h2>';
-				echo '<div class="view"><ul class="modelList">';
+				echo '<div class="view"><h2 class="date">' . $counter . '</h2>';
+				echo '<ul class="modelList">';
 				while ($my_query->have_posts()) : $my_query->the_post();
 			?>
 				<li class="item">

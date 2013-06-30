@@ -326,7 +326,10 @@ UBCC = {
 			}, false);
 			this.item.addEventListener('click', function(){
 				for(var h=0;h<modelLists.length;h++){
+					modelLists[h].parentNode.style.display = 'none';
+					//console.log(h)
 					if(modelList.list === modelLists[h]){
+						modelLists[h].parentNode.style.display = 'block';
 						if(!modelList.list.parentNode.classList.contains('slideShow'))
 						modelSlideShow(modelList,i+1);
 					}
@@ -366,13 +369,13 @@ UBCC = {
 			view.appendChild(prevBtn);
 			view.appendChild(xBtn);
 			
-			console.log(modelList.modelListItems)
+			//console.log(modelList.modelListItems)
 			
 			//set heights
 			var maxHeight = 0;
 			for(var i=0;i<modelList.modelListItems.length;i++){
 				if(modelList.modelListItems[i].offsetHeight > maxHeight){
-					maxHeight = modelList.items[i].offsetHeight;
+					maxHeight = modelList.modelListItems[i].offsetHeight;
 				}
 			}
 			for(var j=0;j<modelList.modelListItems.length;j++){
@@ -380,10 +383,9 @@ UBCC = {
 			}
 			for(var h=0;h<modelLists.length;h++){
 				modelLists[h].style.height = maxHeight + 'px';
-				
 			}
 			
-			var modelItemSlideShow = new SlideShow( view, modelList, modelList.items, nextBtn, prevBtn );
+			var modelItemSlideShow = new SlideShow( view, modelList.list, modelList.modelListItems, nextBtn, prevBtn );
 			modelItemSlideShow.gotoSlide(clicked_slide_index);
 			
 			//x btn click
@@ -393,11 +395,13 @@ UBCC = {
 				view.removeChild(nextBtn);
 				view.removeChild(prevBtn);
 				view.removeChild(xBtn);
-				for(var h=0;h<self.modelList.length;h++){
-					self.modelList[h].style.height = 'auto';
+				for(var h=0;h<modelLists.length;h++){
+					modelLists[h].style.height = 'auto';
+					modelLists[h].parentNode.style.display = 'block';
+					
 				}
-				for(var j=0;j<self.modelListItems.length;j++){
-					self.modelListItems[j].style.height = 'auto';
+				for(var j=0;j<modelList.modelListItems.length;j++){
+					modelList.modelListItems[j].style.height = 'auto';
 				}
 			}, false);
 		}

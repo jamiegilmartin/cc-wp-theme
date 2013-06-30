@@ -230,7 +230,6 @@ SlideShow.prototype.updateSlides = function( dir ){
 			if(this.active_index-1 >= 0){
 				this.previousSlide = this.slides[this.active_index-1];
 				this.previousSlide.classList.add('transitioning');
-				console.log('pp',this.previousSlide)
 			}else{
 				//on first slide
 				this.previousSlide = this.slides[this.slides.length-1];
@@ -257,8 +256,6 @@ SlideShow.prototype.updateSlides = function( dir ){
 				//on last slide
 				this.nextSlide = this.slides[0];
 				//move next slide stage right
-				
-				console.log('ll',this.nextSlide)
 				
 				this.nextSlide.classList.add('transitioning');
 				this.nextSlide.style.zIndex = 0;
