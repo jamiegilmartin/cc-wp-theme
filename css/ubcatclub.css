@@ -49,10 +49,10 @@ section.content {
 }
 
 .screensaver .clock {
-	font-size:15em;
+	font-size:25em;
 	color:rgba(255,134,114,1);
 	text-align:center;
-	margin:0.5em 0 0 0;
+	margin:0.25em 0 0 0;
 }
 /**
  * header#cc-header

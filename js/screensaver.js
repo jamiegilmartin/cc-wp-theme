@@ -7,7 +7,7 @@ var ScreenSaver = window.ScreenSaver || {};
  */
 ScreenSaver =  function(delay){
 	var self = this;
-		
+	
 	this.doc = document.documentElement || document.body;
 	this.view = document.createElement('div');
 	this.clock = document.createElement('div');
@@ -18,12 +18,9 @@ ScreenSaver =  function(delay){
 	this.clock.classList.add('clock');
 	this.clock.setAttribute('id','clock');
 	
-	console.log(this.doc.offsetHeight)
-	
+	this.hasBeenStarted = false;
 	this.delay = delay;
 	this.setCounter();
-	
-	
 };
 ScreenSaver.prototype.setCounter = function(){
 	var self = this,
@@ -39,7 +36,7 @@ ScreenSaver.prototype.setCounter = function(){
 	//animate
 	this.playing = true;
 	this.interval = 0;
-	this.count();
+	this.count( 0 );
 	this.events();
 };
 ScreenSaver.prototype.events = function(){
@@ -48,7 +45,6 @@ ScreenSaver.prototype.events = function(){
 		self.resize();
 	}
 	this.doc.addEventListener('click',function(e){
-	//self.moved = true;
 		self.stop();
 	});
 };
@@ -64,10 +60,13 @@ ScreenSaver.prototype.resize = function(){
 };
 ScreenSaver.prototype.start = function(){
 	console.log('start screen saver');
+	window.scrollTo(0,0);
 	this.playing = false;
 	this.doc.style.overflow = 'hidden';
 	this.doc.appendChild(this.view);
 	this.view.appendChild(this.clock);
+	this.hasBeenStarted = true;
+	
 	
 	setClock('clock');
 	
@@ -76,11 +75,13 @@ ScreenSaver.prototype.start = function(){
 };
 ScreenSaver.prototype.stop = function(){
 	console.log('stop screen saver');
-	this.doc.style.overflow = 'auto';
-	this.doc.style.height = 'auto';
-	this.view.removeChild(this.clock);
-	this.doc.removeChild(this.view);
-	this.count();
+	if(this.hasBeenStarted === true){
+		this.doc.style.overflow = 'auto';
+		this.doc.style.height = 'auto';
+		this.doc.removeChild(this.view);
+	}
+	
+	this.count( 0 );
 };
 ScreenSaver.prototype.count = function(lastTime){
 	var self = this,
@@ -142,6 +143,7 @@ setClock = function( id ){
 			s = "0"+s;
 		}
 		//result = ''+days[day]+' '+months[month]+' '+d+' '+year+' '+h+':'+m+':'+s;
+		if(document.getElementById(id))
 		document.getElementById(id).innerHTML = h+':'+m;
 		
 	setTimeout('setClock("'+id+'");','1000');
