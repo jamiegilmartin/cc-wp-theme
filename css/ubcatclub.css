@@ -39,17 +39,21 @@ section.content {
 	height:100%;
 	width:100%;
 	z-index:11;
-	opacity:0;
 	background:#000;
+	background:#000 url('../images/bg-screensaver.gif') repeat scroll 50% 50%;
+	
 	-webkit-transition:all 0.5s ease-in-out;
 	-moz-transition:all 0.5s ease-in-out;
 	-o-transition:all 0.5s ease-in-out;
 	transition:all 0.5s ease-in-out;
 }
-.activateScreenSaver {
-	opacity:1;
-}
 
+.screensaver .clock {
+	font-size:15em;
+	color:rgba(255,134,114,1);
+	text-align:center;
+	margin:0.25em 0 0 0;
+}
 /**
  * header#cc-header
  */
