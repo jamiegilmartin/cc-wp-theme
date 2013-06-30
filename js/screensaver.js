@@ -36,7 +36,9 @@ ScreenSaver.prototype.setCounter = function(){
 	//animate
 	this.playing = true;
 	this.interval = 0;
-	this.count( 0 );
+	
+	
+	Saver.count( now );
 	this.events();
 };
 ScreenSaver.prototype.events = function(){
@@ -81,8 +83,9 @@ ScreenSaver.prototype.stop = function(){
 		this.doc.removeChild(this.view);
 	}
 	
-	this.count( 0 );
+	Saver.count( Date.now() );
 };
+/*
 ScreenSaver.prototype.count = function(lastTime){
 	var self = this,
 		now = Date.now(), //new Date().getTime();
@@ -117,12 +120,21 @@ ScreenSaver.prototype.count = function(lastTime){
 		}
 	});
 };
+*/
 
-
+Saver = {};
+/**
+ * count
+ */
+Saver.count = function(lastTime){
+	var now = Date.now();
+	console.log(now - lastTime)
+	setTimeout('Saver.count("'+Date.now()+'");','5000');
+}
 /**
  * clock
  */
-setClock = function( id ){
+Saver.setClock = function( id ){
 	var date = new Date,
 		year = date.getFullYear(),
 		month = date.getMonth(),
@@ -146,6 +158,6 @@ setClock = function( id ){
 		if(document.getElementById(id))
 		document.getElementById(id).innerHTML = h+':'+m;
 		
-	setTimeout('setClock("'+id+'");','1000');
+	setTimeout('Saver.setClock("'+id+'");','1000');
 	return true;
 }
