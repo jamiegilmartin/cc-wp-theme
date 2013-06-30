@@ -281,20 +281,24 @@ UBCC = {
 			contentSection = this.content.getElementsByClassName('content')[0],
 			contentWidth = contentSection.offsetWidth;
 		
-		this.modelList = this.content.getElementsByClassName('modelList')[0];
-		this.modelListItems = this.modelList.getElementsByClassName('item');
-		for(var i=0;i<this.modelListItems.length;i++){
-			var item = this.modelListItems[i],
-				header = item.getElementsByTagName('header')[0],
-				entry = item.getElementsByClassName('entry')[0],
-				imgHolder = entry.getElementsByClassName('imgHolder')[0],
-				entryContent = entry.getElementsByClassName('content')[0],
-				img = entryContent.getElementsByTagName('img')[0];
-			
-			imgHolder.appendChild(img);
-			
-			new model(item,header,entry,entryContent,img,i);
+		this.modelList = this.content.getElementsByClassName('modelList');
+		for(var h=0;h<this.modelList.length;h++){
+			this.modelListItems = this.modelList[h].getElementsByClassName('item');
+			for(var i=0;i<this.modelListItems.length;i++){
+				var item = this.modelListItems[i],
+					header = item.getElementsByTagName('header')[0],
+					entry = item.getElementsByClassName('entry')[0],
+					imgHolder = entry.getElementsByClassName('imgHolder')[0],
+					entryContent = entry.getElementsByClassName('content')[0],
+					img = entryContent.getElementsByTagName('img')[0];
+
+				imgHolder.appendChild(img);
+
+				new model(item,header,entry,entryContent,img,i);
+			}
 		}
+		
+		
 		
 		/**
 		 *@Class model

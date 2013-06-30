@@ -505,6 +505,14 @@ ul.contentList li.item:nth-child(2n+1) {
 /**
  * ul.contentList.modelList
  */
+.cc-models h2.date {
+	clear:both;
+	font-size:2em;
+	line-height:1em;
+	color:#fff;
+	text-decoration:none;
+	padding-bottom:1em;
+}
 ul.modelList {
 	/*overflow:hidden;*/
 }
@@ -543,7 +551,7 @@ ul.modelList li article.entry .date a {
 	line-height:1em;
 	color:#fff;
 	text-decoration:none;
-	text-transform:uppercase;
+
 }
 ul.modelList li article.entry section.content {
 	display:none;
