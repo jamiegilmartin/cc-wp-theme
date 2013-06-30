@@ -18,5 +18,4 @@
 		<?php endwhile; ?>
 			<?php get_template_part( 'nav', 'below' ); ?>
 	</div>
-	ARCHIVEA
 <?php get_footer(); ?>

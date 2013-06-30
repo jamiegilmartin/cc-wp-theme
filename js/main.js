@@ -41,7 +41,8 @@ UBCC = {
 		if(this.content.classList.contains('cc-subscribe')){
 			this.subscribe();
 		}
-		this.screensaver();
+		
+		this.screensaver = new ScreenSaver(3500);
 		
 	},
 	header : function(){
@@ -557,12 +558,6 @@ UBCC = {
 		var self = this;
 			
 		this.content.style.height = window.innerHeight + 'px';
-	},
-	screensaver : function(){
-		
-		
-		//var s = new ScreenSaver(3500);
-		
 	}
 };
 window.onload = function(){

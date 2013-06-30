@@ -17,9 +17,9 @@ ScreenSaver =  function(delay){
 	this.doc.appendChild(this.view);
 	
 	this.delay = delay;
-	this.set();
+	this.setCounter();
 };
-ScreenSaver.prototype.set = function(){
+ScreenSaver.prototype.setCounter = function(){
 	var self = this,
 		now = Date.now();
 		
@@ -33,7 +33,7 @@ ScreenSaver.prototype.set = function(){
 	//animate
 	this.playing = true;
 	this.interval = 0;
-	this.animate();
+	this.count();
 	this.events();
 
 };
@@ -53,7 +53,7 @@ ScreenSaver.prototype.resize = function(){
 			
 	this.doc.style.height = this.windowHeight +'px';
 	this.doc.style.width = this.windowWidth + 'px';
-	this.view.style.width = this.windowWidth + 'px';			
+	this.view.style.width = this.windowWidth + 'px';
 	this.view.style.height = this.windowHeight + 'px';
 			
 };
@@ -63,7 +63,7 @@ ScreenSaver.prototype.start = function(){
 	this.resize();
 	this.doc.style.overflow = 'hidden';
 	this.view.display = 'block';
-			
+
 };
 ScreenSaver.prototype.stop = function(){
 	console.log('stop screen saver');
@@ -71,17 +71,20 @@ ScreenSaver.prototype.stop = function(){
 	this.doc.style.height = 'auto';
 	this.view.display = 'none';
 	
-	this.animate();
+	this.count();
 };
-ScreenSaver.prototype.animate = function(lastTime){
+ScreenSaver.prototype.count = function(lastTime){
 	var self = this,
 		now = Date.now(), //new Date().getTime();
 		deltaTime = now - ( lastTime || now);
 
 	this.delta = now - this.then;
-
+	
+	
 	//time in seconds
 	this.milliSecondsRunning = (now - this.startTime);
+	
+	console.log(this.milliSecondsRun)
 	this.interval++;
 	//console.log(this.moved,this.milliSecondsRunning);
 	if(this.moved === true){
@@ -98,7 +101,7 @@ ScreenSaver.prototype.animate = function(lastTime){
 	//request new frame
 	requestAnimFrame(function(){
 		if(self.playing){ // && self.secondsRunning < (self.duration)
-			self.animate( now );
+			self.count( now );
 		}else{
 			self.playing = false;
 		}
