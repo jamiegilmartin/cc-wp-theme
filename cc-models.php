@@ -6,7 +6,6 @@ Template Name: Models
 get_header(); ?>
 <div id="content" class="cc-models">
 	<section class="content">
-		<div class="view">
 		<?php
 		// @see - http://wordpress.org/support/topic/sort-posts-by-year-and-alphabetically#post-1300381
 		$args=array(
@@ -45,7 +44,7 @@ get_header(); ?>
 			$my_query = new WP_Query($args);
 			if( $my_query->have_posts() ) {
 				echo '<h2 class="date">' . $counter . '</h2>';
-				echo '<ul class="modelList">';
+				echo '<div class="view"><ul class="modelList">';
 				while ($my_query->have_posts()) : $my_query->the_post();
 			?>
 				<li class="item">
@@ -53,13 +52,12 @@ get_header(); ?>
 				</li>
 			<?php
 				endwhile;
-				echo '</ul>';
+				echo '</ul></div>';
 		    } //if ($my_query)
 			wp_reset_query();  // Restore global post data stomped by the_post().
 		  }
 		}
 		?>
-		</div>
 		
 	</section>
 </div>

@@ -279,11 +279,23 @@ UBCC = {
 	models : function(){
 		var self = this,
 			contentSection = this.content.getElementsByClassName('content')[0],
-			contentWidth = contentSection.offsetWidth;
-		
-		this.modelList = this.content.getElementsByClassName('modelList');
-		for(var h=0;h<this.modelList.length;h++){
-			this.modelListItems = this.modelList[h].getElementsByClassName('item');
+			contentWidth = contentSection.offsetWidth,
+			modelLists = this.content.getElementsByClassName('modelList');
+			
+		for(var h=0;h<modelLists.length;h++){
+			
+			var list = modelLists[h];
+			new modelList(list);
+			
+		}
+		/**
+		 *@Class modelList
+		 */
+		function modelList(list){
+			var self = this;
+			this.list = list;
+			this.items = [];
+			this.modelListItems = this.list.getElementsByClassName('item');
 			for(var i=0;i<this.modelListItems.length;i++){
 				var item = this.modelListItems[i],
 					header = item.getElementsByTagName('header')[0],
@@ -293,44 +305,50 @@ UBCC = {
 					img = entryContent.getElementsByTagName('img')[0];
 
 				imgHolder.appendChild(img);
-
-				new model(item,header,entry,entryContent,img,i);
+				
+				this.items.push( new model(this,item,header,entry,entryContent,img,i) );
+				
 			}
 		}
-		
-		
 		
 		/**
 		 *@Class model
 		 */
-		function model(item,header,entry,entryContent,img,i){
-			
-			item.addEventListener('mouseover', function(){
-				header.style.opacity =  1;
+		function model(modelList,item,header,entry,entryContent,img,i){
+			var self = this;
+			this.item = item;
+			this.header = header;
+			this.item.addEventListener('mouseover', function(){
+				self.header.style.opacity =  1;
 			}, false);
-			item.addEventListener('mouseout', function(){
-				header.style.opacity = 0;
+			this.item.addEventListener('mouseout', function(){
+				self.header.style.opacity = 0;
 			}, false);
-			item.addEventListener('click', function(){
+			this.item.addEventListener('click', function(){
+				for(var h=0;h<modelLists.length;h++){
+					if(modelList.list === modelLists[h]){
+						if(!modelList.list.parentNode.classList.contains('slideShow'))
+						modelSlideShow(modelList,i+1);
+					}
+					
+				}
 				
-				if(!self.modelList.parentNode.classList.contains('slideShow'))
-				modelSlideShow(i+1);
-				
+
 			}, false);
 		}
 		
 		/**
 		 *@Class modelSlideShow
 		 */
-		function modelSlideShow(clicked_slide_index){
+		function modelSlideShow(modelList,clicked_slide_index){
 			//wrap images in list
-			var view = self.modelList.parentNode,
+			var view = modelList.list.parentNode,
 				content = view.parentNode,
 				nextBtn = document.createElement('a'),
 				prevBtn = document.createElement('a'),
 				xBtn = document.createElement('a');
 			
-			console.log(content.offsetLeft,content.offsetWidth)
+			//console.log(content.offsetLeft,content.offsetWidth)
 			view.classList.add('slideShow');
 			
 			content.style.width = window.innerWidth - ((window.innerWidth - content.offsetWidth) /2)-10 + 'px';
@@ -348,23 +366,25 @@ UBCC = {
 			view.appendChild(prevBtn);
 			view.appendChild(xBtn);
 			
-			
+			console.log(modelList.modelListItems)
 			
 			//set heights
 			var maxHeight = 0;
-			for(var i=0;i<self.modelListItems.length;i++){
-				if(self.modelListItems[i].offsetHeight > maxHeight){
-					maxHeight = self.modelListItems[i].offsetHeight;
+			for(var i=0;i<modelList.modelListItems.length;i++){
+				if(modelList.modelListItems[i].offsetHeight > maxHeight){
+					maxHeight = modelList.items[i].offsetHeight;
 				}
 			}
-			for(var j=0;j<self.modelListItems.length;j++){
-				self.modelListItems[j].style.height = maxHeight + 'px'; //?working correctly??
+			for(var j=0;j<modelList.modelListItems.length;j++){
+				modelList.modelListItems[j].style.height = maxHeight + 'px'; //?working correctly??
 			}
-			self.modelList.style.height = maxHeight + 'px';
+			for(var h=0;h<modelLists.length;h++){
+				modelLists[h].style.height = maxHeight + 'px';
+				
+			}
 			
-			var modelItemSlideShow = new SlideShow( view, self.modelList, self.modelListItems, nextBtn, prevBtn );
+			var modelItemSlideShow = new SlideShow( view, modelList, modelList.items, nextBtn, prevBtn );
 			modelItemSlideShow.gotoSlide(clicked_slide_index);
-			
 			
 			//x btn click
 			xBtn.addEventListener('click', function(){
@@ -373,7 +393,9 @@ UBCC = {
 				view.removeChild(nextBtn);
 				view.removeChild(prevBtn);
 				view.removeChild(xBtn);
-				self.modelList.style.height = 'auto';
+				for(var h=0;h<self.modelList.length;h++){
+					self.modelList[h].style.height = 'auto';
+				}
 				for(var j=0;j<self.modelListItems.length;j++){
 					self.modelListItems[j].style.height = 'auto';
 				}
