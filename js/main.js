@@ -42,8 +42,7 @@ UBCC = {
 			this.subscribe();
 		}
 		
-		this.screensaver = new ScreenSaver(1500);
-		
+		Saver.init();
 	},
 	header : function(){
 		var header = document.getElementById('cc-header');

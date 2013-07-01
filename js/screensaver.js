@@ -5,7 +5,7 @@ var ScreenSaver = window.ScreenSaver || {};
  * @description contains animation code for each ScreenSaver
  * @param ScreenSaver - a ScreenSaver
  */
-ScreenSaver =  function(delay){
+ScreenSaver =  function(){
 	var self = this;
 	
 	this.doc = document.documentElement || document.body;
@@ -19,7 +19,6 @@ ScreenSaver =  function(delay){
 	this.clock.setAttribute('id','clock');
 	
 	this.hasBeenStarted = false;
-	this.delay = delay;
 	this.setCounter();
 };
 ScreenSaver.prototype.setCounter = function(){
@@ -37,7 +36,7 @@ ScreenSaver.prototype.setCounter = function(){
 	this.playing = true;
 	this.interval = 0;
 	
-	
+	Saver.startTime = now;
 	Saver.count( now );
 	this.events();
 };
@@ -61,75 +60,50 @@ ScreenSaver.prototype.resize = function(){
 
 };
 ScreenSaver.prototype.start = function(){
-	console.log('start screen saver');
 	window.scrollTo(0,0);
 	this.playing = false;
 	this.doc.style.overflow = 'hidden';
 	this.doc.appendChild(this.view);
+	this.view.style.height = this.doc.offsetHeight + 'px';
 	this.view.appendChild(this.clock);
 	this.hasBeenStarted = true;
 	
 	
-	setClock('clock');
+	Saver.setClock('clock');
 	
 	this.view.display = 'block';
 
 };
 ScreenSaver.prototype.stop = function(){
-	console.log('stop screen saver');
 	if(this.hasBeenStarted === true){
 		this.doc.style.overflow = 'auto';
 		this.doc.style.height = 'auto';
 		this.doc.removeChild(this.view);
 	}
-	
-	Saver.count( Date.now() );
+	clearTimeout(Saver.timer);
+	var now = Date.now()
+	Saver.startTime = now;
+	Saver.count( Saver.startTime );
 };
-/*
-ScreenSaver.prototype.count = function(lastTime){
-	var self = this,
-		now = Date.now(), //new Date().getTime();
-		deltaTime = now - ( lastTime || now);
 
-	this.delta = now - this.then;
-	
-	
-	//time in seconds
-	this.milliSecondsRunning = (now - this.startTime);
-	
-	console.log(this.milliSecondsRun)
-	this.interval++;
-	//console.log(this.moved,this.milliSecondsRunning);
-	if(this.moved === true){
-		console.log('mooove');
-		this.startTime = now;
-		//this.stop();
-	}
-	if(this.milliSecondsRunning > this.delay){
-		console.log('sss',this.milliSecondsRunning)
-		this.start();
-		this.startTime = now;
-	}
-
-	//request new frame
-	requestAnimFrame(function(){
-		if(self.playing){ // && self.secondsRunning < (self.duration)
-			self.count( now );
-		}else{
-			self.playing = false;
-		}
-	});
-};
-*/
 
 Saver = {};
+Saver.delay = 1000;// 300000;
 /**
  * count
  */
+Saver.init = function(){
+	
+	this.screensaver = new ScreenSaver();
+};
+
 Saver.count = function(lastTime){
 	var now = Date.now();
-	console.log(now - lastTime)
-	setTimeout('Saver.count("'+Date.now()+'");','5000');
+	console.log(lastTime - Saver.startTime )
+	if( (lastTime - Saver.startTime ) >  Saver.delay){
+		this.screensaver.start();
+	}
+	Saver.timer = setTimeout('Saver.count("'+Date.now()+'");','5000');
 }
 /**
  * clock
