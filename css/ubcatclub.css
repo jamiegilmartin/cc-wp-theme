@@ -6,7 +6,6 @@ body {
 	
 	-webkit-font-smoothing: antialiased;
 	font-family:'DrescherGroteskBTW01-Se';
-	font-family:'DrescherGroteskBTW01-Se';
 }
 
 /**
@@ -912,4 +911,20 @@ ul.archiveStoryList li.item article.entry .imgHolder img {
 .cc-subscribe .content {
 	width:83em;
 	overflow:hidden;
+}
+
+
+
+footer {
+	text-align:center;
+	background-color:rgba(255,134,114,1);
+	padding:2em 0;
+}
+footer a {
+	display:block;
+	background: url('../images/United-Bamboo-logo.png') no-repeat scroll top left;
+	text-indent:-9999px;
+	width: 15em;
+	height: 1.8em;
+	margin:0 auto;
 }

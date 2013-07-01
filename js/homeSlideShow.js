@@ -24,7 +24,7 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	this.viewHeight = this.view.offsetHeight;
 	
 	this.scrollTopDif = (document.documentElement.offsetHeight || document.body.offsetHeight - window.innerHeight ) / this.slides.length;
-	this.scrollTopDif = Math.round(this.scrollTopDif);
+	this.scrollTopDif = Math.round(this.scrollTopDif) * 2;
 	this.currentScrollTop = 0;
 	
 		
@@ -54,6 +54,7 @@ HomeSlideShow.prototype.events = function(){
 	this.view.appendChild(output);
 	*/
 	//Events
+	/*
 	var called = 0,
 		touchStartX,
 		touchStartY,
@@ -74,7 +75,7 @@ HomeSlideShow.prototype.events = function(){
 		}
 
 	},false);
-
+	
 	//touch move
 	this.view.addEventListener('touchmove',function(e){
 		var deltaX,
@@ -89,7 +90,7 @@ HomeSlideShow.prototype.events = function(){
 
 		deltaXAvg.push(deltaX);
 		deltaYAvg.push(deltaY);
-		console.log(deltaY)
+		//console.log(deltaY)
 
 		if(deltaXAvg.length > 2){
 			//if scrolling Y return
@@ -119,14 +120,12 @@ HomeSlideShow.prototype.events = function(){
 			}
 		}
 	}
-
+	*/
 	
 	this.nextBtn.addEventListener('click', function(){
 		if(self.transitioning === false)
 		self.next();
 	}, false);
-	
-	
 };
 HomeSlideShow.prototype.XXscrollAnimation = function(){
 	var self = this;
@@ -159,6 +158,7 @@ HomeSlideShow.prototype.scrollAnimation = function(){
 	window.onscroll = function (oEvent) {
 		var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 		//window.scrollTo(0,100);
+		//self.currentSlide.style.position = 'fixed';
 		
 		if(self.reverse === false && scrollTop > self.currentScrollTop ){
 			self.next();
@@ -167,6 +167,7 @@ HomeSlideShow.prototype.scrollAnimation = function(){
 			if(self.currentScrollTop === self.scrollTopDif*self.slides.length){
 				self.reverse = true;
 			}
+			
 		}else if(self.reverse === true && scrollTop < self.currentScrollTop-self.scrollTopDif ){
 			self.prev();
 			self.currentScrollTop -= self.scrollTopDif;
@@ -183,7 +184,6 @@ HomeSlideShow.prototype.scrollAnimation = function(){
 HomeSlideShow.prototype.next = function(){
 	if(this.reverse === false && this.active_index < this.slides.length-1){
 		this.active_index++;
-		
 		this.updateSlides('next');
 	}else{
 		this.reverse = true;
@@ -253,7 +253,7 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 			if(transitionEnd){
 				this.currentSlide.addEventListener(transitionEnd, function( e ) {
 					self.transitioning = false;
-					console.log('t e')
+					//console.log('t e')
 					//TODO: self.currentSlide.removeEventListener('webkitTransitionEnd', this , false);
 				}, false );
 			}else{
