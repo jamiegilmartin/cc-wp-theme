@@ -160,6 +160,9 @@ HomeSlideShow.prototype.scrollAnimation = function(){
 		//window.scrollTo(0,100);
 		//self.currentSlide.style.position = 'fixed';
 		
+		
+		console.log(self.doc.offsetTop )
+		
 		if(self.reverse === false && scrollTop > self.currentScrollTop ){
 			self.next();
 			self.currentScrollTop += self.scrollTopDif;
@@ -168,7 +171,7 @@ HomeSlideShow.prototype.scrollAnimation = function(){
 				self.reverse = true;
 			}
 			
-		}else if(self.reverse === true && scrollTop < self.currentScrollTop-self.scrollTopDif ){
+		}else if(self.reverse === true && scrollTop <  100 ){ //self.currentScrollTop-self.scrollTopDif
 			self.prev();
 			self.currentScrollTop -= self.scrollTopDif;
 			console.log('p ',self.currentScrollTop)
