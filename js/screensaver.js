@@ -88,7 +88,7 @@ ScreenSaver.prototype.stop = function(){
 
 
 Saver = {};
-Saver.delay = 1000;// 300000;
+Saver.delay = 300000;
 /**
  * count
  */
@@ -99,7 +99,7 @@ Saver.init = function(){
 
 Saver.count = function(lastTime){
 	var now = Date.now();
-	console.log(lastTime - Saver.startTime )
+	//console.log(lastTime - Saver.startTime )
 	if( (lastTime - Saver.startTime ) >  Saver.delay){
 		this.screensaver.start();
 	}
