@@ -89,10 +89,11 @@ HomeSlideShow.prototype.events = function(){
 		currentScrollPercent =  position / currentScrollInterval;
 		
 		//act on elements
-		self.nextSlide.style.position = 'absolute';
-		self.nextSlide.style.top = 0;
+		self.nextSlide.slide.style.position = 'absolute';
+		self.nextSlide.slide.style.top = 0;
 		var nH = Math.round(self.slides[self.active_index].offsetHeight * currentScrollPercent);
-		self.nextSlide.style.height = nH + 'px';
+		self.nextSlide.slide.style.height = nH + 'px';
+		self.nextSlide.fader.style.opacity = 1-currentScrollPercent;
 		//(scrollInterval*self.active_index)
 		//console.log(currentScrollPercent.toFixed(2),currentScrollInterval)
 		
@@ -138,72 +139,43 @@ HomeSlideShow.prototype.prev = function(){
 HomeSlideShow.prototype.updateSlides = function( dir ){
 	var self = this;
 
-	for(var i=0;i<this.slides.length;i++){
+	for(var i=0;i<this.slidesArr.length;i++){
 		
 		if(i === this.active_index ){
 			
 			//set prev slide
 			if(this.active_index-1 >= 0){
-				this.previousSlide = this.slides[this.active_index-1];
+				this.previousSlide = this.slidesArr[this.active_index-1];
 			}else{
 				//on first slide
-				this.previousSlide = this.slides[this.slides.length-1];
+				this.previousSlide = this.slidesArr[this.slides.length-1];
 			}
-			
-			
 			//set current
-			this.currentSlide = this.slides[i];
-			//this.currentSlide.style.height = this.slideHeights[i] + 'px';
-			this.currentSlide.classList.add('c');
-			this.currentFader = this.currentSlide.getElementsByClassName('fader')[0];
-			//this.currentFader.style.opacity = 0;
+			this.currentSlide = this.slidesArr[i];
+			this.currentSlide.slide.classList.add('c');
 			
 			
 			//set next slide
-			if(this.active_index+1 <= this.slides.length-1){
-				this.nextSlide = this.slides[this.active_index+1];
+			if(this.active_index+1 <= this.slidesArr.length-1){
+				this.nextSlide = this.slidesArr[this.active_index+1];
 			}else{
 				//on last slide
-				this.nextSlide = this.slides[0];
-			}
-			this.nextFader = this.nextSlide.getElementsByClassName('fader')[0];
-
-
-			//this.transitioning = true; //prevents user from going through slides too fast
-			//this.currentSlide.style.zIndex = 2;
-			//this.currentSlide.style.height = this.viewHeight+'px';
-
-			
-			
-			var transitionEnd = whichTransitionEvent();
-			if(transitionEnd){
-				this.currentSlide.addEventListener(transitionEnd, function( e ) {
-					self.transitioning = false;
-					//console.log('t e')
-					//TODO: self.currentSlide.removeEventListener('webkitTransitionEnd', this , false);
-				}, false );
-			}else{
-				self.transitioning = false;
+				this.nextSlide = this.slidesArr[0];
 			}
 			
 		}else if(i < this.active_index ){
 			//slide is less than active
-			this.slides[i].classList.remove('c');
-			//this.slides[i].classList.add('transitioning');
-			//this.slides[i].style.top  =  this.viewHeight+'px';
-			//var fader = this.slides[i].getElementsByClassName('fader')[0];
-			//fader.style.opacity = 1;
-			
+			this.slidesArr[i].slide.classList.remove('c');
+		
 		}else{
-			this.slides[i].classList.remove('c');
-			//this.slides[i].classList.add('transitioning');
-			//slide is greater than active, move stage right
-			if(this.slides[i] !== this.previousSlide){
+			//slide is greater than active
+			this.slidesArr[i].slide.classList.remove('c');
+
+			if(this.slidesArr[i] !== this.previousSlide){
 				
-				//this.slides[i].style.zIndex = 0;
-				//this.slides[i].style.top  =  -this.viewHeight+'px';
-				//this.slides[i].getElementsByClassName('fader')[0].style.opacity = 1;
-				//fader
+				this.slidesArr[i].slide.style.zIndex = 0;
+				this.slidesArr[i].slide.style.top  =  -this.viewHeight+'px';
+				
 			}
 			
 		}
@@ -215,7 +187,7 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
  * @class HomeSlideShowSlide 
  */
 HomeSlideShowSlide = function(ele){
-	this.ele = ele;
+	this.slide = ele;
 	this.fader = ele.getElementsByClassName('fader')[0]
 }
 /*
