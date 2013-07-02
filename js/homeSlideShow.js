@@ -78,7 +78,7 @@ HomeSlideShow.prototype.events = function(){
 					self.active_index = nextScroll;
 					console.log('next',nextScroll,  Math.round(currentScrollInterval) , max);
 					
-					//self.updateSlides();
+					self.updateSlides();
 				}else{
 					nextScroll = nextScroll;
 				}
@@ -91,8 +91,10 @@ HomeSlideShow.prototype.events = function(){
 		//act on elements
 		self.nextSlide.style.position = 'absolute';
 		self.nextSlide.style.top = 0;
-		self.nextSlide.style.height = Math.round(self.slides[self.active_index].offsetHeight * currentScrollPercent) + 'px';
-		
+		var nH = Math.round(self.slides[self.active_index].offsetHeight * currentScrollPercent);
+		self.nextSlide.style.height = nH + 'px';
+		//(scrollInterval*self.active_index)
+		//console.log(currentScrollPercent.toFixed(2),currentScrollInterval)
 		
 		
 		if(percentScrolled === 0 ){
@@ -147,7 +149,6 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 				//on first slide
 				this.previousSlide = this.slides[this.slides.length-1];
 			}
-			this.previousSlide.classList.add('p');
 			
 			
 			//set current
@@ -166,7 +167,6 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 				this.nextSlide = this.slides[0];
 			}
 			this.nextFader = this.nextSlide.getElementsByClassName('fader')[0];
-			this.nextSlide.classList.add('n')
 
 
 			//this.transitioning = true; //prevents user from going through slides too fast
