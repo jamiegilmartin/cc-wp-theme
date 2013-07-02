@@ -40,7 +40,12 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 };
 HomeSlideShow.prototype.events = function(){
 	var self = this,
-		nextScroll = 0;
+		nextScroll = 0,
+		called = 0;
+	
+	function fireNextScroll(){
+		console.log('fire nex scroll')
+	}
 	
 	window.addEventListener('scroll',function(e){
 		var offsetHeight  = document.documentElement.offsetHeight || document.body.offsetHeight,
@@ -59,6 +64,11 @@ HomeSlideShow.prototype.events = function(){
 			if(scrollTop > scrollInterval*i){
 				nextScroll = nextScroll < i ? i : nextScroll;
 				console.log(nextScroll)
+				if(called <= 1){
+					fireNextScroll();
+				}
+				called++;
+				//self.active_index = nextScroll
 			}
 		}
 		
@@ -73,12 +83,11 @@ HomeSlideShow.prototype.events = function(){
 	});
 	
 	this.nextBtn.addEventListener('click', function(){
-		//if(self.transitioning === false)
-		//self.next();
+		if(self.transitioning === false)
+		self.next();
 	}, false);
 	
 };
-
 HomeSlideShow.prototype.scrollAnimation = function(){
 	var self = this,
 		lastScroll;
