@@ -76,7 +76,7 @@ HomeSlideShow.prototype.events = function(){
 				if(nextScroll < i){
 					nextScroll = i;
 					self.active_index = nextScroll;
-					console.log('next',nextScroll,  Math.round(currentScrollInterval) , max);
+					console.log('next',nextScroll,  Math.round(currentScrollInterval) , max,currentScrollPercent);
 					
 					self.updateSlides();
 				}else{
@@ -85,27 +85,23 @@ HomeSlideShow.prototype.events = function(){
 			
 			}//else if(self.reverse && ) //TOO
 		}
+		currentScrollPercent = position / currentScrollInterval
+		currentScrollPercent =  self.active_index < 1 ? currentScrollPercent : currentScrollPercent-1 ;
 		
-		currentScrollPercent =  position / currentScrollInterval;
 		
-		//act on elements
-		self.nextSlide.slide.style.position = 'absolute';
-		self.nextSlide.slide.style.top = 0;
-		var nH = Math.round(self.slides[self.active_index].offsetHeight * currentScrollPercent);
-		self.nextSlide.slide.style.height = nH + 'px';
-		self.nextSlide.fader.style.opacity = 1-currentScrollPercent;
-		//(scrollInterval*self.active_index)
-		//console.log(currentScrollPercent.toFixed(2),currentScrollInterval)
-		
+		//animate slides
+		self.animate(currentScrollPercent);
 		
 		if(percentScrolled === 0 ){
 			self.reverse = false;
+			console.log('reverse = ',self.reverse)
 		}
 		if(percentScrolled > 1){
 			//hit the end unfix
 			self.slideShow.style.position = 'relative';
 			
 			self.reverse = true;
+			console.log('reverse = ',self.reverse)
 		}else{
 			self.slideShow.style.position = 'fixed';
 		}
@@ -166,15 +162,20 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 		}else if(i < this.active_index ){
 			//slide is less than active
 			this.slidesArr[i].slide.classList.remove('c');
-		
+			this.slidesArr[i].slide.style.top  =  0;//-this.slides[this.active_index].offsetHeight+'px';
+			this.slidesArr[i].slide.style.height  =  0;
+			
 		}else{
 			//slide is greater than active
 			this.slidesArr[i].slide.classList.remove('c');
-
+			this.slidesArr[i].slide.style.zIndex = 0;
+			
+			console.log(this.slides[this.active_index].offsetHeight)
 			if(this.slidesArr[i] !== this.previousSlide){
 				
-				this.slidesArr[i].slide.style.zIndex = 0;
-				this.slidesArr[i].slide.style.top  =  -this.viewHeight+'px';
+				this.slidesArr[i].slide.style.top  =  0;//-this.slides[this.active_index].offsetHeight+'px';
+				this.slidesArr[i].slide.style.height  =  0;
+				
 				
 			}
 			
@@ -182,6 +183,21 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 		
 	}
 };
+HomeSlideShow.prototype.animate = function( currentScrollPercent ){
+	var self = this;
+	console.log('animating at : ' +currentScrollPercent.toFixed(1) );
+	//act on elements
+	this.nextSlide.slide.style.position = 'absolute';
+	this.nextSlide.slide.style.top = 0;
+	var nH = Math.round(this.slides[this.active_index].offsetHeight * currentScrollPercent);
+	this.nextSlide.slide.style.height = nH + 'px';
+	this.nextSlide.fader.style.opacity = 1-currentScrollPercent;
+	//(scrollInterval*self.active_index)
+	//console.log(currentScrollPercent.toFixed(2),currentScrollInterval)
+	
+};
+
+
 
 /**
  * @class HomeSlideShowSlide 
