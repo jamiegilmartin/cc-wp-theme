@@ -11,6 +11,7 @@ var HomeSlideShow = window.HomeSlideShow || {};
 
 HomeSlideShow = function(view, ul, lis, nextBtn ){
 	var self = this;
+	
 	this.view = view;
 	this.slideShow = ul;
 	this.slides = lis;
@@ -23,11 +24,8 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	this.viewWidth = this.view.offsetWidth;
 	this.viewHeight = this.view.offsetHeight;
 	
-	this.scrollTopDif = (document.documentElement.offsetHeight || document.body.offsetHeight - window.innerHeight ) / this.slides.length;
-	this.scrollTopDif = Math.round(this.scrollTopDif) * 2;
-	this.currentScrollTop = 0;
 	
-		
+
 	for(var i=0;i<this.slides.length;i++){
 		this.slideHeights.push(this.slides[i].offsetHeight);
 		this.imgArr.push(this.slides[i].getElementsByTagName('img')[0]);
@@ -37,121 +35,39 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	this.updateSlides();
 	this.events();
 	
-	this.scrollAnimation();
-	//window.scrollTo(0,100);
-	//console.log()
+	//this.scrollAnimation();
+	window.scrollTo(0,1);
 };
 HomeSlideShow.prototype.events = function(){
 	var self = this;
-	/*
-	var output = document.createElement('div');
-	output.style.border = '1px solid red';
-	output.style.position = 'absolute';
-	output.style.height = '40px';
-	output.style.top = '0px';
-	output.style.left = '0px'
-	output.style.zIndex = 100;
-	this.view.appendChild(output);
-	*/
-	//Events
-	/*
-	var called = 0,
-		touchStartX,
-		touchStartY,
-		deltaXAvg = [],
-		deltaYAvg = [];;
-
-	//touch start
-	this.view.addEventListener('touchstart',function(e){
-		called = 0;
-		deltaXAvg = [];
-		deltaYAvg = [];
-		if(MSH.isAndroid){
-			touchStartX = e.changedTouches[0].pageX;
-			touchStartY = e.changedTouches[0].pageY;
-		}else{
-			touchStartX = e.pageX;
-			touchStartY = e.pageY;
-		}
-
-	},false);
 	
-	//touch move
-	this.view.addEventListener('touchmove',function(e){
-		var deltaX,
-			deltaY;
-		if(MSH.isAndroid){
-			deltaX = e.changedTouches[0].pageX  - touchStartX;
-			deltaY = e.changedTouches[0].pageY  - touchStartY;
-		}else{
-			deltaX = e.pageX - touchStartX;
-			deltaY = e.pageY - touchStartY;
-		}
-
-		deltaXAvg.push(deltaX);
-		deltaYAvg.push(deltaY);
-		//console.log(deltaY)
-
-		if(deltaXAvg.length > 2){
-			//if scrolling Y return
-			if(Math.abs(deltaYAvg.sum()) > 10) return;
-
-			var dir = deltaXAvg.sum() > 0 ? 'prev' : 'next';
-
-			//output.innerHTML = e.pageX + ' --- ' + deltaAvg.sum() + ' : ' + dir;
-
-			//reset touch start 
-			touchStartX = e.pageX;
-			//swipe
-			swipe(dir);
-		}
-	},false);
-
-
-	function swipe(dir){
-		called ++;
-		if(called === 1){
-			if(dir === 'next'){
-				if(self.transitioning === false)
-				self.next();
-			}else{
-				if(self.transitioning === false)
-				self.prev();
-			}
-		}
-	}
-	*/
-	
-	this.nextBtn.addEventListener('click', function(){
-		if(self.transitioning === false)
-		self.next();
-	}, false);
-};
-HomeSlideShow.prototype.XXscrollAnimation = function(){
-	var self = this;
-	/*jquery scroll stuff*/
-	//$(window).scrollTop(0);
-	var leftToScroll = self.slides.length;
-	$(window).scroll(function(e){
-		//console.log('scrolling ',e,$(window).height()-$(document).scrollTop(),$(document).scrollTop())
-		/*TweenLite.fromTo($(self.nextSlide), $(document).scrollTop(), 
-			{css:{top:0,height:0}, ease:Quad.easeOut},
-			{css:{top:0,height:$(self.currentSlide).height()}, ease:Quad.easeOut}
-		);*/
-		//console.log($(document).scrollTop(),$(window).height())
+	window.addEventListener('scroll',function(e){
+		var offsetHeight  = document.documentElement.offsetHeight || document.body.offsetHeight,
+			scrollTop = document.documentElement.scrollTop || document.body.scrollTop,
+			scrollHeight  = document.documentElement.scrollHeight || document.body.scrollHeight,
+			clientHeight  = document.documentElement.clientHeight || document.body.clientHeight,
+			position = scrollTop,
+			max = scrollHeight - clientHeight,
+			percent = position / max;
+		//console.log(offsetHeight,scrollTop,scrollHeight,clientHeight);
+		console.log(position, max, percent, (percent / self.slides.length));
 		
-		for(var i=0;i<self.slides.length;i++){
-			if($(document).scrollTop() > $(window).height() / i+1){
-				//leftToScroll = leftToScroll-1;
-				//console.log('i+1',i,$(window).height() / i+1)
-				//console.log('this.slides.length' , self.slides.length,leftToScroll)
-			}
+		
+		if(percent > 1){
+			//hit the end unfix
+			self.slideShow.style.position = 'relative';
+		}else{
+			self.slideShow.style.position = 'fixed';
 		}
 	});
 	
-	
+	this.nextBtn.addEventListener('click', function(){
+		//if(self.transitioning === false)
+		//self.next();
+	}, false);
 	
 };
+
 HomeSlideShow.prototype.scrollAnimation = function(){
 	var self = this,
 		lastScroll;
@@ -161,7 +77,7 @@ HomeSlideShow.prototype.scrollAnimation = function(){
 		//self.currentSlide.style.position = 'fixed';
 		
 		
-		console.log(self.doc.offsetTop )
+		//console.log(self.doc.offsetHeight )
 		
 		if(self.reverse === false && scrollTop > self.currentScrollTop ){
 			self.next();
@@ -293,3 +209,81 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 
 
 
+/*
+var output = document.createElement('div');
+output.style.border = '1px solid red';
+output.style.position = 'absolute';
+output.style.height = '40px';
+output.style.top = '0px';
+output.style.left = '0px'
+output.style.zIndex = 100;
+this.view.appendChild(output);
+*/
+//Events
+/*
+var called = 0,
+	touchStartX,
+	touchStartY,
+	deltaXAvg = [],
+	deltaYAvg = [];;
+
+//touch start
+this.view.addEventListener('touchstart',function(e){
+	called = 0;
+	deltaXAvg = [];
+	deltaYAvg = [];
+	if(MSH.isAndroid){
+		touchStartX = e.changedTouches[0].pageX;
+		touchStartY = e.changedTouches[0].pageY;
+	}else{
+		touchStartX = e.pageX;
+		touchStartY = e.pageY;
+	}
+
+},false);
+
+//touch move
+this.view.addEventListener('touchmove',function(e){
+	var deltaX,
+		deltaY;
+	if(MSH.isAndroid){
+		deltaX = e.changedTouches[0].pageX  - touchStartX;
+		deltaY = e.changedTouches[0].pageY  - touchStartY;
+	}else{
+		deltaX = e.pageX - touchStartX;
+		deltaY = e.pageY - touchStartY;
+	}
+
+	deltaXAvg.push(deltaX);
+	deltaYAvg.push(deltaY);
+	//console.log(deltaY)
+
+	if(deltaXAvg.length > 2){
+		//if scrolling Y return
+		if(Math.abs(deltaYAvg.sum()) > 10) return;
+
+		var dir = deltaXAvg.sum() > 0 ? 'prev' : 'next';
+
+		//output.innerHTML = e.pageX + ' --- ' + deltaAvg.sum() + ' : ' + dir;
+
+		//reset touch start 
+		touchStartX = e.pageX;
+		//swipe
+		swipe(dir);
+	}
+},false);
+
+
+function swipe(dir){
+	called ++;
+	if(called === 1){
+		if(dir === 'next'){
+			if(self.transitioning === false)
+			self.next();
+		}else{
+			if(self.transitioning === false)
+			self.prev();
+		}
+	}
+}
+*/

@@ -42,9 +42,9 @@ ScreenSaver.prototype.setCounter = function(){
 };
 ScreenSaver.prototype.events = function(){
 	var self = this;
-	window.onresize = function(e){
+	window.addEventListener('resize',function(e){
 		self.resize();
-	}
+	});
 	this.doc.addEventListener('click',function(e){
 		self.stop();
 	});

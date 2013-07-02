@@ -151,9 +151,9 @@ UBCC = {
 		}
 		
 		resize( imgArr );
-		window.onresize = function(e){
+		window.addEventListener('resize',function(e){
 			resize( imgArr );
-		};
+		});
 		
 		/**
 		 * create slide show
