@@ -146,7 +146,7 @@ UBCC = {
 			//set shadows same height
 			for(var k=0;k<liArr.length;k++){
 				shadowLiArr[k].style.height = liArr[k].offsetHeight  + 'px';
-				console.log(liArr[k].offsetHeight)
+				//console.log(liArr[k].offsetHeight)
 			}
 		}
 		

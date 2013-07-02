@@ -41,42 +41,56 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 HomeSlideShow.prototype.events = function(){
 	var self = this,
 		nextScroll = 0,
-		called = 0;
-	
-	function fireNextScroll(){
-		console.log('fire nex scroll')
-	}
-	
+		called = 0,
+		offsetHeight = 0,
+		scrollTop = 0,
+		scrollHeight = 0,
+		clientHeight = 0,
+		position = 0,
+		max = 0,
+		percentScrolled = 0,
+		scrollInterval = 0;
+		
+		
 	window.addEventListener('scroll',function(e){
-		var offsetHeight  = document.documentElement.offsetHeight || document.body.offsetHeight,
-			scrollTop = document.documentElement.scrollTop || document.body.scrollTop,
-			scrollHeight  = document.documentElement.scrollHeight || document.body.scrollHeight,
-			clientHeight  = document.documentElement.clientHeight || document.body.clientHeight,
-			position = scrollTop,
-			max = scrollHeight - clientHeight,
-			percentScrolled = position / max,
-			scrollInterval = max / self.slides.length;
+		offsetHeight  = document.documentElement.offsetHeight || document.body.offsetHeight;
+		scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+		scrollHeight  = document.documentElement.scrollHeight || document.body.scrollHeight;
+		clientHeight  = document.documentElement.clientHeight || document.body.clientHeight;
+		position = scrollTop;
+		max = scrollHeight - clientHeight;
+		percentScrolled = position / max;
+		scrollInterval = max / self.slides.length;
+			
 		//console.log(offsetHeight,scrollTop,scrollHeight,clientHeight);
-		//console.log(position, max, percent, (percent / self.slides.length));
+		//console.log(position, max, percent, (percentScrolled / self.slides.length));
+		console.log(percentScrolled)
 		
 		for(var i = 0;i<self.slides.length;i++){
 			
-			if(scrollTop > scrollInterval*i){
-				nextScroll = nextScroll < i ? i : nextScroll;
-				console.log(nextScroll)
-				if(called <= 1){
-					fireNextScroll();
+			if(!self.reverse && scrollTop > scrollInterval*i){
+				//nextScroll = nextScroll < i ? i : nextScroll;
+				if(nextScroll < i){
+					nextScroll = i;
+					self.active_index = nextScroll;
+					console.log(nextScroll);
+					self.updateSlides();
+				}else{
+					nextScroll = nextScroll;
 				}
-				called++;
-				//self.active_index = nextScroll
-			}
+			
+			}//else if(self.reverse && )
 		}
 		
 		
-		//if(nextScroll )
+		if(percentScrolled === 0 ){
+			self.reverse = false;
+		}
 		if(percentScrolled > 1){
 			//hit the end unfix
 			self.slideShow.style.position = 'relative';
+			
+			self.reverse = true;
 		}else{
 			self.slideShow.style.position = 'fixed';
 		}
@@ -139,6 +153,92 @@ HomeSlideShow.prototype.prev = function(){
 		this.next();
 	}
 };
+HomeSlideShow.prototype.updateSlides = function( dir ){
+	var self = this;
+
+	for(var i=0;i<this.slides.length;i++){
+		
+		if(i === this.active_index ){
+			
+			//set prev slide
+			if(this.active_index-1 >= 0){
+				this.previousSlide = this.slides[this.active_index-1];
+			}else{
+				//on first slide
+				this.previousSlide = this.slides[this.slides.length-1];
+			}
+			this.previousSlide.classList.add('p');
+			
+			
+			//set current
+			this.currentSlide = this.slides[i];
+			//this.currentSlide.style.height = this.slideHeights[i] + 'px';
+			this.currentSlide.classList.add('c');
+			this.currentFader = this.currentSlide.getElementsByClassName('fader')[0];
+			//this.currentFader.style.opacity = 0;
+			
+			
+			//set next slide
+			if(this.active_index+1 <= this.slides.length-1){
+				this.nextSlide = this.slides[this.active_index+1];
+			}else{
+				//on last slide
+				this.nextSlide = this.slides[0];
+			}
+			this.nextFader = this.nextSlide.getElementsByClassName('fader')[0];
+			this.nextSlide.classList.add('n')
+
+
+			this.transitioning = true; //prevents user from going through slides too fast
+			//this.currentSlide.style.zIndex = 2;
+			//this.currentSlide.style.height = this.viewHeight+'px';
+
+			
+			
+			var transitionEnd = whichTransitionEvent();
+			if(transitionEnd){
+				this.currentSlide.addEventListener(transitionEnd, function( e ) {
+					self.transitioning = false;
+					//console.log('t e')
+					//TODO: self.currentSlide.removeEventListener('webkitTransitionEnd', this , false);
+				}, false );
+			}else{
+				self.transitioning = false;
+			}
+			
+		}else if(i < this.active_index ){
+			//slide is less than active
+			this.slides[i].classList.remove('c');
+			//this.slides[i].classList.add('transitioning');
+			//this.slides[i].style.top  =  this.viewHeight+'px';
+			//var fader = this.slides[i].getElementsByClassName('fader')[0];
+			//fader.style.opacity = 1;
+			
+		}else{
+			//this.slides[i].style.height = 0;
+			this.slides[i].classList.remove('c');
+			//this.slides[i].classList.add('transitioning');
+			//slide is greater than active, move stage right
+			if(this.slides[i] !== this.previousSlide){
+				
+				//this.slides[i].style.zIndex = 0;
+				//this.slides[i].style.top  =  -this.viewHeight+'px';
+				//this.slides[i].getElementsByClassName('fader')[0].style.opacity = 1;
+				//fader
+			}
+			
+		}
+		*/
+	}
+};
+
+/**
+ * @class HomeSlideShowSlide 
+ */
+HomeSlideShowSlide = function(){
+	
+}
+/*
 HomeSlideShow.prototype.updateSlides = function( dir ){
 	var self = this;
 
@@ -229,7 +329,7 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 
 
 
-/*
+
 var output = document.createElement('div');
 output.style.border = '1px solid red';
 output.style.position = 'absolute';

@@ -219,7 +219,7 @@ header#cc-header section.about p {
 	/*position:fixed;*/
 }
 .cc-home ul.slideList li {
-	position:absolute;
+/*	position:absolute;*/
 	top:0;
 }
 
