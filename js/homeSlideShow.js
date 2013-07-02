@@ -39,7 +39,8 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	window.scrollTo(0,1);
 };
 HomeSlideShow.prototype.events = function(){
-	var self = this;
+	var self = this,
+		nextScroll = 0;
 	
 	window.addEventListener('scroll',function(e){
 		var offsetHeight  = document.documentElement.offsetHeight || document.body.offsetHeight,
@@ -48,12 +49,22 @@ HomeSlideShow.prototype.events = function(){
 			clientHeight  = document.documentElement.clientHeight || document.body.clientHeight,
 			position = scrollTop,
 			max = scrollHeight - clientHeight,
-			percent = position / max;
+			percentScrolled = position / max,
+			scrollInterval = max / self.slides.length;
 		//console.log(offsetHeight,scrollTop,scrollHeight,clientHeight);
-		console.log(position, max, percent, (percent / self.slides.length));
+		//console.log(position, max, percent, (percent / self.slides.length));
+		
+		for(var i = 0;i<self.slides.length;i++){
+			
+			if(scrollTop > scrollInterval*i){
+				nextScroll = nextScroll < i ? i : nextScroll;
+				console.log(nextScroll)
+			}
+		}
 		
 		
-		if(percent > 1){
+		//if(nextScroll )
+		if(percentScrolled > 1){
 			//hit the end unfix
 			self.slideShow.style.position = 'relative';
 		}else{

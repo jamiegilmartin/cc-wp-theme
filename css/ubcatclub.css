@@ -199,7 +199,7 @@ header#cc-header section.about p {
 	width:100%;
 	height:100%;
 /*	z-index:1;*/
-	opacity:1;
+	opacity:0;
 	-webkit-transition:all 1s ease-in-out;
 	-moz-transition:all 1s ease-in-out;
 	-o-transition:all 1s ease-in-out;
@@ -225,11 +225,10 @@ header#cc-header section.about p {
 
 .cc-home ul.shadowList {
 	z-index:0;
-	display:none;
 }
 .cc-home ul.shadowList li {
 }
-/*
+
 .cc-home ul.shadowList li:nth-child(1){
 	background:blue;
 }
@@ -239,7 +238,7 @@ header#cc-header section.about p {
 .cc-home ul.shadowList li:nth-child(3){
 	background:green;
 }
-*/
+/**/
 
 
 /**
