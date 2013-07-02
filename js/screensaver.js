@@ -120,6 +120,7 @@ Saver.setClock = function( id ){
 		if(h<10){
 			h = "0"+h;
 		}
+		h = h > 12 ? h - 12 : h;
 		m = date.getMinutes();
 		if(m<10){
 			m = "0"+m;

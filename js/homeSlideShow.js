@@ -15,6 +15,7 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	this.view = view;
 	this.slideShow = ul;
 	this.slides = lis;
+	this.slidesArr = [];
 	this.slideHeights = [];
 	this.imgArr = [];
 	this.nextBtn = nextBtn;
@@ -29,6 +30,7 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	for(var i=0;i<this.slides.length;i++){
 		this.slideHeights.push(this.slides[i].offsetHeight);
 		this.imgArr.push(this.slides[i].getElementsByTagName('img')[0]);
+		this.slidesArr.push( new HomeSlideShowSlide( this.slides[i]) );
 	}
 
 	
@@ -49,7 +51,8 @@ HomeSlideShow.prototype.events = function(){
 		position = 0,
 		max = 0,
 		percentScrolled = 0,
-		scrollInterval = 0;
+		scrollInterval = 0,
+		currentScrollInterval = 0;;
 		
 		
 	window.addEventListener('scroll',function(e){
@@ -61,26 +64,35 @@ HomeSlideShow.prototype.events = function(){
 		max = scrollHeight - clientHeight;
 		percentScrolled = position / max;
 		scrollInterval = max / self.slides.length;
-			
+		//console.log(scrollInterval,Math.round(currentScrollInterval) );
 		//console.log(offsetHeight,scrollTop,scrollHeight,clientHeight);
 		//console.log(position, max, percent, (percentScrolled / self.slides.length));
-		console.log(percentScrolled)
+		//console.log(percentScrolled)
 		
 		for(var i = 0;i<self.slides.length;i++){
 			
 			if(!self.reverse && scrollTop > scrollInterval*i){
-				//nextScroll = nextScroll < i ? i : nextScroll;
+				currentScrollInterval = scrollInterval*i <= currentScrollInterval ? scrollInterval : scrollInterval*i;
 				if(nextScroll < i){
 					nextScroll = i;
 					self.active_index = nextScroll;
-					console.log(nextScroll);
-					self.updateSlides();
+					console.log('next',nextScroll,  Math.round(currentScrollInterval) , max);
+					
+					//self.updateSlides();
 				}else{
 					nextScroll = nextScroll;
 				}
 			
-			}//else if(self.reverse && )
+			}//else if(self.reverse && ) //TOO
 		}
+		
+		currentScrollPercent =  position / currentScrollInterval;
+		
+		//act on elements
+		self.nextSlide.style.position = 'absolute';
+		self.nextSlide.style.top = 0;
+		self.nextSlide.style.height = Math.round(self.slides[self.active_index].offsetHeight * currentScrollPercent) + 'px';
+		
 		
 		
 		if(percentScrolled === 0 ){
@@ -101,38 +113,6 @@ HomeSlideShow.prototype.events = function(){
 		self.next();
 	}, false);
 	
-};
-HomeSlideShow.prototype.scrollAnimation = function(){
-	var self = this,
-		lastScroll;
-	window.onscroll = function (oEvent) {
-		var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-		//window.scrollTo(0,100);
-		//self.currentSlide.style.position = 'fixed';
-		
-		
-		//console.log(self.doc.offsetHeight )
-		
-		if(self.reverse === false && scrollTop > self.currentScrollTop ){
-			self.next();
-			self.currentScrollTop += self.scrollTopDif;
-		
-			if(self.currentScrollTop === self.scrollTopDif*self.slides.length){
-				self.reverse = true;
-			}
-			
-		}else if(self.reverse === true && scrollTop <  100 ){ //self.currentScrollTop-self.scrollTopDif
-			self.prev();
-			self.currentScrollTop -= self.scrollTopDif;
-			console.log('p ',self.currentScrollTop)
-			
-			if(self.currentScrollTop === 0){
-				self.reverse = false;
-			}
-		}
-		
-		lastScroll = scrollTop;
-	}
 };
 HomeSlideShow.prototype.next = function(){
 	if(this.reverse === false && this.active_index < this.slides.length-1){
@@ -189,7 +169,7 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 			this.nextSlide.classList.add('n')
 
 
-			this.transitioning = true; //prevents user from going through slides too fast
+			//this.transitioning = true; //prevents user from going through slides too fast
 			//this.currentSlide.style.zIndex = 2;
 			//this.currentSlide.style.height = this.viewHeight+'px';
 
@@ -215,7 +195,6 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 			//fader.style.opacity = 1;
 			
 		}else{
-			//this.slides[i].style.height = 0;
 			this.slides[i].classList.remove('c');
 			//this.slides[i].classList.add('transitioning');
 			//slide is greater than active, move stage right
@@ -228,15 +207,16 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 			}
 			
 		}
-		*/
+		
 	}
 };
 
 /**
  * @class HomeSlideShowSlide 
  */
-HomeSlideShowSlide = function(){
-	
+HomeSlideShowSlide = function(ele){
+	this.ele = ele;
+	this.fader = ele.getElementsByClassName('fader')[0]
 }
 /*
 HomeSlideShow.prototype.updateSlides = function( dir ){
