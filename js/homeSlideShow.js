@@ -28,9 +28,12 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	
 
 	for(var i=0;i<this.slides.length;i++){
-		this.slideHeights.push(this.slides[i].offsetHeight);
+		this.slideHeights.push(this.slides[i].offsetHeight );
+		//test
+		this.slides[i].setAttribute('offH', this.slides[i].offsetHeight )
+		
 		this.imgArr.push(this.slides[i].getElementsByTagName('img')[0]);
-		this.slidesArr.push( new HomeSlideShowSlide( this.slides[i]) );
+		this.slidesArr.push( new HomeSlideShowSlide( this.slides[i],i )  );
 	}
 
 	
@@ -51,8 +54,7 @@ HomeSlideShow.prototype.events = function(){
 		position = 0,
 		max = 0,
 		percentScrolled = 0,
-		scrollInterval = 0,
-		currentScrollInterval = 0;;
+		lastScrollTop = 0;
 		
 		
 	window.addEventListener('scroll',function(e){
@@ -63,48 +65,12 @@ HomeSlideShow.prototype.events = function(){
 		position = scrollTop;
 		max = scrollHeight - clientHeight;
 		percentScrolled = position / max;
-		scrollInterval = max / self.slides.length;
-		//console.log(scrollInterval,Math.round(currentScrollInterval) );
-		//console.log(offsetHeight,scrollTop,scrollHeight,clientHeight);
-		//console.log(position, max, percent, (percentScrolled / self.slides.length));
-		//console.log(percentScrolled)
-		
-		for(var i = 0;i<self.slides.length;i++){
-			
-			if(!self.reverse && scrollTop > scrollInterval*i){
-				currentScrollInterval = scrollInterval*i <= currentScrollInterval ? scrollInterval : scrollInterval*i;
-				if(nextScroll < i){
-					nextScroll = i;
-					self.active_index = nextScroll;
-					console.log('next',nextScroll,  Math.round(currentScrollInterval) , max,currentScrollPercent);
-					
-					self.updateSlides();
-				}else{
-					nextScroll = nextScroll;
-				}
-			
-			}//else if(self.reverse && ) //TOO
-		}
-		currentScrollPercent = position / currentScrollInterval
-		currentScrollPercent =  self.active_index < 1 ? currentScrollPercent : currentScrollPercent-1 ;
-		
+	
+		self.reverse = lastScrollTop > scrollTop ? true : false;
+		lastScrollTop = scrollTop;
 		
 		//animate slides
-		self.animate(currentScrollPercent);
-		
-		if(percentScrolled === 0 ){
-			self.reverse = false;
-			console.log('reverse = ',self.reverse)
-		}
-		if(percentScrolled > 1){
-			//hit the end unfix
-			self.slideShow.style.position = 'relative';
-			
-			self.reverse = true;
-			console.log('reverse = ',self.reverse)
-		}else{
-			self.slideShow.style.position = 'fixed';
-		}
+		self.animate(percentScrolled);
 	});
 	
 	this.nextBtn.addEventListener('click', function(){
@@ -134,66 +100,60 @@ HomeSlideShow.prototype.prev = function(){
 };
 HomeSlideShow.prototype.updateSlides = function( dir ){
 	var self = this;
-
+	
+	//first slide intro
+	if(this.active_index === 0 && !this.reverse){
+		this.slidesArr[0].slide.classList.add('intro');
+	}
+	
 	for(var i=0;i<this.slidesArr.length;i++){
 		
+		
 		if(i === this.active_index ){
-			
-			//set prev slide
-			if(this.active_index-1 >= 0){
-				this.previousSlide = this.slidesArr[this.active_index-1];
-			}else{
-				//on first slide
-				this.previousSlide = this.slidesArr[this.slides.length-1];
-			}
 			//set current
 			this.currentSlide = this.slidesArr[i];
-			this.currentSlide.slide.classList.add('c');
 			
 			
 			//set next slide
-			if(this.active_index+1 <= this.slidesArr.length-1){
-				this.nextSlide = this.slidesArr[this.active_index+1];
-			}else{
-				//on last slide
-				this.nextSlide = this.slidesArr[0];
+			if(this.reverse && this.active_index >= 1 ){
+				this.nextIndex = this.active_index-1;
 			}
-			
-		}else if(i < this.active_index ){
-			//slide is less than active
-			this.slidesArr[i].slide.classList.remove('c');
-			this.slidesArr[i].slide.style.top  =  0;//-this.slides[this.active_index].offsetHeight+'px';
-			this.slidesArr[i].slide.style.height  =  0;
-			
-		}else{
-			//slide is greater than active
-			this.slidesArr[i].slide.classList.remove('c');
-			this.slidesArr[i].slide.style.zIndex = 0;
-			
-			console.log(this.slides[this.active_index].offsetHeight)
-			if(this.slidesArr[i] !== this.previousSlide){
-				
-				this.slidesArr[i].slide.style.top  =  0;//-this.slides[this.active_index].offsetHeight+'px';
-				this.slidesArr[i].slide.style.height  =  0;
-				
-				
+			if(! this.reverse && this.active_index < this.slides.length-1){
+				this.nextIndex = this.active_index+1;
 			}
+			this.nextSlide = this.slidesArr[this.nextIndex];
 			
 		}
-		
 	}
 };
-HomeSlideShow.prototype.animate = function( currentScrollPercent ){
-	var self = this;
-	console.log('animating at : ' +currentScrollPercent.toFixed(1) );
+HomeSlideShow.prototype.animate = function( percent ){
+	var self = this,
+		animatingSlide = this.nextSlide,
+		animatingIndex = this.nextIndex;
+	
+	percent = percent * this.slides.length;
+	
+	for(var i = 0;i<self.slides.length;i++){
+		
+		if(Math.floor(percent) === i){
+			self.active_index = i;
+			console.log('slide change','current = '+i,'next = '+ this.nextIndex)
+			self.updateSlides();
+		}
+	}
+	
+	this.slideShow.style.position = 'fixed';
+	
+	//console.log(this.active_index,'animating at : ' +percent.toFixed(1) );
+
 	//act on elements
-	this.nextSlide.slide.style.position = 'absolute';
-	this.nextSlide.slide.style.top = 0;
-	var nH = Math.round(this.slides[this.active_index].offsetHeight * currentScrollPercent);
-	this.nextSlide.slide.style.height = nH + 'px';
-	this.nextSlide.fader.style.opacity = 1-currentScrollPercent;
+	animatingSlide.slide.style.position = 'absolute';
+	var nH = Math.round( this.slideHeights[animatingIndex] * percent );
+	animatingSlide.slide.style.height = nH + 'px';
+	animatingSlide.fader.style.opacity = 1-percent;
 	//(scrollInterval*self.active_index)
 	//console.log(currentScrollPercent.toFixed(2),currentScrollInterval)
+	
 	
 };
 
@@ -202,176 +162,8 @@ HomeSlideShow.prototype.animate = function( currentScrollPercent ){
 /**
  * @class HomeSlideShowSlide 
  */
-HomeSlideShowSlide = function(ele){
+HomeSlideShowSlide = function(ele,i){
 	this.slide = ele;
-	this.fader = ele.getElementsByClassName('fader')[0]
+	this.fader = ele.getElementsByClassName('fader')[0];
+	this.slideNumber = i;
 }
-/*
-HomeSlideShow.prototype.updateSlides = function( dir ){
-	var self = this;
-
-	for(var i=0;i<this.slides.length;i++){
-		
-		if(i === this.active_index ){
-
-			//set prev slide
-			if(this.active_index-1 >= 0){
-				this.previousSlide = this.slides[this.active_index-1];
-			}else{
-				//on first slide
-				this.previousSlide = this.slides[this.slides.length-1];
-				//move previous slide stage left
-				//this.previousSlide.style.zIndex = 0;
-				//this.previousSlide.style.top  =  this.viewHeight+'px';
-			}
-			//this.previousFader = this.previousSlide.getElementsByClassName('fader')[0];
-			
-			
-			
-			//set current
-			this.currentSlide = this.slides[i];
-			this.currentSlide.style.height = this.slideHeights[i] + 'px';
-			this.currentSlide.classList.add('c');
-			this.currentFader = this.currentSlide.getElementsByClassName('fader')[0];
-			this.currentFader.style.opacity = 0;
-			
-			
-			//set next slide
-			if(this.active_index+1 <= this.slides.length-1){
-				this.nextSlide = this.slides[this.active_index+1];
-			}else{
-				//on last slide
-				this.nextSlide = this.slides[0];
-				//move next slide stage right
-				//this.nextSlide.style.zIndex = 0;
-				//this.nextSlide.style.top  =  -this.viewHeight+'px';
-			}
-			this.nextFader = this.nextSlide.getElementsByClassName('fader')[0];
-			//this.nextFader.style.opacity = 0;
-
-
-			this.transitioning = true; //prevents user from going through slides too fast
-			//this.currentSlide.style.zIndex = 2;
-			//this.currentSlide.style.height = this.viewHeight+'px';
-
-			
-			
-			var transitionEnd = whichTransitionEvent();
-			if(transitionEnd){
-				this.currentSlide.addEventListener(transitionEnd, function( e ) {
-					self.transitioning = false;
-					//console.log('t e')
-					//TODO: self.currentSlide.removeEventListener('webkitTransitionEnd', this , false);
-				}, false );
-			}else{
-				self.transitioning = false;
-			}
-			
-		}else if(i < this.active_index ){
-			//slide is less than active
-			//this.slides[i].style.height = 0;
-			//this.slides[i].style.zIndex = 0;
-			this.slides[i].classList.remove('c');
-			this.slides[i].classList.add('transitioning');
-			//this.slides[i].style.top  =  this.viewHeight+'px';
-			//var fader = this.slides[i].getElementsByClassName('fader')[0];
-			//fader.style.opacity = 1;
-			
-		}else{
-			this.slides[i].style.height = 0;
-			this.slides[i].classList.remove('c');
-			this.slides[i].classList.add('transitioning');
-			//slide is greater than active, move stage right
-			if(this.slides[i] !== this.previousSlide){
-				
-				//this.slides[i].style.zIndex = 0;
-				//this.slides[i].style.top  =  -this.viewHeight+'px';
-				this.slides[i].getElementsByClassName('fader')[0].style.opacity = 1;
-				//fader
-			}
-			
-		}
-	}
-
-};
-
-
-
-
-var output = document.createElement('div');
-output.style.border = '1px solid red';
-output.style.position = 'absolute';
-output.style.height = '40px';
-output.style.top = '0px';
-output.style.left = '0px'
-output.style.zIndex = 100;
-this.view.appendChild(output);
-*/
-//Events
-/*
-var called = 0,
-	touchStartX,
-	touchStartY,
-	deltaXAvg = [],
-	deltaYAvg = [];;
-
-//touch start
-this.view.addEventListener('touchstart',function(e){
-	called = 0;
-	deltaXAvg = [];
-	deltaYAvg = [];
-	if(MSH.isAndroid){
-		touchStartX = e.changedTouches[0].pageX;
-		touchStartY = e.changedTouches[0].pageY;
-	}else{
-		touchStartX = e.pageX;
-		touchStartY = e.pageY;
-	}
-
-},false);
-
-//touch move
-this.view.addEventListener('touchmove',function(e){
-	var deltaX,
-		deltaY;
-	if(MSH.isAndroid){
-		deltaX = e.changedTouches[0].pageX  - touchStartX;
-		deltaY = e.changedTouches[0].pageY  - touchStartY;
-	}else{
-		deltaX = e.pageX - touchStartX;
-		deltaY = e.pageY - touchStartY;
-	}
-
-	deltaXAvg.push(deltaX);
-	deltaYAvg.push(deltaY);
-	//console.log(deltaY)
-
-	if(deltaXAvg.length > 2){
-		//if scrolling Y return
-		if(Math.abs(deltaYAvg.sum()) > 10) return;
-
-		var dir = deltaXAvg.sum() > 0 ? 'prev' : 'next';
-
-		//output.innerHTML = e.pageX + ' --- ' + deltaAvg.sum() + ' : ' + dir;
-
-		//reset touch start 
-		touchStartX = e.pageX;
-		//swipe
-		swipe(dir);
-	}
-},false);
-
-
-function swipe(dir){
-	called ++;
-	if(called === 1){
-		if(dir === 'next'){
-			if(self.transitioning === false)
-			self.next();
-		}else{
-			if(self.transitioning === false)
-			self.prev();
-		}
-	}
-}
-*/

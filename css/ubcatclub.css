@@ -203,7 +203,7 @@ header#cc-header section.about p {
 
 	
 }
-.cc-home ul li.c .fader {
+.cc-home ul li.intro .fader {
 	opacity:0;
 	-webkit-transition:all 0.5s ease-in-out;
 	-moz-transition:all 0.5s ease-in-out;
