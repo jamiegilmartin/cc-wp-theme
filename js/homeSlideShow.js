@@ -29,6 +29,7 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	
 
 	for(var i=0;i<this.slides.length;i++){
+		this.slides[i].setAttribute('s',i);
 		this.slideHeights.push( this.slides[i].offsetHeight );
 		this.imgArr.push(this.slides[i].getElementsByTagName('img')[0]);
 		this.slidesArr.push( new HomeSlideShowSlide( this.slides[i],i )  );
@@ -72,11 +73,9 @@ HomeSlideShow.prototype.events = function(){
 		
 		
 		//animate slides
-		self.animate( percentScrolled * self.slides.length );
+		self.animate( percentScrolled );
 		
-		if(percentScrolled >1){
-			console.log('end');
-		}
+	
 	});
 	
 	this.nextBtn.addEventListener('click', function(){
@@ -118,46 +117,37 @@ HomeSlideShow.prototype.animate = function( percent ){
 	var self = this,
 		nextScroll = 0,
 		animatingSlide,
-		currPercent;
-		
+		currPercent = percent * self.slides.length;
+	
 	this.slideShow.style.position = 'fixed';
 	
 	for(var i = 0;i<self.slidesArr.length;i++){
 		
-		 // clamp
-		if(Math.floor(percent) === i && i < self.slidesArr.length-1 ){
+		if(Math.floor(currPercent) === i && i < self.slidesArr.length-1 ){
 			this.activeIndex = i;
 			nextScroll = nextScroll < i ? i : nextScroll;
 			
-			//console.log(nextScroll,(percent-i).toFixed(1))
+			console.log(this.activeIndex+1,nextScroll,(currPercent).toFixed(1), percent.toFixed(1) )
+			
 			//next slide
 			animatingSlide = this.slidesArr[this.activeIndex+1];
 			
-			//var nH = Math.round( this.slideHeights[this.activeIndex+1] * (percent-i) );
-			var nH = Math.round( this.slideHeights[this.activeIndex+1] * (percent-i) );
+			var nH = Math.round( this.slideHeights[this.activeIndex+1] * (currPercent-i) );
+			
 			//act on elements
 			animatingSlide.slide.style.position = 'absolute';
 			animatingSlide.slide.style.height = nH + 'px';
-			animatingSlide.fader.style.opacity = this.activeIndex+1 - percent;
-			animatingSlide.slide.style.opacity = 1;
+			animatingSlide.fader.style.opacity = this.activeIndex+1 - currPercent;
 			
-			
-		}else{
-			if(Math.floor(percent) > i){
-				//console.log('less',this.slidesArr[this.activeIndex].slide)
-				//this.slidesArr[i].slide.style.opacity = 0
+			if(percent >1){
+				console.log('end');
+				animatingSlide.slide.style.height = this.slideHeights[this.activeIndex+1] + 'px';
+				//animatingSlide.fader.style.opacity = 0;
 			}
-			//this.slidesArr[i].slide.style.opacity = 0
 			
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
+
 };
 
 
