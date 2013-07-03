@@ -80,7 +80,7 @@ HomeSlideShow.prototype.events = function(){
 	});
 	
 	this.nextBtn.addEventListener('click', function(){
-		self.next();
+		//self.next();
 	}, false);
 	
 };
@@ -122,13 +122,14 @@ HomeSlideShow.prototype.animate = function( percent ){
 		
 	this.slideShow.style.position = 'fixed';
 	
-	for(var i = 0;i<self.slides.length;i++){
-
-		if(Math.floor(percent) === i && i < self.slides.length-1 ){
+	for(var i = 0;i<self.slidesArr.length;i++){
+		
+		 // clamp
+		if(Math.floor(percent) === i && i < self.slidesArr.length-1 ){
 			this.activeIndex = i;
 			nextScroll = nextScroll < i ? i : nextScroll;
 			
-			console.log(nextScroll,(percent-i).toFixed(1))
+			//console.log(nextScroll,(percent-i).toFixed(1))
 			//next slide
 			animatingSlide = this.slidesArr[this.activeIndex+1];
 			
@@ -138,8 +139,15 @@ HomeSlideShow.prototype.animate = function( percent ){
 			animatingSlide.slide.style.position = 'absolute';
 			animatingSlide.slide.style.height = nH + 'px';
 			animatingSlide.fader.style.opacity = this.activeIndex+1 - percent;
+			animatingSlide.slide.style.opacity = 1;
 			
 			
+		}else{
+			if(Math.floor(percent) > i){
+				//console.log('less',this.slidesArr[this.activeIndex].slide)
+				//this.slidesArr[i].slide.style.opacity = 0
+			}
+			//this.slidesArr[i].slide.style.opacity = 0
 			
 		}
 	}
