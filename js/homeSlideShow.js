@@ -71,93 +71,63 @@ HomeSlideShow.prototype.events = function(){
 		
 		
 		//animate slides
-		self.animate( percentScrolled );
+		self.animate( percentScrolled * self.slides.length );
+		
+		if(percentScrolled >1){
+			console.log('end');
+		}
 	});
 	
 	this.nextBtn.addEventListener('click', function(){
-		if(self.transitioning === false)
 		self.next();
 	}, false);
 	
 };
 HomeSlideShow.prototype.next = function(){
-	if(this.reverse === false && this.active_index < this.slides.length-1){
-		this.active_index++;
-		this.updateSlides('next');
-	}else{
-		this.reverse = true;
-		this.prev();
-	}
+	console.log('next')
+	this.activeIndex++
+	//this.animate(this.activeIndex)
+	
 };
-HomeSlideShow.prototype.prev = function(){
-	if(this.active_index > 0){
-		this.active_index--;
-		
-		this.updateSlides('prev');
-	}else{
-		this.reverse = false;
-		this.next();
-	}
-};
-/*HomeSlideShow.prototype.updateSlides = function(){
+HomeSlideShow.prototype.run = function(  ){
 	var self = this;
 	
-	//first slide intro
-	if(this.activeIndex === 1 && !this.reverse){
-		this.animatingSlide = this.slidesArr[1];
-	}else if(this.activeIndex === this.slides.length-1){
-		//last slide
-		console.log('last slide')
-	}else{
-		for(var i=0;i<this.slidesArr.length;i++){
-
-			console.log(this.activeIndex)
-			if(i === this.activeIndex){
-				
-				//set next slide
-				if(this.reverse && activeIndex>= 1 ){
-					this.nextIndex = activeIndex-1;
-				}
-				if(!this.reverse && activeIndex < this.slides.length-1){
-					this.nextIndex = activeIndex+1;
-				}
-				this.nextSlide = this.slidesArr[this.nextIndex];
-				
-
-				//set current
-				this.animatingSlide = this.slidesArr[i];
-
-			}
+	//request new frame
+	requestAnimFrame(function(){
+		if(self.playing){ // && self.secondsRunning < (self.duration)
+			self.run( now );
+		}else{
+			self.playing = false;
 		}
-	}
-};*/
+	});
+};
 HomeSlideShow.prototype.animate = function( percent ){
 	var self = this,
 		nextScroll = 0,
-		animatingSlide;
+		animatingSlide,
+		currPercent;
 		
 	this.slideShow.style.position = 'fixed';
 	
-	newPercent = percent * self.slides.length;
-	
 	for(var i = 0;i<self.slides.length;i++){
 
-		if(Math.floor(newPercent) === i && i < self.slides.length-1 ){
+		if(Math.floor(percent) === i && i < self.slides.length-1 ){
 			this.activeIndex = i;
-			//self.updateSlides(nextScroll);
+			nextScroll = nextScroll < i ? i : nextScroll;
+			
+			console.log(nextScroll,(percent-i).toFixed(1))
+			//next slide
 			animatingSlide = this.slidesArr[this.activeIndex+1];
 			
-			var nH = Math.round( this.slideHeights[this.activeIndex+1] * (newPercent-i));
-			
-			console.log('slide change','current = '+this.activeIndex,'next = '+ (this.activeIndex+1) )
-			console.log(this.activeIndex,'animating at : ' +newPercent.toFixed(1) , 'h='+nH);
-			
+			//var nH = Math.round( this.slideHeights[this.activeIndex+1] * (percent-i) );
+			var nH = Math.round( this.slideHeights[this.activeIndex+1] * (percent-i) );
 			//act on elements
 			animatingSlide.slide.style.position = 'absolute';
 			animatingSlide.slide.style.height = nH + 'px';
-			animatingSlide.fader.style.opacity = this.activeIndex+1 - newPercent;
-			//(scrollInterval*self.active_index)
-			//console.log(currentScrollPercent.toFixed(2),currentScrollInterval)
+			animatingSlide.fader.style.opacity = this.activeIndex+1 - percent;
+			
+			
+			
 		}
 	}
 	

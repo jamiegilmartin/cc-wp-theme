@@ -225,7 +225,7 @@ header#cc-header section.about p {
 }
 .cc-home ul.shadowList li {
 }
-
+/*
 .cc-home ul.shadowList li:nth-child(1){
 	background:blue;
 }
@@ -235,7 +235,7 @@ header#cc-header section.about p {
 .cc-home ul.shadowList li:nth-child(3){
 	background:green;
 }
-/**/
+*/
 
 
 /**
