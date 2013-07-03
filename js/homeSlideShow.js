@@ -21,6 +21,7 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	this.nextBtn = nextBtn;
 	this.activeIndex = 0;
 	this.reverse = false;
+	this.playing  = false;
 	
 	this.viewWidth = this.view.offsetWidth;
 	this.viewHeight = this.view.offsetHeight;
@@ -87,15 +88,27 @@ HomeSlideShow.prototype.next = function(){
 	console.log('next')
 	this.activeIndex++
 	//this.animate(this.activeIndex)
-	
+	this.aniInterval = 0;
+	this.playing = true;
+	this.run();
 };
 HomeSlideShow.prototype.run = function(  ){
 	var self = this;
 	
+	this.aniInterval++;
+	if(this.aniInterval >=100){
+		this.playing = false;
+		console.log('run',this.aniInterval*0.01)
+		
+		this.aniInterval = 0;
+	}
+	//window.scrollTo(0)
+	this.animate(this.aniInterval*0.01)
+	
 	//request new frame
 	requestAnimFrame(function(){
 		if(self.playing){ // && self.secondsRunning < (self.duration)
-			self.run( now );
+			self.run();
 		}else{
 			self.playing = false;
 		}

@@ -372,8 +372,14 @@ ul.contentList li.item:nth-child(2n+1) {
 	left:-5em;
 }
 
-
-
+.cc-news a.more-link {
+	color:#fff;
+	float:right;
+	text-decoration:none;
+}
+.cc-news a.more-link:hover {
+	color:rgba(0,0,255,1);
+}
 
 /*news nav*/
 .cc-news .navigation {

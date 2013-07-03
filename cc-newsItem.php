@@ -6,7 +6,11 @@
 		</header>
 		
 		<section class="content">
-			<?php the_content(); ?>
+			<?php
+			global $more;
+			$more = 0;
+			?>
+			<?php the_content('...more'); ?>
 		</section>
 		
 </article>

@@ -4,7 +4,17 @@
 		<ul class="contentList">
 		<?php if (have_posts()) :while ( have_posts() ) : the_post(); ?>
 			<li class="item">
-				<?php get_template_part( 'cc', 'newsItem'); ?>
+				<article class="entry">
+						<header>
+							<div class="date"><?php ubcc_posted_on(); ?></div>
+							<h2 class="title"><a href="javascript:void(0);"><?php the_title(); ?></a></h2>
+						</header>
+
+						<section class="content">
+							<?php the_content(); ?>
+						</section>
+
+				</article>
 			</li>
 		<?php endwhile; endif; ?>
 		</ul>
