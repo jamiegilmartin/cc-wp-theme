@@ -19,7 +19,7 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	this.slideHeights = [];
 	this.imgArr = [];
 	this.nextBtn = nextBtn;
-	this.active_index = 0;
+	this.activeIndex = 0;
 	this.reverse = false;
 	
 	this.viewWidth = this.view.offsetWidth;
@@ -28,16 +28,15 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	
 
 	for(var i=0;i<this.slides.length;i++){
-		this.slideHeights.push(this.slides[i].offsetHeight );
-		//test
-		this.slides[i].setAttribute('offH', this.slides[i].offsetHeight )
-		
+		this.slideHeights.push( this.slides[i].offsetHeight );
 		this.imgArr.push(this.slides[i].getElementsByTagName('img')[0]);
 		this.slidesArr.push( new HomeSlideShowSlide( this.slides[i],i )  );
 	}
 
 	
-	this.updateSlides();
+	//this.updateSlides( 0 );
+	
+	this.slidesArr[this.activeIndex].slide.classList.add('intro');
 	this.events();
 	
 	//this.scrollAnimation();
@@ -54,7 +53,8 @@ HomeSlideShow.prototype.events = function(){
 		position = 0,
 		max = 0,
 		percentScrolled = 0,
-		lastScrollTop = 0;
+		lastScrollTop = 0,
+		newPercent;
 		
 		
 	window.addEventListener('scroll',function(e){
@@ -69,8 +69,9 @@ HomeSlideShow.prototype.events = function(){
 		self.reverse = lastScrollTop > scrollTop ? true : false;
 		lastScrollTop = scrollTop;
 		
+		
 		//animate slides
-		self.animate(percentScrolled);
+		self.animate( percentScrolled );
 	});
 	
 	this.nextBtn.addEventListener('click', function(){
@@ -98,61 +99,72 @@ HomeSlideShow.prototype.prev = function(){
 		this.next();
 	}
 };
-HomeSlideShow.prototype.updateSlides = function( dir ){
+/*HomeSlideShow.prototype.updateSlides = function(){
 	var self = this;
 	
 	//first slide intro
-	if(this.active_index === 0 && !this.reverse){
-		this.slidesArr[0].slide.classList.add('intro');
-	}
-	
-	for(var i=0;i<this.slidesArr.length;i++){
-		
-		
-		if(i === this.active_index ){
-			//set current
-			this.currentSlide = this.slidesArr[i];
-			
-			
-			//set next slide
-			if(this.reverse && this.active_index >= 1 ){
-				this.nextIndex = this.active_index-1;
+	if(this.activeIndex === 1 && !this.reverse){
+		this.animatingSlide = this.slidesArr[1];
+	}else if(this.activeIndex === this.slides.length-1){
+		//last slide
+		console.log('last slide')
+	}else{
+		for(var i=0;i<this.slidesArr.length;i++){
+
+			console.log(this.activeIndex)
+			if(i === this.activeIndex){
+				
+				//set next slide
+				if(this.reverse && activeIndex>= 1 ){
+					this.nextIndex = activeIndex-1;
+				}
+				if(!this.reverse && activeIndex < this.slides.length-1){
+					this.nextIndex = activeIndex+1;
+				}
+				this.nextSlide = this.slidesArr[this.nextIndex];
+				
+
+				//set current
+				this.animatingSlide = this.slidesArr[i];
+
 			}
-			if(! this.reverse && this.active_index < this.slides.length-1){
-				this.nextIndex = this.active_index+1;
-			}
-			this.nextSlide = this.slidesArr[this.nextIndex];
-			
 		}
 	}
-};
+};*/
 HomeSlideShow.prototype.animate = function( percent ){
 	var self = this,
-		animatingSlide = this.nextSlide,
-		animatingIndex = this.nextIndex;
+		nextScroll = 0,
+		animatingSlide;
+		
+	this.slideShow.style.position = 'fixed';
 	
-	percent = percent * this.slides.length;
+	newPercent = percent * self.slides.length;
 	
 	for(var i = 0;i<self.slides.length;i++){
-		
-		if(Math.floor(percent) === i){
-			self.active_index = i;
-			console.log('slide change','current = '+i,'next = '+ this.nextIndex)
-			self.updateSlides();
+
+		if(Math.floor(newPercent) === i && i < self.slides.length-1 ){
+			this.activeIndex = i;
+			//self.updateSlides(nextScroll);
+			animatingSlide = this.slidesArr[this.activeIndex+1];
+			
+			var nH = Math.round( this.slideHeights[this.activeIndex+1] * (newPercent-i));
+			
+			console.log('slide change','current = '+this.activeIndex,'next = '+ (this.activeIndex+1) )
+			console.log(this.activeIndex,'animating at : ' +newPercent.toFixed(1) , 'h='+nH);
+			
+			//act on elements
+			animatingSlide.slide.style.position = 'absolute';
+			animatingSlide.slide.style.height = nH + 'px';
+			animatingSlide.fader.style.opacity = this.activeIndex+1 - newPercent;
+			//(scrollInterval*self.active_index)
+			//console.log(currentScrollPercent.toFixed(2),currentScrollInterval)
 		}
 	}
 	
-	this.slideShow.style.position = 'fixed';
 	
-	//console.log(this.active_index,'animating at : ' +percent.toFixed(1) );
-
-	//act on elements
-	animatingSlide.slide.style.position = 'absolute';
-	var nH = Math.round( this.slideHeights[animatingIndex] * percent );
-	animatingSlide.slide.style.height = nH + 'px';
-	animatingSlide.fader.style.opacity = 1-percent;
-	//(scrollInterval*self.active_index)
-	//console.log(currentScrollPercent.toFixed(2),currentScrollInterval)
+	
+	
+	
 	
 	
 };
