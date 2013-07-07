@@ -79,7 +79,7 @@ HomeSlideShow.prototype.events = function(){
 	});
 	
 	this.nextBtn.addEventListener('click', function(){
-		//self.next();
+		self.next();
 	}, false);
 	
 };
@@ -91,7 +91,7 @@ HomeSlideShow.prototype.next = function(){
 	this.playing = true;
 	this.run();
 };
-HomeSlideShow.prototype.run = function(  ){
+HomeSlideShow.prototype.run = function(){
 	var self = this;
 	
 	this.aniInterval++;
@@ -101,6 +101,7 @@ HomeSlideShow.prototype.run = function(  ){
 		
 		this.aniInterval = 0;
 	}
+	
 	//window.scrollTo(0)
 	this.animate(this.aniInterval*0.01)
 	
