@@ -26,8 +26,6 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	this.viewWidth = this.view.offsetWidth;
 	this.viewHeight = this.view.offsetHeight;
 	
-	
-
 	for(var i=0;i<this.slides.length;i++){
 		this.slides[i].setAttribute('s',i);
 		this.slideHeights.push( this.slides[i].offsetHeight );
@@ -56,7 +54,8 @@ HomeSlideShow.prototype.events = function(){
 		max = 0,
 		percentScrolled = 0,
 		lastScrollTop = 0,
-		newPercent;
+		lastPastPercentageCheck = 0,
+		nextSlide = 0;
 		
 		
 	window.addEventListener('scroll',function(e){
@@ -72,8 +71,21 @@ HomeSlideShow.prototype.events = function(){
 		lastScrollTop = scrollTop;
 		
 		
+		//switch slide
+		if(Math.floor(percentScrolled * self.slides.length) > lastPastPercentageCheck ){
+			if(self.activeIndex < self.slides.length-1) self.activeIndex++;
+			nextSlide = lastPastPercentageCheck + 1;
+			if(nextSlide === self.slides.length)
+			console.log('end!')
+		}
+		lastPastPercentageChecks = Math.floor(percentScrolled * self.slides.length);
+		
+		
+		//console.log(lastPastPercentage, percentScrolled* self.slides.length);
+		
+		
 		//animate slides
-		self.animate( percentScrolled );
+		//xsself.animate(percentScrolled);
 		
 	
 	});
@@ -114,21 +126,21 @@ HomeSlideShow.prototype.run = function(){
 		}
 	});
 };
-HomeSlideShow.prototype.animate = function( percent ){
+HomeSlideShow.prototype.animate = function(){
 	var self = this,
 		nextScroll = 0,
 		animatingSlide,
 		currPercent = percent * self.slides.length;
 	
 	this.slideShow.style.position = 'fixed';
-	
+
 	for(var i = 0;i<self.slidesArr.length;i++){
 		
 		if(Math.floor(currPercent) === i && i < self.slidesArr.length-1 ){
 			this.activeIndex = i;
 			nextScroll = nextScroll < i ? i : nextScroll;
 			
-			console.log(this.activeIndex+1,nextScroll,(currPercent).toFixed(1), percent.toFixed(1) )
+			//console.log(this.activeIndex+1,nextScroll,(currPercent).toFixed(1), percent.toFixed(1) )
 			
 			//next slide
 			animatingSlide = this.slidesArr[this.activeIndex+1];
@@ -148,7 +160,7 @@ HomeSlideShow.prototype.animate = function( percent ){
 			
 		}
 	}
-
+	
 };
 
 
