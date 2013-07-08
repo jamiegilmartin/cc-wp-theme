@@ -179,18 +179,18 @@ header#cc-header section.about p {
 	position:relative;
 }
 .cc-home ul li {
-	position:relative;
+	position:absolute;
 	width:100%;
 	text-align:center;
 	overflow:hidden;
 }
 .cc-home ul li.transitioning {
-	/*
+
 	-webkit-transition:all 1s ease-in-out;
 	-moz-transition:all 1s ease-in-out;
 	-o-transition:all 1s ease-in-out;
 	transition:all 1s ease-in-out;
-	*/
+	/*	*/
 }
 .cc-home ul li .fader {
 	background-color:rgba(255,134,114,1);
