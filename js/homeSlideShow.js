@@ -75,13 +75,14 @@ HomeSlideShow.prototype.events = function(){
 		if(Math.floor(percentScrolled * self.slides.length) > lastPastPercentageCheck ){
 			if(self.activeIndex < self.slides.length-1) self.activeIndex++;
 			nextSlide = lastPastPercentageCheck + 1;
+			console.log('next',nextSlide)
 			if(nextSlide === self.slides.length)
 			console.log('end!')
 		}
-		lastPastPercentageChecks = Math.floor(percentScrolled * self.slides.length);
+		lastPastPercentageCheck = Math.floor(percentScrolled * self.slides.length);
 		
 		
-		//console.log(lastPastPercentage, percentScrolled* self.slides.length);
+		//console.log(lastPastPercentageCheck, percentScrolled* self.slides.length);
 		
 		
 		//animate slides
