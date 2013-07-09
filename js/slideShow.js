@@ -32,6 +32,13 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	//this.nextBtn.style.opacity = 0
 	//this.prevBtn.style.opacity = 0;
 	
+	//indicator
+	this.indicator = document.createElement('div');
+	this.indicator.classList.add('indicator');
+	this.indicator.innerHTML = '1 of '+this.slides.length;
+	this.view.appendChild(this.indicator);
+	
+	
 	this.updateSlides();
 	//set agian for ff
 	this.transitioning = false;
@@ -47,6 +54,7 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	output.style.zIndex = 100;
 	this.view.appendChild(output);
 	*/
+	
 
 	
 };
@@ -177,6 +185,7 @@ SlideShow.prototype.events = function(){
 	}, false);
 	*/
 };
+/*
 SlideShow.prototype.showButtons = function(){
 	if(this.overLeftSide===true){
 		this.prevBtn.style.opacity = 1;
@@ -198,7 +207,7 @@ SlideShow.prototype.hideButtons = function(){
 	}
 	setTimeout(hide,1000);
 };
-
+*/
 
 SlideShow.prototype.next = function(){
 	if(this.active_index < this.slides.length-1){
@@ -297,6 +306,9 @@ SlideShow.prototype.updateSlides = function( dir ){
 		}
 	}
 	
+	
+	//update indicator
+	this.indicator.innerHTML = (this.active_index+1) +' of '+this.slides.length;
 };
 
 
