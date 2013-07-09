@@ -838,11 +838,13 @@ ul.archiveStoryList li.item article.entry .imgHolder img {
 	background: url('../images/cc-btn-next.png') no-repeat scroll top left;
 	top:35em;
 	left:65em;
+	display:none;
 }
 .cc-archive .slideShow a.prevBtn {
 	background: url('../images/cc-btn-prev.png') no-repeat scroll top left;
 	top:35em;
 	left:-5em;
+	display:none;
 }
 .cc-archive .slideShow a.xBtn {
 	position:absolute;
