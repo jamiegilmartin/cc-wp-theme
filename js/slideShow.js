@@ -29,8 +29,8 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	this.active_index = 0;
 	
 	//hide next and prev
-	this.nextBtn.style.opacity = 0
-	this.prevBtn.style.opacity = 0;
+	//this.nextBtn.style.opacity = 0
+	//this.prevBtn.style.opacity = 0;
 	
 	this.updateSlides();
 	//set agian for ff
@@ -118,7 +118,7 @@ SlideShow.prototype.events = function(){
 		}
 	}
 	
-	
+	/*
 	//hide show next and prev
 	this.slideShow.addEventListener('mouseover', function(e){
 		self.over = true;
@@ -143,6 +143,7 @@ SlideShow.prototype.events = function(){
 	}, false);
 	
 	//next and prev over and out
+	
 	this.nextBtn.addEventListener('mouseover', function(){
 		self.over = true;
 		self.overLeftSide = false;
@@ -161,7 +162,7 @@ SlideShow.prototype.events = function(){
 		self.over = false;
 		self.hideButtons()
 	}, false);
-	
+	*/
 	
 	//next and prev click
 	this.nextBtn.addEventListener('click', function(){
@@ -169,10 +170,12 @@ SlideShow.prototype.events = function(){
 		if(self.transitioning === false)
 		self.next();
 	}, false);
+	/*
 	this.prevBtn.addEventListener('click', function(){
 		if(self.transitioning === false)
 		self.prev();
 	}, false);
+	*/
 };
 SlideShow.prototype.showButtons = function(){
 	if(this.overLeftSide===true){

@@ -375,10 +375,12 @@ ul.contentList li.item:nth-child(2n+1) {
 .cc-news article.entry section.content .slideShow a.nextBtn {
 	background: url('../images/cc-btn-next.png') no-repeat scroll top left;
 	right:-5em;
+	display:none;
 }
 .cc-news article.entry section.content .slideShow a.prevBtn {
 	background: url('../images/cc-btn-prev.png') no-repeat scroll top left;
 	left:-5em;
+	display:none;
 }
 
 .cc-news a.more-link {
@@ -635,6 +637,7 @@ ul.modelList li article.entry .imgHolder img {
 	-o-transition:all 0.5s ease-in-out;
 	transition:all 0.5s ease-in-out;
 	cursor:pointer;
+	display:none;
 }
 .cc-models .slideShow a.nextBtn {
 	background: url('../images/cc-btn-next.png') no-repeat scroll top left;

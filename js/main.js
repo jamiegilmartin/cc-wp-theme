@@ -240,7 +240,7 @@ UBCC = {
 				/**
 				 * create slide show
 				 */
-				var newsItemSlideShow = new SlideShow( view, list, liArr, nextBtn, prevBtn );
+				var newsItemSlideShow = new SlideShow( view, list, liArr, list, prevBtn ); //@param penUltimate was nextBtn
 			
 			}else{
 				//no images, slide show
@@ -390,7 +390,7 @@ UBCC = {
 				modelLists[h].style.height = maxHeight + 'px';
 			}
 			
-			var modelItemSlideShow = new SlideShow( view, modelList.list, modelList.modelListItems, nextBtn, prevBtn );
+			var modelItemSlideShow = new SlideShow( view, modelList.list, modelList.modelListItems, modelList.list, prevBtn );//@param penUltimate was nextBtn
 			modelItemSlideShow.gotoSlide(clicked_slide_index);
 			
 			//x btn click
@@ -528,7 +528,7 @@ UBCC = {
 				}
 				list.style.height = maxHeight + 'px';
 
-				var archiveStoryItemSlideShow = new SlideShow( view, list, listItems, nextBtn, prevBtn );
+				var archiveStoryItemSlideShow = new SlideShow( view, list, listItems, list, prevBtn );//@param penUltimate was nextBtn
 				archiveStoryItemSlideShow.gotoSlide(listItems.length);
 				
 

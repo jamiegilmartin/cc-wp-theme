@@ -88,7 +88,7 @@ ScreenSaver.prototype.stop = function(){
 
 
 Saver = {};
-Saver.delay = 2000//300000;
+Saver.delay = 300000;
 /**
  * count
  */
