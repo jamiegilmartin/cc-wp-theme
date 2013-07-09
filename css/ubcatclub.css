@@ -52,6 +52,14 @@ section.content {
 	color:rgba(255,134,114,1);
 	text-align:center;
 	margin:0.25em 0 0 0;
+	-webkit-font-smoothing: antialiased;
+	font-family:'DrescherGroteskBTW01-Se';
+}
+.screensaver .clock span{
+	opacity:1;
+}
+.screensaver .clock span.blink {
+	opacity:0;
 }
 /**
  * header#cc-header

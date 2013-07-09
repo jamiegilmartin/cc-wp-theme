@@ -88,7 +88,7 @@ ScreenSaver.prototype.stop = function(){
 
 
 Saver = {};
-Saver.delay = 300000;
+Saver.delay = 2000//300000;
 /**
  * count
  */
@@ -130,8 +130,12 @@ Saver.setClock = function( id ){
 			s = "0"+s;
 		}
 		//result = ''+days[day]+' '+months[month]+' '+d+' '+year+' '+h+':'+m+':'+s;
-		if(document.getElementById(id))
-		document.getElementById(id).innerHTML = h+':'+m;
+		if(document.getElementById(id)){
+			console.log(s % 2)
+			var blink = s % 2 === 0 ? ' ' :'blink';
+			document.getElementById(id).innerHTML = h+'<span class="'+blink+'">:</span>'+m;
+		}
+		
 		
 	setTimeout('Saver.setClock("'+id+'");','1000');
 	return true;

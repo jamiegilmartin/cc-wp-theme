@@ -11,7 +11,7 @@ get_header(); ?>
 			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 		</div>
 		TODO-->
-		
+	
 		<?php
 			/*
 			$twitterFeedURL = get_stylesheet_directory_uri() .'twitterfeed.class.php';
@@ -28,6 +28,8 @@ get_header(); ?>
 			var_dump($tweets);
 			*/
 		?>
+		<!--TRY: http://wordpress.org/plugins/rotatingtweets/-->
+		
 		
 		<div class="twitter-module ">
 			<p class="title"><a href="#">Twitter</a> @<a href="#">UBcatclub</a> &mdash; 2 days ago</p>
