@@ -429,6 +429,7 @@ ul.contentList li.item:nth-child(2n+1) {
 .cc-store article.entry {
 	position:relative;
 	width:60em;
+	cursor:pointer;
 }
 .cc-store article.entry header {
 	overflow:hidden;
@@ -447,7 +448,7 @@ ul.contentList li.item:nth-child(2n+1) {
 	-moz-transition:all 0.2s ease-in-out;
 	-o-transition:all 0.2s ease-in-out;
 	transition:all 0.2s ease-in-out;
-	
+	cursor:auto;
 }
 .cc-store article.entry:hover header {
 	opacity:1;
