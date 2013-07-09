@@ -136,7 +136,7 @@ UBCC = {
 					elementsToResize[i].style.height = (oldH*this.windowWidth)/oldW + 'px';
 					
 					//set view height
-					//self.content.style.height = (oldH*this.windowWidth)/oldW + 'px';
+					self.content.style.height = (oldH*this.windowWidth)/oldW + 'px';
 				}else{
 					elementsToResize[i].style.height = this.windowHeight + 'px';
 				}

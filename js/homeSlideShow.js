@@ -20,13 +20,10 @@ HomeSlideShow = function(view, ul, lis, nextBtn ){
 	this.active_index = 0;
 	this.reverse = false;
 
+	this.transitioning  = false;
+
 	this.viewWidth = this.view.offsetWidth;
 	this.viewHeight = this.view.offsetHeight;
-
-	this.scrollTopDif = (document.documentElement.offsetHeight || document.body.offsetHeight - window.innerHeight ) / this.slides.length;
-	this.scrollTopDif = Math.round(this.scrollTopDif);
-	this.currentScrollTop = 0;
-
 
 	for(var i=0;i<this.slides.length;i++){
 		this.slideHeights.push(this.slides[i].offsetHeight);
@@ -124,35 +121,13 @@ HomeSlideShow.prototype.events = function(){
 	this.nextBtn.addEventListener('click', function(){
 		if(self.transitioning === false)
 		self.next();
+		
+			console.log('nne',self.transitioning )
 	}, false);
 
 
 };
-HomeSlideShow.prototype.XXscrollAnimation = function(){
-	var self = this;
-	/*jquery scroll stuff*/
-	//$(window).scrollTop(0);
-	var leftToScroll = self.slides.length;
-	$(window).scroll(function(e){
-		//console.log('scrolling ',e,$(window).height()-$(document).scrollTop(),$(document).scrollTop())
-		/*TweenLite.fromTo($(self.nextSlide), $(document).scrollTop(), 
-			{css:{top:0,height:0}, ease:Quad.easeOut},
-			{css:{top:0,height:$(self.currentSlide).height()}, ease:Quad.easeOut}
-		);*/
-		//console.log($(document).scrollTop(),$(window).height())
 
-		for(var i=0;i<self.slides.length;i++){
-			if($(document).scrollTop() > $(window).height() / i+1){
-				//leftToScroll = leftToScroll-1;
-				//console.log('i+1',i,$(window).height() / i+1)
-				//console.log('this.slides.length' , self.slides.length,leftToScroll)
-			}
-		}
-	});
-
-
-
-};
 HomeSlideShow.prototype.scrollAnimation = function(){
 	var self = this,
 		lastScroll;
@@ -243,7 +218,7 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 			//this.nextFader.style.opacity = 0;
 
 
-			this.transitioning = true; //prevents user from going through slides too fast
+			//this.transitioning = true; //prevents user from going through slides too fast
 			//this.currentSlide.style.zIndex = 2;
 			//this.currentSlide.style.height = this.viewHeight+'px';
 
