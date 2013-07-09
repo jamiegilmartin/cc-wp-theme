@@ -131,12 +131,17 @@ UBCC = {
 				if(isImage(elementsToResize[i])){
 					oldH = elementsToResize[i].offsetHeight;
 					oldW = elementsToResize[i].offsetWidth;
-					//scale img
-					elementsToResize[i].style.width = this.windowWidth + 'px';
-					elementsToResize[i].style.height = (oldH*this.windowWidth)/oldW + 'px';
+					//scale img to width
+					//elementsToResize[i].style.width = this.windowWidth + 'px';
+					//elementsToResize[i].style.height = (oldH*this.windowWidth)/oldW + 'px';
+					
+					//scale img to height
+					elementsToResize[i].style.width = (oldW*this.windowHeight)/oldH + 'px';
+					elementsToResize[i].style.height = this.windowHeight + 'px';
 					
 					//set view height
-					self.content.style.height = (oldH*this.windowWidth)/oldW + 'px';
+					//self.content.style.height = (oldH*this.windowWidth)/oldW + 'px';
+					self.content.style.height = this.windowHeight + 'px';
 				}else{
 					elementsToResize[i].style.height = this.windowHeight + 'px';
 				}

@@ -210,6 +210,7 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 			}else{
 				//on last slide
 				this.nextSlide = this.slides[0];
+				console.log('last')
 				//move next slide stage right
 				//this.nextSlide.style.zIndex = 0;
 				//this.nextSlide.style.top  =  -this.viewHeight+'px';
@@ -218,17 +219,15 @@ HomeSlideShow.prototype.updateSlides = function( dir ){
 			//this.nextFader.style.opacity = 0;
 
 
-			//this.transitioning = true; //prevents user from going through slides too fast
+			this.transitioning = true; //prevents user from going through slides too fast
 			//this.currentSlide.style.zIndex = 2;
 			//this.currentSlide.style.height = this.viewHeight+'px';
-
-
 
 			var transitionEnd = whichTransitionEvent();
 			if(transitionEnd){
 				this.currentSlide.addEventListener(transitionEnd, function( e ) {
 					self.transitioning = false;
-					console.log('t e')
+					//console.log('t e')
 					//TODO: self.currentSlide.removeEventListener('webkitTransitionEnd', this , false);
 				}, false );
 			}else{
