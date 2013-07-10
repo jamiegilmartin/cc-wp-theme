@@ -36,6 +36,9 @@ get_header(); ?>
 			<div class="tweet garamonditalic">Cat casting call, going on now, please visit us at our new website: <a href="#">http://t.co/XCOlseAa</a> @<a href="#">UBcatclub</a></div>
 		</div>
 		
+		<?php echo do_shortcode("[rotatingtweets screen_name='jamiegilmartin']"); ?>
+		
+		
 		<?php
 			$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 			$args= array(
