@@ -246,7 +246,7 @@ ul.contentList li.item:nth-child(2n+1) {
 	width:80em;
 }
 
-/*twitter -- TODO:*/
+/*twitter -- TODO:
 .cc-news .twitter-module {
 	padding-bottom:8em;
 }
@@ -273,8 +273,35 @@ ul.contentList li.item:nth-child(2n+1) {
 }
 .cc-news .twitter-module .tweet a:hover {
 	color:#333333;
+}*/
+.cc-news .rotatingtweets {
+	padding-bottom:8em;
+	border:0 !important;
 }
-
+.cc-news .rotatingtweets .rotatingtweet p.rtw_main {
+	font-size:2em;
+	line-height:1em;
+	color:#fff;
+	padding-bottom:1em;
+}
+.cc-news .twitter-module p.title a {
+	text-decoration:none;
+	color:#fff;
+}
+.cc-news .twitter-module p.title a:hover {
+	color:#333333;
+}
+.cc-news .twitter-module .tweet {
+	font-size:5em;
+	line-height:1em;
+	color:#fff;
+}
+.cc-news .twitter-module .tweet a {
+	color:#fff;
+}
+.cc-news .twitter-module .tweet a:hover {
+	color:#333333;
+}
 
 
 /*news article*/
