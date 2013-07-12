@@ -19,7 +19,6 @@ SlideShowVertical = function( view, ul, lis, nextBtn){
 	this.slideHeights = [];
 	this.slidesArr = [];
 	this.nextBtn = nextBtn;
-		
 	this.viewWidth = this.view.offsetWidth;
 	this.viewHeight = this.view.offsetHeight;
 	
@@ -40,7 +39,7 @@ SlideShowVertical = function( view, ul, lis, nextBtn){
 	//set agian for ff
 	this.transitioning = false;
 	
-	this.slidesArr[this.active_index].slide.classList.add('intro');
+	//this.slidesArr[this.active_index].slide.classList.add('intro');
 	
 	this.events();
 	
@@ -135,29 +134,13 @@ SlideShowVertical.prototype.next = function(){
 };
 SlideShowVertical.prototype.updateSlides = function( dir ){
 	var self = this;
+	
+	
 	for(var i=0;i<this.slidesArr.length;i++){
 		//add transitioning class
 		//this.slides[i].classList.remove('transitioning');
 		
 		if(i === this.active_index ){
-			
-			//set prev slide
-			if(this.active_index-1 >= 0){
-				this.previousSlide = this.slidesArr[this.active_index-1];
-				this.previousSlide.slide.classList.add('transitioning');
-			}else{
-				//on first slide
-				this.previousSlide = this.slidesArr[this.slides.length-1];
-				//move previous slide stage left
-				if(dir === 'next'){
-					this.previousSlide.slide.classList.add('transitioning');
-				}else{
-					this.previousSlide.slide.classList.remove('transitioning');
-				}
-				//this.previousSlide.slide.style.zIndex = 0;
-				//this.previousSlide.slide.style.top  =  this.viewHeight+'px';
-				
-			}
 			
 			//set current
 			this.currentSlide = this.slidesArr[i];
@@ -166,6 +149,33 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 			this.currentSlide.slide.classList.add('currentSlide');
 			this.currentSlide.slide.classList.add('transitioning');
 			
+			//set prev slide
+			if(this.active_index-1 >= 0){
+				this.previousSlide = this.slidesArr[this.active_index-1];
+				this.previousSlide.slide.classList.add('transitioning');
+				this.previousSlide.slide.classList.remove('p');
+				
+			}else{
+				//on first slide
+				this.previousSlide = this.slidesArr[this.slides.length-1];
+				
+				//move previous slide stage left
+				//this.previousSlide.slide.classList.add('p');
+				
+				//this.previousSlide.slide.classList.remove('transitioning');
+				//this.previousSlide.fader.classList.remove('transitioning');
+				
+				this.currentSlide.slide.classList.remove('transitioning');
+				this.currentSlide.fader.classList.remove('transitioning');
+		
+				//this.previousSlide.slide.style.zIndex = 0;
+				//this.previousSlide.slide.style.top  =  this.viewHeight+'px';
+				console.log('on f',this.previousSlide.slide)
+				
+			}
+			this.previousSlide.slide.classList.add('p');
+			
+			
 			//set next slide
 			if(this.active_index+1 <= this.slides.length-1){
 				this.nextSlide = this.slidesArr[this.active_index+1];
@@ -173,8 +183,10 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 				//on last slide
 				this.nextSlide = this.slidesArr[0];
 				//move next slide stage right
-				
+				console.log('llasst')
 				this.nextSlide.slide.classList.add('transitioning');
+				this.nextSlide.slide.style.height = 0;
+				
 				//this.nextSlide.slide.style.zIndex = 0;
 				//this.nextSlide.slide.style.top  =  -this.viewHeight+'px';
 			}

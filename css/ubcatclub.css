@@ -277,31 +277,40 @@ ul.contentList li.item:nth-child(2n+1) {
 	color:#333333;
 }*/
 .cc-news .rotatingtweets {
-	padding-bottom:8em;
+	padding-bottom:2em;
 	border:0 !important;
 }
 .cc-news .rotatingtweets .rotatingtweet p.rtw_main {
+	font-size:5em;
+	line-height:1em;
+	color:#fff;
+	padding-bottom:1em;
+	font-family: Garamond;
+	font-style: italic;
+	font-weight: normal !important;
+	position:relative;
+	top:0.5em;
+}
+.cc-news .rotatingtweets .rotatingtweet p.rtw_main  a {
+	color:#fff;
+}
+.cc-news .rotatingtweets .rotatingtweet p.rtw_main a:hover {
+	color:#333333;
+}
+
+.cc-news .rotatingtweets .rotatingtweet p.rtw_meta {
 	font-size:2em;
 	line-height:1em;
 	color:#fff;
 	padding-bottom:1em;
+	position:absolute;
+	top:0;
 }
-.cc-news .twitter-module p.title a {
+.cc-news .rotatingtweets .rotatingtweet p.rtw_meta a {
 	text-decoration:none;
 	color:#fff;
 }
-.cc-news .twitter-module p.title a:hover {
-	color:#333333;
-}
-.cc-news .twitter-module .tweet {
-	font-size:5em;
-	line-height:1em;
-	color:#fff;
-}
-.cc-news .twitter-module .tweet a {
-	color:#fff;
-}
-.cc-news .twitter-module .tweet a:hover {
+.cc-news .rotatingtweets .rotatingtweet p.rtw_meta a:hover {
 	color:#333333;
 }
 
