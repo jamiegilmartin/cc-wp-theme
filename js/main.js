@@ -167,17 +167,6 @@ UBCC = {
 
 	},
 	news : function(){
-		//twitter
-		$.ajax({
-			url:'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=jamiegilmartin&count=1',
-		error: function(msg){
-			//console.log(msg);
-		},
-		success: function(msg){
-			console.log(msg);
-		}	 
-		});
-		
 		//list
 		for(var i=0;i<this.contentListItems.length;i++){
 			var item = this.contentListItems[i],
@@ -250,7 +239,8 @@ UBCC = {
 		}
 	},
 	store : function(){
-		var self = this;
+		var self = this,
+			slideShowHeight = 0;
 		
 		for(var i=0;i<this.contentListItems.length;i++){
 			var item = this.contentListItems[i],
@@ -278,8 +268,21 @@ UBCC = {
 						buyNowBtn.setAttribute('href',string);
 					}
 			}
+			console.log(item.offsetHeight)
+			
+			//set slide show height based on tallest slide
+			if(item.offsetHeight > slideShowHeight){
+				slideShowHeight = item.offsetHeight;
+			}
+			
 			
 		}
+		
+		var view = this.content.getElementsByClassName('content')[0];
+		view.classList.add('slideShow');
+		view.style.height = slideShowHeight + 'px';
+		this.contentList.style.height = slideShowHeight + 'px';
+		new SlideShow( this.content, this.contentList , this.contentListItems, this.contentList , null );
 	},
 	models : function(){
 		var self = this,

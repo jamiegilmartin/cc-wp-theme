@@ -438,9 +438,33 @@ ul.contentList li.item:nth-child(2n+1) {
 .cc-store .content {
 	width:80em;
 }
+
+.cc-store .slideShow {
+	position:relative;
+	padding-bottom:3em;
+}
+.cc-store .slideShow ul.contentList {
+	overflow:hidden;
+	width:80em;
+	position:relative;
+	cursor:pointer;
+}
+.cc-store .slideShow ul li.item {
+	height:100%;
+	width:100%;
+	position:absolute;
+}
+.cc-store .slideShow ul li.transitioning {
+	-webkit-transition:all 0.5s ease-in-out;
+	-moz-transition:all 0.5s ease-in-out;
+	-o-transition:all 0.5s ease-in-out;
+	transition:all 0.5s ease-in-out;
+}
+
 .cc-store article.entry {
 	position:relative;
 	width:60em;
+	right:2em;
 	cursor:pointer;
 }
 .cc-store article.entry header {
