@@ -163,7 +163,7 @@ UBCC = {
 		/**
 		 * create slide show
 		 */
-		var homeSlideShow = new HomeSlideShow( this.content, slideList, liArr, this.content );
+		var homeSlideShow = new SlideShowVertical( this.content, slideList, liArr, this.content );
 
 	},
 	news : function(){

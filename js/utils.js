@@ -32,26 +32,3 @@ function whichTransitionEvent(){
 		}
 	}
 };
-
-
-//not working yet
-/*
-function maxMin( test ){
-	var t = test,
-		max,
-		min,
-		obj = {};
-	if(t > max){
-		max = t;
-	}else{
-		if(t < min){
-			min = t;
-		}else{
-			min = t;
-		}
-	}
-	obj.max = max;
-	obj.min = min;
-	return obj;
-}
-*/

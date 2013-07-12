@@ -2,7 +2,7 @@ var SlideShow = window.SlideShow || {};
  
 /**
  * @class SlideShow 
- * @description IBM Security Headlines, a responsive slide show
+ * @description a responsive slide show
  * @param view - slide show view port
  * @param ul - slide show list
  * @param lis - slides, array of elements
