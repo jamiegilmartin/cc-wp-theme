@@ -38,7 +38,7 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	this.indicator.innerHTML = '1 of '+this.slides.length;
 	this.view.appendChild(this.indicator);
 	
-	
+	console.log('init',this.active_index )
 	this.updateSlides();
 	//set agian for ff
 	this.transitioning = false;
@@ -229,6 +229,11 @@ SlideShow.prototype.prev = function(){
 SlideShow.prototype.gotoSlide = function(num){
 	this.active_index = num-1;
 	this.updateSlides();
+	this.indicator.style.display = 'block';
+	
+};
+SlideShow.prototype.close = function(){
+	this.indicator.style.display = 'none';
 };
 SlideShow.prototype.updateSlides = function( dir ){
 	var self = this;
@@ -237,7 +242,7 @@ SlideShow.prototype.updateSlides = function( dir ){
 		//this.slides[i].classList.remove('transitioning');
 		
 		if(i === this.active_index ){
-			
+			console.log(i, this.active_index )
 			//set prev slide
 			if(this.active_index-1 >= 0){
 				this.previousSlide = this.slides[this.active_index-1];
@@ -257,6 +262,7 @@ SlideShow.prototype.updateSlides = function( dir ){
 			}
 			
 			//set current
+			console.log(i,this.slides[i],this.active_index)
 			this.currentSlide = this.slides[i];
 			this.currentSlide.classList.add('currentSlide');
 			this.currentSlide.classList.add('transitioning');

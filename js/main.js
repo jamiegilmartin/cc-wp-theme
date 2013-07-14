@@ -258,17 +258,19 @@ UBCC = {
 					//console.log(span.innerHTML)
 					//buyNow set link
 					if(span.innerHTML === 'description:'){
+						metaListItems[j].classList.add('description');
 						orderedList[0] = metaListItems[j];
 					}
 					if(span.innerHTML === 'price:'){
+						metaListItems[j].classList.add('price');
 						orderedList[1] = metaListItems[j];
 					}
 					if(span.innerHTML === 'buy now:'){
+						metaListItems[j].classList.add('buyNow');
 						var string = metaListItems[j].innerHTML.split('</span> ')[1];
 						buyNowBtn.setAttribute('href',string);
 					}
 			}
-			console.log(item.offsetHeight)
 			
 			//set slide show height based on tallest slide
 			if(item.offsetHeight > slideShowHeight){
@@ -278,6 +280,8 @@ UBCC = {
 			
 		}
 		
+		
+		//build slide show
 		var view = this.content.getElementsByClassName('content')[0];
 		view.classList.add('slideShow');
 		view.style.height = slideShowHeight + 'px';
@@ -339,7 +343,8 @@ UBCC = {
 					if(modelList.list === modelLists[h]){
 						modelLists[h].parentNode.style.display = 'block';
 						if(!modelList.list.parentNode.classList.contains('slideShow'))
-						modelSlideShow(modelList,i+1);
+						modelSlideShow(h,modelList,i+1);
+
 					}
 					
 				}
@@ -351,14 +356,15 @@ UBCC = {
 		/**
 		 *@Class modelSlideShow
 		 */
-		function modelSlideShow(modelList,clicked_slide_index){
+		var slideShows = [];
+		function modelSlideShow(listNum,modelList,clicked_slide_index){
 			//wrap images in list
 			var view = modelList.list.parentNode,
 				content = view.parentNode,
 				nextBtn = document.createElement('a'),
 				prevBtn = document.createElement('a'),
 				xBtn = document.createElement('a');
-			
+
 			//console.log(content.offsetLeft,content.offsetWidth)
 			view.classList.add('slideShow');
 			
@@ -393,7 +399,12 @@ UBCC = {
 				modelLists[h].style.height = maxHeight + 'px';
 			}
 			
-			var modelItemSlideShow = new SlideShow( view, modelList.list, modelList.modelListItems, modelList.list, prevBtn );//@param penUltimate was nextBtn
+			if(slideShows[listNum] === undefined){
+				var modelItemSlideShow = new SlideShow( view, modelList.list, modelList.modelListItems, modelList.list, prevBtn );//@param penUltimate was nextBtn
+				slideShows.push(modelItemSlideShow);
+			}else{
+				modelItemSlideShow = slideShows[listNum];
+			}
 			modelItemSlideShow.gotoSlide(clicked_slide_index);
 			
 			//x btn click
@@ -411,6 +422,11 @@ UBCC = {
 				for(var j=0;j<modelList.modelListItems.length;j++){
 					modelList.modelListItems[j].style.height = 'auto';
 				}
+				modelItemSlideShow.close();
+				window.scrollTo(0,0);
+				
+				console.log(slideShows)
+				
 			}, false);
 		}
 	},
