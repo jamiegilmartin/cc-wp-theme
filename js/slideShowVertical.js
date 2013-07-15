@@ -21,6 +21,8 @@ SlideShowVertical = function( view, ul, lis, nextBtn){
 	this.nextBtn = nextBtn;
 	this.viewWidth = this.view.offsetWidth;
 	this.viewHeight = this.view.offsetHeight;
+	this.onLast = false;
+	
 	
 	for(var i=0;i<this.slides.length;i++){
 		this.slideHeights.push(this.slides[i].offsetHeight);
@@ -153,7 +155,6 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 			if(this.active_index-1 >= 0){
 				this.previousSlide = this.slidesArr[this.active_index-1];
 				this.previousSlide.slide.classList.add('transitioning');
-				this.previousSlide.slide.classList.remove('p');
 				
 			}else{
 				//on first slide
@@ -173,7 +174,6 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 				console.log('on f',this.previousSlide.slide)
 				
 			}
-			this.previousSlide.slide.classList.add('p');
 			
 			
 			//set next slide
@@ -184,10 +184,14 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 				this.nextSlide = this.slidesArr[0];
 				//move next slide stage right
 				console.log('llasst')
-				this.nextSlide.slide.classList.add('transitioning');
+				this.nextSlide.slide.classList.remove('transitioning');
 				this.nextSlide.slide.style.height = 0;
 				
-				//this.nextSlide.slide.style.zIndex = 0;
+				this.onLast = true;
+				
+				//this.nextSlide.slide.style.zIndex = 1;
+				this.currentSlide.fader.style.bottom = 0;
+				
 				//this.nextSlide.slide.style.top  =  -this.viewHeight+'px';
 			}
 			
@@ -202,6 +206,7 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 				this.currentSlide.slide.addEventListener(transitionEnd, function( e ) {
 					self.transitioning = false;
 					//TODO: self.currentSlide.removeEventListener('webkitTransitionEnd', this , false);
+					
 				}, false );
 			}else{
 				self.transitioning = false;
@@ -223,7 +228,7 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 			
 			//slide is greater than active, move stage right
 			if(this.slidesArr[i] !== this.previousSlide){
-			
+				
 				//this.slidesArr[i].slide.style.zIndex = 0;
 				//this.slidesArr[i].slide.style.top = -this.viewHeight+'px';
 				this.slidesArr[i].fader.style.opacity = 1;

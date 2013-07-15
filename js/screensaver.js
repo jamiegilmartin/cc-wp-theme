@@ -131,7 +131,6 @@ Saver.setClock = function( id ){
 		}
 		//result = ''+days[day]+' '+months[month]+' '+d+' '+year+' '+h+':'+m+':'+s;
 		if(document.getElementById(id)){
-			console.log(s % 2)
 			var blink = s % 2 === 0 ? ' ' :'blink';
 			document.getElementById(id).innerHTML = h+'<span class="'+blink+'">:</span>'+m;
 		}

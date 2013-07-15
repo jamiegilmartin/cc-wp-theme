@@ -296,6 +296,8 @@ SlideShow.prototype.updateSlides = function( dir ){
 		}else if(i < this.active_index ){
 			//slide is less than active, move stage left
 			this.slides[i].classList.remove('currentSlide');
+			this.slides[i].classList.remove('transitioning');
+			
 			this.slides[i].style.zIndex = 0;
 			this.slides[i].style.left = -this.viewWidth+'px';
 			
@@ -303,7 +305,8 @@ SlideShow.prototype.updateSlides = function( dir ){
 			this.slides[i].classList.remove('currentSlide');
 			//slide is greater than active, move stage right
 			if(this.slides[i] !== this.previousSlide){
-			
+				this.slides[i].classList.remove('transitioning');
+				
 				this.slides[i].style.zIndex = 0;
 				this.slides[i].style.left = this.viewWidth+'px';
 			}
