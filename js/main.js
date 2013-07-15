@@ -344,7 +344,7 @@ UBCC = {
 						modelLists[h].parentNode.style.display = 'block';
 						if(!modelList.list.parentNode.classList.contains('slideShow'))
 						modelSlideShow(h,modelList,i+1);
-
+						window.scrollTo(0,0);
 					}
 					
 				}
@@ -423,9 +423,6 @@ UBCC = {
 					modelList.modelListItems[j].style.height = 'auto';
 				}
 				modelItemSlideShow.close();
-				window.scrollTo(0,0);
-				
-				console.log(slideShows)
 				
 			}, false);
 		}
@@ -492,6 +489,7 @@ UBCC = {
 		/**
 		 *@Class archiveSlideShow
 		 */
+		var slideShows = [];
 		function archiveSlideShow(clicked_story_index,storyWidth){
 			
 			//get clicked story
@@ -546,10 +544,15 @@ UBCC = {
 					//listItems[j].style.height = maxHeight + 'px'; //?working correctly??
 				}
 				list.style.height = maxHeight + 'px';
-
-				var archiveStoryItemSlideShow = new SlideShow( view, list, listItems, list, prevBtn );//@param penUltimate was nextBtn
-				archiveStoryItemSlideShow.gotoSlide(listItems.length);
 				
+				console.log(clicked_story_index)
+				if(slideShows[clicked_story_index] === undefined){
+					var archiveStoryItemSlideShow = new SlideShow( view, list, listItems, list, prevBtn );//@param penUltimate was nextBtn
+					slideShows.push(archiveStoryItemSlideShow);
+				}else{
+					archiveStoryItemSlideShow = slideShows[clicked_story_index];
+				}
+				archiveStoryItemSlideShow.gotoSlide(listItems.length);
 
 				//x btn click
 				xBtn.addEventListener('click', function(){
@@ -568,10 +571,10 @@ UBCC = {
 						}
 					}
 					for(var i=0;i<self.archiveListStories.length;i++){
-						
 						self.archiveListStories[i].style.display = 'block';
-						
 					}
+					archiveStoryItemSlideShow.close();
+					
 				}, false);
 			}
 			
