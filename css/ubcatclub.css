@@ -953,7 +953,7 @@ ul.archiveStoryList li.item article.entry .imgHolder img {
 	line-height:1em;
 	color:#fff;
 	text-decoration:none;
-	padding-bottom:0;
+	padding:0;
 }
 .cc-archive .slideShow ul.archiveStoryList li article.entry section.content p.name {
 	font-family:'DrescherGroteskBTW01-Se';

@@ -545,7 +545,6 @@ UBCC = {
 				}
 				list.style.height = maxHeight + 'px';
 				
-				console.log(clicked_story_index)
 				if(slideShows[clicked_story_index] === undefined){
 					var archiveStoryItemSlideShow = new SlideShow( view, list, listItems, list, prevBtn );//@param penUltimate was nextBtn
 					slideShows.push(archiveStoryItemSlideShow);
