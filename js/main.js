@@ -19,6 +19,22 @@ UBCC = {
 		//header
 		this.header();
 		
+		//subscribe link out rather than page
+		function subscribeLinkOut(){
+			var url = 'http://unitedbamboo.us6.list-manage1.com/subscribe?u=6b9528ffebce1155e342ec488&id=3267b6a7cb',
+				header = document.getElementById('cc-header'),
+				nav = header.getElementsByTagName('nav')[0],
+				menu = nav.getElementsByClassName('menu')[0],
+				list = menu.getElementsByTagName('ul')[0],
+				listItems = list.getElementsByTagName('li');
+				subscribeLink = listItems[listItems.length-1].getElementsByTagName('a')[0];
+				
+			subscribeLink.setAttribute('href',url);
+			subscribeLink.setAttribute('target','_blank');
+				
+		}
+		subscribeLinkOut();
+		
 		//pages
 		if(this.content.classList.contains('cc-home')){
 			this.homeSlideShow();
