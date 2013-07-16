@@ -866,9 +866,9 @@ ul.archiveStoryList li.item article.entry .imgHolder img {
 	position:absolute;
 	padding:0;
 	float:none;
-	width:100%;
-	background-color:#ff8672;;
-	
+	width:80%;
+/*	background-color:#ff8672;
+*/	
 }
 .cc-archive .slideShow ul.archiveStoryList li.transitioning {
 	-webkit-transition:all 0.5s ease-in-out;
