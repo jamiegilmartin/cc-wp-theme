@@ -969,6 +969,16 @@ ul.archiveStoryList li.item article.entry .imgHolder img {
 	width:60em;
 	height:auto;
 }
+.cc-archive .indicator {
+	position:absolute;
+	top:31.5em;
+	left:35em;
+	z-index:4;
+	-webkit-transition:all 0.5s ease-in-out;
+	-moz-transition:all 0.5s ease-in-out;
+	-o-transition:all 0.5s ease-in-out;
+	transition:all 0.5s ease-in-out;
+}
 
 /**
  * cc-subscribe

@@ -316,6 +316,9 @@ SlideShow.prototype.updateSlides = function( dir ){
 	
 	//update indicator
 	this.indicator.innerHTML = (this.active_index+1) +' of '+this.slides.length;
+	//set indicator top
+	var img  = this.slides[this.active_index].getElementsByTagName('img')[0];
+	this.indicator.style.top = img.offsetHeight+10+'px';
 };
 
 

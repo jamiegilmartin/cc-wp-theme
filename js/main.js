@@ -360,7 +360,6 @@ UBCC = {
 						modelLists[h].parentNode.style.display = 'block';
 						if(!modelList.list.parentNode.classList.contains('slideShow'))
 						modelSlideShow(h,modelList,i+1);
-						window.scrollTo(0,0);
 					}
 					
 				}
@@ -384,6 +383,7 @@ UBCC = {
 			//console.log(content.offsetLeft,content.offsetWidth)
 			view.classList.add('slideShow');
 			
+			//fix width to show part of next slide
 			content.style.width = window.innerWidth - ((window.innerWidth - content.offsetWidth) /2)-10 + 'px';
 			view.style.width = content.offsetWidth - 100+ 'px';
 			
@@ -531,9 +531,11 @@ UBCC = {
 				//console.log(content,content.offsetLeft,content.offsetWidth)//TODO : on resize, models ...
 				view.classList.add('slideShow');
 				
+				//fix width to show part of next slide
 				content.style.width = window.innerWidth - ((window.innerWidth - content.offsetWidth) /2)-10 + 'px';
 				
 				view.style.width = content.offsetWidth - 100+ 'px';
+
 
 				nextBtn.classList.add('nextBtn');
 				prevBtn.classList.add('prevBtn');
@@ -547,6 +549,17 @@ UBCC = {
 				view.appendChild(prevBtn);
 				view.appendChild(xBtn);
 
+				
+				//create slide show instance
+				if(slideShows[clicked_story_index] === undefined){
+					var archiveStoryItemSlideShow = new SlideShow( view, list, listItems, list, prevBtn );//@param penUltimate was nextBtn
+					slideShows.push(archiveStoryItemSlideShow);
+				}else{
+					archiveStoryItemSlideShow = slideShows[clicked_story_index];
+				}
+				archiveStoryItemSlideShow.gotoSlide(listItems.length);
+				
+				
 				//set heights
 				var maxHeight = 0;
 				for(var i=0;i<listItems.length;i++){
@@ -561,14 +574,7 @@ UBCC = {
 				}
 				list.style.height = maxHeight + 'px';
 				
-				if(slideShows[clicked_story_index] === undefined){
-					var archiveStoryItemSlideShow = new SlideShow( view, list, listItems, list, prevBtn );//@param penUltimate was nextBtn
-					slideShows.push(archiveStoryItemSlideShow);
-				}else{
-					archiveStoryItemSlideShow = slideShows[clicked_story_index];
-				}
-				archiveStoryItemSlideShow.gotoSlide(listItems.length);
-
+				
 				//x btn click
 				xBtn.addEventListener('click', function(){
 					content.style.width = contentWidth + 'px';
