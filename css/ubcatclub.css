@@ -348,7 +348,7 @@ ul.contentList li.item:nth-child(2n+1) {
 }
 .cc-news article.entry section.content .slideShow {
 	position:relative;
-	padding-bottom:3em;
+	padding-bottom:1em;
 }
 .cc-news article.entry section.content .slideShow ul {
 	overflow:hidden;
