@@ -151,6 +151,10 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 			this.currentSlide.slide.classList.add('currentSlide');
 			this.currentSlide.slide.classList.add('transitioning');
 			
+			
+			if(this.onLast ){
+			
+			}
 			//set prev slide
 			if(this.active_index-1 >= 0){
 				this.previousSlide = this.slidesArr[this.active_index-1];

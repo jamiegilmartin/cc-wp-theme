@@ -17,7 +17,7 @@ get_header(); ?>
 		
 
 		
-		<?php echo do_shortcode("[rotatingtweets screen_name='jamiegilmartin']"); ?>
+		<?php echo do_shortcode("[rotatingtweets screen_name='jamiegilmartin' rotation_type='fade' ]"); ?>
 		
 		
 		<?php
