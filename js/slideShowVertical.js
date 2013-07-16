@@ -152,9 +152,7 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 			this.currentSlide.slide.classList.add('transitioning');
 			
 			
-			if(this.onLast ){
 			
-			}
 			//set prev slide
 			if(this.active_index-1 >= 0){
 				this.previousSlide = this.slidesArr[this.active_index-1];
@@ -175,7 +173,13 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 		
 				//this.previousSlide.slide.style.zIndex = 0;
 				//this.previousSlide.slide.style.top  =  this.viewHeight+'px';
-				console.log('on f',this.previousSlide.slide)
+				if(this.onLast){
+					this.previousSlide.slide.classList.remove('transitioning');
+					this.previousSlide.fader.classList.remove('transitioning');
+					this.previousSlide.slide.style.height = 0;
+					this.previousSlide.fader.style.height = 0;
+					console.log('on f',this.previousSlide.slide);
+				}
 				
 			}
 			
