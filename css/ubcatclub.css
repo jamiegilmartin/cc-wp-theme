@@ -180,7 +180,9 @@ header#cc-header section.about p {
 	height:100%;
 	z-index:1;
 	opacity:1;
-
+}
+.cc-home ul li .fade {
+	opacity:0;
 }
 .cc-home ul li.transitioning .fader {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
@@ -189,14 +191,14 @@ header#cc-header section.about p {
 	-o-transition:all 1.5s ease-in-out;
 	transition:all 1.5s ease-in-out;
 }
-.cc-home ul li.intro .fader {
+/*.cc-home ul li.intro .fader {
 	opacity:0;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 	-webkit-transition:all 0.5s ease-in-out;
 	-moz-transition:all 0.5s ease-in-out;
 	-o-transition:all 0.5s ease-in-out;
 	transition:all 0.5s ease-in-out;
-}
+}*/
 
 .cc-home ul.slideList {
 	z-index:1;

@@ -287,6 +287,7 @@ SlideShow.prototype.updateSlides = function( dir ){
 			var transitionEnd = whichTransitionEvent();
 			if(transitionEnd){
 				this.currentSlide.addEventListener(transitionEnd, function( e ) {
+					//set transitioning false so next can click
 					self.transitioning = false;
 					//TODO: self.currentSlide.removeEventListener('webkitTransitionEnd', this , false);
 				}, false );

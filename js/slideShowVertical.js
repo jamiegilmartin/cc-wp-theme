@@ -137,10 +137,13 @@ SlideShowVertical.prototype.next = function(){
 SlideShowVertical.prototype.updateSlides = function( dir ){
 	var self = this;
 	
+	function resetFaders(){
+		for(var i=0;i<self.slidesArr.length;i++){
+			self.slidesArr[i].fader.classList.remove('fade');
+		}
+	}
 	
 	for(var i=0;i<this.slidesArr.length;i++){
-		//add transitioning class
-		//this.slides[i].classList.remove('transitioning');
 		
 		if(i === this.active_index ){
 			
@@ -148,8 +151,8 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 			this.currentSlide = this.slidesArr[i];
 			this.currentSlide.slide.style.height = this.slideHeights[i] + 'px';
 			
-			//this.currentSlide.slide.classList.add('currentSlide');
-			//this.currentSlide.slide.classList.add('transitioning');
+			this.currentSlide.slide.classList.add('currentSlide');
+			this.currentSlide.slide.classList.add('transitioning');
 			
 			
 			
@@ -161,26 +164,12 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 			}else{
 				//on first slide
 				this.previousSlide = this.slidesArr[this.slides.length-1];
-				
-				//move previous slide stage left
-				//this.previousSlide.slide.classList.add('p');
-				
-				//this.previousSlide.slide.classList.remove('transitioning');
-				//this.previousSlide.fader.classList.remove('transitioning');
-				
-				this.currentSlide.slide.classList.remove('transitioning');
-				this.currentSlide.fader.classList.remove('transitioning');
-		
-				//this.previousSlide.slide.style.zIndex = 0;
-				//this.previousSlide.slide.style.top  =  this.viewHeight+'px';
-				if(this.onLast){
-					//this.previousSlide.slide.classList.remove('transitioning');
-					//this.previousSlide.fader.classList.remove('transitioning');
-					//this.previousSlide.slide.style.height = 0;
-					//this.previousSlide.fader.style.height = 0;
-					console.log('on f',this.previousSlide.slide);
-				}
-				
+
+				//hide last slide
+				this.previousSlide.slide.classList.remove('transitioning');
+
+				//reset all faders
+				resetFaders();
 			}
 			
 			
@@ -190,30 +179,32 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 			}else{
 				//on last slide
 				this.nextSlide = this.slidesArr[0];
-				//move next slide stage right
-				console.log('llasst')
-				this.nextSlide.slide.classList.remove('transitioning');
+				
+				//set first slide fader to fade
+				this.slidesArr[0].fader.classList.remove('fade');
+				
+				//this.nextSlide.slide.classList.remove('transitioning');
 				this.nextSlide.slide.style.height = 0;
 				
 				this.onLast = true;
 				
+				//remove all transitions
 				this.slidesArr[i].slide.classList.remove('transitioning');
-				this.slidesArr[i].fader.classList.remove('transitioning');
-				//this.nextSlide.slide.style.top  =  -this.viewHeight+'px';
+				//re-ad transitioning to current
+				this.currentSlide.slide.classList.add('transitioning');
+				
 			}
 			
-			//this.transitioning = true; //prevents user from going through slides too fast
-			//this.currentSlide.slide.style.zIndex = 2;
-			//this.currentSlide.slide.style.top = 0;
-			this.currentSlide.fader.style.opacity = 0;
+			//add class to current fade to fade out
+			this.currentSlide.fader.classList.add('fade');
 			
 			
 			var transitionEnd = whichTransitionEvent();
 			if(transitionEnd){
 				this.currentSlide.slide.addEventListener(transitionEnd, function( e ) {
+					//set transitioning false so next can click
 					self.transitioning = false;
 					//TODO: self.currentSlide.removeEventListener('webkitTransitionEnd', this , false);
-					
 				}, false );
 			}else{
 				self.transitioning = false;
@@ -222,23 +213,16 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 		}else if(i < this.active_index ){
 			//slide is less than active, move stage left
 			this.slidesArr[i].slide.classList.remove('currentSlide');
-			//this.slidesArr[i].slide.classList.add('transitioning');
-			
-			//this.slidesArr[i].slide.style.zIndex = 0;
-			//this.slidesArr[i].slide.style.top = this.viewHeight+'px';
+			this.slidesArr[i].slide.classList.remove('transitioning');
 			
 		}else{
 			this.slidesArr[i].slide.style.height = 0;
 			
 			this.slidesArr[i].slide.classList.remove('currentSlide');
-			//this.slidesArr[i].slide.classList.add('transitioning');
 			
 			//slide is greater than active, move stage right
 			if(this.slidesArr[i] !== this.previousSlide){
 				
-				//this.slidesArr[i].slide.style.zIndex = 0;
-				//this.slidesArr[i].slide.style.top = -this.viewHeight+'px';
-				this.slidesArr[i].fader.style.opacity = 1;
 				
 			}
 		}
