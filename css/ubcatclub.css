@@ -180,6 +180,9 @@ header#cc-header section.about p {
 	height:100%;
 	z-index:1;
 	opacity:1;
+
+}
+.cc-home ul li.transitioning .fader {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 	-webkit-transition:all 1.5s ease-in-out;
 	-moz-transition:all 1.5s ease-in-out;
@@ -792,8 +795,8 @@ ul.modelList li article.entry .imgHolder img {
  * ul.contentList.archiveList
  */
 ul.archiveList {
-	overflow:hidden;
-}
+/*	overflow:hidden;
+*/}
 
 ul.archiveList li.story {
 	padding:0 2em 4em 0;
@@ -803,8 +806,8 @@ ul.archiveList li.story {
  * archiveStoryList
  */
 ul.archiveStoryList {
-	overflow:hidden;
-	float:left;
+/*	overflow:hidden;
+*/	float:left;
 }
 ul.archiveStoryList li.item {
 	display:none;
@@ -853,12 +856,12 @@ ul.archiveStoryList li.item article.entry .imgHolder img {
 /*archive slide show*/
 .cc-archive .slideShow {
 	position:relative;
-/*	margin:0;
-	width:60em;*/
+	margin:0;
+	width:60em;
 }
 .cc-archive .slideShow ul.archiveStoryList  {
 	position:relative;
-	background-color:#ff8672;;
+	background-color:#ff8672;
 	width:100%;
 }
 .cc-archive .slideShow ul.archiveStoryList li.item {
@@ -866,8 +869,7 @@ ul.archiveStoryList li.item article.entry .imgHolder img {
 	padding:0;
 	float:none;
 	width:80%;
-/*	background-color:#ff8672;
-*/	
+	background-color:#ff8672;
 }
 .cc-archive .slideShow ul.archiveStoryList li.transitioning {
 	-webkit-transition:all 0.5s ease-in-out;
@@ -876,6 +878,7 @@ ul.archiveStoryList li.item article.entry .imgHolder img {
 	transition:all 0.5s ease-in-out;
 }
 .cc-archive .slideShow ul.archiveStoryList li article.entry {
+	background-color:#ff8672;
 
 }
 .cc-archive .slideShow ul.archiveStoryList li article.entry header {

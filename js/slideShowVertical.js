@@ -148,15 +148,15 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 			this.currentSlide = this.slidesArr[i];
 			this.currentSlide.slide.style.height = this.slideHeights[i] + 'px';
 			
-			this.currentSlide.slide.classList.add('currentSlide');
-			this.currentSlide.slide.classList.add('transitioning');
+			//this.currentSlide.slide.classList.add('currentSlide');
+			//this.currentSlide.slide.classList.add('transitioning');
 			
 			
 			
 			//set prev slide
 			if(this.active_index-1 >= 0){
 				this.previousSlide = this.slidesArr[this.active_index-1];
-				this.previousSlide.slide.classList.add('transitioning');
+				//this.previousSlide.slide.classList.add('transitioning');
 				
 			}else{
 				//on first slide
@@ -174,10 +174,10 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 				//this.previousSlide.slide.style.zIndex = 0;
 				//this.previousSlide.slide.style.top  =  this.viewHeight+'px';
 				if(this.onLast){
-					this.previousSlide.slide.classList.remove('transitioning');
-					this.previousSlide.fader.classList.remove('transitioning');
-					this.previousSlide.slide.style.height = 0;
-					this.previousSlide.fader.style.height = 0;
+					//this.previousSlide.slide.classList.remove('transitioning');
+					//this.previousSlide.fader.classList.remove('transitioning');
+					//this.previousSlide.slide.style.height = 0;
+					//this.previousSlide.fader.style.height = 0;
 					console.log('on f',this.previousSlide.slide);
 				}
 				
@@ -197,13 +197,12 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 				
 				this.onLast = true;
 				
-				//this.nextSlide.slide.style.zIndex = 1;
-				this.currentSlide.fader.style.bottom = 0;
-				
+				this.slidesArr[i].slide.classList.remove('transitioning');
+				this.slidesArr[i].fader.classList.remove('transitioning');
 				//this.nextSlide.slide.style.top  =  -this.viewHeight+'px';
 			}
 			
-			this.transitioning = true; //prevents user from going through slides too fast
+			//this.transitioning = true; //prevents user from going through slides too fast
 			//this.currentSlide.slide.style.zIndex = 2;
 			//this.currentSlide.slide.style.top = 0;
 			this.currentSlide.fader.style.opacity = 0;
@@ -223,7 +222,7 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 		}else if(i < this.active_index ){
 			//slide is less than active, move stage left
 			this.slidesArr[i].slide.classList.remove('currentSlide');
-			this.slidesArr[i].slide.classList.add('transitioning');
+			//this.slidesArr[i].slide.classList.add('transitioning');
 			
 			//this.slidesArr[i].slide.style.zIndex = 0;
 			//this.slidesArr[i].slide.style.top = this.viewHeight+'px';
@@ -232,7 +231,7 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 			this.slidesArr[i].slide.style.height = 0;
 			
 			this.slidesArr[i].slide.classList.remove('currentSlide');
-			this.slidesArr[i].slide.classList.add('transitioning');
+			//this.slidesArr[i].slide.classList.add('transitioning');
 			
 			//slide is greater than active, move stage right
 			if(this.slidesArr[i] !== this.previousSlide){

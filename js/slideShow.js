@@ -273,10 +273,11 @@ SlideShow.prototype.updateSlides = function( dir ){
 				this.nextSlide = this.slides[0];
 				//move next slide stage right
 				
-				this.nextSlide.classList.add('transitioning');
+				this.nextSlide.classList.remove('transitioning');
 				this.nextSlide.style.zIndex = 0;
 				this.nextSlide.style.left  =  this.viewWidth+'px';
 			}
+			
 			
 			this.transitioning = true; //prevents user from going through slides too fast
 			this.currentSlide.style.zIndex = 2;

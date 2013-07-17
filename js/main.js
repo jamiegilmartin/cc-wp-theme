@@ -533,8 +533,8 @@ UBCC = {
 				
 				//fix width to show part of next slide
 				content.style.width = window.innerWidth - ((window.innerWidth - content.offsetWidth) /2)-10 + 'px';
-				view.style.width = content.offsetWidth+ 'px';
-
+				view.style.width = content.offsetWidth-100+ 'px';
+				console.log(contentWidth,content.offsetWidth)
 
 				nextBtn.classList.add('nextBtn');
 				prevBtn.classList.add('prevBtn');
