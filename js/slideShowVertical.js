@@ -162,7 +162,7 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 				//this.previousSlide.slide.classList.add('transitioning');
 				
 			}else{
-				//on first slide
+				//ON FIRST SLIDE
 				this.previousSlide = this.slidesArr[this.slides.length-1];
 
 				//hide last slide
@@ -177,7 +177,7 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 			if(this.active_index+1 <= this.slides.length-1){
 				this.nextSlide = this.slidesArr[this.active_index+1];
 			}else{
-				//on last slide
+				//ON LAST SLIDE
 				this.nextSlide = this.slidesArr[0];
 				
 				//set first slide fader to fade
