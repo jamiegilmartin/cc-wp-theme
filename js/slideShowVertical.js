@@ -21,7 +21,6 @@ SlideShowVertical = function( view, ul, lis, nextBtn){
 	this.nextBtn = nextBtn;
 	this.viewWidth = this.view.offsetWidth;
 	this.viewHeight = this.view.offsetHeight;
-	this.onLast = false;
 	
 	
 	for(var i=0;i<this.slides.length;i++){
@@ -152,8 +151,8 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 			this.currentSlide.slide.style.height = this.slideHeights[i] + 'px';
 			
 			this.currentSlide.slide.classList.add('currentSlide');
+			if(i!==0)
 			this.currentSlide.slide.classList.add('transitioning');
-			
 			
 			
 			//set prev slide
@@ -186,7 +185,6 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 				//this.nextSlide.slide.classList.remove('transitioning');
 				this.nextSlide.slide.style.height = 0;
 				
-				this.onLast = true;
 				
 				//remove all transitions
 				this.slidesArr[i].slide.classList.remove('transitioning');

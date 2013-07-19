@@ -191,21 +191,12 @@ header#cc-header section.about p {
 	-o-transition:all 1.5s ease-in-out;
 	transition:all 1.5s ease-in-out;
 }
-/*.cc-home ul li.intro .fader {
-	opacity:0;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-	-webkit-transition:all 0.5s ease-in-out;
-	-moz-transition:all 0.5s ease-in-out;
-	-o-transition:all 0.5s ease-in-out;
-	transition:all 0.5s ease-in-out;
-}*/
+
 
 .cc-home ul.slideList {
 	z-index:1;
-	/*position:fixed;*/
 }
 .cc-home ul.slideList li {
-/*	position:absolute;*/
 	top:0;
 }
 
@@ -214,17 +205,7 @@ header#cc-header section.about p {
 }
 .cc-home ul.shadowList li {
 }
-/*
-.cc-home ul.shadowList li:nth-child(1){
-	background:blue;
-}
-.cc-home ul.shadowList li:nth-child(2){
-	background:red;
-}
-.cc-home ul.shadowList li:nth-child(3){
-	background:green;
-}
-*/
+
 
 
 /**
