@@ -484,8 +484,8 @@ ul.contentList li.item:nth-child(2n+1) {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 }
 .cc-store article.entry header .content {
-	width:90%;
-	margin:5em auto;
+	width:80%;
+	margin:4em auto;
 	text-align:center;
 }
 .cc-store article.entry header h2.title{
@@ -509,9 +509,9 @@ ul.contentList li.item:nth-child(2n+1) {
 	display:none;
 }
 .cc-store article.entry header .meta ul li.description {
-	font-family:'Courier New';
-	font-size:1.2em;
-	line-height:1.6em;
+	
+	font-size:1.6em;
+	line-height:1em;
 	color:#ff8672;;
 }
 .cc-store article.entry header .meta ul li.price {
