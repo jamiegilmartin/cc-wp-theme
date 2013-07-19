@@ -36,6 +36,8 @@ SlideShowVertical = function( view, ul, lis, nextBtn){
 	this.transitioning = false;
 	this.active_index = 0;
 	
+	this.view.classList.add('show');
+	console.log(this.view)
 	this.updateSlides();
 	//set agian for ff
 	this.transitioning = false;
