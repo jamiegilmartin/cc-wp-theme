@@ -421,6 +421,7 @@ UBCC = {
 			}else{
 				modelItemSlideShow = slideShows[listNum];
 			}
+			modelItemSlideShow.indicatorOn = false;
 			modelItemSlideShow.gotoSlide(clicked_slide_index);
 			
 			//x btn click
@@ -534,7 +535,7 @@ UBCC = {
 				//fix width to show part of next slide
 				content.style.width = window.innerWidth - ((window.innerWidth - content.offsetWidth) /2)-10 + 'px';
 				view.style.width = content.offsetWidth-100+ 'px';
-				console.log(contentWidth,content.offsetWidth)
+				//console.log(contentWidth,content.offsetWidth)
 
 				nextBtn.classList.add('nextBtn');
 				prevBtn.classList.add('prevBtn');
@@ -556,8 +557,8 @@ UBCC = {
 				}else{
 					archiveStoryItemSlideShow = slideShows[clicked_story_index];
 				}
+				archiveStoryItemSlideShow.indicatorOn = false;
 				archiveStoryItemSlideShow.gotoSlide(listItems.length);
-				
 				
 				//set heights
 				var maxHeight = 0;

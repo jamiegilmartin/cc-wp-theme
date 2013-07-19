@@ -24,7 +24,7 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	this.over = false;
 	this.overLeftSide = false;
 	//console.log(this.viewWidth ,this.viewHeight )
-	
+	this.indicatorOn = true;
 	this.transitioning = false;
 	this.active_index = 0;
 	
@@ -228,6 +228,7 @@ SlideShow.prototype.prev = function(){
 SlideShow.prototype.gotoSlide = function(num){
 	this.active_index = num-1;
 	this.updateSlides();
+	if(this.indicatorOn)
 	this.indicator.style.display = 'block';
 	
 };
