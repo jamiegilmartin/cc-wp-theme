@@ -37,7 +37,8 @@ SlideShowVertical = function( view, ul, lis, nextBtn){
 	this.active_index = 0;
 	
 	this.view.classList.add('show');
-	console.log(this.view)
+	this.first = true;
+	
 	this.updateSlides();
 	//set agian for ff
 	this.transitioning = false;
@@ -88,8 +89,11 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 			this.currentSlide.slide.style.height = this.slideHeights[i] + 'px';
 			
 			this.currentSlide.slide.classList.add('currentSlide');
-			if(i!==0)
-			this.currentSlide.slide.classList.add('transitioning');
+			if(i===0 && this.first === true){
+				this.first = false;
+			}else{
+				this.currentSlide.slide.classList.add('transitioning');
+			}
 			
 			
 			//set prev slide
@@ -103,7 +107,8 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 
 				//hide last slide
 				this.previousSlide.slide.classList.remove('transitioning');
-
+				
+				this.currentSlide.slide.classList.opacity = 0;
 				//reset all faders
 				resetFaders();
 			}

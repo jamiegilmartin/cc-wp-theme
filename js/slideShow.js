@@ -41,7 +41,6 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	this.updateSlides();
 	//set agian for ff
 	this.transitioning = false;
-	this.first = true;
 	
 	this.events();
 	/*
@@ -266,9 +265,8 @@ SlideShow.prototype.updateSlides = function( dir ){
 			//console.log(i,this.slides[i],this.active_index)
 			this.currentSlide = this.slides[i];
 			this.currentSlide.classList.add('currentSlide');
-			if(!this.first)
 			this.currentSlide.classList.add('transitioning');
-			this.first = false;
+
 			
 			//set next slide
 			if(this.active_index+1 <= this.slides.length-1){
