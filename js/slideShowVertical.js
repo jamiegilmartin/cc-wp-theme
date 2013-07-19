@@ -49,72 +49,7 @@ SlideShowVertical = function( view, ul, lis, nextBtn){
 //SlideShowVertical.prototype = new SlideShow();
 //SlideShowVertical.prototype.constructor = this.SlideShowVertical;
 SlideShowVertical.prototype.events = function(){
-	//Events
-	var self = this,
-		called = 0,
-		touchStartX,
-		touchStartY,
-		deltaXAvg = [],
-		deltaYAvg = [];;
-		
-	//touch start
-	this.view.addEventListener('touchstart',function(e){
-		called = 0;
-		deltaXAvg = [];
-		deltaYAvg = [];
-		if(UBCC.isAndroid){
-			touchStartX = e.changedTouches[0].pageX;
-			touchStartY = e.changedTouches[0].pageY;
-		}else{
-			touchStartX = e.pageX;
-			touchStartY = e.pageY;
-		}
-		
-	},false);
-	
-	//touch move
-	this.view.addEventListener('touchmove',function(e){
-		var deltaX,
-			deltaY;
-		if(UBCC.isAndroid){
-			deltaX = e.changedTouches[0].pageX  - touchStartX;
-			deltaY = e.changedTouches[0].pageY  - touchStartY;
-		}else{
-			deltaX = e.pageX - touchStartX;
-			deltaY = e.pageY - touchStartY;
-		}
-		
-		deltaXAvg.push(deltaX);
-		deltaYAvg.push(deltaY);
-		
-		if(deltaXAvg.length > 2){
-			//if scrolling Y return
-			if(Math.abs(deltaYAvg.sum()) > 10) return;
-			
-			var dir = deltaXAvg.sum() > 0 ? 'prev' : 'next';
-			
-			//output.innerHTML = e.pageX + ' --- ' + deltaAvg.sum() + ' : ' + dir;
-			
-			//reset touch start 
-			touchStartX = e.pageX;
-			//swipe
-			swipe(dir);
-		}
-	},false);
-	
-	
-	function swipe(dir){
-		called ++;
-		if(called === 1){
-			if(dir === 'next'){
-				if(self.transitioning === false)
-				self.next();
-			}else{
-				if(self.transitioning === false)
-				self.prev();
-			}
-		}
-	}
+	var self = this;
 
 	//next and prev click
 	this.nextBtn.addEventListener('click', function(){

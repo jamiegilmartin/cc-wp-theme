@@ -217,9 +217,9 @@ ul.contentList {
 ul.contentList li.item {
 	padding:0 0 8em 0em;
 }
-ul.contentList li.item:nth-child(2n+1) {
+/*ul.contentList li.item:nth-child(2n+1) {
 	padding-left:20em;
-}
+}*/
 
 
 
