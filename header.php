@@ -32,6 +32,7 @@ display: block;
 </style>
 <script src="<?php echo bloginfo( 'template_url' ); ?>/js/shims.js" type="text/javascript" charset="utf-8"></script> 
 <![endif]-->
+<script src="<?php echo bloginfo( 'template_url' ); ?>/js/libraries/greensock/TweenMax.min.js"></script>
 
 <script src="<?php echo bloginfo( 'template_url' ); ?>/js/libraries/widgets.js"></script>
 
