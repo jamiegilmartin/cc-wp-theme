@@ -20,7 +20,17 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	
 	this.viewWidth = this.view.offsetWidth;
 	this.viewHeight = this.view.offsetHeight;
+	
+	this.over = false;
+	this.overLeftSide = false;
+	//console.log(this.viewWidth ,this.viewHeight )
+	this.indicatorOn = true;
+	this.transitioning = false;
 	this.active_index = 0;
+	
+	//hide next and prev
+	//this.nextBtn.style.opacity = 0
+	//this.prevBtn.style.opacity = 0;
 	
 	//indicator
 	this.indicator = document.createElement('div');
@@ -28,22 +38,24 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	this.indicator.innerHTML = '1 of '+this.slides.length;
 	this.view.appendChild(this.indicator);
 	
-	
-	this.aniDelay = 0.5;
-	
-	
-	//three places
-	this.previousSlide;
-	this.currentSlide;
-	this.nextSlide;
-	
-	this.onFirst = false;
-	this.onLast = false;
-	
 	this.updateSlides();
-	this.animateSlides();
+	//set agian for ff
+	this.transitioning = false;
 	
 	this.events();
+	/*
+	var output = document.createElement('div');
+	output.style.border = '1px solid red';
+	output.style.position = 'absolute';
+	output.style.height = '40px';
+	output.style.top = '0px';
+	output.style.left = '0px'
+	output.style.zIndex = 100;
+	this.view.appendChild(output);
+	*/
+	
+
+	
 };
 SlideShow.prototype.events = function(){
 	//Events
@@ -113,13 +125,89 @@ SlideShow.prototype.events = function(){
 		}
 	}
 	
+	/*
+	//hide show next and prev
+	this.slideShow.addEventListener('mouseover', function(e){
+		self.over = true;
+		self.showButtons();
+	}, false);
+	this.slideShow.addEventListener('mousemove', function(e){
+		if(self.over === true){
+			var x = e.offsetX==undefined?e.layerX:e.offsetX;
+			var y = e.offsetY==undefined?e.layerY:e.offsetY;
+			
+			if(x > this.offsetWidth/2){
+				self.overLeftSide = false;
+			}else{
+				self.overLeftSide = true;
+			}
+			self.showButtons();
+		}
+	}, false);
+	this.slideShow.addEventListener('mouseout', function(e){
+		self.over = false;
+		self.hideButtons();
+	}, false);
+	
+	//next and prev over and out
+	
+	this.nextBtn.addEventListener('mouseover', function(){
+		self.over = true;
+		self.overLeftSide = false;
+		self.showButtons();
+	}, false);
+	this.prevBtn.addEventListener('mouseover', function(){
+		self.over = true;
+		self.overLeftSide = true;
+		self.showButtons();
+	}, false);
+	this.nextBtn.addEventListener('mouseout', function(){
+		self.over = false;
+		self.hideButtons()
+	}, false);
+	this.prevBtn.addEventListener('mouseout', function(){
+		self.over = false;
+		self.hideButtons()
+	}, false);
+	*/
+	
 	//next and prev click
 	this.nextBtn.addEventListener('click', function(){
-		//if(self.transitioning === false)
+		//console.log(self.transitioning)
+		if(self.transitioning === false)
 		self.next();
 	}, false);
-
+	/*
+	this.prevBtn.addEventListener('click', function(){
+		if(self.transitioning === false)
+		self.prev();
+	}, false);
+	*/
 };
+/*
+SlideShow.prototype.showButtons = function(){
+	if(this.overLeftSide===true){
+		this.prevBtn.style.opacity = 1;
+		this.nextBtn.style.opacity = 0;
+	}else{
+		this.nextBtn.style.opacity = 1;
+		this.prevBtn.style.opacity = 0;
+	}
+	
+};
+SlideShow.prototype.hideButtons = function(){
+	var self = this;
+	
+	function hide(){
+		if(self.over === false){
+			self.nextBtn.style.opacity = 0;
+			self.prevBtn.style.opacity = 0;
+		}
+	}
+	setTimeout(hide,1000);
+};
+*/
+
 SlideShow.prototype.next = function(){
 	if(this.active_index < this.slides.length-1){
 		this.active_index++;
@@ -127,7 +215,6 @@ SlideShow.prototype.next = function(){
 		this.active_index = 0;
 	}
 	this.updateSlides('next');
-	this.animateSlides();
 
 };
 SlideShow.prototype.prev = function(){
@@ -141,7 +228,6 @@ SlideShow.prototype.prev = function(){
 SlideShow.prototype.gotoSlide = function(num){
 	this.active_index = num-1;
 	this.updateSlides();
-	this.nonAnimateSlides();
 	if(this.indicatorOn)
 	this.indicator.style.display = 'block';
 	
@@ -153,59 +239,81 @@ SlideShow.prototype.close = function(){
 SlideShow.prototype.updateSlides = function( dir ){
 	var self = this;
 	for(var i=0;i<this.slides.length;i++){
+		//add transitioning class
+		//this.slides[i].classList.remove('transitioning');
 		
 		if(i === this.active_index ){
 			//set prev slide
 			if(this.active_index-1 >= 0){
-				this.onFirst = false;
 				this.previousSlide = this.slides[this.active_index-1];
+				this.previousSlide.classList.add('transitioning');
 			}else{
 				//on first slide
-				this.onFirst = true;
 				this.previousSlide = this.slides[this.slides.length-1];
 				//move previous slide stage left
-				this.previousSlide.style.zIndex = 1;
-				//this.previousSlide.style.left  =  -this.viewWidth+'px';
+				if(dir === 'next'){
+					this.previousSlide.classList.add('transitioning');
+				}else{
+					this.previousSlide.classList.remove('transitioning');
+				}
+				this.previousSlide.style.zIndex = 0;
+				this.previousSlide.style.left  =  -this.viewWidth+'px';
 				
 			}
 			
 			//set current
+			//console.log(i,this.slides[i],this.active_index)
 			this.currentSlide = this.slides[i];
 			this.currentSlide.classList.add('currentSlide');
+			this.currentSlide.classList.add('transitioning');
+
 			
 			//set next slide
 			if(this.active_index+1 <= this.slides.length-1){
 				this.nextSlide = this.slides[this.active_index+1];
-				this.onLast = false;
 			}else{
 				//on last slide
-				this.onLast = true;
 				this.nextSlide = this.slides[0];
 				//move next slide stage right
-				this.nextSlide.style.zIndex = 1;
-				//this.nextSlide.style.left  =  this.viewWidth+'px';
+				
+				this.nextSlide.classList.remove('transitioning');
+				this.nextSlide.style.zIndex = 0;
+				this.nextSlide.style.left  =  this.viewWidth+'px';
 			}
 			
 			
+			this.transitioning = true; //prevents user from going through slides too fast
 			this.currentSlide.style.zIndex = 2;
-			//this.currentSlide.style.left = 0;
+			this.currentSlide.style.left = 0;
+			
+			
+			var transitionEnd = whichTransitionEvent();
+			if(transitionEnd){
+				this.currentSlide.addEventListener(transitionEnd, function( e ) {
+					//set transitioning false so next can click
+					self.transitioning = false;
+					//TODO: self.currentSlide.removeEventListener('webkitTransitionEnd', this , false);
+				}, false );
+			}else{
+				self.transitioning = false;
+			}
 			
 		}else if(i < this.active_index ){
 			//slide is less than active, move stage left
 			this.slides[i].classList.remove('currentSlide');
+			this.slides[i].classList.remove('transitioning');
 			
-			//this.slides[i].style.zIndex = 0;
-			//this.slides[i].style.left = -this.viewWidth+'px';
+			this.slides[i].style.zIndex = 0;
+			this.slides[i].style.left = -this.viewWidth+'px';
 			
 		}else{
-			//slide is greater than active, move stage right
 			this.slides[i].classList.remove('currentSlide');
-			
+			//slide is greater than active, move stage right
 			if(this.slides[i] !== this.previousSlide){
-				//this.slides[i].style.zIndex = 0;
-				//this.slides[i].style.left = this.viewWidth+'px';
-			}else{
-				//console.log('prev',this.slides[i])
+				this.slides[i].classList.remove('transitioning');
+				
+				this.slides[i].style.zIndex = 0;
+				this.slides[i].style.left = this.viewWidth+'px';
 			}
 		}
 	}
@@ -217,24 +325,8 @@ SlideShow.prototype.updateSlides = function( dir ){
 	var img  = this.slides[this.active_index].getElementsByTagName('img')[0];
 	this.indicator.style.top = img.offsetHeight+10+'px';
 };
-SlideShow.prototype.animateSlides = function( dir ){
-	
-	TweenLite.to(this.currentSlide, this.aniDelay, {left:0, ease:Linear.easeOut});
-	
-	TweenLite.to(this.previousSlide, this.aniDelay, {left: -this.viewWidth, ease:Linear.easeOut});
 
-	this.nextSlide.style.left  =  this.viewWidth+'px';
-	
-};
-SlideShow.prototype.nonAnimateSlides = function(){
-	if(this.onFirst)
-	this.previousSlide.style.left  =  -this.viewWidth+'px';
-	
-	this.currentSlide.style.left = 0;
-	
-	if(this.onLast)
-	this.nextSlide.style.left  =  this.viewWidth+'px';
-	
-};
+
+
 
 
