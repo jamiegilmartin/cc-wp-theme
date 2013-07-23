@@ -148,7 +148,7 @@ SlideShow.prototype.gotoSlide = function(num){
 };
 SlideShow.prototype.close = function(){
 	this.indicator.style.display = 'none';
-	this.first = true;
+	this.active_index = 0;
 };
 SlideShow.prototype.updateSlides = function( dir ){
 	var self = this;

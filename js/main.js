@@ -422,7 +422,7 @@ UBCC = {
 				modelItemSlideShow = slideShows[listNum];
 			}
 			modelItemSlideShow.indicatorOn = false;
-			modelItemSlideShow.gotoSlide(clicked_slide_index);
+			modelItemSlideShow.gotoSlide(clicked_slide_index-1);
 			
 			//x btn click
 			xBtn.addEventListener('click', function(){
@@ -558,7 +558,7 @@ UBCC = {
 					archiveStoryItemSlideShow = slideShows[clicked_story_index];
 				}
 				archiveStoryItemSlideShow.indicatorOn = false;
-				archiveStoryItemSlideShow.gotoSlide(listItems.length);
+				archiveStoryItemSlideShow.gotoSlide(listItems.length-1);
 				
 				//set heights
 				var maxHeight = 0;
