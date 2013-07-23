@@ -66,6 +66,7 @@ UBCC = {
 		function openCloseHeader(){
 			if(header.classList.contains('closed')){
 				openHeader();
+				console.log('oo')
 			}else{
 				closeHeader();
 			}
@@ -359,7 +360,7 @@ UBCC = {
 					if(modelList.list === modelLists[h]){
 						modelLists[h].parentNode.style.display = 'block';
 						if(!modelList.list.parentNode.classList.contains('slideShow'))
-						modelSlideShow(h,modelList,i+1);
+						modelSlideShow(h,modelList,i);
 					}
 					
 				}
@@ -371,7 +372,7 @@ UBCC = {
 		/**
 		 *@Class modelSlideShow
 		 */
-		var slideShows = [];
+		var slideShowsArr = [];
 		function modelSlideShow(listNum,modelList,clicked_slide_index){
 			//wrap images in list
 			var view = modelList.list.parentNode,
@@ -399,6 +400,7 @@ UBCC = {
 			view.appendChild(prevBtn);
 			view.appendChild(xBtn);
 			
+			
 			//console.log(modelList.modelListItems)
 			
 			//set heights
@@ -415,14 +417,19 @@ UBCC = {
 				modelLists[h].style.height = maxHeight + 'px';
 			}
 			
-			if(slideShows[listNum] === undefined){
-				var modelItemSlideShow = new SlideShow( view, modelList.list, modelList.modelListItems, modelList.list, prevBtn );//@param penUltimate was nextBtn
-				slideShows.push(modelItemSlideShow);
+			if(slideShowsArr[listNum] === undefined){
+				var modelItemSlideShow = new SlideShow( view, modelList.list, modelList.modelListItems,  modelList.list, prevBtn );//@param penUltimate was nextBtn
+				slideShowsArr.push(modelItemSlideShow);
+				
+				//reset next button to fix double firing
+				//modelItemSlideShow.nextBtn = modelList.list;
+				//modelItemSlideShow.events()
 			}else{
-				modelItemSlideShow = slideShows[listNum];
+				modelItemSlideShow = slideShowsArr[listNum];
 			}
+			console.log(slideShowsArr)
 			modelItemSlideShow.indicatorOn = false;
-			modelItemSlideShow.gotoSlide(clicked_slide_index-1);
+			//modelItemSlideShow.gotoSlide(clicked_slide_index);
 			
 			//x btn click
 			xBtn.addEventListener('click', function(){
@@ -558,7 +565,7 @@ UBCC = {
 					archiveStoryItemSlideShow = slideShows[clicked_story_index];
 				}
 				archiveStoryItemSlideShow.indicatorOn = false;
-				archiveStoryItemSlideShow.gotoSlide(listItems.length-1);
+				//archiveStoryItemSlideShow.gotoSlide(listItems.length);
 				
 				//set heights
 				var maxHeight = 0;

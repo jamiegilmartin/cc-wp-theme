@@ -41,7 +41,7 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	this.onLast = false;
 	
 	this.updateSlides();
-	this.animateSlides();
+	this.nonAnimateSlides();
 	
 	this.events();
 };
@@ -126,6 +126,8 @@ SlideShow.prototype.next = function(){
 	}else{
 		this.active_index = 0;
 	}
+	console.log('n')
+	
 	this.updateSlides('next');
 	this.animateSlides();
 
@@ -139,9 +141,11 @@ SlideShow.prototype.prev = function(){
 	this.updateSlides('prev');
 };
 SlideShow.prototype.gotoSlide = function(num){
-	this.active_index = num-1;
+	console.log('gts '+ num)
+	this.active_index = num;
 	this.updateSlides();
 	this.nonAnimateSlides();
+	//this.events();
 	if(this.indicatorOn)
 	this.indicator.style.display = 'block';
 	
@@ -168,7 +172,7 @@ SlideShow.prototype.updateSlides = function( dir ){
 				//this.previousSlide.style.left  =  -this.viewWidth+'px';
 				
 			}
-			
+			console.log('this.active_index ',this.active_index,this.nextBtn)
 			//set current
 			this.currentSlide = this.slides[i];
 			this.currentSlide.classList.add('currentSlide');
@@ -203,7 +207,7 @@ SlideShow.prototype.updateSlides = function( dir ){
 			
 			if(this.slides[i] !== this.previousSlide){
 				//this.slides[i].style.zIndex = 0;
-				//this.slides[i].style.left = this.viewWidth+'px';
+				this.slides[i].style.left = this.viewWidth+'px';
 			}else{
 				//console.log('prev',this.slides[i])
 			}
