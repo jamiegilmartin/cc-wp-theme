@@ -126,7 +126,6 @@ SlideShow.prototype.next = function(){
 	}else{
 		this.active_index = 0;
 	}
-	console.log('n')
 	
 	this.updateSlides('next');
 	this.animateSlides();
@@ -141,7 +140,6 @@ SlideShow.prototype.prev = function(){
 	this.updateSlides('prev');
 };
 SlideShow.prototype.gotoSlide = function(num){
-	console.log('gts '+ num)
 	this.active_index = num;
 	this.updateSlides('next');
 	this.nonAnimateSlides();

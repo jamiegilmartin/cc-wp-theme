@@ -427,7 +427,7 @@ UBCC = {
 			}else{
 				modelItemSlideShow = slideShowsArr[listNum];
 			}
-			console.log(slideShowsArr)
+			
 			modelItemSlideShow.indicatorOn = false;
 			modelItemSlideShow.gotoSlide(clicked_slide_index-1);
 			
@@ -519,7 +519,7 @@ UBCC = {
 		/**
 		 *@Class archiveSlideShow
 		 */
-		var slideShows = [];
+		var slideShowsArr = [];
 		function archiveSlideShow(clicked_story_index,storyWidth){
 			
 			//get clicked story
@@ -562,14 +562,14 @@ UBCC = {
 				view.appendChild(prevBtn);
 				view.appendChild(xBtn);
 
-				
 				//create slide show instance
-				if(slideShows[clicked_story_index] === undefined){
+				if(slideShowsArr[clicked_story_index] === undefined){
 					var archiveStoryItemSlideShow = new SlideShow( view, list, listItems, list, prevBtn );//@param penUltimate was nextBtn
-					slideShows.push(archiveStoryItemSlideShow);
+					slideShowsArr.push(archiveStoryItemSlideShow);
 				}else{
-					archiveStoryItemSlideShow = slideShows[clicked_story_index];
+					archiveStoryItemSlideShow = slideShowsArr[clicked_story_index];
 				}
+				console.log(slideShowsArr)
 				archiveStoryItemSlideShow.indicatorOn = false;
 				archiveStoryItemSlideShow.gotoSlide(listItems.length-2);
 				
@@ -613,6 +613,7 @@ UBCC = {
 						self.archiveListStories[i].style.display = 'block';
 					}
 					archiveStoryItemSlideShow.close();
+					slideShowsArr=[];
 					window.scrollTo(0,top);
 				}, false);
 			}
