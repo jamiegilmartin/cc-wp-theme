@@ -143,7 +143,7 @@ SlideShow.prototype.prev = function(){
 SlideShow.prototype.gotoSlide = function(num){
 	console.log('gts '+ num)
 	this.active_index = num;
-	this.updateSlides();
+	this.updateSlides('next');
 	this.nonAnimateSlides();
 	//this.events();
 	if(this.indicatorOn)
@@ -156,6 +156,7 @@ SlideShow.prototype.close = function(){
 };
 SlideShow.prototype.updateSlides = function( dir ){
 	var self = this;
+	if(this.active_index<0) return;
 	for(var i=0;i<this.slides.length;i++){
 		
 		if(i === this.active_index ){

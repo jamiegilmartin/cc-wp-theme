@@ -429,7 +429,7 @@ UBCC = {
 			}
 			console.log(slideShowsArr)
 			modelItemSlideShow.indicatorOn = false;
-			//modelItemSlideShow.gotoSlide(clicked_slide_index);
+			modelItemSlideShow.gotoSlide(clicked_slide_index-1);
 			
 			//save scroll position
 			var doc = document.documentElement, body = document.body;
@@ -571,7 +571,7 @@ UBCC = {
 					archiveStoryItemSlideShow = slideShows[clicked_story_index];
 				}
 				archiveStoryItemSlideShow.indicatorOn = false;
-				//archiveStoryItemSlideShow.gotoSlide(listItems.length);
+				archiveStoryItemSlideShow.gotoSlide(listItems.length-2);
 				
 				//set heights
 				var maxHeight = 0;
