@@ -431,6 +431,13 @@ UBCC = {
 			modelItemSlideShow.indicatorOn = false;
 			//modelItemSlideShow.gotoSlide(clicked_slide_index);
 			
+			//save scroll position
+			var doc = document.documentElement, body = document.body;
+			var left = (doc && doc.scrollLeft || body && body.scrollLeft || 0);
+			var top = (doc && doc.scrollTop  || body && body.scrollTop  || 0);
+			console.log(top)
+			window.scrollTo(0,0);
+			
 			//x btn click
 			xBtn.addEventListener('click', function(){
 				content.style.width = contentWidth + 'px';
@@ -447,7 +454,7 @@ UBCC = {
 					modelList.modelListItems[j].style.height = 'auto';
 				}
 				modelItemSlideShow.close();
-				
+				window.scrollTo(0,top);
 			}, false);
 		}
 	},
