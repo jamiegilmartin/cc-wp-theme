@@ -18,15 +18,11 @@
 			</li>
 		<?php endwhile; endif; ?>
 		</ul>
-		
 		<div class="navigation">
 			<p class="backToTop"><a href="<?php echo esc_url( get_permalink( get_page_by_title( 'News' ) ) ); ?>" onclick="window.scrollTo(0,0);">Back to List</a></p>
-			<p class="nav-next"><?php next_post_link( '%link', 'Next Post' ) ?></p>
-			<p class="nav-previous"><?php previous_post_link( '%link', 'Previous Entry' ) ?></p>
-			
-			
+			<p class="nav-next"><?php next_post_link( '%link', 'Next Post' ,true) ?></p>
+			<p class="nav-previous"><?php previous_post_link( '%link', 'Previous Entry' ,true) ?></p>
 		</div>
-			
 	</section>
 </div>
 <?php get_footer(); ?>
