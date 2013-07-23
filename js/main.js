@@ -435,7 +435,6 @@ UBCC = {
 			var doc = document.documentElement, body = document.body;
 			var left = (doc && doc.scrollLeft || body && body.scrollLeft || 0);
 			var top = (doc && doc.scrollTop  || body && body.scrollTop  || 0);
-			console.log(top)
 			window.scrollTo(0,0);
 			
 			//x btn click
@@ -588,6 +587,11 @@ UBCC = {
 				}
 				list.style.height = maxHeight + 'px';
 				
+				//save scroll position
+				var doc = document.documentElement, body = document.body;
+				var left = (doc && doc.scrollLeft || body && body.scrollLeft || 0);
+				var top = (doc && doc.scrollTop  || body && body.scrollTop  || 0);
+				window.scrollTo(0,0);
 				
 				//x btn click
 				xBtn.addEventListener('click', function(){
@@ -609,7 +613,7 @@ UBCC = {
 						self.archiveListStories[i].style.display = 'block';
 					}
 					archiveStoryItemSlideShow.close();
-					
+					window.scrollTo(0,top);
 				}, false);
 			}
 			
