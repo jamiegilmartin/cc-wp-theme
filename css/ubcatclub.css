@@ -245,15 +245,13 @@ ul.contentList li.item {
 	padding-left:20em;
 }
 
-/*twitter -- TODO:
+/*twitter*/
 .cc-news .twitter-module {
-	padding-bottom:8em;
 }
 .cc-news .twitter-module p.title {
 	font-size:2em;
 	line-height:1em;
 	color:#fff;
-	padding-bottom:1em;
 }
 .cc-news .twitter-module p.title a {
 	text-decoration:none;
@@ -262,6 +260,7 @@ ul.contentList li.item {
 .cc-news .twitter-module p.title a:hover {
 	color:#333333;
 }
+/*
 .cc-news .twitter-module .tweet {
 	font-size:5em;
 	line-height:1em;
@@ -273,8 +272,11 @@ ul.contentList li.item {
 .cc-news .twitter-module .tweet a:hover {
 	color:#333333;
 }*/
+.cc-news .rtw_meta {
+	display:none;
+}
 .cc-news .rotatingtweets {
-	padding-bottom:2em;
+	padding:0;
 	border:0 !important;
 }
 .cc-news .rotatingtweets .rotatingtweet p.rtw_main {

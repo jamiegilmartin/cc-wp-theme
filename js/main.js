@@ -185,6 +185,14 @@ UBCC = {
 
 	},
 	news : function(){
+		//twitter
+		var twitterModule = document.getElementsByClassName('twitter-module')[0],
+			twitterTitle = twitterModule.getElementsByClassName('title')[0],
+			rtw_meta = document.getElementsByClassName('rtw_meta')[0],
+			rtw_a = rtw_meta.getElementsByTagName('a')[0];
+		rtw_a.style.paddingLeft = '5px';
+		twitterTitle.appendChild(rtw_a);
+		
 		//list
 		for(var i=0;i<this.contentListItems.length;i++){
 			var item = this.contentListItems[i],
