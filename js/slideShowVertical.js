@@ -204,7 +204,7 @@ SlideShowVertical.prototype.animateSlides = function( dir ){
 	this.transitioning = true;
 	
 	TweenLite.to(this.currentSlide.slide, this.aniDelay, {height:this.viewHeight, ease:Linear.easeOut});
-	TweenLite.to(this.currentSlide.fader, this.aniDelay*2, {opacity:0, ease:Linear.easeOut,
+	TweenLite.to(this.currentSlide.fader, this.aniDelay+0.3, {opacity:0, ease:Linear.easeOut,
 		onComplete : function(){
 			self.transitioning = false;
 			self.previousSlide.slide.style.height  =  0;
