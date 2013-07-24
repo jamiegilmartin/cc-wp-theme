@@ -153,11 +153,11 @@ header#cc-header section.about p {
 	background: -ms-radial-gradient(circle, #fff, #f6f7f2);
 	overflow:hidden;
 	
-	-webkit-transition:opacity 1s ease-in-out;
+/*	-webkit-transition:opacity 1s ease-in-out;
 	-moz-transition:opacity 1s ease-in-out;
 	-o-transition:opacity 1s ease-in-out;
 	transition:opacity 1s ease-in-out;
-	opacity:0;
+	opacity:0;*/
 	
 	z-index:3;/*3;???*/
 }

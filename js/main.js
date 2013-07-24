@@ -89,7 +89,7 @@ UBCC = {
 			shadowLiArr = [];
 		
 		//set slide show height
-		//var slideShowHeight = this.content.style.height = imgs[0].offsetHeight + 'px';
+		var slideShowHeight = this.content.style.height = imgs[0].offsetHeight + 'px';
 		
 		
 		//wrap images in list and shadow list for scrollarama
@@ -121,12 +121,12 @@ UBCC = {
 			li.appendChild( img );
 			//li.style.top = -slideShowHeight+'px';
 			slideList.appendChild( li );
-			shadowList.appendChild( cloneLi );
+			//shadowList.appendChild( cloneLi );
 			liArr.push(li);
-			shadowLiArr.push(cloneLi);
+			//shadowLiArr.push(cloneLi);
 		}
 		this.content.appendChild(slideList);
-		this.content.appendChild(shadowList);
+		//this.content.appendChild(shadowList);
 		
 
 		//set top slideList
@@ -164,12 +164,13 @@ UBCC = {
 				}
 
 			}
-
+			/*
 			//set shadows same height
 			for(var k=0;k<liArr.length;k++){
 				shadowLiArr[k].style.height = liArr[k].offsetHeight  + 'px';
 				//console.log(liArr[k].offsetHeight)
 			}
+			*/
 		}
 		
 		resize( imgArr );

@@ -78,6 +78,7 @@ ScreenSaver.prototype.stop = function(){
 	if(this.hasBeenStarted === true){
 		this.doc.style.overflow = 'auto';
 		this.doc.style.height = 'auto';
+		if(this.view)
 		this.doc.removeChild(this.view);
 	}
 	clearTimeout(Saver.timer);
