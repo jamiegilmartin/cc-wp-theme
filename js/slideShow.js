@@ -41,10 +41,13 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	this.onFirst = false;
 	this.onLast = false;
 	
-	this.updateSlides();
-	this.nonAnimateSlides();
+	if(this.slides.length > 0){
+		this.updateSlides();
+		this.nonAnimateSlides();
+
+		this.events();
+	}
 	
-	this.events();
 };
 SlideShow.prototype.events = function(){
 	//Events
@@ -172,7 +175,7 @@ SlideShow.prototype.updateSlides = function( dir ){
 				//this.previousSlide.style.left  =  -this.viewWidth+'px';
 				
 			}
-			console.log('this.active_index ',this.active_index,this.nextBtn)
+			//console.log('this.active_index ',this.active_index,this.nextBtn)
 			//set current
 			this.currentSlide = this.slides[i];
 			this.currentSlide.classList.add('currentSlide');
@@ -222,7 +225,7 @@ SlideShow.prototype.updateSlides = function( dir ){
 	this.indicator.style.top = img.offsetHeight+10+'px';
 };
 SlideShow.prototype.animateSlides = function( dir ){
-	var self = true;
+	var self = this;
 	this.transitioning = true;
 	
 	TweenLite.to(this.currentSlide, this.aniDelay, {left:0, ease:Linear.easeOut,
@@ -231,8 +234,10 @@ SlideShow.prototype.animateSlides = function( dir ){
 		}
 	});
 	
+	if(this.slides.length>2)
 	TweenLite.to(this.previousSlide, this.aniDelay, {left: -this.viewWidth, ease:Linear.easeOut});
-
+	
+	
 	this.nextSlide.style.left  =  this.viewWidth+'px';
 	
 };

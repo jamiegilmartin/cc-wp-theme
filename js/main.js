@@ -66,7 +66,6 @@ UBCC = {
 		function openCloseHeader(){
 			if(header.classList.contains('closed')){
 				openHeader();
-				console.log('oo')
 			}else{
 				closeHeader();
 			}
@@ -565,14 +564,14 @@ UBCC = {
 
 				//create slide show instance
 				if(slideShowsArr[clicked_story_index] === undefined){
-					var archiveStoryItemSlideShow = new SlideShow( view, list, listItems, list, prevBtn );//@param penUltimate was nextBtn
+					var archiveStoryItemSlideShow = new SlideShow( view, list, listItems, nextBtn, prevBtn );//@param penUltimate was nextBtn
 					slideShowsArr.push(archiveStoryItemSlideShow);
 				}else{
 					archiveStoryItemSlideShow = slideShowsArr[clicked_story_index];
 				}
-				console.log(slideShowsArr)
 				archiveStoryItemSlideShow.indicatorOn = false;
-				archiveStoryItemSlideShow.gotoSlide(listItems.length-2);
+				//archiveStoryItemSlideShow.gotoSlide(listItems.length-2);
+				archiveStoryItemSlideShow.gotoSlide(listItems.length-1);
 				
 				//set heights
 				var maxHeight = 0;

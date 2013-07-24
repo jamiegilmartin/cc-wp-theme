@@ -463,6 +463,7 @@ ul.contentList li.item {
 	padding:0.3em 0 0 0;
 	color:#333333;
 	text-align:right;
+	display:none;
 }
 .cc-store article.entry {
 	position:relative;
@@ -920,10 +921,14 @@ ul.archiveStoryList li.item article.entry .imgHolder img {
 	cursor:pointer;
 }
 .cc-archive .slideShow a.nextBtn {
-	background: url('../images/cc-btn-next.png') no-repeat scroll top left;
+/*	background: url('../images/cc-btn-next.png') no-repeat scroll top left;
 	top:35em;
 	left:65em;
-	display:none;
+*/
+	top:0;
+	left:0;
+	height:80em;
+	width:60em;
 }
 .cc-archive .slideShow a.prevBtn {
 	background: url('../images/cc-btn-prev.png') no-repeat scroll top left;
