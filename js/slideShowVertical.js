@@ -20,6 +20,7 @@ SlideShowVertical = function(view, ul, lis, nextBtn, prevBtn){
 	this.slidesArr = [];
 	this.viewWidth = this.view.offsetWidth;
 	this.viewHeight = this.view.offsetHeight;
+	this.transitioning = false;
 	this.active_index = 0;
 	
 	
@@ -114,7 +115,7 @@ SlideShowVertical.prototype.events = function(){
 	
 	//next and prev click
 	this.nextBtn.addEventListener('click', function(){
-		//if(self.transitioning === false)
+		if(self.transitioning === false)
 		self.next();
 	}, false);
 
@@ -159,7 +160,6 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 				this.previousSlide = this.slidesArr[this.slides.length-1];
 				//move previous slide stage left
 				this.previousSlide.slide.style.zIndex = 1;
-				//this.previousSlide.style.left  =  -this.viewWidth+'px';
 				
 			}
 			//set current
@@ -176,29 +176,21 @@ SlideShowVertical.prototype.updateSlides = function( dir ){
 				this.nextSlide = this.slidesArr[0];
 				//move next slide stage right
 				this.nextSlide.slide.style.zIndex = 1;
-				//this.nextSlide.style.left  =  this.viewWidth+'px';
 			}
 			
 			
 			this.currentSlide.slide.style.zIndex = 2;
-			//this.currentSlide.style.left = 0;
 			
 		}else if(i < this.active_index ){
 			//slide is less than active, move stage left
 			this.slidesArr[i].slide.classList.remove('currentSlide');
-			
-			//this.slides[i].style.zIndex = 0;
-			//this.slides[i].style.left = -this.viewWidth+'px';
 			
 		}else{
 			//slide is greater than active, move stage right
 			this.slidesArr[i].slide.classList.remove('currentSlide');
 			
 			if(this.slidesArr[i] !== this.previousSlide){
-				//this.slides[i].style.zIndex = 0;
 				this.slidesArr[i].slide.style.top = -this.viewHeight+'px';
-			}else{
-				//console.log('prev',this.slides[i])
 			}
 		}
 	}
@@ -209,16 +201,16 @@ SlideShowVertical.prototype.animateSlides = function( dir ){
 	this.currentSlide.slide.style.top = 0;
 	this.currentSlide.slide.style.height = 0;
 	
+	this.transitioning = true;
+	
 	TweenLite.to(this.currentSlide.slide, this.aniDelay, {height:this.viewHeight, ease:Linear.easeOut});
-	TweenLite.to(this.currentSlide.fader, this.aniDelay*2, {opacity:0, ease:Linear.easeOut,
+	TweenLite.to(this.currentSlide.fader, this.aniDelay, {opacity:0, ease:Linear.easeOut,
 		onComplete : function(){
+			self.transitioning = false;
 			self.previousSlide.slide.style.height  =  0;
 			self.previousSlide.fader.style.opacity  =  1;
 		}
 	});
-	
-	//TweenLite.to(this.previousSlide.slide, this.aniDelay, {top: this.viewHeight, ease:Linear.easeOut});
-	//this.previousSlide.fader.style.opacity  =  1;
 	
 	this.nextSlide.slide.style.top  =  -this.viewHeight+'px';
 	
