@@ -20,6 +20,7 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	
 	this.viewWidth = this.view.offsetWidth;
 	this.viewHeight = this.view.offsetHeight;
+	this.transitioning = false;
 	this.active_index = 0;
 	
 	//indicator
@@ -115,7 +116,7 @@ SlideShow.prototype.events = function(){
 	
 	//next and prev click
 	this.nextBtn.addEventListener('click', function(){
-		//if(self.transitioning === false)
+		if(self.transitioning === false)
 		self.next();
 	}, false);
 
@@ -221,8 +222,14 @@ SlideShow.prototype.updateSlides = function( dir ){
 	this.indicator.style.top = img.offsetHeight+10+'px';
 };
 SlideShow.prototype.animateSlides = function( dir ){
+	var self = true;
+	this.transitioning = true;
 	
-	TweenLite.to(this.currentSlide, this.aniDelay, {left:0, ease:Linear.easeOut});
+	TweenLite.to(this.currentSlide, this.aniDelay, {left:0, ease:Linear.easeOut,
+		onComplete : function(){
+			self.transitioning = false;
+		}
+	});
 	
 	TweenLite.to(this.previousSlide, this.aniDelay, {left: -this.viewWidth, ease:Linear.easeOut});
 
