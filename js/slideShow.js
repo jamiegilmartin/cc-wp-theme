@@ -41,13 +41,11 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	this.onFirst = false;
 	this.onLast = false;
 	
-	if(this.slides.length > 0){
-		this.updateSlides();
-		this.nonAnimateSlides();
-
-		this.events();
-	}
 	
+	this.updateSlides();
+	this.nonAnimateSlides();
+	
+	this.events();
 };
 SlideShow.prototype.events = function(){
 	//Events

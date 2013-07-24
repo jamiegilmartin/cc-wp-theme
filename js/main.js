@@ -180,6 +180,7 @@ UBCC = {
 		/**
 		 * create slide show
 		 */
+		if(liArr.length > 0)
 		var homeSlideShow = new SlideShowVertical( this.content, slideList, liArr, this.content );
 
 	},
@@ -246,6 +247,7 @@ UBCC = {
 				/**
 				 * create slide show
 				 */
+				if(liArr.length > 0)
 				var newsItemSlideShow = new SlideShow( view, list, liArr, list, prevBtn ); //@param penUltimate was nextBtn
 			
 			}else{
@@ -303,6 +305,7 @@ UBCC = {
 		view.classList.add('slideShow');
 		view.style.height = slideShowHeight + 'px';
 		this.contentList.style.height = slideShowHeight + 'px';
+		if(this.contentListItems.length > 0)
 		new SlideShow( this.content, this.contentList , this.contentListItems, this.contentList , null );
 	},
 	models : function(){
@@ -563,7 +566,7 @@ UBCC = {
 				view.appendChild(xBtn);
 
 				//create slide show instance
-				if(slideShowsArr[clicked_story_index] === undefined){
+				if(slideShowsArr[clicked_story_index] === undefined && listItems.length > 0){
 					var archiveStoryItemSlideShow = new SlideShow( view, list, listItems, nextBtn, prevBtn );//@param penUltimate was nextBtn
 					slideShowsArr.push(archiveStoryItemSlideShow);
 				}else{
