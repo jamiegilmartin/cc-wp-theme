@@ -6,19 +6,10 @@ Template Name: News
 get_header(); ?>
 <div id="content" class="cc-news">
 	<section class="content">
-		<!--
-		<div class="twitter-module ">
-			<p class="title"><a href="#">Twitter</a> @<a href="#">UBcatclub</a> &mdash; 2 days ago</p>
-			<div class="tweet garamonditalic">Cat casting call, going on now, please visit us at our new website: <a href="#">http://t.co/XCOlseAa</a> @<a href="#">UBcatclub</a></div>
-		</div>
-		TODO-->
 		<!-- http://wordpress.org/plugins/rotatingtweets/-->
-		
-		
-
 		<div class="twitter-module ">
 		<p class="title"><a href="https://twitter.com/unitedbamboo" target"_blank">Twitter</a> @<a href="https://twitter.com/unitedbamboo" target"_blank">UBcatclub</a></p>
-		<?php echo do_shortcode("[rotatingtweets screen_name='jamiegilmartin' rotation_type='none' ]"); ?>
+		<?php echo do_shortcode("[rotatingtweets screen_name='unitedbamboo' rotation_type='none' ]"); ?>
 		</div>
 		
 		<?php
