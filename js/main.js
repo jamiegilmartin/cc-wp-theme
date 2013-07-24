@@ -9,6 +9,9 @@ UBCC = {
 		this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
 		this.isAndroid = /Android/i.test(navigator.userAgent);
 		
+		//load store bg
+		storeBG = new Image(); 
+		storeBG.src = "wp-content/themes/ubcatclub/images/cc-store-bg.gif";
 		
 		this.content = document.getElementById('content');
 		this.contentList = this.content.getElementsByClassName('contentList')[0];
