@@ -432,7 +432,7 @@ UBCC = {
 			}
 			
 			if(slideShowsArr[listNum] === undefined){
-				var modelItemSlideShow = new SlideShow( view, modelList.list, modelList.modelListItems,  modelList.list, prevBtn );//@param penUltimate was nextBtn
+				var modelItemSlideShow = new SlideShow( view, modelList.list, modelList.modelListItems,  nextBtn, prevBtn );//@param penUltimate was nextBtn
 				slideShowsArr.push(modelItemSlideShow);
 				
 				//reset next button to fix double firing
@@ -443,7 +443,7 @@ UBCC = {
 			}
 			
 			modelItemSlideShow.indicatorOn = false;
-			modelItemSlideShow.gotoSlide(clicked_slide_index-1);
+			modelItemSlideShow.gotoSlide(clicked_slide_index);
 			
 			//save scroll position
 			var doc = document.documentElement, body = document.body;
@@ -466,6 +466,8 @@ UBCC = {
 				for(var j=0;j<modelList.modelListItems.length;j++){
 					modelList.modelListItems[j].style.height = 'auto';
 				}
+				slideShowsArr=[];
+				
 				modelItemSlideShow.close();
 				window.scrollTo(0,top);
 			}, false);

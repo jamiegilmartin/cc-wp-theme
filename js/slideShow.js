@@ -158,7 +158,6 @@ SlideShow.prototype.updateSlides = function( dir ){
 	var self = this;
 	if(this.active_index<0) return;
 	for(var i=0;i<this.slides.length;i++){
-		
 		if(i === this.active_index ){
 			//set prev slide
 			if(this.active_index-1 >= 0){
