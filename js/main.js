@@ -6,6 +6,7 @@ var UBCC = window.UBCC || {};
  */
 UBCC = {
 	init : function(){
+		var self = this;
 		this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
 		this.isAndroid = /Android/i.test(navigator.userAgent);
 		
@@ -17,8 +18,7 @@ UBCC = {
 		this.contentList = this.content.getElementsByClassName('contentList')[0];
 		if(this.contentList)
 		this.contentListItems = this.contentList.getElementsByClassName('item');
-		
-		
+
 		//header
 		this.header();
 		
@@ -188,13 +188,18 @@ UBCC = {
 
 	},
 	news : function(){
+		window.scrollTo(0,0);
+		
 		//twitter
-		var twitterModule = document.getElementsByClassName('twitter-module')[0],
-			twitterTitle = twitterModule.getElementsByClassName('title')[0],
-			rtw_meta = document.getElementsByClassName('rtw_meta')[0],
-			rtw_a = rtw_meta.getElementsByTagName('a')[0];
-		rtw_a.style.paddingLeft = '5px';
-		twitterTitle.appendChild(rtw_a);
+		var twitterModule = document.getElementsByClassName('twitter-module')[0];
+		if(twitterModule){
+			var twitterTitle = twitterModule.getElementsByClassName('title')[0],
+				rtw_meta = document.getElementsByClassName('rtw_meta')[0],
+				rtw_a = rtw_meta.getElementsByTagName('a')[0];
+			rtw_a.style.paddingLeft = '5px';
+			twitterTitle.appendChild(rtw_a);
+		}
+			
 		
 		//list
 		for(var i=0;i<this.contentListItems.length;i++){
