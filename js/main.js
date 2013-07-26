@@ -61,7 +61,7 @@ UBCC = {
 			this.subscribe();
 		}
 		
-		Saver.init();
+		//Saver.init();
 	},
 	header : function(){
 		var header = document.getElementById('cc-header');
@@ -175,10 +175,13 @@ UBCC = {
 			*/
 		}
 		
-		resize( imgArr );
-		window.addEventListener('resize',function(e){
+		if(!this.isMobile){
 			resize( imgArr );
-		});
+			window.addEventListener('resize',function(e){
+				resize( imgArr );
+			});
+		}
+		
 		
 		/**
 		 * create slide show
@@ -330,6 +333,7 @@ UBCC = {
 			contentWidth = contentSection.offsetWidth,
 			modelLists = this.content.getElementsByClassName('modelList');
 			
+		console.log(contentWidth)
 		for(var h=0;h<modelLists.length;h++){
 			
 			var list = modelLists[h];
@@ -458,7 +462,8 @@ UBCC = {
 			
 			//x btn click
 			xBtn.addEventListener('click', function(){
-				content.style.width = contentWidth + 'px';
+				content.style.width = contentWidth+ 'px';
+				console.log(contentWidth)
 				view.classList.remove('slideShow');
 				view.removeChild(nextBtn);
 				view.removeChild(prevBtn);
