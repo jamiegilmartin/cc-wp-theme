@@ -104,10 +104,10 @@ header#cc-header nav ul li {
 	float:left;
 	padding-right:2em;
 }
-header#cc-header nav ul li:last-child{
+/*header#cc-header nav ul li:last-child{
 	position:absolute;
 	left:51.5%;
-}
+}*/
 header#cc-header nav ul li a {
 	font-size:2em;
 	line-height:1em;
@@ -692,7 +692,7 @@ ul.modelList li article.entry .imgHolder img {
 	left:65em;*/
 	top:0;
 	height:100em;
-	width:60em;
+	width:100em;
 }
 .cc-models .slideShow a.prevBtn {
 	background: url('../images/cc-btn-prev.png') no-repeat scroll top left;
@@ -927,8 +927,8 @@ ul.archiveStoryList li.item article.entry .imgHolder img {
 */
 	top:0;
 	left:0;
-	height:80em;
-	width:60em;
+	height:100em;
+	width:100em;
 }
 .cc-archive .slideShow a.prevBtn {
 	background: url('../images/cc-btn-prev.png') no-repeat scroll top left;
