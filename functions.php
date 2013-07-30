@@ -1,5 +1,17 @@
 <?php
 
+/*not logged in*/
+function ldap_login(){
+	if(!is_user_logged_in()) {
+		//$location = wp_login_url( get_permalink() );
+		$location = wp_login_url( home_url() );
+		wp_redirect( $location );
+		exit;
+	}
+}
+add_action( 'send_headers', 'ldap_login' );
+
+
 if ( ! function_exists( 'ubcc_posted_on' ) ) :
 /**
  * Prints HTML with meta information for the current post-date/time and author.

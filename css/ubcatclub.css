@@ -780,15 +780,29 @@ ul.modelList li article.entry .imgHolder img {
  * casting
  */
 .cc-casting {
-	background-color:#ff8672;;
+	background-color:#ff8672;
 	padding:0;
 	height:100%;
 }
 .cc-casting .content {
 	margin:0;
 }
+.cc-casting .content p {
+	position:absolute;
+	top:1.25em;
+	left:3em;
+	z-index:2;
+	font-size:1.5em;
+	background:rgb(53,53,53);
+	color:#fff;
+}
+.cc-casting .content p a {
+	color:#ff8672;
+}
 .cc-casting iframe {
 	position:absolute;
+	top:1em;
+	z-index:1;
 }
 
 /**
