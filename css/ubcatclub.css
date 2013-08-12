@@ -787,17 +787,24 @@ ul.modelList li article.entry .imgHolder img {
 .cc-casting .content {
 	margin:0;
 }
-.cc-casting .content p {
+.cc-casting .content .callout {
 	position:absolute;
-	top:1.25em;
-	left:3em;
+	top:40%;
+	width:100%;
 	z-index:2;
-	font-size:1.5em;
-	background:rgb(53,53,53);
-	color:#fff;
 }
-.cc-casting .content p a {
+.cc-casting .content .callout p {
+	width:20em;
+	margin:0 auto;
+	font-size:4em;
 	color:#ff8672;
+	text-align:center;
+}
+.cc-casting .content .callout p a {
+	color:#ff8672;
+}
+.cc-casting .content .callout p a:hover {
+	color:#333;
 }
 .cc-casting iframe {
 	position:absolute;
