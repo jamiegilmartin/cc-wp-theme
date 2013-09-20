@@ -67,7 +67,7 @@ UBCC = {
 		var header = document.getElementById('cc-header');
 		
 		function openCloseHeader(){
-			console.log('header click')
+			//console.log('header click')
 			if(header.classList.contains('closed')){
 				openHeader();
 			}else{
@@ -296,15 +296,15 @@ UBCC = {
 					
 					//console.log(span.innerHTML)
 					//buyNow set link
-					if(span.innerHTML === 'description:'){
+					if(span.innerHTML.toLowerCase()  === 'description:'){
 						metaListItems[j].classList.add('description');
 						orderedList[0] = metaListItems[j];
 					}
-					if(span.innerHTML === 'price:'){
+					if(span.innerHTML.toLowerCase()  === 'price:'){
 						metaListItems[j].classList.add('price');
 						orderedList[1] = metaListItems[j];
 					}
-					if(span.innerHTML === 'buy now:'){
+					if(span.innerHTML.toLowerCase() === 'buy now:'){
 						metaListItems[j].classList.add('buyNow');
 						var string = metaListItems[j].innerHTML.split('</span> ')[1];
 						buyNowBtn.setAttribute('href',string);

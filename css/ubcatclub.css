@@ -846,7 +846,6 @@ ul.archiveList {
 ul.archiveList li.story {
 	padding:0 2em 4em 0;
 	float:left;
-	border:1px dotted red;
 }
 /**
  * archiveStoryList
