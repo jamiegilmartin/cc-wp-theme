@@ -67,6 +67,7 @@ UBCC = {
 		var header = document.getElementById('cc-header');
 		
 		function openCloseHeader(){
+			console.log('header click')
 			if(header.classList.contains('closed')){
 				openHeader();
 			}else{
@@ -333,7 +334,7 @@ UBCC = {
 			contentWidth = contentSection.offsetWidth,
 			modelLists = this.content.getElementsByClassName('modelList');
 			
-		console.log(contentWidth)
+		//console.log(contentWidth)
 		for(var h=0;h<modelLists.length;h++){
 			
 			var list = modelLists[h];
@@ -498,12 +499,15 @@ UBCC = {
 			
 		this.archiveList = this.content.getElementsByClassName('archiveList')[0];
 		this.archiveListStories = this.archiveList.getElementsByClassName('story');
+
+		console.log(this.archiveListStories)
+
 		for(var i=0;i<this.archiveListStories.length;i++){
 			var story = this.archiveListStories[i],
 				archiveStoryList = story.getElementsByClassName('archiveStoryList')[0],
 				archiveStoryListItems = archiveStoryList.getElementsByClassName('item'),
 				storyWidth = 0;
-				
+			console.log(archiveStoryListItems)
 			for(var j=0;j<archiveStoryListItems.length;j++){
 				var item = archiveStoryListItems[j],
 					header = item.getElementsByTagName('header')[0],
@@ -512,6 +516,9 @@ UBCC = {
 					entryContent = entry.getElementsByClassName('content')[0],
 					img = entryContent.getElementsByTagName('img')[0];
 				
+					img.style.width = '50%';
+					//img.style.height = '50%';
+				if(img)
 				imgHolder.appendChild(img);
 				
 				if(j===archiveStoryListItems.length-1){
