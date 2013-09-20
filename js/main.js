@@ -12,7 +12,7 @@ UBCC = {
 		
 		//load store bg
 		storeBG = new Image(); 
-		storeBG.src = "wp-content/themes/ubcatclub/images/cc-store-bg.gif";
+		storeBG.src = "/wp-content/themes/ubcatclub/images/cc-store-bg.gif";
 		
 		this.content = document.getElementById('content');
 		this.contentList = this.content.getElementsByClassName('contentList')[0];
@@ -500,32 +500,50 @@ UBCC = {
 		this.archiveList = this.content.getElementsByClassName('archiveList')[0];
 		this.archiveListStories = this.archiveList.getElementsByClassName('story');
 
-		console.log(this.archiveListStories)
-
 		for(var i=0;i<this.archiveListStories.length;i++){
 			var story = this.archiveListStories[i],
 				archiveStoryList = story.getElementsByClassName('archiveStoryList')[0],
 				archiveStoryListItems = archiveStoryList.getElementsByClassName('item'),
 				storyWidth = 0;
-			console.log(archiveStoryListItems)
 			for(var j=0;j<archiveStoryListItems.length;j++){
 				var item = archiveStoryListItems[j],
 					header = item.getElementsByTagName('header')[0],
 					entry = item.getElementsByClassName('entry')[0],
 					imgHolder = entry.getElementsByClassName('imgHolder')[0],
 					entryContent = entry.getElementsByClassName('content')[0],
-					img = entryContent.getElementsByTagName('img')[0];
+					img = entryContent.getElementsByTagName('img')[0],
+					obj = entryContent.getElementsByTagName('object')[0],
+					iframe = entryContent.getElementsByTagName('iframe')[0],
+					imgW = 0,
+					imgH = 0,
+					media = null;
+					
+				if(img){
+					imgW = img.style.width = (img.width / 2)+'px';
+					imgH = img.style.height = (img.height / 2)+'px';
+					imgHolder.appendChild(img);
+					media = img;
+				}
+				if(obj){
+					imgW = obj.style.width = (obj.width / 2)+'px';
+					imgH = obj.style.height = (obj.height / 2)+'px';
+					imgHolder.appendChild(obj);
+					media = obj;
+				}
+				if(iframe){
+					imgW = iframe.width = (iframe.width / 2)+'px';
+					imgH = iframe.height = (iframe.height / 2)+'px';
+					imgHolder.appendChild(iframe);
+					media = iframe;
+				}
 				
-					img.style.width = '50%';
-					//img.style.height = '50%';
-				if(img)
-				imgHolder.appendChild(img);
+				
 				
 				if(j===archiveStoryListItems.length-1){
 					item.style.display = 'block';
-					storyWidth = img.width;
+					storyWidth = imgW;
 					
-					new archiveItem(item,header,entry,entryContent,img,i,storyWidth);
+					new archiveItem(item,header,entry,entryContent,media,i,storyWidth);
 				}
 				
 			}
@@ -535,7 +553,7 @@ UBCC = {
 		/**
 		 *@Class archiveItem
 		 */
-		function archiveItem(item,header,entry,entryContent,img,i,storyWidth){
+		function archiveItem(item,header,entry,entryContent,media,i,storyWidth){
 
 			item.addEventListener('mouseover', function(){
 				header.style.opacity =  1;
@@ -544,16 +562,17 @@ UBCC = {
 				header.style.opacity = 0;
 			}, false);
 			item.addEventListener('click', function(){
-				if(!self.archiveListStories[i].classList.contains('slideShow'))
-				archiveSlideShow(i,storyWidth);
-
+				if(!self.archiveListStories[i].classList.contains('slideShow')){
+					archiveSlideShow(i,media,storyWidth);
+				}
+				
 			}, false);
 		}
 		/**
 		 *@Class archiveSlideShow
 		 */
 		var slideShowsArr = [];
-		function archiveSlideShow(clicked_story_index,storyWidth){
+		function archiveSlideShow(clicked_story_index,media,storyWidth){
 			
 			//get clicked story
 			for(var i=0;i<self.archiveListStories.length;i++){
@@ -563,7 +582,6 @@ UBCC = {
 					self.archiveListStories[i].style.display = 'none';
 				}
 			}
-			
 			
 			function buildSlideShow( story ){
 				//wrap images in list
@@ -575,7 +593,27 @@ UBCC = {
 					prevBtn = document.createElement('a'),
 					xBtn = document.createElement('a');
 				
-				//console.log(content,content.offsetLeft,content.offsetWidth)//TODO : on resize, models ...
+				media.style.width = (media.width * 2) +'px';
+				media.style.height = (media.height * 2) +'px';
+				for(var k=0;k<listItems.length;k++){
+					//make images bigger again
+					var img = listItems[k].getElementsByTagName('img')[0],
+						obj = listItems[k].getElementsByTagName('object')[0],
+						iframe = listItems[k].getElementsByTagName('iframe')[0];
+					if(img){
+						img.style.width = (img.width )+'px';
+						img.style.height = (img.height )+'px';
+					}
+					if(obj){
+						obj.style.width = (obj.width )+'px';
+						obj.style.height = (obj.height )+'px';
+					}
+					if(iframe){
+						iframe.width = (iframe.width )+'px';
+						iframe.height = (iframe.height )+'px';
+					}
+				}
+				
 				view.classList.add('slideShow');
 				
 				//fix width to show part of next slide
@@ -633,7 +671,7 @@ UBCC = {
 					view.removeChild(nextBtn);
 					view.removeChild(prevBtn);
 					view.removeChild(xBtn);
-					view.style.width = storyWidth + 'px';
+					view.style.width = storyWidth;
 					list.style.height = 'auto';
 					for(var j=0;j<listItems.length;j++){
 						listItems[j].style.height = 'auto';
@@ -645,6 +683,8 @@ UBCC = {
 					for(var i=0;i<self.archiveListStories.length;i++){
 						self.archiveListStories[i].style.display = 'block';
 					}
+					media.style.width = (media.width / 2) +'px';
+					media.style.height = (media.height / 2) +'px';
 					archiveStoryItemSlideShow.close();
 					slideShowsArr=[];
 					window.scrollTo(0,top);

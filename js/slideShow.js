@@ -40,8 +40,7 @@ SlideShow = function(view, ul, lis, nextBtn, prevBtn){
 	
 	this.onFirst = false;
 	this.onLast = false;
-	
-	
+
 	this.updateSlides();
 	this.nonAnimateSlides();
 	
@@ -218,8 +217,18 @@ SlideShow.prototype.updateSlides = function( dir ){
 	//update indicator
 	this.indicator.innerHTML = (this.active_index+1) +' of '+this.slides.length;
 	//set indicator top
-	var img  = this.slides[this.active_index].getElementsByTagName('img')[0];
-	this.indicator.style.top = img.offsetHeight+10+'px';
+	var img  = this.slides[this.active_index].getElementsByTagName('img')[0],
+		obj = this.slides[this.active_index].getElementsByTagName('object')[0],
+		iframe= this.slides[this.active_index].getElementsByTagName('iframe')[0];
+	if(img){
+		this.indicator.style.top = img.offsetHeight+10+'px';
+	}
+	if(obj){
+		this.indicator.style.top = obj.offsetHeight+10+'px';
+	}
+	if(iframe){
+		this.indicator.style.top = iframe.offsetHeight+10+'px';
+	}
 };
 SlideShow.prototype.animateSlides = function( dir ){
 	var self = this;
