@@ -632,17 +632,20 @@ UBCC = {
 				view.appendChild(nextBtn);
 				view.appendChild(prevBtn);
 				view.appendChild(xBtn);
-
-				//create slide show instance
-				if(slideShowsArr[clicked_story_index] === undefined && listItems.length > 0){
-					var archiveStoryItemSlideShow = new SlideShow( view, list, listItems, nextBtn, prevBtn );//@param penUltimate was nextBtn
-					slideShowsArr.push(archiveStoryItemSlideShow);
-				}else{
-					archiveStoryItemSlideShow = slideShowsArr[clicked_story_index];
+				
+				if(listItems.length>1 ){//more than one slide
+					//create slide show instance
+					if(slideShowsArr[clicked_story_index] === undefined && listItems.length > 0){
+						var archiveStoryItemSlideShow = new SlideShow( view, list, listItems, nextBtn, prevBtn );//@param penUltimate was nextBtn
+						slideShowsArr.push(archiveStoryItemSlideShow);
+					}else{
+						archiveStoryItemSlideShow = slideShowsArr[clicked_story_index];
+					}
+					archiveStoryItemSlideShow.indicatorOn = false;
+					//archiveStoryItemSlideShow.gotoSlide(listItems.length-2);
+					archiveStoryItemSlideShow.gotoSlide(listItems.length-1);
 				}
-				archiveStoryItemSlideShow.indicatorOn = false;
-				//archiveStoryItemSlideShow.gotoSlide(listItems.length-2);
-				archiveStoryItemSlideShow.gotoSlide(listItems.length-1);
+				
 				
 				//set heights
 				var maxHeight = 0;
@@ -685,6 +688,7 @@ UBCC = {
 					}
 					media.style.width = (media.width / 2) +'px';
 					media.style.height = (media.height / 2) +'px';
+					if(archiveStoryItemSlideShow) 
 					archiveStoryItemSlideShow.close();
 					slideShowsArr=[];
 					window.scrollTo(0,top);
