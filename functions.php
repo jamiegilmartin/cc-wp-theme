@@ -1,6 +1,6 @@
 <?php
 
-/*not logged in
+/*not logged in*/
 function ldap_login(){
 	if(!is_user_logged_in()) {
 		//$location = wp_login_url( get_permalink() );
@@ -10,7 +10,7 @@ function ldap_login(){
 	}
 }
 add_action( 'send_headers', 'ldap_login' );
-*/
+
 
 if ( ! function_exists( 'ubcc_posted_on' ) ) :
 /**
