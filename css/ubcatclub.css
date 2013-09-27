@@ -622,7 +622,7 @@ ul.modelList li article.entry section.content {
 }
 ul.modelList li article.entry .imgHolder {
 	width:186px;
-	height:217px;
+	height:255px;
 	overflow:hidden;
 }
 
@@ -632,7 +632,7 @@ ul.modelList li article.entry .imgHolder img:hover {
 ul.modelList li article.entry .imgHolder img {
 	padding-bottom:0;
 	width:186px;
-	height:217px;
+	height:255px;
 
 }
 
@@ -774,7 +774,7 @@ ul.modelList li article.entry .imgHolder img {
 }
 .cc-models .slideShow ul.modelList li article.entry .imgHolder img {
 	padding:0;
-	width:60em;
+	width:43.8em;
 	height:auto;
 }
 .cc-models .indicator {
@@ -924,7 +924,6 @@ ul.archiveStoryList li.item article.entry .imgHolder img {
 }
 .cc-archive .slideShow ul.archiveStoryList li article.entry {
 	background-color:#ff8672;
-
 }
 .cc-archive .slideShow ul.archiveStoryList li article.entry header {
 	overflow:hidden;
@@ -980,7 +979,6 @@ ul.archiveStoryList li.item article.entry .imgHolder img {
 	cursor:pointer;
 	background: url('../images/cc-btn-x.png') no-repeat scroll top left;
 }
-
 .cc-archive .slideShow ul.archiveStoryList li article.entry section.content {
 	width:60em;
 	margin:0;

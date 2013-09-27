@@ -203,10 +203,11 @@ SlideShow.prototype.updateSlides = function( dir ){
 		}else{
 			//slide is greater than active, move stage right
 			this.slides[i].classList.remove('currentSlide');
-			
+			this.slides[i].style.opacity = 1;
 			if(this.slides[i] !== this.previousSlide){
 				//this.slides[i].style.zIndex = 0;
-				this.slides[i].style.left = this.viewWidth+'px';
+				
+				this.slides[i].style.left = this.viewWidth+100+'px';
 			}else{
 				//console.log('prev',this.slides[i])
 			}
@@ -244,17 +245,20 @@ SlideShow.prototype.animateSlides = function( dir ){
 	TweenLite.to(this.previousSlide, this.aniDelay, {left: -this.viewWidth, ease:Linear.easeOut});
 	
 	
-	this.nextSlide.style.left  =  this.viewWidth+'px';
+	//this.nextSlide.style.left  =  this.viewWidth+'px';
+	TweenLite.to(this.nextSlide, this.aniDelay, {left: this.viewWidth, ease:Linear.easeOut});
 	
 };
 SlideShow.prototype.nonAnimateSlides = function(){
-	if(this.onFirst)
-	this.previousSlide.style.left  =  -this.viewWidth+'px';
-	
+	if(this.onFirst){
+		this.previousSlide.style.left  =  -this.viewWidth+'px';
+		this.nextSlide.style.left  =  this.viewWidth+'px';
+	}
 	this.currentSlide.style.left = 0;
 	
-	if(this.onLast)
-	this.nextSlide.style.left  =  this.viewWidth+'px';
+	if(this.onLast){
+		this.nextSlide.style.left  =  this.viewWidth+'px';
+	}
 	
 };
 

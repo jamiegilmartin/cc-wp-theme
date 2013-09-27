@@ -380,7 +380,7 @@ UBCC = {
 			this.item.addEventListener('click', function(){
 				for(var h=0;h<modelLists.length;h++){
 					modelLists[h].parentNode.style.display = 'none';
-					//console.log(h)
+					window.scrollTo(0,0);
 					if(modelList.list === modelLists[h]){
 						modelLists[h].parentNode.style.display = 'block';
 						if(!modelList.list.parentNode.classList.contains('slideShow'))
@@ -531,8 +531,8 @@ UBCC = {
 					media = obj;
 				}
 				if(iframe){
-					imgW = iframe.width = (iframe.width / 2)+'px';
-					imgH = iframe.height = (iframe.height / 2)+'px';
+					imgW = iframe.setAttribute('width',iframe.width / 2)+'px';
+					imgH = iframe.setAttribute('height',iframe.height / 2)+'px';
 					imgHolder.appendChild(iframe);
 					media = iframe;
 				}
@@ -565,7 +565,6 @@ UBCC = {
 				if(!self.archiveListStories[i].classList.contains('slideShow')){
 					archiveSlideShow(i,media,storyWidth);
 				}
-				
 			}, false);
 		}
 		/**
