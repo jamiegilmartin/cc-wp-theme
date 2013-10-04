@@ -7,7 +7,12 @@ body {
 	-webkit-font-smoothing: antialiased;
 	font-family:'DrescherGroteskBTW01-Se';
 }
-
+article.entry a {
+	color:#fff;
+}
+article.entry a:hover {
+	color:#333;
+}
 /**
  * fonts
  */
@@ -344,6 +349,9 @@ ul.contentList li.item {
 	color:#fff;
 	text-decoration:none;
 	/*padding-bottom:1.5em;*/
+}
+.cc-news article.entry section.content img {
+	
 }
 .cc-news article.entry section.content .slideShow {
 	position:relative;

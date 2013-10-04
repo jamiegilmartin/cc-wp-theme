@@ -228,6 +228,7 @@ UBCC = {
 			if(imgs.length>1){
 				
 				for(var j=0;j<imgs.length;j++){
+					imgs[j].style.opacity = 0;
 					//set slide show height based on tallest slide
 					if(imgs[j].offsetHeight > slideShowHeight){
 						slideShowHeight = imgs[j].offsetHeight;
@@ -252,7 +253,7 @@ UBCC = {
 					list.appendChild( li );
 					liArr.push(li);
 					
-					
+					img.style.opacity = 1;
 				}
 				view.appendChild(nextBtn);
 				view.appendChild(list);
