@@ -241,10 +241,20 @@ SlideShow.prototype.animateSlides = function( dir ){
 		}
 	});
 	
-	if(this.slides.length>2)
-	TweenLite.to(this.previousSlide, this.aniDelay, {left: -this.viewWidth, ease:Linear.easeOut});
 	
+	TweenLite.to(this.previousSlide, this.aniDelay, {left: -this.viewWidth, ease:Linear.easeOut,
+		onComplete : function(){
+			if(self.slides.length>2){
+				self.previousSlide.style.left = self.viewWidth+100+'px';
+			}else{
+				self.previousSlide.style.opacity = 0;
+				self.previousSlide.style.left = self.viewWidth+'px';
+				TweenLite.to(self.previousSlide, 0.5, {opacity:1, ease:Linear.easeOut});
+			}
+		}
+	});
 	
+	if(this.previousSlide === this.nextSlide) return;
 	//this.nextSlide.style.left  =  this.viewWidth+'px';
 	TweenLite.to(this.nextSlide, this.aniDelay, {left: this.viewWidth, ease:Linear.easeOut});
 	

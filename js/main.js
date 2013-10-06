@@ -530,12 +530,14 @@ UBCC = {
 					imgH = obj.style.height = (obj.height / 2)+'px';
 					imgHolder.appendChild(obj);
 					media = obj;
+					item.style.zIndex = 11;
 				}
 				if(iframe){
 					imgW = iframe.setAttribute('width',iframe.width / 2)+'px';
 					imgH = iframe.setAttribute('height',iframe.height / 2)+'px';
 					imgHolder.appendChild(iframe);
 					media = iframe;
+					item.style.zIndex = 11;
 				}
 				
 				
@@ -688,6 +690,11 @@ UBCC = {
 					}
 					media.style.width = (media.width / 2) +'px';
 					media.style.height = (media.height / 2) +'px';
+					if(media.tagName === 'IFRAME'){
+						console.log(media.tagName)
+						media.setAttribute('width',(media.width / 2) );
+						media.setAttribute('height',(media.height / 2) );
+					}
 					if(archiveStoryItemSlideShow) 
 					archiveStoryItemSlideShow.close();
 					slideShowsArr=[];

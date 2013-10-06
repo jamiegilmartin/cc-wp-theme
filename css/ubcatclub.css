@@ -983,7 +983,7 @@ ul.archiveStoryList li.item article.entry .imgHolder img {
 	height:4.2em;
 	top:0;
 	left:65em;
-	z-index:10;
+	z-index:13;
 	cursor:pointer;
 	background: url('../images/cc-btn-x.png') no-repeat scroll top left;
 }
@@ -1020,6 +1020,9 @@ ul.archiveStoryList li.item article.entry .imgHolder img {
 	color:#fff;
 	text-decoration:none;
 	padding:1.5em 0 1em 0;
+}
+.cc-archive .slideShow ul.archiveStoryList li article.entry .imgHolder {
+	
 }
 .cc-archive .slideShow ul.archiveStoryList li article.entry .imgHolder img {
 	padding:0;
