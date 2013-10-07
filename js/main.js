@@ -528,12 +528,16 @@ UBCC = {
 				if(obj){
 					//imgW = obj.style.width = (obj.width / 2)+'px';
 					//imgH = obj.style.height = (obj.height / 2)+'px';
+					imgW = obj.style.width = (obj.width )+'px';
+					imgH = obj.style.height = (obj.height )+'px';
 					imgHolder.appendChild(obj);
 					media = obj;
 				}
 				if(iframe){
 					//imgW = iframe.setAttribute('width',iframe.width / 2)+'px';
 					//imgH = iframe.setAttribute('height',iframe.height / 2)+'px';
+					imgW = iframe.getAttribute('width' )+'px';
+					imgH = iframe.getAttribute('height' )+'px';
 					imgHolder.appendChild(iframe);
 					media = iframe;
 				}
@@ -593,8 +597,13 @@ UBCC = {
 					prevBtn = document.createElement('a'),
 					xBtn = document.createElement('a');
 				
-				media.style.width = (media.width * 2) +'px';
-				media.style.height = (media.height * 2) +'px';
+				if(media.tagName === 'IFRAME' || media.tagName === 'OBJECT'){
+					//don't change size
+				}else{
+					media.style.width = (media.width * 2) +'px';
+					media.style.height = (media.height * 2) +'px';
+				}
+				
 				for(var k=0;k<listItems.length;k++){
 					//make images bigger again
 					var img = listItems[k].getElementsByTagName('img')[0],
@@ -605,12 +614,12 @@ UBCC = {
 						img.style.height = (img.height )+'px';
 					}
 					if(obj){
-						obj.style.width = (obj.width )+'px';
-						obj.style.height = (obj.height )+'px';
+						//obj.style.width = (obj.width )+'px';
+						//obj.style.height = (obj.height )+'px';
 					}
 					if(iframe){
-						iframe.width = (iframe.width )+'px';
-						iframe.height = (iframe.height )+'px';
+						//iframe.width = (iframe.width )+'px';
+						//iframe.height = (iframe.height )+'px';
 					}
 				}
 				
@@ -686,13 +695,19 @@ UBCC = {
 					for(var i=0;i<self.archiveListStories.length;i++){
 						self.archiveListStories[i].style.display = 'block';
 					}
-					if(media.tagName === 'IFRAME'){
+					if(media.tagName === 'IFRAME' || media.tagName === 'OBJECT'){
 						console.log(media.tagName,media.width)
-						media.setAttribute('width',(media.width / 2) );
-						media.setAttribute('height',(media.height / 2) );
+						//media.setAttribute('width',(parseInt(media.width) / 2) );
+						//media.setAttribute('height',(parseInt(media.height) / 2) );
+						//media.width = (media.width /2)+'px';
+						//media.height = (media.height /2)+'px';
+					}else{
+						media.style.width = (media.width / 2) +'px';
+						media.style.height = (media.height / 2) +'px';
 					}
-					media.style.width = (media.width / 2) +'px';
-					media.style.height = (media.height / 2) +'px';
+					
+					
+					
 					
 					if(archiveStoryItemSlideShow) 
 					archiveStoryItemSlideShow.close();
