@@ -868,7 +868,6 @@ ul.archiveStoryList li.item {
 ul.archiveStoryList li.item article.entry {
 	position:relative;
 	width:auto;
-	cursor:pointer;
 }
 ul.archiveStoryList li.item article.entry header {
 	position:absolute;
@@ -969,7 +968,8 @@ ul.archiveStoryList li.item article.entry .imgHolder img {
 	top:0;
 	left:0;
 	height:100em;
-	width:100em;
+	width:50em;
+	left:70em;
 }
 .cc-archive .slideShow a.prevBtn {
 	background: url('../images/cc-btn-prev.png') no-repeat scroll top left;

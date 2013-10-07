@@ -526,18 +526,16 @@ UBCC = {
 					media = img;
 				}
 				if(obj){
-					imgW = obj.style.width = (obj.width / 2)+'px';
-					imgH = obj.style.height = (obj.height / 2)+'px';
+					//imgW = obj.style.width = (obj.width / 2)+'px';
+					//imgH = obj.style.height = (obj.height / 2)+'px';
 					imgHolder.appendChild(obj);
 					media = obj;
-					item.style.zIndex = 11;
 				}
 				if(iframe){
-					imgW = iframe.setAttribute('width',iframe.width / 2)+'px';
-					imgH = iframe.setAttribute('height',iframe.height / 2)+'px';
+					//imgW = iframe.setAttribute('width',iframe.width / 2)+'px';
+					//imgH = iframe.setAttribute('height',iframe.height / 2)+'px';
 					imgHolder.appendChild(iframe);
 					media = iframe;
-					item.style.zIndex = 11;
 				}
 				
 				
@@ -688,13 +686,14 @@ UBCC = {
 					for(var i=0;i<self.archiveListStories.length;i++){
 						self.archiveListStories[i].style.display = 'block';
 					}
-					media.style.width = (media.width / 2) +'px';
-					media.style.height = (media.height / 2) +'px';
 					if(media.tagName === 'IFRAME'){
-						console.log(media.tagName)
+						console.log(media.tagName,media.width)
 						media.setAttribute('width',(media.width / 2) );
 						media.setAttribute('height',(media.height / 2) );
 					}
+					media.style.width = (media.width / 2) +'px';
+					media.style.height = (media.height / 2) +'px';
+					
 					if(archiveStoryItemSlideShow) 
 					archiveStoryItemSlideShow.close();
 					slideShowsArr=[];
