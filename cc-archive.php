@@ -19,7 +19,11 @@ get_header(); ?>
 					//echo $category->name;
 					//Display the sub category information using $category values like $category->cat_name
 					echo '<li class="story"><ul class="archiveStoryList">';
-					foreach (get_posts('cat='.$category->term_id) as $post) {
+					$args = array(
+					   'posts_per_page'=> 500,
+					   'category'=>'cat='.$category->term_id
+					);
+					foreach (get_posts($args) as $post) {
 				        setup_postdata( $post );
 				        //echo '<li><a href="'.get_permalink($post->ID).'">'.get_the_title().'</a></li>';   
 						echo '<li class="item"><article class="entry"><header><h2 class="title"><a href="javascript:void(0);">';
