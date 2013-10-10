@@ -180,6 +180,9 @@ header#cc-header section.about p {
 	text-align:center;
 	overflow:hidden;
 }
+.cc-home img {
+	opacity:0;
+}
 .cc-home ul li.transitioning {
 
 	-webkit-transition:all 1s ease-in-out;

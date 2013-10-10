@@ -104,6 +104,8 @@ UBCC = {
 		
 		//add images to array
 		for(var i=0;i<imgs.length;i++){
+			//hide images
+			imgs[i].style.opacity = 0;
 			imgArr.push( imgs[i] );
 		}
 		//empty content
@@ -127,6 +129,8 @@ UBCC = {
 			//shadowList.appendChild( cloneLi );
 			liArr.push(li);
 			//shadowLiArr.push(cloneLi);
+			//show images
+			img.style.opacity = 1;
 		}
 		this.content.appendChild(slideList);
 		//this.content.appendChild(shadowList);
@@ -228,6 +232,7 @@ UBCC = {
 			if(imgs.length>1){
 				
 				for(var j=0;j<imgs.length;j++){
+					//hide images
 					imgs[j].style.opacity = 0;
 					//set slide show height based on tallest slide
 					if(imgs[j].offsetHeight > slideShowHeight){
@@ -310,6 +315,12 @@ UBCC = {
 						var string = metaListItems[j].innerHTML.split('</span> ')[1];
 						buyNowBtn.setAttribute('href',string);
 					}
+			}
+			//check if desc
+			if(!meta.getElementsByClassName('description')[0]){
+				entryContent.style.paddingTop = '45px'
+			}else{
+				entryContent.style.paddingTop = '0px'
 			}
 			
 			//set slide show height based on tallest slide
