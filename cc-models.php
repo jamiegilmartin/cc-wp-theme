@@ -30,8 +30,8 @@ get_header(); ?>
 		  $oldest = mysql2date("Y", $oldestpost[0]->post_date);
 		  $newest = mysql2date("Y", $newestpost[0]->post_date);
 
-		  for ( $counter = intval($oldest); $counter <= intval($newest); $counter += 1) {
-
+		  for ( $counter = intval($newest); $counter >= intval($oldest); $counter -= 1) {
+			
 		    $args=array(
 				'year'     => $counter,
 				'posts_per_page' => -1,
