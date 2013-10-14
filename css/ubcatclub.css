@@ -297,6 +297,8 @@ ul.contentList li.item {
 	font-weight: normal !important;
 	position:relative;
 	top:0.5em;
+	padding:0 0.1em 0.1em 0.1em;
+	overflow:hidden;
 }
 .cc-news .rotatingtweets .rotatingtweet p.rtw_main  a {
 	color:#fff;
