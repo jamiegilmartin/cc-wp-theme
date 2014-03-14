@@ -456,6 +456,76 @@ ul.contentList li.item {
 	width:80em;
 }
 
+
+.cc-store article.entry{
+	position:relative;
+	border:1px dotted red;
+}
+.cc-store article.entry section.content {
+	position:relative;
+	width:100%;
+}
+.cc-store article.entry section.content p {
+	font-size:2em;
+	line-height:1em;
+	color:#fff;
+	text-decoration:none;
+	/*padding-bottom:1.5em;*/
+}
+.cc-store article.entry section.content img {
+	
+}
+.cc-store article.entry section.content .slideShow {
+	position:relative;
+	padding-bottom:1em;
+}
+.cc-store article.entry section.content .slideShow ul {
+	overflow:hidden;
+	width:65.5em;
+	height:65.5em;
+	position:relative;
+	cursor:pointer;
+}
+.cc-store article.entry section.content .slideShow ul li {
+	background-color:#ff8672;;
+	height:100%;
+	width:100%;
+	position:absolute;
+}
+.cc-store article.entry section.content .slideShow ul li.transitioning {
+	-webkit-transition:all 0.5s ease-in-out;
+	-moz-transition:all 0.5s ease-in-out;
+	-o-transition:all 0.5s ease-in-out;
+	transition:all 0.5s ease-in-out;
+}
+.cc-store article.entry section.content .slideShow ul li img {
+	width:100%;
+	height:auto;
+}
+
+.cc-store article.entry section.content .slideShow a {
+	position:absolute;
+	width: 1.2em;
+	height: 2.4em;
+	-webkit-transition:all 0.5s ease-in-out;
+	-moz-transition:all 0.5s ease-in-out;
+	-o-transition:all 0.5s ease-in-out;
+	transition:all 0.5s ease-in-out;
+	cursor:pointer;
+}
+.cc-store article.entry section.content .slideShow a.nextBtn {
+	background: url('../images/cc-btn-next.png') no-repeat scroll top left;
+	right:-5em;
+	display:none;
+}
+.cc-store article.entry section.content .slideShow a.prevBtn {
+	background: url('../images/cc-btn-prev.png') no-repeat scroll top left;
+	left:-5em;
+	display:none;
+}
+
+
+/*
 .cc-store .slideShow {
 	position:relative;
 	padding-bottom:3em;
@@ -491,6 +561,7 @@ ul.contentList li.item {
 	right:2em;
 	cursor:pointer;
 }
+*/
 .cc-store article.entry header {
 	overflow:hidden;
 	position:absolute;
@@ -499,7 +570,7 @@ ul.contentList li.item {
 	width:27em;
 	height:25em;
 	top:29em;
-	right:-1.5em;
+	left:35em;
 	-moz-border-radius:17em;
 	border-radius:17em;
 	box-shadow: 0.1em 0.2em 0.5em rgba(0,0,0,0.3);
@@ -510,6 +581,7 @@ ul.contentList li.item {
 	-o-transition:all 0.2s ease-in-out;
 	transition:all 0.2s ease-in-out;
 	cursor:auto;
+	z-index: 10;
 }
 .cc-store article.entry:hover header {
 	opacity:1;

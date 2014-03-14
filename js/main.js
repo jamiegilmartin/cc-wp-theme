@@ -284,6 +284,82 @@ UBCC = {
 		}
 	},
 	store : function(){
+		console.log('store');
+		//list
+		for(var i=0;i<this.contentListItems.length;i++){
+			var item = this.contentListItems[i],
+				entry = item.getElementsByClassName('entry')[0],
+				entryContent = entry.getElementsByClassName('content')[1],//1 cuz header has content
+				imgs = entryContent.getElementsByTagName('img'),
+				imgArr = [],
+				liArr = [],
+				slideShowHeight = 0;
+			
+
+				console.log( entry )
+
+			//wrap images in list
+			var view = document.createElement('div'),
+				list = document.createElement('ul'),
+				nextBtn = document.createElement('a'),
+				prevBtn = document.createElement('a');
+			
+			view.classList.add('slideShow');
+			nextBtn.classList.add('nextBtn');
+			prevBtn.classList.add('prevBtn');
+			
+			if(imgs.length>1){
+				for(var j=0;j<imgs.length;j++){
+					//hide images
+					imgs[j].style.opacity = 0;
+					//set slide show height based on tallest slide
+					if(imgs[j].offsetHeight > slideShowHeight){
+						slideShowHeight = imgs[j].offsetHeight;
+						//console.log(imgs[j].offsetHeight, slideShowHeight )
+					}
+					
+					imgArr.push( imgs[j] );
+					
+				}
+				
+				//set ss height
+				list.style.height = slideShowHeight + 'px';
+				
+				
+				//wrap images in list item
+				for(var k=0;k<imgArr.length;k++){
+					var img = imgArr[k],
+						li = document.createElement('li'),
+						over = false;
+
+					li.appendChild( img );
+					list.appendChild( li );
+					liArr.push(li);
+					
+					img.style.opacity = 1;
+				}
+				view.appendChild(nextBtn);
+				view.appendChild(list);
+				view.appendChild(prevBtn);
+				
+				//set btn tops
+				nextBtn.style.top = slideShowHeight / 2 - nextBtn.offsetHeight / 2 + 'px';
+				prevBtn.style.top = slideShowHeight / 2 - prevBtn.offsetHeight / 2 + 'px';
+				
+				entryContent.insertBefore(view, entryContent.firstChild);
+				
+				/**
+				 * create slide show
+				 */
+				if(liArr.length > 0)
+				var newsItemSlideShow = new SlideShow( view, list, liArr, list, prevBtn ); //@param penUltimate was nextBtn
+			
+			}else{
+				//no images, slide show
+			}
+		}
+	},
+	storeOld : function(){
 		var self = this,
 			slideShowHeight = 0;
 		
