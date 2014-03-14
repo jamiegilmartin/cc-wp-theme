@@ -11,7 +11,6 @@ and (max-device-width : 480px) {
 	header#cc-header {
 		font-size:2em;
 		height:150em;
-		
 	}
 	header#cc-header nav ul li {
 		float:none;
@@ -20,7 +19,16 @@ and (max-device-width : 480px) {
 	header#cc-header nav ul li a {
 		font-size:3em;
 	}
-	
+	header#cc-header nav a.facebook {
+		display:block;
+		width:45px;
+		height:45px;
+		position: relative;
+		right:auto;
+		top:10px;
+		text-indent:-9999px;
+		background: url('../images/icon-fb.jpg') no-repeat scroll top left;
+	}
 	/*about*/
 	header#cc-header section.about {
 	}

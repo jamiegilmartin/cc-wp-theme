@@ -104,6 +104,7 @@ header#cc-header #branding #site-title a {
 /*nav*/
 header#cc-header nav  {
 	float:left;
+	position: relative;
 	padding:4em 0 4em 4em;
 }
 
@@ -127,7 +128,16 @@ header#cc-header nav ul li a {
 header#cc-header nav ul li a:hover {
 	color:#333333;
 }
-
+header#cc-header nav a.facebook {
+	display:block;
+	width:45px;
+	height:45px;
+	position: absolute;
+	right:-91px;
+	top:30px;
+	text-indent:-9999px;
+	background: url('../images/icon-fb.jpg') no-repeat scroll top left;
+}
 /*about*/
 header#cc-header section.about {
 	clear:both;
@@ -452,14 +462,16 @@ ul.contentList li.item {
 	background: url('../images/cc-store-bg.gif') repeat scroll 50% 50%;
 
 }
+
 .cc-store .content {
 	width:80em;
 }
-
+.cc-store ul.contentList li.item:nth-child(2n+1) {
+	padding-left:20em;
+}
 
 .cc-store article.entry{
 	position:relative;
-	border:1px dotted red;
 }
 .cc-store article.entry section.content {
 	position:relative;
@@ -524,44 +536,6 @@ ul.contentList li.item {
 	display:none;
 }
 
-
-/*
-.cc-store .slideShow {
-	position:relative;
-	padding-bottom:3em;
-}
-.cc-store .slideShow ul.contentList {
-	overflow:hidden;
-	width:80em;
-	position:relative;
-	cursor:pointer;
-}
-.cc-store .slideShow ul li.item {
-	height:100%;
-	width:100%;
-	position:absolute;
-}
-.cc-store .slideShow ul li.transitioning {
-	-webkit-transition:all 0.5s ease-in-out;
-	-moz-transition:all 0.5s ease-in-out;
-	-o-transition:all 0.5s ease-in-out;
-	transition:all 0.5s ease-in-out;
-}
-.cc-store .indicator {
-	font-size:1.6em;
-	line-height:1.2em;
-	padding:0.3em 0 0 0;
-	color:#333333;
-	text-align:right;
-	display:none;
-}
-.cc-store article.entry {
-	position:relative;
-	width:60em;
-	right:2em;
-	cursor:pointer;
-}
-*/
 .cc-store article.entry header {
 	overflow:hidden;
 	position:absolute;
@@ -895,6 +869,12 @@ ul.modelList li article.entry .imgHolder img {
 	top:40%;
 	width:100%;
 	z-index:2;
+	opacity: 1;
+	cursor: pointer;
+	-webkit-transition:all 0.5s ease-in-out;
+	-moz-transition:all 0.5s ease-in-out;
+	-o-transition:all 0.5s ease-in-out;
+	transition:all 0.5s ease-in-out;
 }
 .cc-casting .content .callout p {
 	width:20em;
@@ -902,6 +882,7 @@ ul.modelList li article.entry .imgHolder img {
 	font-size:4em;
 	color:#ff8672;
 	text-align:center;
+	cursor: pointer;
 }
 .cc-casting .content .callout p a {
 	color:#ff8672;

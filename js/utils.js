@@ -32,3 +32,10 @@ function whichTransitionEvent(){
 		}
 	}
 };
+
+function getRatio(d1,d2,valueOf1){
+	d1 = d1 * 0.1;
+	d2 = d2 * 0.1;
+	//return valueOf2
+	return Math.round( (d2*valueOf1) / d1 );
+};

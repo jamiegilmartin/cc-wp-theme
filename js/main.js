@@ -92,8 +92,13 @@ UBCC = {
 			shadowLiArr = [];
 		
 		//set slide show height
-		var slideShowHeight = this.content.style.height = imgs[0].offsetHeight + 'px';
-		
+		var slideShowHeight;
+		if(!this.isMobile){
+			slideShowHeight = this.content.style.height = imgs[0].offsetHeight + 'px';
+		}else{
+			var newImgHeight= getRatio(imgs[0].offsetWidth ,imgs[0].offsetHeight ,window.innerWidth);
+			slideShowHeight = this.content.style.height = newImgHeight + 'px';
+		}
 		
 		//wrap images in list and shadow list for scrollarama
 		var slideList = document.createElement('ul'),
@@ -159,9 +164,15 @@ UBCC = {
 					//elementsToResize[i].style.width = this.windowWidth + 'px';
 					//elementsToResize[i].style.height = (oldH*this.windowWidth)/oldW + 'px';
 					
-					//scale img to height
-					elementsToResize[i].style.width = (oldW*this.windowHeight)/oldH + 'px';
-					elementsToResize[i].style.height = this.windowHeight + 'px';
+					if(!this.isMobile){
+						//scale img to height
+						elementsToResize[i].style.width = (oldW*this.windowHeight)/oldH + 'px';
+						elementsToResize[i].style.height = this.windowHeight + 'px';
+					}else{
+						elementsToResize[i].style.width = this.windowWidth  + 'px';
+						elementsToResize[i].style.height = (oldH*this.windowWidth)/oldW + 'px';
+					}
+					
 					
 					//set view height
 					//self.content.style.height = (oldH*this.windowWidth)/oldW + 'px';
@@ -180,14 +191,12 @@ UBCC = {
 			*/
 		}
 		
-		if(!this.isMobile){
+		
+		resize( imgArr );
+		window.addEventListener('resize',function(e){
 			resize( imgArr );
-			window.addEventListener('resize',function(e){
-				resize( imgArr );
-			});
-		}
-		
-		
+		});
+	
 		/**
 		 * create slide show
 		 */
@@ -284,20 +293,51 @@ UBCC = {
 		}
 	},
 	store : function(){
-		console.log('store');
 		//list
 		for(var i=0;i<this.contentListItems.length;i++){
 			var item = this.contentListItems[i],
 				entry = item.getElementsByClassName('entry')[0],
+				headerContent = entry.getElementsByClassName('content')[0],
 				entryContent = entry.getElementsByClassName('content')[1],//1 cuz header has content
 				imgs = entryContent.getElementsByTagName('img'),
 				imgArr = [],
 				liArr = [],
-				slideShowHeight = 0;
-			
+				slideShowHeight = 0,
+				meta = headerContent.getElementsByClassName('meta')[0],
+				metaListItems = meta.getElementsByTagName('li'),
+				buyNowBtn = headerContent.getElementsByClassName('buyNowBtn')[0],
+				orderedList = [];
 
-				console.log( entry )
+			//meta fix
+			for(var j=0;j<metaListItems.length;j++){
+				var metaListItem = metaListItems[j],
+					span = metaListItem.getElementsByTagName('span')[0];
+					
+					//console.log(span.innerHTML)
+					//buyNow set link
+					if(span.innerHTML.toLowerCase()  === 'description:'){
+						metaListItems[j].classList.add('description');
+						orderedList[0] = metaListItems[j];
+					}
+					if(span.innerHTML.toLowerCase()  === 'price:'){
+						metaListItems[j].classList.add('price');
+						orderedList[1] = metaListItems[j];
+					}
+					if(span.innerHTML.toLowerCase() === 'buy now:'){
+						metaListItems[j].classList.add('buyNow');
+						var string = metaListItems[j].innerHTML.split('</span> ')[1];
+						buyNowBtn.setAttribute('href',string);
+					}
+			}
+			//check if desc
+			if(!meta.getElementsByClassName('description')[0]){
+				entryContent.style.paddingTop = '45px'
+			}else{
+				entryContent.style.paddingTop = '0px'
+			}
 
+
+			//slide show
 			//wrap images in list
 			var view = document.createElement('div'),
 				list = document.createElement('ul'),
@@ -358,63 +398,6 @@ UBCC = {
 				//no images, slide show
 			}
 		}
-	},
-	storeOld : function(){
-		var self = this,
-			slideShowHeight = 0;
-		
-		for(var i=0;i<this.contentListItems.length;i++){
-			var item = this.contentListItems[i],
-				entry = item.getElementsByClassName('entry')[0],
-				entryContent = entry.getElementsByClassName('content')[0],
-				meta = entryContent.getElementsByClassName('meta')[0],
-				metaListItems = meta.getElementsByTagName('li'),
-				buyNowBtn = entryContent.getElementsByClassName('buyNowBtn')[0],
-				orderedList = [];
-
-			for(var j=0;j<metaListItems.length;j++){
-				var metaListItem = metaListItems[j],
-					span = metaListItem.getElementsByTagName('span')[0];
-					
-					//console.log(span.innerHTML)
-					//buyNow set link
-					if(span.innerHTML.toLowerCase()  === 'description:'){
-						metaListItems[j].classList.add('description');
-						orderedList[0] = metaListItems[j];
-					}
-					if(span.innerHTML.toLowerCase()  === 'price:'){
-						metaListItems[j].classList.add('price');
-						orderedList[1] = metaListItems[j];
-					}
-					if(span.innerHTML.toLowerCase() === 'buy now:'){
-						metaListItems[j].classList.add('buyNow');
-						var string = metaListItems[j].innerHTML.split('</span> ')[1];
-						buyNowBtn.setAttribute('href',string);
-					}
-			}
-			//check if desc
-			if(!meta.getElementsByClassName('description')[0]){
-				entryContent.style.paddingTop = '45px'
-			}else{
-				entryContent.style.paddingTop = '0px'
-			}
-			
-			//set slide show height based on tallest slide
-			if(item.offsetHeight > slideShowHeight){
-				slideShowHeight = item.offsetHeight;
-			}
-			
-			
-		}
-		
-		
-		//build slide show
-		var view = this.content.getElementsByClassName('content')[0];
-		view.classList.add('slideShow');
-		view.style.height = slideShowHeight + 'px';
-		this.contentList.style.height = slideShowHeight + 'px';
-		if(this.contentListItems.length > 0)
-		new SlideShow( this.content, this.contentList , this.contentListItems, this.contentList , null );
 	},
 	models : function(){
 		var self = this,
@@ -575,7 +558,13 @@ UBCC = {
 	casting : function(){
 		var self = this;
 		this.content.style.height =  window.innerHeight + 'px';
-		
+		var callout = this.content.getElementsByClassName('callout')[0];
+
+		setTimeout(function(){
+			callout.style.opacity = 0;
+		},5000)
+
+
 		window.onresize = function(e){
 			self.content.style.height =  window.innerHeight + 'px';
 		};
