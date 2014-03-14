@@ -61,20 +61,25 @@ header#cc-header.closed {
 	height:3em;
 	cursor:pointer;
 }
-header#cc-header .dot {
+header#cc-header ul.lines {
 	position:absolute;
 	width:1em;
 	height:1em;
 	top:1em;
 	left:1.2em;
 	border-radius: 0.6em;
-	background:#fff;
 	display:none;
 }
-header#cc-header.closed .dot {
+header#cc-header ul.lines li {
+	width:2.5em;
+	height:0.2em;
+	margin-bottom:0.2em;
+	background:#fff;
+}
+header#cc-header.closed ul.lines  {
 	display:block;
 }
-header#cc-header:hover .dot {
+header#cc-header:hover ul.lines li{
 	background:#333333;
 }
 

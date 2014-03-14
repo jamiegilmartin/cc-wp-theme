@@ -63,7 +63,11 @@ display: block;
 	<div id="wrapper" class="hfeed">
 		<header id="cc-header" class="closed">
 			<section class="content">
-				<div class="dot"></div>
+				<ul class="lines">
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
 				<div id="branding">
 					<div id="site-title">
 						<a href="/">
