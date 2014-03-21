@@ -2,7 +2,11 @@
 	<div class="clear"></div>
 	</div><!--end container-->
 	<footer>
-		<a href="http://unitedbamboo.com">united bamboo</a>
+		<nav>
+			<a href="https://www.facebook.com/catclubbyunitedbamboo" target="_blank" class="facebook">facebook</a>
+			<a href="https://twitter.com/unitedbamboo" target="_blank" class="twitter">twitter</a>
+		</nav>
+		<a href="http://unitedbamboo.com" class="logo">united bamboo</a>
 	</footer>
 </div><!--end wrapper-->
 <?php wp_footer(); ?>

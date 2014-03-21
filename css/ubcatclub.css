@@ -128,16 +128,7 @@ header#cc-header nav ul li a {
 header#cc-header nav ul li a:hover {
 	color:#333333;
 }
-header#cc-header nav a.facebook {
-	display:block;
-	width:45px;
-	height:45px;
-	position: absolute;
-	right:-91px;
-	top:30px;
-	text-indent:-9999px;
-	background: url('../images/icon-fb.jpg') no-repeat scroll top left;
-}
+
 /*about*/
 header#cc-header section.about {
 	clear:both;
@@ -1120,11 +1111,12 @@ ul.archiveStoryList li.item article.entry .imgHolder img {
 
 
 footer {
+	position: relative;
 	text-align:center;
 	background-color:#ff8672;;
 	padding:2em 0;
 }
-footer a {
+footer a.logo {
 	display:block;
 	background: url('../images/United-Bamboo-logo.png') no-repeat scroll top left;
 	text-indent:-9999px;
@@ -1132,7 +1124,27 @@ footer a {
 	height: 1.8em;
 	margin:0 auto;
 }
-
+footer nav {
+	position:absolute;
+	top:-55px;
+	left:10px;
+	background:#c9c8c4;
+	padding:4px 3px;
+	z-index:100;
+}
+footer nav a {
+	display:block;
+	width:16px;
+	height:16px;
+	text-indent:-9999px;
+}
+footer nav a.facebook {
+	background: url('../images/icon-facebook.png') no-repeat scroll top left;
+	margin-bottom:4px;
+}
+footer nav a.twitter {
+	background: url('../images/icon-twitter.png') no-repeat scroll top left;
+}
 
 /**
  * screensaver

@@ -77,7 +77,6 @@ display: block;
 				</div>
 				<nav>
 					<?php wp_nav_menu(); ?>
-					<a href="https://www.facebook.com/catclubbyunitedbamboo" target="_blank" class="facebook">facebook</a>
 				</nav>
 				<section class="about">
 					<?php

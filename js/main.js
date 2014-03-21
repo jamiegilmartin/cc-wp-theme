@@ -161,9 +161,10 @@ UBCC = {
 					oldH = elementsToResize[i].offsetHeight;
 					oldW = elementsToResize[i].offsetWidth;
 					//scale img to width
-					//elementsToResize[i].style.width = this.windowWidth + 'px';
-					//elementsToResize[i].style.height = (oldH*this.windowWidth)/oldW + 'px';
+					elementsToResize[i].style.width = this.windowWidth + 'px';
+					elementsToResize[i].style.height = (oldH*this.windowWidth)/oldW + 'px';
 					
+					/*
 					if(!this.isMobile){
 						//scale img to height
 						elementsToResize[i].style.width = (oldW*this.windowHeight)/oldH + 'px';
@@ -172,11 +173,11 @@ UBCC = {
 						elementsToResize[i].style.width = this.windowWidth  + 'px';
 						elementsToResize[i].style.height = (oldH*this.windowWidth)/oldW + 'px';
 					}
-					
+					*/
 					
 					//set view height
-					//self.content.style.height = (oldH*this.windowWidth)/oldW + 'px';
-					self.content.style.height = this.windowHeight + 'px';
+					self.content.style.height = (oldH*this.windowWidth)/oldW + 'px';
+					//self.content.style.height = this.windowHeight + 'px';
 				}else{
 					elementsToResize[i].style.height = this.windowHeight + 'px';
 				}
@@ -196,7 +197,9 @@ UBCC = {
 		window.addEventListener('resize',function(e){
 			resize( imgArr );
 		});
-	
+		window.addEventListener('orientationchange',function(e){
+			resize( imgArr );
+		});
 		/**
 		 * create slide show
 		 */
