@@ -1126,8 +1126,8 @@ footer a.logo {
 }
 footer nav {
 	position:absolute;
-	top:-55px;
-	left:10px;
+	bottom:3px;
+	left:7px;
 	background:#c9c8c4;
 	padding:4px 3px;
 	z-index:100;
